@@ -1,0 +1,15 @@
+.vscode
+
+__pycache__
+__pycache__/
+**/*/__pycache__
+
+
+*.pyc
+
+.env
+media/*
+!media/.keep
+
+media/
+media
