@@ -213,7 +213,7 @@ class Incident(models.Model):
     current_decision = models.CharField(max_length=50, default=None, null=True, blank=True)
 
     def save(self, *args, **kwargs):
-        if self.incidentType == IncidentType.INQUIRY :
+        if self.incidentType == IncidentType.INQUIRY.value :
             self.refId = generate_inquiry_refId(election=self.election, category=self.category, institution=self.institution)
         else:
             self.refId = generate_complaint_refId(election=self.election, district=self.district)
