@@ -10,12 +10,12 @@ import {
     fetchChannels,
     fetchDistricts,
     fetchDivisionalSecretariats,
-    fetchElections,
+    // fetchElections,
     fetchGramaNiladharis,
     fetchInstitutions,
     fetchPoliceDivisions,
     fetchPoliceStations,
-    fetchPoliticalParties,
+    // fetchPoliticalParties,
     fetchPollingDivisions,
     fetchPollingStations,
     fetchProvinces,
@@ -157,8 +157,8 @@ function IncidentFormInternal(props) {
         policeStations,
         policeDivisions,
         wards,
-        elections,
-        politicalParties
+        // elections,
+        // politicalParties
     } = useSelector((state) => state.shared);
 
     const [state, setState] = useState({
@@ -251,7 +251,7 @@ function IncidentFormInternal(props) {
 
     useEffect(() => {
         dispatch(fetchChannels());
-        dispatch(fetchElections());
+        // dispatch(fetchElections());
         dispatch(fetchCategories());
         dispatch(fetchInstitutions());
         dispatch(fetchProvinces());
@@ -263,7 +263,7 @@ function IncidentFormInternal(props) {
         dispatch(fetchPoliceStations());
         dispatch(fetchPoliceDivisions());
         dispatch(fetchWards());
-        dispatch(fetchPoliticalParties());
+        // dispatch(fetchPoliticalParties());
 
         // depreciated
         // dispatch(resetIncidentForm())
@@ -389,6 +389,7 @@ function IncidentFormInternal(props) {
         });
     };
 
+    
     const customValidations = (values) => {
         //date time is validated here since it has to be compared with the occurrence.
         //cannot do this with yup.
@@ -444,22 +445,22 @@ function IncidentFormInternal(props) {
     const isProcessing = useLoadingStatus([]);
     const reinit = paramIncidentId ? true : false;
 
-    const politicalPartyLookup = Object.assign(
-        {},
-        ...politicalParties.allCodes.map((c, k) => {
-            const curParty = politicalParties.byCode[c];
-            return { [curParty.code]: politicalParties.byCode[c].name };
-        })
-    );
+    // const politicalPartyLookup = Object.assign(
+    //     {},
+    //     ...politicalParties.allCodes.map((c, k) => {
+    //         const curParty = politicalParties.byCode[c];
+    //         return { [curParty.code]: politicalParties.byCode[c].name };
+    //     })
+    // );
     //validation schema
     const IncidentSchema = Yup.object().shape({
         incidentType: Yup.mixed().required("Required"),
         infoChannel: Yup.mixed().required("Required"),
         title: Yup.string().required("Required"),
         description: Yup.string().required("Required"),
-        occurrence: Yup.mixed().when('incidentType', (incidentType, IncidentSchema) => (incidentType == 'COMPLAINT' ? IncidentSchema.required("Required") : IncidentSchema)),
+        // occurrence: Yup.mixed().when('incidentType', (incidentType, IncidentSchema) => (incidentType == 'COMPLAINT' ? IncidentSchema.required("Required") : IncidentSchema)),
         category: Yup.mixed().required("Required"),
-        election: Yup.mixed().required("Required"),
+        // election: Yup.mixed().required("Required"),
         severity: Yup.mixed().when('incidentType', (incidentType, IncidentSchema) => (incidentType == 'COMPLAINT' ? IncidentSchema.required("Required") : IncidentSchema)),
         district: Yup.mixed().when('incidentType', (incidentType, IncidentSchema) => (incidentType == 'COMPLAINT' ? IncidentSchema.required("Required") : IncidentSchema)),
         reporterMobile: Yup.number(),
@@ -485,7 +486,8 @@ function IncidentFormInternal(props) {
 
                 }}
                 validationSchema={IncidentSchema}
-                validate={customValidations}
+                // validate={customValidations} 
+                // above customValidation commented due to removing of occurrence
                 render={({
                     handleSubmit,
                     handleChange,
@@ -513,11 +515,11 @@ function IncidentFormInternal(props) {
                             {/* basic incident detail information */}
                             <Paper className={classes.paper}>
                                 <Typography variant="h5" gutterBottom>
-                                    Basic Information
+                                    Basic Information 
                                 </Typography>
                                 <Grid container spacing={24}>
                                     <Grid item xs={12}>
-                                        <FormControl component="fieldset" className={classes.formControl}>
+                                        {/* <FormControl component="fieldset" className={classes.formControl}>
                                             <FormLabel component="legend">Type*</FormLabel>
                                             <RadioGroup
                                                 id="incidentType"
@@ -540,7 +542,7 @@ function IncidentFormInternal(props) {
                                             {errors.incidentType ? (
                                                 <FormHelperText>{errors.incidentType}</FormHelperText>
                                             ) : null}
-                                        </FormControl>
+                                        </FormControl> */}
                                     </Grid>
                                     <Grid item xs={12}>
                                         <FormLabel component="legend">
@@ -604,13 +606,14 @@ function IncidentFormInternal(props) {
                                             className={classes.textField}
                                             multiline
                                             value={values.description}
+                                            variant="outlined"
                                             onChange={handleChange}
                                             onBlur={handleBlur}
                                             error={touched.description && errors.description}
                                             helperText={touched.description ? errors.description : null}
                                         />
                                     </Grid>
-                                    <Grid item xs={12} sm={6}>
+                                    {/* <Grid item xs={12} sm={6}>
                                         <FormControl
                                             error={touched.election && errors.election}
                                             className={classes.formControl}>
@@ -638,7 +641,7 @@ function IncidentFormInternal(props) {
                                                 {touched.election && errors.election ? errors.election : ""}
                                             </FormHelperText>
                                         </FormControl>
-                                    </Grid>
+                                    </Grid> */}
                                     <Grid item xs={12} sm={6}>
                                         <FormControl
                                             className={classes.formControl}
@@ -689,7 +692,7 @@ function IncidentFormInternal(props) {
                                     </Grid>
                                     {values.incidentType === "COMPLAINT" ? (
                                         <>
-                                            <Grid item xs={12} sm={6}>
+                                            {/* <Grid item xs={12} sm={6}>
                                                 <FormControl
                                                     error={touched.occurrence && errors.occurrence}
                                                     component="fieldset"
@@ -722,7 +725,7 @@ function IncidentFormInternal(props) {
                                                         <FormHelperText>{errors.occurrence}</FormHelperText>
                                                     ) : null}
                                                 </FormControl>
-                                            </Grid>
+                                            </Grid> */}
                                             <Grid item xs={12} sm={6}>
                                                 <TextField
                                                     id="occured_date_date"
@@ -731,16 +734,16 @@ function IncidentFormInternal(props) {
                                                     value={values.occured_date_date}
                                                     InputLabelProps={{ shrink: true }}
                                                     onChange={handleChange}
-                                                    inputProps={{
-                                                        max:
-                                                            values.occurrence === "OCCURRED"
-                                                                ? moment().format("YYYY-MM-DD")
-                                                                : null,
-                                                        min:
-                                                            values.occurrence === "WILL_OCCUR"
-                                                                ? moment().format("YYYY-MM-DD")
-                                                                : null
-                                                    }}
+                                                    // inputProps={{
+                                                    //     max:
+                                                    //         values.occurrence === "OCCURRED"
+                                                    //             ? moment().format("YYYY-MM-DD")
+                                                    //             : null,
+                                                    //     min:
+                                                    //         values.occurrence === "WILL_OCCUR"
+                                                    //             ? moment().format("YYYY-MM-DD")
+                                                    //             : null
+                                                    // }}
                                                     error={errors.occured_date_date}
                                                     helperText={errors.occured_date_date}
                                                 />
@@ -771,17 +774,35 @@ function IncidentFormInternal(props) {
                                                     onChange={handleChange}
                                                     row>
                                                     <FormControlLabel
-                                                        value="1"
+                                                        value="High"
+                                                        control={
+                                                            <Radio
+                                                                classes={{
+                                                                    root: classes.severityHigh,
+                                                                    checked: classes.checked
+                                                                }}
+                                                                checked={values.severity == "High" ? true : false}
+                                                            />
+                                                        }
+                                                        label="High"
+                                                        labelPlacement="bottom"
+                                                        className={classes.radioItem}
+                                                        classes={{
+                                                            label: classes.severityHigh
+                                                        }}
+                                                    />
+                                                    <FormControlLabel
+                                                        value="Low"
                                                         control={
                                                             <Radio
                                                                 classes={{
                                                                     root: classes.severityLow,
                                                                     checked: classes.checked
                                                                 }}
-                                                                checked={values.severity == "1" ? true : false}
+                                                                checked={values.severity == "Low" ? true : false}
                                                             />
                                                         }
-                                                        label="1"
+                                                        label="Low"
                                                         labelPlacement="bottom"
                                                         className={classes.radioItem}
                                                         classes={{
@@ -789,42 +810,24 @@ function IncidentFormInternal(props) {
                                                         }}
                                                     />
                                                     <FormControlLabel
-                                                        value="2"
+                                                        value="Medium"
                                                         control={
                                                             <Radio
                                                                 classes={{
-                                                                    root: classes.severityLow,
+                                                                    root: classes.severityMedium,
                                                                     checked: classes.checked
                                                                 }}
-                                                                checked={values.severity == "2" ? true : false}
+                                                                checked={values.severity == "Medium" ? true : false}
                                                             />
                                                         }
-                                                        label="2"
+                                                        label="Medium"
                                                         labelPlacement="bottom"
                                                         className={classes.radioItem}
                                                         classes={{
-                                                            label: classes.severityLow
+                                                            label: classes.severityMedium
                                                         }}
                                                     />
-                                                    <FormControlLabel
-                                                        value="3"
-                                                        control={
-                                                            <Radio
-                                                                classes={{
-                                                                    root: classes.severityLow,
-                                                                    checked: classes.checked
-                                                                }}
-                                                                checked={values.severity == "3" ? true : false}
-                                                            />
-                                                        }
-                                                        label="3"
-                                                        labelPlacement="bottom"
-                                                        className={classes.radioItem}
-                                                        classes={{
-                                                            label: classes.severityLow
-                                                        }}
-                                                    />
-                                                    <FormControlLabel
+                                                    {/* <FormControlLabel
                                                         value="4"
                                                         control={
                                                             <Radio
@@ -949,7 +952,7 @@ function IncidentFormInternal(props) {
                                                         classes={{
                                                             label: classes.severityHigh
                                                         }}
-                                                    />
+                                                    /> */}
                                                 </RadioGroup>
                                                 <FormHelperText>
                                                     {touched.severity && errors.severity ? errors.severity : ""}
@@ -1059,7 +1062,7 @@ function IncidentFormInternal(props) {
                             {/* contact information of the complianer */}
                             <Paper className={classes.paper}>
                                 <Typography variant="h5" gutterBottom>
-                                    Reporter / Complainer Information
+                                    Contact Information
                                 </Typography>
                                 <Grid container spacing={24}>
                                     <Grid item xs={12} sm={6}>
@@ -1074,7 +1077,7 @@ function IncidentFormInternal(props) {
                                     </Grid>
                                     <Grid item xs={12} sm={3}>
                                         <FormControl className={classes.formControl}>
-                                            <InputLabel htmlFor="reporterType">Reporter Type</InputLabel>
+                                            <InputLabel htmlFor="reporterType">Individual/Organization</InputLabel>
                                             <Select
                                                 value={values.reporterType}
                                                 onChange={handleChange}
@@ -1091,7 +1094,7 @@ function IncidentFormInternal(props) {
                                             </Select>
                                         </FormControl>
                                     </Grid>
-                                    {values.incidentType === "COMPLAINT" && (
+                                    {/* {values.incidentType === "COMPLAINT" && (
                                         <Grid item xs={12} sm={3}>
                                             <FormControl className={classes.formControl}>
                                                 <InputLabel htmlFor="reporterAffiliation">Political Affiliation</InputLabel>
@@ -1116,8 +1119,8 @@ function IncidentFormInternal(props) {
                                                 </Select>
                                             </FormControl>
                                         </Grid>
-                                    )}
-                                    <Grid item xs={12}>
+                                    )} */}
+                                    {/* <Grid item xs={12}>
                                         <TextField
                                             id="reporterAddress"
                                             name="reporterAddress"
@@ -1126,19 +1129,19 @@ function IncidentFormInternal(props) {
                                             value={values.reporterAddress}
                                             onChange={handleChange}
                                         />
-                                    </Grid>
+                                    </Grid> */}
                                     <Grid item xs={12} sm={6}>
                                         <TelephoneInput
                                             className={classes.textField}
                                             name="reporterMobile"
-                                            label="Reporter Mobile"
+                                            label="Mobile No"
                                         />
                                     </Grid>
                                     <Grid item xs={12} sm={6}>
                                         <TextField
                                             id="reporterEmail"
                                             name="reporterEmail"
-                                            label="Reporter Email"
+                                            label="Email"
                                             className={classes.textField}
                                             value={values.reporterEmail}
                                             onChange={handleChange}
@@ -1148,7 +1151,7 @@ function IncidentFormInternal(props) {
                                     </Grid>
                                     {values.incidentType === "COMPLAINT" ? (
                                         <>
-                                            <Grid item xs={12} sm={6}>
+                                            {/* <Grid item xs={12} sm={6}>
                                                 <TextField
                                                     id="accusedName"
                                                     name="accusedName"
@@ -1159,8 +1162,8 @@ function IncidentFormInternal(props) {
                                                     error={touched.accusedName && errors.accusedName}
                                                     helperText={touched.accusedName ? errors.accusedName : null}
                                                 />
-                                            </Grid>
-                                            <Grid item xs={12} sm={6}>
+                                            </Grid> */}
+                                            {/* <Grid item xs={12} sm={6}>
                                                 <FormControl className={classes.formControl}>
                                                     <InputLabel htmlFor="accusedAffiliation">
                                                         Political Affiliation of the accused
@@ -1185,8 +1188,8 @@ function IncidentFormInternal(props) {
                                                         })}
                                                     </Select>
                                                 </FormControl>
-                                            </Grid>
-                                            <Grid item xs={12}>
+                                            </Grid> */}
+                                            {/* <Grid item xs={12}>
                                                 <FormControlLabel
                                                     control={
                                                         <Checkbox
@@ -1199,7 +1202,7 @@ function IncidentFormInternal(props) {
                                                     }
                                                     label="Reporter details can be shared with external parties."
                                                 />
-                                            </Grid>
+                                            </Grid> */}
                                         </>
                                     ) : null}
                                 </Grid>
@@ -1213,23 +1216,24 @@ function IncidentFormInternal(props) {
                                     Location Information
                                 </Typography>
                                 <Grid container spacing={24}>
-                                    <Grid item xs={12}>
-                                        <TextField
-                                            id="location"
-                                            label="Location / Description"
-                                            className={classes.textField}
-                                            value={values.location}
-                                            onChange={handleChange}
-                                            multiline
-                                        />
-                                    </Grid>
                                     <Grid item xs={12} sm={8}>
                                         <TextField
                                             id="address"
                                             label="Address"
+                                            variant="outlined"
                                             className={classes.textField}
                                             value={values.address}
                                             onChange={handleChange}
+                                        />
+                                    </Grid>
+                                    <Grid item xs={12}>
+                                        <TextField
+                                            id="location"
+                                            label="Additional Information / (e.g. Landmarks)"
+                                            className={classes.textField}
+                                            value={values.location}
+                                            onChange={handleChange}
+                                            multiline
                                         />
                                     </Grid>
                                     <Grid item xs={12} sm={4}>
@@ -1241,7 +1245,7 @@ function IncidentFormInternal(props) {
                                             onChange={handleChange}
                                         />
                                     </Grid>
-                                    <Grid item xs={12} sm={4}>
+                                    {/* <Grid item xs={12} sm={4}>
                                         <FormControl className={classes.formControl}>
                                             <InputLabel htmlFor="province">Province</InputLabel>
                                             <Select
@@ -1265,13 +1269,13 @@ function IncidentFormInternal(props) {
                                                 })}
                                             </Select>
                                         </FormControl>
-                                    </Grid>
+                                    </Grid> */}
                                     <Grid item xs={12} sm={4}>
                                         <FormControl
                                             error={touched.district && errors.district}
                                             className={classes.formControl}
                                         >
-                                            <InputLabel htmlFor="district">District</InputLabel>
+                                            <InputLabel htmlFor="district">District*</InputLabel>
                                             <Select
                                                 value={values.district}
                                                 onChange={handleChange}
@@ -1299,7 +1303,7 @@ function IncidentFormInternal(props) {
                                             </FormHelperText>
                                         </FormControl>
                                     </Grid>
-                                    <Grid item xs={12} sm={4}>
+                                    {/* <Grid item xs={12} sm={4}>
                                         <FormControl className={classes.formControl}>
                                             <InputLabel htmlFor="divisionalSecretariat">
                                                 Divisional Secretariat
@@ -1311,8 +1315,8 @@ function IncidentFormInternal(props) {
                                                 dataObj={divisionalSecretariats}
                                             />
                                         </FormControl>
-                                    </Grid>
-                                    <Grid item xs={12} sm={4}>
+                                    </Grid> */}
+                                    {/* <Grid item xs={12} sm={4}>
                                         <FormControl className={classes.formControl}>
                                             <InputLabel htmlFor="pollingDivision">Polling Division</InputLabel>
                                             <IntlSelect
@@ -1322,8 +1326,8 @@ function IncidentFormInternal(props) {
                                                 dataObj={pollingDivisions}
                                             />
                                         </FormControl>
-                                    </Grid>
-                                    <Grid item xs={12} sm={4}>
+                                    </Grid> */}
+                                    {/* <Grid item xs={12} sm={4}>
                                         <FormControl className={classes.formControl}>
                                             <InputLabel htmlFor="pollingStation">Polling Station</InputLabel>
                                             <IntlSelect
@@ -1333,7 +1337,7 @@ function IncidentFormInternal(props) {
                                                 dataObj={pollingStations}
                                             />
                                         </FormControl>
-                                    </Grid>
+                                    </Grid> */}
                                     <Grid item xs={12} sm={4}>
                                         <FormControl className={classes.formControl}>
                                             <InputLabel htmlFor="gramaNiladhari">Grama Niladhari Division</InputLabel>
@@ -1345,16 +1349,16 @@ function IncidentFormInternal(props) {
                                             />
                                         </FormControl>
                                     </Grid>
-                                    <Grid item xs={12} sm={4}>
+                                    {/* <Grid item xs={12} sm={4}>
                                         <FormControl className={classes.formControl}>
-                                            <InputLabel htmlFor="policeDivision">Police Division</InputLabel>
+                                            <InputLabel htmlFor="policeDivision">Police Division</InputLabel> */}
                                             {/* <IntlSelect
                                                         value={values.policeDivision}
                                                         handleChange={handleChange}
                                                         name='policeDivision'
                                                         dataObj={policeDivisions}
                                                     /> */}
-                                            <Select
+                                            {/* <Select
                                                 value={values.policeDivision}
                                                 onChange={handleChange}
                                                 inputProps={{
@@ -1375,19 +1379,19 @@ function IncidentFormInternal(props) {
                                                         )
                                                     );
                                                 })}
-                                            </Select>
-                                        </FormControl>
-                                    </Grid>
-                                    <Grid item xs={12} sm={4}>
+                                            </Select> */}
+                                        {/* </FormControl>
+                                    </Grid> */}
+                                    {/* <Grid item xs={12} sm={4}>
                                         <FormControl className={classes.formControl}>
-                                            <InputLabel htmlFor="policeStation">Police Station</InputLabel>
+                                            <InputLabel htmlFor="policeStation">Police Station</InputLabel> */}
                                             {/* <IntlSelect
                                                         value={values.policeStation}
                                                         handleChange={handleChange}
                                                         name='policeStation'
                                                         dataObj={policeStations}
                                                     /> */}
-                                            <Select
+                                            {/* <Select
                                                 value={values.policeStation}
                                                 onChange={handleChange}
                                                 inputProps={{
@@ -1408,14 +1412,14 @@ function IncidentFormInternal(props) {
                                                         )
                                                     );
                                                 })}
-                                            </Select>
-                                        </FormControl>
-                                    </Grid>
+                                            </Select> */}
+                                        {/* </FormControl>
+                                    </Grid> */}
                                 </Grid>
                             </Paper>
                             {/* police details */}
                             <div>
-                                <ExpansionPanel>
+                                {/* <ExpansionPanel>
                                     <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
                                         <Typography variant="h5" gutterBottom>
                                             {" "}
@@ -1432,7 +1436,7 @@ function IncidentFormInternal(props) {
                                                         {
                                                             title: "Political Affiliation",
                                                             field: "political_affliation",
-                                                            lookup: politicalPartyLookup
+                                                            // lookup: politicalPartyLookup
                                                         }
                                                     ]}
                                                     data={values.injuredParties}
@@ -1476,7 +1480,7 @@ function IncidentFormInternal(props) {
                                                         {
                                                             title: "Political Affiliation",
                                                             field: "political_affliation",
-                                                            lookup: politicalPartyLookup
+                                                            // lookup: politicalPartyLookup
                                                         }
                                                     ]}
                                                     data={values.respondents}
@@ -1559,7 +1563,7 @@ function IncidentFormInternal(props) {
                                             </Grid>
                                         </Grid>
                                     </ExpansionPanelDetails>
-                                </ExpansionPanel>
+                                </ExpansionPanel> */}
                             </div>
                             </>
                         )}
