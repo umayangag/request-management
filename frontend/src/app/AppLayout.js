@@ -221,7 +221,7 @@ class DomainContainer extends React.Component {
             <Toolbar disableGutters={!open}>
 
                 <Typography variant="h6" color="inherit" className={classes.grow}>
-                    Incident Management
+                    Tell The President
 
                     <Button
                         variant={selectedMainSection==='home'?'outlined': 'flat'}
@@ -232,8 +232,8 @@ class DomainContainer extends React.Component {
                     {userCan(signedInUser, null, USER_ACTIONS.CAN_REVIEW_INCIDENTS) && (
                         <spanner>
                             <Button variant={selectedMainSection==='review-complaints' || selectedMainSection === 'review-inquiries'?'outlined': 'flat'}
-                                    color="inherit" onClick={this.handleOnClickReviewMenuOpenButton} aria-owns="review-menu">Review <ArrowDropDown/></Button>
-                            <Menu id="review-menu" open={Boolean(this.state.menuAnchorEl)}
+                               component={ReviewComplaintsLink}     color="inherit"  aria-owns="review-menu">Review</Button>
+                            {/* <Menu id="review-menu" open={Boolean(this.state.menuAnchorEl)}
                                   onClose={this.handleReviewMenuClose} anchorEl={this.state.menuAnchorEl} className={classes.reviewMenu}
                                   anchorOrigin={{
                                       horizontal: 'center',
@@ -249,7 +249,7 @@ class DomainContainer extends React.Component {
                                     Inquiries
                                 </MenuItem>
 
-                            </Menu>
+                            </Menu> */}
                         </spanner>
                     )}
 

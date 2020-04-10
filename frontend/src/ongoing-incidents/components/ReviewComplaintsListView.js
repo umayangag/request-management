@@ -83,6 +83,8 @@ function ReviewComplaintsListView({ classes, ...props }) {
   return (
     <Paper className={classes.root}>
       <h3>Review Complaints</h3>
+      <Grid container direction={"row"} className={classes.exportContainer}>
+      <Grid item xs={12} sm={6}>
       <SearchForm
         incidentType='COMPLAINT'
         categories={categories} 
@@ -90,6 +92,8 @@ function ReviewComplaintsListView({ classes, ...props }) {
         filters={filters}
         showClosed={false}
         {...props} />
+        </Grid>
+        </Grid>
       <Grid container direction={"row"} className={classes.exportContainer}>
         <Grid item>
           <Button variant={"contained"} onClick={() => handleExportClick("csv")} className={classes.exportButton}>
@@ -102,6 +106,8 @@ function ReviewComplaintsListView({ classes, ...props }) {
           </Button>
         </Grid>
       </Grid>
+      <Grid container direction={"row"} className={classes.exportContainer}>
+      <Grid item xs={12} sm={12}>
       <IncidentListReview
           incidentType='COMPLAINT'
           incidents={incidents}
@@ -110,6 +116,8 @@ function ReviewComplaintsListView({ classes, ...props }) {
           handleRowClick={incidentId => props.history.push(`/app/review/${incidentId}`)}
           handlePageChange={handlePageChange}
       />
+      </Grid>
+      </Grid>
     </Paper>
   );
 }
