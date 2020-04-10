@@ -92,8 +92,8 @@ function IncidentList({ classes, incidentType, incidents, pageNumber, count, han
             <col style={{ width: "10%" }} />
             <col style={{ width: "15%" }} />
             <col style={{ width: "15%" }} />
-            <col style={{ width: "30%" }} />
-            <col style={{ width: "10%" }} />
+            <col style={{ width: "40%" }} />
+            {/* <col style={{ width: "10%" }} /> */}
           </colgroup>
           <TableHead>
             <TableRow>
@@ -102,7 +102,7 @@ function IncidentList({ classes, incidentType, incidents, pageNumber, count, han
               <CustomTableCell align="center">{ incidentType === 'COMPLAINT' ? 'District' : 'Description'}</CustomTableCell>
               <CustomTableCell align="center">Status</CustomTableCell>
               <CustomTableCell align="center">Title</CustomTableCell>
-              <CustomTableCell align="center">Final Resolution</CustomTableCell>
+              {/* <CustomTableCell align="center">Final Resolution</CustomTableCell> */}
             </TableRow>
           </TableHead>
           <TableBody>
@@ -134,9 +134,9 @@ function IncidentList({ classes, incidentType, incidents, pageNumber, count, han
                   <CustomTableCell align="center">
                     <p>{row.title}</p>
                   </CustomTableCell>
-                  <CustomTableCell align="center">
+                  {/* <CustomTableCell align="center">
                     <p>{row.current_decision}</p>
-                  </CustomTableCell>
+                  </CustomTableCell> */}
                 </TableRow>
                 )
               }

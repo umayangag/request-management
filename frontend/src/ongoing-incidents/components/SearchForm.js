@@ -140,7 +140,7 @@ function SearchForm(props) {
                   margin: "15px 4px",
                   width: "calc(100% - 88px)"
                 }}
-                placeholder="Search Text / Incident Id"
+                placeholder="Search Text / Reference ID"
                 margin="normal"
                 variant="outlined"
                 name="textSearch"
@@ -158,7 +158,7 @@ function SearchForm(props) {
                 <SearchIcon />
               </Button>
             </Grid>
-            <ExpansionPanel>
+            {/* <ExpansionPanel>
               <ExpansionPanelSummary
                 expandIcon={<ExpandMoreIcon />}
                 aria-controls="panel1a-content"
@@ -280,7 +280,7 @@ function SearchForm(props) {
                     <FormControl className={classes.formControlSearch}>
                       { orgSearch }
                     </FormControl>
-                    <FormControl className={classes.buttonContainer}>
+                    <FormControl className={classes.buttonContainer}> */}
                       {/* Reset workflow is pending
                        <Button
                         onClick={handleReset}
@@ -290,7 +290,7 @@ function SearchForm(props) {
                       >
                         Reset
                       </Button> */}
-                      <Button type="submit" variant="contained">
+                      {/* <Button type="submit" variant="contained">
                         Search
                         <SearchIcon />
                       </Button>
@@ -298,7 +298,7 @@ function SearchForm(props) {
                   </Grid>
                 </Grid>
               </ExpansionPanelDetails>
-            </ExpansionPanel>
+            </ExpansionPanel> */}
           </form>
         );
       }}
