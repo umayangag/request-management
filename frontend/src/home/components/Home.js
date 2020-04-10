@@ -24,7 +24,7 @@ const Home = ({classes, ...props}) =>{
                 <Grid item>
                     <Card xs={6}>
                         <CardHeader 
-                            title="Incidents Assigned to You"
+                            title="Complaints Assigned to You"
                         />
                         <CardContent>
                             <ManagedIncidentList 
@@ -37,7 +37,7 @@ const Home = ({classes, ...props}) =>{
                 <Grid item style={{paddingTop:"10px"}}>
                     <Card xs={6}>
                         <CardHeader 
-                            title="Incidents Linked to You"
+                            title="Complaints Linked to You"
                         />
                         <CardContent>
                             <ManagedIncidentList 

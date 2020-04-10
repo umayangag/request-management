@@ -90,20 +90,20 @@ function IncidentList({ classes, incidents, pageNumber, count, handleRowClick, h
             <col style={{ width: "45%" }} />
             <col style={{ width: "5%" }} />
             <col style={{ width: "5%" }} />
-            <col style={{ width: "15%" }} />
-            <col style={{ width: "2%" }} />
+            <col style={{ width: "17%" }} />
+            {/* <col style={{ width: "2%" }} /> */}
           </colgroup>
           <TableHead>
             <TableRow>
               <CustomTableCell align="center">Ref Id</CustomTableCell>
 
               <CustomTableCell align="center">Title</CustomTableCell>
-              <CustomTableCell align="center">Description</CustomTableCell>
+              {/* <CustomTableCell align="center">Description</CustomTableCell> */}
               <CustomTableCell align="center">Status</CustomTableCell>
-              <CustomTableCell align="center">Severity</CustomTableCell>
+              <CustomTableCell align="center">Priority</CustomTableCell>
               <CustomTableCell align="center">Response Time</CustomTableCell>
-              <CustomTableCell align="center">Category</CustomTableCell>
-              <CustomTableCell align="center">Last Action At</CustomTableCell>
+              {/* <CustomTableCell align="center">Category</CustomTableCell> */}
+              {/* <CustomTableCell align="center">Last Action At</CustomTableCell> */}
             </TableRow>
           </TableHead>
           <TableBody>
@@ -120,9 +120,9 @@ function IncidentList({ classes, incidents, pageNumber, count, handleRowClick, h
                 <CustomTableCell scope="center">
                   <p>{row.title}</p>
                 </CustomTableCell>
-                <CustomTableCell>
+                {/* <CustomTableCell>
                   <p className="description">{row.description}</p>
-                </CustomTableCell>
+                </CustomTableCell> */}
                 <CustomTableCell align="center">
                   <p>{row.currentStatus}</p>
                 </CustomTableCell>
@@ -132,12 +132,12 @@ function IncidentList({ classes, incidents, pageNumber, count, handleRowClick, h
                 <CustomTableCell align="center">
                   <p>{row.response_time} h</p>
                 </CustomTableCell>
-                <CustomTableCell align="center">
+                {/* <CustomTableCell align="center">
                   <p>{row.category}</p>
-                </CustomTableCell>
-                <CustomTableCell align="center">
+                </CustomTableCell> */}
+                {/* <CustomTableCell align="center">
                   <p>{row.subCategory}</p>
-                </CustomTableCell>
+                </CustomTableCell> */}
               </TableRow>
             ))}
           </TableBody>
