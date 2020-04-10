@@ -125,7 +125,7 @@ class AutosuggestInput extends React.Component {
     };
 
     render() {
-        const { classes, incidentType } = this.props;
+        const { classes, incidentType,paramIncidentId } = this.props;
         
         const autosuggestProps = {
             renderInputComponent,
@@ -150,7 +150,8 @@ class AutosuggestInput extends React.Component {
                     className: this.props.className,
                     onBlur: this.props.onBlur,
                     error: this.props.error,
-                    helperText: this.props.helperText
+                    helperText: this.props.helperText,
+                    disabled:paramIncidentId ? true : false
                 }}
                 theme={{
                     container: classes.container,

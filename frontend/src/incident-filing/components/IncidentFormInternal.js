@@ -164,7 +164,7 @@ function IncidentFormInternal(props) {
     const [state, setState] = useState({
         incidentType: "COMPLAINT",
         infoChannel: "",
-        title: "",
+        title: "Internal Creation",
         description: "",
         occurrence: null,
         occured_date: null,
@@ -456,7 +456,7 @@ function IncidentFormInternal(props) {
     const IncidentSchema = Yup.object().shape({
         incidentType: Yup.mixed().required("Required"),
         infoChannel: Yup.mixed().required("Required"),
-        title: Yup.string().required("Required"),
+        // title: Yup.string().required("Required"),
         description: Yup.string().required("Required"),
         // occurrence: Yup.mixed().when('incidentType', (incidentType, IncidentSchema) => (incidentType == 'COMPLAINT' ? IncidentSchema.required("Required") : IncidentSchema)),
         category: Yup.mixed().required("Required"),
@@ -584,10 +584,11 @@ function IncidentFormInternal(props) {
                                             onChange={handleChange}
                                         />
                                     </Grid>
-                                    <Grid item xs={12}>
+                                    {/* <Grid item xs={12}>
                                         <TitleAutoComplete
                                             value={values.title}
                                             incidentType={values.incidentType}
+                                            paramIncidentId={props.match.params.paramIncidentId}
                                             data={similarIncidents}
                                             onChange={(event) => handleChange(event)}
                                             onFetchSimilarInquiries={(title, type) => handleSimilarInquiries(title, type)}
@@ -596,7 +597,7 @@ function IncidentFormInternal(props) {
                                             error={(touched.title && errors.title) == 'Required' ? true : false}
                                             helperText={touched.title ? errors.title : null}
                                         />
-                                    </Grid>
+                                    </Grid> */}
                                     <Grid item xs={12}>
                                         <TextField
                                             type="text"
@@ -604,6 +605,7 @@ function IncidentFormInternal(props) {
                                             label={(values.incidentType === "INQUIRY") ? "Letter reference number*" : "Description*"}
                                             placeholder="Press enter for new lines."
                                             className={classes.textField}
+                                            disabled={props.match.params.paramIncidentId ? true : false}
                                             multiline
                                             value={values.description}
                                             variant="outlined"
@@ -1120,16 +1122,17 @@ function IncidentFormInternal(props) {
                                             </FormControl>
                                         </Grid>
                                     )} */}
-                                    {/* <Grid item xs={12}>
+                                    <Grid item xs={12}>
                                         <TextField
                                             id="reporterAddress"
                                             name="reporterAddress"
                                             label="Reporter Address"
+                                            variant="outlined"
                                             className={classes.textField}
                                             value={values.reporterAddress}
                                             onChange={handleChange}
                                         />
-                                    </Grid> */}
+                                    </Grid>
                                     <Grid item xs={12} sm={6}>
                                         <TelephoneInput
                                             className={classes.textField}
