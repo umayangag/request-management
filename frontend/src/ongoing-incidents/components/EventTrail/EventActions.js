@@ -207,12 +207,12 @@ const EventActions = (props) => {
             activeIncident.currentStatus !== 'INVALIDATED'  &&
               userCan(currentUser, activeIncident, USER_ACTIONS.CAN_RUN_WORKFLOW) &&
                 <>
-                {userCan(currentUser, activeIncident, USER_ACTIONS.CAN_ESCALATE_INCIDENT) &&
+                {/* {userCan(currentUser, activeIncident, USER_ACTIONS.CAN_ESCALATE_INCIDENT) &&
                     <Button color="primary" size="large" variant='text' className={classes.button} onClick={() => props.modalAction('ESCALATE_MODAL')}>
                         <ArrowUpwardIcon className={classes.actionButtonIcon} />
                         Escalate
                     </Button>
-                }
+                } */}
 
 
                 {userCan(currentUser, activeIncident, USER_ACTIONS.CAN_ESCALATE_EXTERNAL) &&

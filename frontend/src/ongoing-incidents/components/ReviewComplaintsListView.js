@@ -84,7 +84,7 @@ function ReviewComplaintsListView({ classes, ...props }) {
     <Paper className={classes.root}>
       <h3>Review Complaints</h3>
       <Grid container direction={"row"} className={classes.exportContainer}>
-      <Grid item xs={12} sm={6}>
+      <Grid item xs={12} sm={12}>
       <SearchForm
         incidentType='COMPLAINT'
         categories={categories} 

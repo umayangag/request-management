@@ -59,7 +59,7 @@ function BasicDetailTab(props) {
 
                         <Grid container spacing={24}>
                             <Grid item xs>
-                                <Typography className={classes.label}> {(incident.incidentType === 'COMPLAINT') ? 'Complaint' : 'Inquiry'} Ref ID </Typography>
+                                <Typography className={classes.label}> Reference ID </Typography>
                                 <Typography variant="h4" gutterBottom> {incident.refId} </Typography>
                             </Grid>
                         </Grid>
@@ -80,22 +80,22 @@ function BasicDetailTab(props) {
 
                         {incident.incidentType === 'COMPLAINT' &&
                             <>
-                                <Grid container spacing={24}>
+                                {/* <Grid container spacing={24}>
                                     <Grid item xs>
                                         <Typography variant="caption" className={classes.label}> Occurrence </Typography>
                                         <Typography gutterBottom> {occurrence[incident.occurrence]} </Typography>
                                     </Grid>
-                                </Grid>
+                                </Grid> */}
 
                                 <Grid container spacing={24}>
                                     <Grid item xs>
-                                        <Typography variant="caption" className={classes.label}>Incident Date </Typography>
+                                        <Typography variant="caption" className={classes.label}>Complaint Date </Typography>
                                         <Typography gutterBottom>
                                             {(incident.occured_date) ? <Moment format="YYYY/MM/DD">{incident.occured_date}</Moment> : "No date set"}
                                         </Typography>
                                     </Grid>
                                     <Grid item xs>
-                                        <Typography variant="caption" className={classes.label}> Incident Time </Typography>
+                                        <Typography variant="caption" className={classes.label}> Complaint Time </Typography>
                                         <Typography gutterBottom>
                                             {(incident.occured_date) ? <Moment format="HH:mm">{incident.occured_date}</Moment> : "No time set"}
                                         </Typography>
@@ -136,14 +136,14 @@ function BasicDetailTab(props) {
                 <Grid item xs={12}>
                     <Paper elevation={1} className={classes.paper}>
 
-                        <Grid container spacing={24}>
+                        {/* <Grid container spacing={24}>
                             <Grid item xs>
                                 <Typography className={classes.label}> Election </Typography>
                                 <Typography variant="h6" gutterBottom>
                                     {elections.map((value, index) => (value.code === incident.election ? value.name : null))}
                                 </Typography>
                             </Grid>
-                        </Grid>
+                        </Grid> */}
 
                         <Grid container spacing={24}>
                             <Grid item xs>
@@ -240,7 +240,7 @@ function LocationTab(props) {
                 <Grid item xs={12}>
                     <Paper elevation={1} className={classes.paper}>
 
-                        <Grid container spacing={24}>
+                        {/* <Grid container spacing={24}>
                             <Grid item xs>
                                 <Typography variant="caption" className={classes.label}> Province </Typography>
                                 <Typography variant="" gutterBottom>
@@ -250,7 +250,7 @@ function LocationTab(props) {
                                     }
                                 </Typography>
                             </Grid>
-                        </Grid>
+                        </Grid> */}
 
                         <Grid container spacing={24}>
                             <Grid item xs>
@@ -477,7 +477,7 @@ function SummaryTabView(props) {
                 <LinkTab label="Basic Information" href="page1" />
                 <LinkTab label="Contact Information" href="page2" />
                 <LinkTab label="Location Information" href="page3" style={{ display: incident.incidentType === 'INQUIRY' ? 'none' : ''}}/>
-                <LinkTab label="Police Information" href="page4" style={{ display: incident.incidentType === 'INQUIRY' ? 'none' : ''}}/>
+                {/* <LinkTab label="Police Information" href="page4" style={{ display: incident.incidentType === 'INQUIRY' ? 'none' : ''}}/> */}
             </Tabs>
 
             {currentTab === 0 && <TabContainer>
