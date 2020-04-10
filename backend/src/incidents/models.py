@@ -35,19 +35,23 @@ class StatusType(enum.Enum):
 
 
 class SeverityType(enum.Enum):
-    CRITICAL = "Critical"
-    MAJOR = "Major"
-    MODERATE = "Moderate"
-    MINOR = "Minor"
-    INSIGNIFICANT = "Insignificant"
-    DEFAULT = "Default"
+    # CRITICAL = "CRITICAL"
+    # MAJOR = "MAJOR"
+    # MODERATE = "MODERATE"
+    # MINOR = "MINOR"
+    # INSIGNIFICANT = "INSIGNIFICANT"
+    # DEFAULT = "DEFAULT"
+
+    HIGH = "High"
+    MEDIUM = "Medium"
+    LOW = "Low"
 
     def __str__(self):
         return self.name
 
 class IncidentType(enum.Enum):
-    INQUIRY = "INQUIRY"
-    COMPLAINT = "COMPLAINT"
+    INQUIRY = "Inquiry"
+    COMPLAINT = "Complaint"
 
     def __str__(self):
         return self.name
@@ -197,12 +201,14 @@ class Incident(models.Model):
     occured_date = models.DateTimeField(null=True, blank=True)
     created_date = models.DateTimeField(auto_now_add=True)
 
-    # old severity mapping
     current_status = models.CharField(max_length=50, default=None, null=True, blank=True)
-    current_severity = models.CharField(max_length=50, default=None, null=True, blank=True)
+    current_severity = models.CharField(
+        max_length=50,
+        choices=[(tag.name, tag.value) for tag in SeverityType],
+        default=SeverityType.LOW,
+    )
 
-    # new severity mapping
-    # alternative of issue #180
+    # not in use
     severity = models.IntegerField(default=None, null=True, blank=True, validators=[MinValueValidator(1), MaxValueValidator(10)])
 
     # inquiry related fields
@@ -213,7 +219,7 @@ class Incident(models.Model):
     current_decision = models.CharField(max_length=50, default=None, null=True, blank=True)
 
     def save(self, *args, **kwargs):
-        if self.incidentType == IncidentType.INQUIRY.value :
+        if self.incidentType == IncidentType.INQUIRY.name :
             self.refId = generate_inquiry_refId(election=self.election, category=self.category, institution=self.institution)
         else:
             self.refId = generate_complaint_refId(election=self.election, district=self.district)
