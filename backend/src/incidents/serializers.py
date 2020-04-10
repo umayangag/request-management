@@ -35,7 +35,9 @@ class ReporterSerializer(serializers.ModelSerializer):
 class IncidentSerializer(serializers.ModelSerializer):
 
     currentStatus = serializers.ReadOnlyField(source="current_status")
-    currentSeverity = serializers.ReadOnlyField(source="current_severity")
+    
+    # currentSeverity = serializers.ReadOnlyField(source="current_severity")
+    severity = serializers.CharField(source="current_severity", required=False, allow_null=True, allow_blank=True)
 
     divisionalSecretariat = serializers.CharField(
         source="ds_division", required=False, allow_null=True, allow_blank=True)
@@ -69,12 +71,6 @@ class IncidentSerializer(serializers.ModelSerializer):
     assignee = UserSerializer(read_only=True)
 
     lastAssignment = serializers.SerializerMethodField(method_name="get_last_assignment")
-
-    severity = serializers.IntegerField(initial=0, allow_null=True)
-
-    # refId = serializers.CharField(required=False)
-    # election = serializers.CharField(required=False)
-    # reporter = ReporterSerializer()
 
     # inquiry specifics
     receivedDate = serializers.DateField(source="received_date", allow_null=True)
