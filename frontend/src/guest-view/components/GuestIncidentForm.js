@@ -418,7 +418,7 @@ const VerticalLinearStepper = (props) => {
 
             {/* <Button variant="outlined" onClick={() => { window.history.back(); }}> Back </Button> */}
             <Typography style={{ width: '100%' }} align="center" variant="h5" marginTop="20">
-                {f({ id: "eclk.incident.management.report.incidents", defaultMessage: "Report Incident" })}
+                {f({ id: "eclk.incident.management.report.incidents", defaultMessage: "Report Complaint" })}
             </Typography>
             <Typography style={{ width: '100%' }} align="left" variant="" marginTop="20">
                 {f({ id: "eclk.incident.management.report.incidents.helper.text", defaultMessage: "*fields are mandatory" })}

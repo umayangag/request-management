@@ -194,6 +194,9 @@ class AutosuggestInput extends React.Component {
                     suggestionsContainerOpen: classes.suggestionsContainerOpen,
                     suggestionsList: classes.suggestionsList,
                     suggestion: classes.suggestion,
+                    input:{
+                        width: '50%'
+                    }   
                 }}
                 renderSuggestionsContainer={options => (
                     <Paper {...options.containerProps} square>

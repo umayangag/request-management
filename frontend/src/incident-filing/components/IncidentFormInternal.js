@@ -1130,6 +1130,7 @@ function IncidentFormInternal(props) {
                                             name="reporterAddress"
                                             label="Reporter Address"
                                             variant="outlined"
+                                            multiline
                                             className={classes.textField}
                                             value={values.reporterAddress}
                                             onChange={handleChange}
@@ -1229,6 +1230,7 @@ function IncidentFormInternal(props) {
                                             className={classes.textField}
                                             value={values.address}
                                             onChange={handleChange}
+                                            multiline
                                         />
                                     </Grid>
                                     <Grid item xs={12}>
