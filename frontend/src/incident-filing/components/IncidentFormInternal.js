@@ -336,7 +336,9 @@ function IncidentFormInternal(props) {
         }
         const incident = incidentUtils.getIncident(paramIncidentId);
         var initData = { ...state, ...incident };
-        const reporter = reporter;
+
+        // get current reporter details
+        const reporter = (incident) ? incidentUtils.getReporter(incident.reporter) : ""
         if (reporter) {
             Object.assign(initData, {
                 reporterName: reporter.name,
@@ -389,7 +391,7 @@ function IncidentFormInternal(props) {
         });
     };
 
-    
+
     const customValidations = (values) => {
         //date time is validated here since it has to be compared with the occurrence.
         //cannot do this with yup.
@@ -486,7 +488,7 @@ function IncidentFormInternal(props) {
 
                 }}
                 validationSchema={IncidentSchema}
-                // validate={customValidations} 
+                // validate={customValidations}
                 // above customValidation commented due to removing of occurrence
                 render={({
                     handleSubmit,
@@ -515,7 +517,7 @@ function IncidentFormInternal(props) {
                             {/* basic incident detail information */}
                             <Paper className={classes.paper}>
                                 <Typography variant="h5" gutterBottom>
-                                    Basic Information 
+                                    Basic Information
                                 </Typography>
                                 <Grid container spacing={24}>
                                     <Grid item xs={12}>

@@ -7,3 +7,12 @@ export function getIncident(incidentId){
     }
     return null;
 }
+
+export function getReporter(reporterId){
+    const reporters = useSelector( state => state.incident.reporters)
+    if (reporters.allIds.indexOf(reporterId) !== -1){
+        return reporters.byIds[reporterId]
+    }
+    return null
+}
+
