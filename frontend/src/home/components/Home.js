@@ -18,10 +18,10 @@ const Home = ({classes, ...props}) =>{
     const user = useSelector(state => state.shared.signedInUser.data);
 
     return (
-        <Grid container>
+        <Grid direction="column" container>
             {userCan(user, null, USER_ACTIONS.CAN_REVIEW_ALL_INCIDENTS) && (
                 <>
-                <Grid item>
+                <Grid xs={12} item>
                     <Card xs={6}>
                         <CardHeader 
                             title="Complaints Assigned to You"
@@ -34,7 +34,7 @@ const Home = ({classes, ...props}) =>{
                     </Card>
                 </Grid>
                 
-                <Grid item style={{paddingTop:"10px"}}>
+                <Grid xs={12} item style={{paddingTop:"10px"}}>
                     <Card xs={6}>
                         <CardHeader 
                             title="Complaints Linked to You"
@@ -51,7 +51,7 @@ const Home = ({classes, ...props}) =>{
 
             {!userCan(user, null, USER_ACTIONS.CAN_REVIEW_ALL_INCIDENTS) && (
                 <>
-                <Grid item style={{paddingTop:"10px"}}>
+                <Grid xs={12} item style={{paddingTop:"10px"}}>
                     <Card xs={6}>
                         <CardHeader 
                             title="Your Incidents"
