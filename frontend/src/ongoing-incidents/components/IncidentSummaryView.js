@@ -213,7 +213,7 @@ function LocationTab(props) {
 
                         <Grid container spacing={24}>
                             <Grid item xs>
-                                <Typography variant="caption" className={classes.label}> Name / Description </Typography>
+                                <Typography variant="caption" className={classes.label}> Additional Information / (e.g. Landmarks) </Typography>
                                 <Typography gutterBottom> {incident.location} </Typography>
                             </Grid>
                         </Grid>
@@ -302,7 +302,6 @@ function LocationTab(props) {
 function ContactTab(props) {
 
     const { classes, reporter } = props;
-
     return (
         <div>
             <Grid container spacing={24}>
