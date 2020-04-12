@@ -778,14 +778,14 @@ function IncidentFormInternal(props) {
                                                     onChange={handleChange}
                                                     row>
                                                     <FormControlLabel
-                                                        value="High"
+                                                        value="HIGH"
                                                         control={
                                                             <Radio
                                                                 classes={{
                                                                     root: classes.severityHigh,
                                                                     checked: classes.checked
                                                                 }}
-                                                                checked={values.severity == "High" ? true : false}
+                                                                checked={values.severity == "HIGH" ? true : false}
                                                             />
                                                         }
                                                         label="High"
@@ -796,14 +796,14 @@ function IncidentFormInternal(props) {
                                                         }}
                                                     />
                                                     <FormControlLabel
-                                                        value="Low"
+                                                        value="LOW"
                                                         control={
                                                             <Radio
                                                                 classes={{
                                                                     root: classes.severityLow,
                                                                     checked: classes.checked
                                                                 }}
-                                                                checked={values.severity == "Low" ? true : false}
+                                                                checked={values.severity == "LOW" ? true : false}
                                                             />
                                                         }
                                                         label="Low"
@@ -814,14 +814,14 @@ function IncidentFormInternal(props) {
                                                         }}
                                                     />
                                                     <FormControlLabel
-                                                        value="Medium"
+                                                        value="MEDIUM"
                                                         control={
                                                             <Radio
                                                                 classes={{
                                                                     root: classes.severityMedium,
                                                                     checked: classes.checked
                                                                 }}
-                                                                checked={values.severity == "Medium" ? true : false}
+                                                                checked={values.severity == "MEDIUM" ? true : false}
                                                             />
                                                         }
                                                         label="Medium"
