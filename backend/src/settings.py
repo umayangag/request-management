@@ -61,7 +61,10 @@ INSTALLED_APPS = [
     'src.incidents',
     'src.events',
     'src.reporting',
-    'src.file_upload'
+    'src.file_upload',
+    'src.notifications',
+
+    'channels',
 ]
 
 MIDDLEWARE = [
@@ -76,6 +79,13 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'src.urls'
+
+# TODO: need to use redis channel layer in prod
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels.layers.InMemoryChannelLayer"
+    }
+}
 
 TEMPLATES = [
     {
@@ -94,7 +104,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'src.wsgi.application'
-
+ASGI_APPLICATION = "src.routing.application"
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
