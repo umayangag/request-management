@@ -61,20 +61,6 @@
     "fields": {
       "code": "CVD19-5",
       "top_category": "COVID19",
-      "sub_category": "Request help - Samurdhi allowances",
-      "sn_top_category": "COVID19",
-      "sn_sub_category": "සහය පැතීම - සමුර්දි දීමනා",
-      "tm_top_category": "COVID19",
-      "tm_sub_category": "உதவி கோருங்கள் - சமுர்தி கொடுப்பனவுகள்",
-      "created_date": "2020-01-01T00:00:00Z"
-    }
-  },
-  {
-    "model": "common.category",
-    "pk": 6,
-    "fields": {
-      "code": "CVD19-6",
-      "top_category": "COVID19",
       "sub_category": "Request help - Elders allowances",
       "sn_top_category": "COVID19",
       "sn_sub_category": "සහය පැතීම - වැඩිහිටි දීමනා",
@@ -85,9 +71,9 @@
   },
   {
     "model": "common.category",
-    "pk": 7,
+    "pk": 6,
     "fields": {
-      "code": "CVD19-7",
+      "code": "CVD19-6",
       "top_category": "COVID19",
       "sub_category": "Request help - Temporary allowances",
       "sn_top_category": "COVID19",
@@ -99,9 +85,9 @@
   },
   {
     "model": "common.category",
-    "pk": 8,
+    "pk": 7,
     "fields": {
-      "code": "CVD19-8",
+      "code": "CVD19-7",
       "top_category": "COVID19",
       "sub_category": "Request help - Other allowances",
       "sn_top_category": "COVID19",
@@ -113,23 +99,9 @@
   },
   {
     "model": "common.category",
-    "pk": 9,
+    "pk": 8,
     "fields": {
-      "code": "CVD19-9",
-      "top_category": "COVID19",
-      "sub_category": "Request help - Pensioners",
-      "sn_top_category": "COVID19",
-      "sn_sub_category": "සහය පැතීම - විශ්‍රාමිකයන්",
-      "tm_top_category": "COVID19",
-      "tm_sub_category": "உதவி கோருங்கள் - ஓய்வூதியம் பெறுவோர்",
-      "created_date": "2020-01-01T00:00:00Z"
-    }
-  },
-  {
-    "model": "common.category",
-    "pk": 10,
-    "fields": {
-      "code": "CVD19-10",
+      "code": "CVD19-8",
       "top_category": "COVID19",
       "sub_category": "Request help - Farming pensioners",
       "sn_top_category": "COVID19",
@@ -141,9 +113,9 @@
   },
   {
     "model": "common.category",
-    "pk": 11,
+    "pk": 9,
     "fields": {
-      "code": "CVD19-11",
+      "code": "CVD19-9",
       "top_category": "COVID19",
       "sub_category": "Sri Lankan citizen living overseas - Help wanted in overseas country",
       "sn_top_category": "COVID19",
@@ -155,9 +127,9 @@
   },
   {
     "model": "common.category",
-    "pk": 12,
+    "pk": 10,
     "fields": {
-      "code": "CVD19-12",
+      "code": "CVD19-10",
       "top_category": "COVID19",
       "sub_category": "Sri Lankan citizen living overseas - Assistance for family members in SL",
       "sn_top_category": "COVID19",
@@ -169,14 +141,42 @@
   },
   {
     "model": "common.category",
+    "pk": 11,
+    "fields": {
+      "code": "CVD19-11",
+      "top_category": "COVID19",
+      "sub_category": "Public utilities, repairs and waste disposal",
+      "sn_top_category": "COVID19",
+      "sn_sub_category": "මහජන උපයෝගිතා, අළුත්වැඩියා සහ අපද්‍රව්‍ය බැහැර කිරීම",
+      "tm_top_category": "COVID19",
+      "tm_sub_category": "பொது பயன்பாடுகள், பழுது மற்றும் கழிவுகளை அகற்றுவது",
+      "created_date": "2020-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "common.category",
+    "pk": 12,
+    "fields": {
+      "code": "SAMURDHI-1",
+      "top_category": "Samurdhi",
+      "sub_category": "Request help - Samurdhi allowances",
+      "sn_top_category": "සමෘද්ධි",
+      "sn_sub_category": "සහය පැතීම - සමෘද්ධි දීමනා",
+      "tm_top_category": "சமுர்த்தி",
+      "tm_sub_category": "உதவி கோருங்கள் - சமுர்தி கொடுப்பனவுகள்",
+      "created_date": "2020-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "common.category",
     "pk": 13,
     "fields": {
-      "code": "CVD19-13",
-      "top_category": "COVID19",
+      "code": "DIPLO-1",
+      "top_category": "DIPLOMAT / EMBASSIES / NGOs",
       "sub_category": "Expatriates / Residents of Sri Lanka with foreign citizenship / Diplomatic embassies",
-      "sn_top_category": "COVID19",
+      "sn_top_category": "තානාපතියන් / තානාපති කාර්යාල / රාජ්‍ය නොවන සංවිධාන",
       "sn_sub_category": "විදේශිකයන් / විදේශීය පුරවැසිභාවය සහිත ශ්‍රී ලංකාවේ පදිංචිකරුවන් / රාජ්‍ය තාන්ත්‍රික තානාපති කාර්යාල",
-      "tm_top_category": "COVID19",
+      "tm_top_category": "தூதர்கள் / தூதரகங்கள் / தன்னார்வ தொண்டு நிறுவனம்",
       "tm_sub_category": "வெளிநாட்டவர்கள் / வெளிநாட்டு குடியுரிமையுடன் இலங்கையில் வசிப்பவர்கள் / இராஜதந்திர தூதரகங்கள்",
       "created_date": "2020-01-01T00:00:00Z"
     }
@@ -185,12 +185,12 @@
     "model": "common.category",
     "pk": 14,
     "fields": {
-      "code": "CVD19-14",
-      "top_category": "COVID19",
+      "code": "DIPLO-2",
+      "top_category": "DIPLOMAT / EMBASSIES / NGOs",
       "sub_category": "Tourist",
-      "sn_top_category": "COVID19",
+      "sn_top_category": "තානාපතියන් / තානාපති කාර්යාල / රාජ්‍ය නොවන සංවිධාන",
       "sn_sub_category": "සංචාරකයන්",
-      "tm_top_category": "COVID19",
+      "tm_top_category": "தூதர்கள் / தூதரகங்கள் / தன்னார்வ தொண்டு நிறுவனம்",
       "tm_sub_category": "சுற்றுலா",
       "created_date": "2020-01-01T00:00:00Z"
     }
@@ -199,13 +199,13 @@
     "model": "common.category",
     "pk": 15,
     "fields": {
-      "code": "CVD19-15",
-      "top_category": "COVID19",
-      "sub_category": "Government organizations",
-      "sn_top_category": "COVID19",
-      "sn_sub_category": "රජයේ සංවිධාන",
-      "tm_top_category": "COVID19",
-      "tm_sub_category": "அரசு நிறுவனங்கள்",
+      "code": "DIPLO-3",
+      "top_category": "DIPLOMAT / EMBASSIES / NGOs",
+      "sub_category": "DIPLOMAT / EMBASSIES / UN / NGOs",
+      "sn_top_category": "තානාපතියන් / තානාපති කාර්යාල / රාජ්‍ය නොවන සංවිධාන",
+      "sn_sub_category": "තානාපතියන් / තානාපති කාර්යාල / UN / රාජ්‍ය නොවන සංවිධාන",
+      "tm_top_category": "தூதர்கள் / தூதரகங்கள் / தன்னார்வ தொண்டு நிறுவனம்",
+      "tm_sub_category": "தூதர்கள் / தூதரகங்கள் / UN / தன்னார்வ தொண்டு நிறுவனம்",
       "created_date": "2020-01-01T00:00:00Z"
     }
   },
@@ -213,13 +213,41 @@
     "model": "common.category",
     "pk": 16,
     "fields": {
-      "code": "CVD19-16",
-      "top_category": "COVID19",
-      "sub_category": "Other",
-      "sn_top_category": "COVID19",
-      "sn_sub_category": "වෙනත්",
-      "tm_top_category": "COVID19",
-      "tm_sub_category": "மற்றவை",
+      "code": "GOV-1",
+      "top_category": "GOVT ORG",
+      "sub_category": "Request authorization/ approval",
+      "sn_top_category": "රාජ්‍ය සංවිධානය",
+      "sn_sub_category": "අවසරය / අනුමැතිය ඉල්ලා සිටින්න",
+      "tm_top_category": "அரசு நிறுவனங்கள்",
+      "tm_sub_category": "அங்கீகாரம் / ஒப்புதல் கோருங்கள்",
+      "created_date": "2020-01-01T00:00:00Z"
+    }
+  }
+  {
+    "model": "common.category",
+    "pk": 17,
+    "fields": {
+      "code": "GOV-2",
+      "top_category": "GOVT ORG",
+      "sub_category": "Request travel authorization",
+      "sn_top_category": "රාජ්‍ය සංවිධානය",
+      "sn_sub_category": "සංචාරක අවසරය ඉල්ලීම",
+      "tm_top_category": "அரசு நிறுவனங்கள்",
+      "tm_sub_category": "பயண அங்கீகாரத்தைக் கோருங்கள்",
+      "created_date": "2020-01-01T00:00:00Z"
+    }
+  }
+  {
+    "model": "common.category",
+    "pk": 18,
+    "fields": {
+      "code": "GOV-3",
+      "top_category": "GOVT ORG",
+      "sub_category": "Request financial assistance",
+      "sn_top_category": "රාජ්‍ය සංවිධානය",
+      "sn_sub_category": "මූල්‍ය ආධාර ඉල්ලීම",
+      "tm_top_category": "அரசு நிறுவனங்கள்",
+      "tm_sub_category": "நிதி உதவி கோருங்கள்",
       "created_date": "2020-01-01T00:00:00Z"
     }
   }
