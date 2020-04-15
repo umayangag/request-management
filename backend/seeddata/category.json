@@ -222,7 +222,7 @@
       "tm_sub_category": "அங்கீகாரம் / ஒப்புதல் கோருங்கள்",
       "created_date": "2020-01-01T00:00:00Z"
     }
-  }
+  },
   {
     "model": "common.category",
     "pk": 17,
@@ -236,7 +236,7 @@
       "tm_sub_category": "பயண அங்கீகாரத்தைக் கோருங்கள்",
       "created_date": "2020-01-01T00:00:00Z"
     }
-  }
+  },
   {
     "model": "common.category",
     "pk": 18,
