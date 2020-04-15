@@ -3,56 +3,224 @@
     "model": "common.category",
     "pk": 1,
     "fields": {
-      "code": "COVID19-1",
+      "code": "CVD19-1",
       "top_category": "COVID19",
-      "sub_category": "Report a COVID-19 case",
+      "sub_category": "Report a matter/incident",
       "sn_top_category": "COVID19",
-      "sn_sub_category": "COVID-19 නඩුවක් වාර්තා කරන්න",
+      "sn_sub_category": "කාරණයක් / සිද්ධියක් වාර්තා කරන්න",
       "tm_top_category": "COVID19",
-      "tm_sub_category": "COVID-19 வழக்கைப் புகாரளிக்கவும்",
-      "created_date": "2019-06-27T00:00:00Z"
+      "tm_sub_category": "ஒரு விஷயம் / சம்பவத்தைப் புகாரளிக்கவும்",
+      "created_date": "2020-01-01T00:00:00Z"
     }
   },
   {
     "model": "common.category",
     "pk": 2,
     "fields": {
-      "code": "COVID19-2",
+      "code": "CVD19-2",
       "top_category": "COVID19",
       "sub_category": "Report a suspected case of COVID-19",
       "sn_top_category": "COVID19",
       "sn_sub_category": "COVID-19 හි සැක සහිත නඩුවක් වාර්තා කරන්න",
       "tm_top_category": "COVID19",
       "tm_sub_category": "COVID-19 இன் சந்தேகத்திற்குரிய வழக்கைப் புகாரளிக்கவும்",
-      "created_date": "2019-06-27T00:00:00Z"
+      "created_date": "2020-01-01T00:00:00Z"
     }
   },
   {
     "model": "common.category",
     "pk": 3,
     "fields": {
-      "code": "COVID19-3",
+      "code": "CVD19-3",
       "top_category": "COVID19",
-      "sub_category": "Request on delivery of essential grocery supplies or medicines",
+      "sub_category": "Request help - Access or delivery of essential grocery supplies or medicines",
       "sn_top_category": "COVID19",
-      "sn_sub_category": "අත්‍යවශ්‍ය සිල්ලර බඩු හෝ ඖෂධ ලබා දීමට ඉල්ලීම",
+      "sn_sub_category": "සහය පැතීම - අත්‍යවශ්‍ය සිල්ලර බඩු හෝ ඖෂධ ලබා දීම",
       "tm_top_category": "COVID19",
-      "tm_sub_category": "அத்தியாவசிய மளிகை பொருட்கள் அல்லது மருந்துகளை வழங்குவதற்கான கோரிக்கை",
-      "created_date": "2019-06-27T00:00:00Z"
+      "tm_sub_category": "உதவி கோருங்கள் - அத்தியாவசிய மளிகை பொருட்கள் அல்லது மருந்துகளை அணுகல் அல்லது வழங்குதல்",
+      "created_date": "2020-01-01T00:00:00Z"
     }
   },
   {
     "model": "common.category",
     "pk": 4,
     "fields": {
-      "code": "COVID19-4",
+      "code": "CVD19-4",
       "top_category": "COVID19",
-      "sub_category": "Request financial assistance towards essential grocery supplies or medicines",
+      "sub_category": "Request help - Financial assistance towards essential grocery supplies or medicines",
       "sn_top_category": "COVID19",
-      "sn_sub_category": "අත්‍යවශ්‍ය සිල්ලර බඩු හෝ ඖෂධ සඳහා මූල්‍ය ආධාර ඉල්ලන්න",
+      "sn_sub_category": "සහය පැතීම - අත්‍යවශ්‍ය සිල්ලර බඩු හෝ ඖෂධ සඳහා මූල්‍ය ආධාර",
       "tm_top_category": "COVID19",
-      "tm_sub_category": "அத்தியாவசிய மளிகை பொருட்கள் அல்லது மருந்துகளுக்கு நிதி உதவி கோருங்கள்",
-      "created_date": "2019-06-27T00:00:00Z"
+      "tm_sub_category": "உதவி கோருங்கள் - அத்தியாவசிய மளிகை பொருட்கள் அல்லது மருந்துகளுக்கு நிதி உதவி",
+      "created_date": "2020-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "common.category",
+    "pk": 5,
+    "fields": {
+      "code": "CVD19-5",
+      "top_category": "COVID19",
+      "sub_category": "Request help - Samurdhi allowances",
+      "sn_top_category": "COVID19",
+      "sn_sub_category": "සහය පැතීම - සමුර්දි දීමනා",
+      "tm_top_category": "COVID19",
+      "tm_sub_category": "உதவி கோருங்கள் - சமுர்தி கொடுப்பனவுகள்",
+      "created_date": "2020-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "common.category",
+    "pk": 6,
+    "fields": {
+      "code": "CVD19-6",
+      "top_category": "COVID19",
+      "sub_category": "Request help - Elders allowances",
+      "sn_top_category": "COVID19",
+      "sn_sub_category": "සහය පැතීම - වැඩිහිටි දීමනා",
+      "tm_top_category": "COVID19",
+      "tm_sub_category": "உதவி கோருங்கள் - முதியோர் கொடுப்பனவுகள்",
+      "created_date": "2020-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "common.category",
+    "pk": 7,
+    "fields": {
+      "code": "CVD19-7",
+      "top_category": "COVID19",
+      "sub_category": "Request help - Temporary allowances",
+      "sn_top_category": "COVID19",
+      "sn_sub_category": "සහය පැතීම - තාවකාලික දීමනා",
+      "tm_top_category": "COVID19",
+      "tm_sub_category": "உதவி கோருங்கள் - தற்காலிக கொடுப்பனவுகள்",
+      "created_date": "2020-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "common.category",
+    "pk": 8,
+    "fields": {
+      "code": "CVD19-8",
+      "top_category": "COVID19",
+      "sub_category": "Request help - Other allowances",
+      "sn_top_category": "COVID19",
+      "sn_sub_category": "සහය පැතීම - වෙනත් දීමනා",
+      "tm_top_category": "COVID19",
+      "tm_sub_category": "உதவி கோருங்கள் - பிற கொடுப்பனவுகள்",
+      "created_date": "2020-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "common.category",
+    "pk": 9,
+    "fields": {
+      "code": "CVD19-9",
+      "top_category": "COVID19",
+      "sub_category": "Request help - Pensioners",
+      "sn_top_category": "COVID19",
+      "sn_sub_category": "සහය පැතීම - විශ්‍රාමිකයන්",
+      "tm_top_category": "COVID19",
+      "tm_sub_category": "உதவி கோருங்கள் - ஓய்வூதியம் பெறுவோர்",
+      "created_date": "2020-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "common.category",
+    "pk": 10,
+    "fields": {
+      "code": "CVD19-10",
+      "top_category": "COVID19",
+      "sub_category": "Request help - Farming pensioners",
+      "sn_top_category": "COVID19",
+      "sn_sub_category": "සහය පැතීම - ගොවි විශ්‍රාමිකයන්",
+      "tm_top_category": "COVID19",
+      "tm_sub_category": "உதவி கோருங்கள் - விவசாய ஓய்வூதியம் பெறுவோர்",
+      "created_date": "2020-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "common.category",
+    "pk": 11,
+    "fields": {
+      "code": "CVD19-11",
+      "top_category": "COVID19",
+      "sub_category": "Sri Lankan citizen living overseas - Help wanted in overseas country",
+      "sn_top_category": "COVID19",
+      "sn_sub_category": "විදේශයක ජීවත්වන ශ්‍රී ලාංකික පුරවැසියන් - විදේශ රටක උපකාර අවශ්‍ය වේ",
+      "tm_top_category": "COVID19",
+      "tm_sub_category": "வெளிநாட்டில் வாழும் இலங்கை குடிமகன் - வெளிநாட்டு நாட்டில் உதவி தேவை",
+      "created_date": "2020-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "common.category",
+    "pk": 12,
+    "fields": {
+      "code": "CVD19-12",
+      "top_category": "COVID19",
+      "sub_category": "Sri Lankan citizen living overseas - Assistance for family members in SL",
+      "sn_top_category": "COVID19",
+      "sn_sub_category": "විදේශයක ජීවත්වන ශ්‍රී ලාංකික පුරවැසියන් - ශ්‍රී ලංකාවේ පවුලේ සාමාජිකයින් සඳහා උදව් උපකාර",
+      "tm_top_category": "COVID19",
+      "tm_sub_category": "வெளிநாட்டில் வாழும் இலங்கை குடிமகன் - எஸ்.எல். இல் குடும்ப உறுப்பினர்களுக்கு உதவி",
+      "created_date": "2020-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "common.category",
+    "pk": 13,
+    "fields": {
+      "code": "CVD19-13",
+      "top_category": "COVID19",
+      "sub_category": "Expatriates / Residents of Sri Lanka with foreign citizenship / Diplomatic embassies",
+      "sn_top_category": "COVID19",
+      "sn_sub_category": "විදේශිකයන් / විදේශීය පුරවැසිභාවය සහිත ශ්‍රී ලංකාවේ පදිංචිකරුවන් / රාජ්‍ය තාන්ත්‍රික තානාපති කාර්යාල",
+      "tm_top_category": "COVID19",
+      "tm_sub_category": "வெளிநாட்டவர்கள் / வெளிநாட்டு குடியுரிமையுடன் இலங்கையில் வசிப்பவர்கள் / இராஜதந்திர தூதரகங்கள்",
+      "created_date": "2020-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "common.category",
+    "pk": 14,
+    "fields": {
+      "code": "CVD19-14",
+      "top_category": "COVID19",
+      "sub_category": "Tourist",
+      "sn_top_category": "COVID19",
+      "sn_sub_category": "සංචාරකයන්",
+      "tm_top_category": "COVID19",
+      "tm_sub_category": "சுற்றுலா",
+      "created_date": "2020-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "common.category",
+    "pk": 15,
+    "fields": {
+      "code": "CVD19-15",
+      "top_category": "COVID19",
+      "sub_category": "Government organizations",
+      "sn_top_category": "COVID19",
+      "sn_sub_category": "රජයේ සංවිධාන",
+      "tm_top_category": "COVID19",
+      "tm_sub_category": "அரசு நிறுவனங்கள்",
+      "created_date": "2020-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "common.category",
+    "pk": 16,
+    "fields": {
+      "code": "CVD19-16",
+      "top_category": "COVID19",
+      "sub_category": "Other",
+      "sn_top_category": "COVID19",
+      "sn_sub_category": "වෙනත්",
+      "tm_top_category": "COVID19",
+      "tm_sub_category": "மற்றவை",
+      "created_date": "2020-01-01T00:00:00Z"
     }
   }
 ]
