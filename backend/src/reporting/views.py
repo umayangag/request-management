@@ -14,7 +14,7 @@ import os
 
 from .services import get_police_division_summary, get_category_summary, \
     get_mode_summary, get_severity_summary, get_status_summary, get_subcategory_summary, get_district_summary, \
-    get_incident_date_summary, get_slip_data, get_daily_category_data, get_daily_summary_data, get_daily_district_data
+    get_incident_date_summary, get_slip_data, get_daily_category_data, get_daily_summary_data, get_daily_district_data, get_weekly_closed_complain_category_data, get_weekly_closed_complain_organization_data, get_daily_category_data_with_timefilter
 from .functions import apply_style, decode_column_names, incident_type_title, incident_type_query
 
 '''
@@ -57,6 +57,27 @@ class ReportingAccessView(APIView):
             GET parameters => /?template_type=daily_category
             """
             json_dict["file"] = get_daily_category_data()
+
+        elif (template_type == "daily_category_with_timefilter"):
+            """
+            daily_summery_report_categorywise_with_timefilter
+            GET parameters => /?template_type=daily_category_with_timefilter&startTime=<startTime>&endTime=<endTime>
+            """
+            json_dict["file"] = get_daily_category_data_with_timefilter()
+
+        elif (template_type == "weekly_closed_request_category"):
+            """
+            weeekly_closed_request_report_categorywise
+            GET parameters => /?template_type=weekly_closed_request_category
+            """
+            json_dict["file"] = get_weekly_closed_complain_category_data()
+
+        elif (template_type == "weekly_closed_request_organization"):
+            """
+            weeekly_closed_request_report_organizationwise
+            GET parameters => /?template_type=weekly_closed_request_organization
+            """
+            json_dict["file"] = get_weekly_closed_complain_organization_data()
 
         elif (template_type == "daily_summary"):
             """
