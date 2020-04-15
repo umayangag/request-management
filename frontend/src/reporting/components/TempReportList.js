@@ -1,10 +1,19 @@
-import React, {Component} from 'react';
+import React, { Component, useEffect, useState } from 'react';
 import {Link} from 'react-router-dom';
 import {withRouter} from "react-router";
-
+import MuiExpansionPanel from '@material-ui/core/ExpansionPanel';
+import MuiExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
+import MuiExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import {withStyles} from '@material-ui/core/styles';
 import { Paper, Grid, Typography, List, ListItemText, ListItem } from '@material-ui/core';
 import { API_BASE_URL } from '../../config';
+import TextField from "@material-ui/core/TextField";
+import { Formik } from "formik";
+import moment from "moment";
+import * as Yup from "yup";
+import { showNotification } from "../../notifications/state/notifications.actions";
+import { Button } from '@material-ui/core';
+import { connect, useDispatch, useSelector } from 'react-redux'
 
 const styles = theme => ({
     root: {
@@ -17,29 +26,195 @@ const styles = theme => ({
     }
 })
 
+const ExpansionPanel = withStyles({
+    root: {
+      border: '1px solid rgba(0, 0, 0, .125)',
+      boxShadow: 'none',
+      '&:not(:last-child)': {
+        borderBottom: 0,
+      },
+      '&:before': {
+        display: 'none',
+      },
+      '&$expanded': {
+        margin: 'auto',
+      },
+    },
+    expanded: {},
+  })(MuiExpansionPanel);
+  
+  const ExpansionPanelSummary = withStyles({
+    root: {
+      backgroundColor: 'rgba(0, 0, 0, .03)',
+      borderBottom: '1px solid rgba(0, 0, 0, .125)',
+      marginBottom: -1,
+      minHeight: 56,
+      '&$expanded': {
+        minHeight: 56,
+      },
+    },
+    content: {
+      '&$expanded': {
+        margin: '12px 0',
+      },
+    },
+    expanded: {},
+  })(MuiExpansionPanelSummary);
+  
+  const ExpansionPanelDetails = withStyles((theme) => ({
+    root: {
+      padding: theme.spacing.unit * 2,
+    },
+  }))(MuiExpansionPanelDetails);
+
 function ListItemLink(props) {
     return <ListItem button component="a" {...props} />;
 }
 
 export default function TempReportList(){
+    const dispatch = useDispatch();
+
+    const [state, setState] = useState({
+        startTime: null,
+        endTime: null,
+    });
+
+    const handleSubmit = (values, actions) => {
+    window.open(`${API_BASE_URL}/pdfgen/?template_type=daily_category_with_timefilter&startTime="${values.startTime}"&endTime="${values.endTime}"`,"_blank");// setGoToConfig(true);
+    };
+
+    const confirmDateAndSubmit = (values, actions) => {
+            setState(
+                handleSubmit(values, actions)
+            );
+    };
+
+    const getInitialValues = () => {
+        var initData = { ...state};
+        
+        //TODO: Need to split the date values to date and time
+        if (initData.startTime) {
+            initData.startTime = moment(initData.from_date).format("YYYY-MM-DDTHH:mm");
+        }
+        if (initData.endTime) {
+            initData.endTime = moment(initData.to_date).format("YYYY-MM-DDTHH:mm");
+        }
+        return initData;
+    };
+
+    const [expanded, setExpanded] = React.useState('panel1');
+
+    const handleChange2 = (panel) => (event, newExpanded) => {
+      setExpanded(newExpanded ? panel : false);
+    };
+
+    const reportSchema = Yup.object().shape({
+        startTime: Yup.mixed().required("Required"),
+        endTime: Yup.mixed().required("Required"),
+    });
+
+    return (
+    <Formik
+                onSubmit={(values, actions) => {
+                    confirmDateAndSubmit(values, actions)
+                }}
+                validationSchema={reportSchema}
+                initialValues={getInitialValues()}
+                // validate={customValidations} 
+                // above customValidation commented due to removing of occurrence
+                render={({
+                    handleSubmit,
+                    handleChange,
+                    handleBlur,
+                    values,
+                    errors,
+                    touched,
+                    setFieldValue,
+                    isValid,
+                }) => {
     return (
         <Paper style={{padding: 20}}>
             <Grid container spacing={24}>
                 <Grid item xs>
-                    <Typography variant="h6"> View Daily Reports </Typography>
+                    <Typography variant="h6"> View Reports </Typography>
                     <List>
-                        <ListItemLink href={`${API_BASE_URL}/pdfgen/?template_type=daily_district`} target="_blank">
+                        {/* <ListItemLink href={`${API_BASE_URL}/pdfgen/?template_type=daily_district`} target="_blank">
                             <ListItemText primary="Daily Summary Report" />
-                        </ListItemLink>
+                        </ListItemLink> */}
                         <ListItemLink href={`${API_BASE_URL}/pdfgen/?template_type=daily_category`} target="_blank">
                             <ListItemText primary="Categorywise Daily Summary Report" />
                         </ListItemLink>
-                        <ListItemLink href={`${API_BASE_URL}/pdfgen/?template_type=daily_summary_report_districtwise`} target="_blank">
-                            <ListItemText primary="Districtwise Daily Summary Report" />
+                        <ListItemLink href={`${API_BASE_URL}/pdfgen/?template_type=weekly_closed_request_category`} target="_blank">
+                            <ListItemText primary="Categorywise Weekly Closed Request Summary Report" />
                         </ListItemLink>
+                        <ListItemLink href={`${API_BASE_URL}/pdfgen/?template_type=weekly_closed_request_organization`} target="_blank">
+                            <ListItemText primary="Organizationwise Weekly Closed Request Summary Report" />
+                        </ListItemLink>
+                        {/* <ListItemLink href={`${API_BASE_URL}/pdfgen/?template_type=daily_summary_report_districtwise`} target="_blank">
+                            <ListItemText primary="Districtwise Daily Summary Report" />
+                        </ListItemLink> */}
                     </List>
+                    <form
+                            // className={classes.container}
+                            noValidate
+                            autoComplete="off"
+                            onSubmit={(e) => {
+                                e.preventDefault();
+                                if (!isValid) {
+                                    dispatch(showNotification({ message: "Missing required values" }, null));
+                                    window.scroll(0, 0);
+                                }
+                                handleSubmit(e);
+                            }}>
+                    <ExpansionPanel square expanded={expanded === 'panel2'} onChange={handleChange2('panel2')}>
+                        <ExpansionPanelSummary aria-controls="panel1d-content" id="panel1d-header">
+                        <Typography>Categorywise Summary Report ( Filter by time )</Typography>
+                        </ExpansionPanelSummary>
+                        <ExpansionPanelDetails>
+                        <Grid container spacing={24}>
+                        <Grid item xs={6}>
+                        <TextField
+                        id="start-time"
+                        label="Start Date/Time"
+                        name="startTime"
+                        type="datetime-local"
+                        value={values.startTime}
+                        InputLabelProps={{
+                          shrink: true
+                        }}
+                        onChange={handleChange}
+                        error={touched.startTime && errors.startTime}
+                        helperText={touched.startTime ? errors.startTime : null}
+                      />
+                    </Grid>
+                    <Grid item xs={6}>
+                    <TextField
+                        id="end-time"
+                        label="End Date/Time"
+                        name="endTime"
+                        type="datetime-local"
+                        value={values.endTime}
+                        InputLabelProps={{
+                          shrink: true
+                        }}
+                        onChange={handleChange}
+                        error={touched.endTime && errors.endTime}
+                        helperText={touched.endTime ? errors.endTime : null}
+                      />
+                    </Grid>
+                    <Grid item xs={4}>
+                    <Button variant={'outlined'}
+                        color="inherit" type="submit" >Create</Button>
+                    </Grid>
+                        </Grid>
+                        </ExpansionPanelDetails>
+                    </ExpansionPanel>
+                    </form>
                 </Grid>
             </Grid>
         </Paper>
     )
+}}
+/>
+    );
 }
