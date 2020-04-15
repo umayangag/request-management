@@ -94,9 +94,12 @@ class IncidentList(APIView, IncidentResultsSetPagination):
         # _user = get_guest_user()
         # _user = User.objects.get(username="police1")
         # print("assigneee", find_incident_assignee(_user))
-        election_code = settings.ELECTION
+        
+        # following was set default on one election
+        # election_code = settings.ELECTION
+        # incidents = Incident.objects.all().filter(election=election_code).order_by('created_date').reverse()
 
-        incidents = Incident.objects.all().filter(election=election_code).order_by('created_date').reverse()
+        incidents = Incident.objects.all().order_by('created_date').reverse()
         user = request.user
 
         # for external entities, they can only view related incidents
