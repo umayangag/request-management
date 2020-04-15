@@ -81,24 +81,26 @@ const styles = theme => ({
 });
 
 function IncidentList({ classes, incidents, pageNumber, count, handleRowClick, handlePageChange }){
-    
+
+  const categories = useSelector(state => state.shared.categories)
+  console.log(categories)
+
     return (
         <Table className={classes.table}>
           <colgroup>
-            <col style={{ width: "2%" }} />
-            <col style={{ width: "20%" }} />
+            <col style={{ width: "5%" }} />
+            <col style={{ width: "25%" }} />
             <col style={{ width: "45%" }} />
             <col style={{ width: "5%" }} />
             <col style={{ width: "5%" }} />
-            <col style={{ width: "17%" }} />
+            <col style={{ width: "5%" }} />
             {/* <col style={{ width: "2%" }} /> */}
           </colgroup>
           <TableHead>
             <TableRow>
               <CustomTableCell align="center">Ref Id</CustomTableCell>
-
-              <CustomTableCell align="center">Title</CustomTableCell>
-              {/* <CustomTableCell align="center">Description</CustomTableCell> */}
+              <CustomTableCell align="center">Category</CustomTableCell>
+              <CustomTableCell align="center">Description</CustomTableCell>
               <CustomTableCell align="center">Status</CustomTableCell>
               <CustomTableCell align="center">Priority</CustomTableCell>
               <CustomTableCell align="center">Response Time</CustomTableCell>
@@ -118,11 +120,11 @@ function IncidentList({ classes, incidents, pageNumber, count, handleRowClick, h
                   <p>{row.refId}</p>
                 </CustomTableCell>
                 <CustomTableCell scope="center">
-                  <p>{row.title}</p>
+                  <p>{categories.map((value, index) => (value.id == row.category ? value.sub_category : null))}</p>
                 </CustomTableCell>
-                {/* <CustomTableCell>
-                  <p className="description">{row.description}</p>
-                </CustomTableCell> */}
+                <CustomTableCell>
+                  <p className="description">{(row.description.length > 40) ? row.description.substr(0,40)+".." : row.description}</p>
+                </CustomTableCell>
                 <CustomTableCell align="center">
                   <p>{row.currentStatus}</p>
                 </CustomTableCell>
