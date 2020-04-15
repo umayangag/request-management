@@ -14,7 +14,10 @@ import os
 
 from .services import get_police_division_summary, get_category_summary, \
     get_mode_summary, get_severity_summary, get_status_summary, get_subcategory_summary, get_district_summary, \
-    get_incident_date_summary, get_slip_data, get_daily_category_data, get_daily_summary_data, get_daily_district_data, get_weekly_closed_complain_category_data, get_weekly_closed_complain_organization_data, get_daily_category_data_with_timefilter, get_organizationwise_data_with_timefilter
+    get_incident_date_summary, get_slip_data, get_daily_category_data, get_daily_summary_data, get_daily_district_data, \
+        get_weekly_closed_complain_category_data, get_weekly_closed_complain_organization_data, \
+            get_daily_category_data_with_timefilter, get_organizationwise_data_with_timefilter, \
+                get_total_requests_by_category_for_a_selected_time
 from .functions import apply_style, decode_column_names, incident_type_title, incident_type_query
 
 '''
@@ -85,6 +88,12 @@ class ReportingAccessView(APIView):
             GET parameters => /?template_type=weekly_closed_request_organization
             """
             json_dict["file"] = get_weekly_closed_complain_organization_data()
+        elif (template_type == "total_requests_by_category_for_a_selected_time"):
+            """
+            Total_requests_by_category_for_a_selected_time
+            GET parameters => /?total_requests_by_category_for_a_selected_time
+            """
+            json_dict["file"] = get_total_requests_by_category_for_a_selected_time()
 
         elif (template_type == "daily_summary"):
             """

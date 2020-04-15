@@ -6,7 +6,7 @@ import numpy as np
 from datetime import date, timedelta, datetime
 
 from ..common.models import Category, Channel, District
-from ..incidents.models import Incident, IncidentType
+from ..incidents.models import Incident, IncidentType, CloseWorkflow
 from django.contrib.auth.models import User
 from ..incidents.services import get_incident_by_id
 from .functions import get_detailed_report, get_general_report, encode_column_names, get_subcategory_report, \
@@ -407,47 +407,27 @@ def get_weekly_closed_complain_organization_data():
     file_dict["template"] = "/incidents/complaints/weeekly_closed_request_report_organizationwise.js"
     file_dict["date"] = date.today().strftime("%Y/%m/%d")
 
-    incidents = get_daily_incidents(IncidentType.COMPLAINT)
-    file_dict["total"] = incidents.count()
+    start_datetime = (date.today() - timedelta(days=7)
+                      ).strftime("%Y-%m-%d")
+    end_datetime = date.today().strftime("%Y-%m-%d")
+    weekly_incidents_closed=CloseWorkflow.objects.filter(created_date__range=(start_datetime, end_datetime))\
+        .values('departments').annotate(total=Count('departments'))
 
-    other_category = Category.objects.get(top_category='Other')
-    file_dict["other"] = incidents.filter(category='Other').count()
+    file_dict["total"] = weekly_incidents_closed
 
-    # collecting all category data
-    category_dict = []
+    return file_dict
 
-    # collect 'violence' top category data
-    violence_category_dict = {}
-    violence_category_dict["categoryNameSinhala"] = "මැතිවරණ ප්‍රචණ්ඩ ක්‍රියා"
-    violence_category_dict["categoryNameTamil"] = "தேர்தல் வன்முறைகள்"
+def get_total_requests_by_category_for_a_selected_time(start_time, end_time):
+    """
+        This returns the total requests by category during the input time period
+    """
+    file_dict={}
+    file_dict["template"] = "/incidents/complaints/total_requests_by_category_for_a_selected_time.js"
+    file_dict["date"] = date.today().strftime("%Y/%m/%d")
 
-    violence_subcategories = Category.objects.all().filter(top_category='Violence')
-    subcategory_dict = []
-    for category in violence_subcategories:
-        subcategory_data_dict = {}
-        subcategory_data_dict["name"] = category.sn_sub_category
-        subcategory_data_dict["count"] = incidents.filter(category=category.id).count()
-        subcategory_dict.append(subcategory_data_dict)
-    violence_category_dict["subCategories"] = subcategory_dict
-
-    # collect 'violation of law' top category data
-    violation_category_dict = {}
-    violation_category_dict["categoryNameSinhala"] = "මැතිවරණ නීති උල්ලංඝනය"
-    violation_category_dict["categoryNameTamil"] = "தேர்தல் சட்டங்களை மீறுதல்"
-
-    violation_subcategories = Category.objects.all().filter(top_category='Violation of election law')
-    subcategory_dict = []
-    for category in violation_subcategories:
-        subcategory_data_dict = {}
-        subcategory_data_dict["name"] = category.sn_sub_category
-        subcategory_data_dict["count"] = incidents.filter(category=category.id).count()
-        subcategory_dict.append(subcategory_data_dict)
-    violation_category_dict["subCategories"] = subcategory_dict
-
-    # complete category data
-    category_dict.append(violence_category_dict)
-    category_dict.append(violation_category_dict)
-    file_dict["categories"] = category_dict
+    incidents=Incident.objects.filter(created_date__range=(start_time, end_time)).values("category")\
+        .annotate(total=Count('category'))
+    file_dict["total_per_category"]=incidents
 
     return file_dict
 
