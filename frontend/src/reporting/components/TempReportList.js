@@ -80,7 +80,12 @@ export default function TempReportList(){
     });
 
     const handleSubmit = (values, actions) => {
-    window.open(`${API_BASE_URL}/pdfgen/?template_type=daily_category_with_timefilter&startTime="${values.startTime}"&endTime="${values.endTime}"`,"_blank");// setGoToConfig(true);
+      if(expanded==="panel2"){
+        window.open(`${API_BASE_URL}/pdfgen/?template_type=daily_category_with_timefilter&startTime="${values.startTime}"&endTime="${values.endTime}"`,"_blank");
+      }
+      if(expanded==="panel3"){
+        window.open(`${API_BASE_URL}/pdfgen/?template_type=organizationwise_total_request_with_timefilter&startTime="${values.startTime}"&endTime="${values.endTime}"`,"_blank");
+      }
     };
 
     const confirmDateAndSubmit = (values, actions) => {
@@ -169,6 +174,62 @@ export default function TempReportList(){
                     <ExpansionPanel square expanded={expanded === 'panel2'} onChange={handleChange2('panel2')}>
                         <ExpansionPanelSummary aria-controls="panel1d-content" id="panel1d-header">
                         <Typography>Categorywise Summary Report ( Filter by time )</Typography>
+                        </ExpansionPanelSummary>
+                        <ExpansionPanelDetails>
+                        <Grid container spacing={24}>
+                        <Grid item xs={6}>
+                        <TextField
+                        id="start-time"
+                        label="Start Date/Time"
+                        name="startTime"
+                        type="datetime-local"
+                        value={values.startTime}
+                        InputLabelProps={{
+                          shrink: true
+                        }}
+                        onChange={handleChange}
+                        error={touched.startTime && errors.startTime}
+                        helperText={touched.startTime ? errors.startTime : null}
+                      />
+                    </Grid>
+                    <Grid item xs={6}>
+                    <TextField
+                        id="end-time"
+                        label="End Date/Time"
+                        name="endTime"
+                        type="datetime-local"
+                        value={values.endTime}
+                        InputLabelProps={{
+                          shrink: true
+                        }}
+                        onChange={handleChange}
+                        error={touched.endTime && errors.endTime}
+                        helperText={touched.endTime ? errors.endTime : null}
+                      />
+                    </Grid>
+                    <Grid item xs={4}>
+                    <Button variant={'outlined'}
+                        color="inherit" type="submit" >Create</Button>
+                    </Grid>
+                        </Grid>
+                        </ExpansionPanelDetails>
+                    </ExpansionPanel>
+                    </form>
+                    <form
+                            // className={classes.container}
+                            noValidate
+                            autoComplete="off"
+                            onSubmit={(e) => {
+                                e.preventDefault();
+                                if (!isValid) {
+                                    dispatch(showNotification({ message: "Missing required values" }, null));
+                                    window.scroll(0, 0);
+                                }
+                                handleSubmit(e);
+                            }}>
+                    <ExpansionPanel square expanded={expanded === 'panel3'} onChange={handleChange2('panel3')}>
+                        <ExpansionPanelSummary aria-controls="panel1d-content" id="panel1d-header">
+                        <Typography>Organizationwise delegated requests ( Filter by time )</Typography>
                         </ExpansionPanelSummary>
                         <ExpansionPanelDetails>
                         <Grid container spacing={24}>
