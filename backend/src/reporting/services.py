@@ -347,6 +347,58 @@ def get_weekly_closed_complain_category_data():
 
     return file_dict
 
+def get_organizationwise_data_with_timefilter():
+    """ Function to get daily categories data on complaints for PDF export. """
+    # TODO: signify the category types, so that helps to pull up category values without hardcoding as bellow
+    file_dict = {}
+
+    file_dict["template"] = "/incidents/complaints/summery_report_organizationwise_with_timefilter.js"
+    file_dict["date"] = date.today().strftime("%Y/%m/%d")
+
+    incidents = get_daily_incidents(IncidentType.COMPLAINT)
+    file_dict["total"] = incidents.count()
+
+    other_category = Category.objects.get(top_category='Other')
+    file_dict["other"] = incidents.filter(category='Other').count()
+
+    # collecting all category data
+    category_dict = []
+
+    # collect 'violence' top category data
+    violence_category_dict = {}
+    violence_category_dict["categoryNameSinhala"] = "මැතිවරණ ප්‍රචණ්ඩ ක්‍රියා"
+    violence_category_dict["categoryNameTamil"] = "தேர்தல் வன்முறைகள்"
+
+    violence_subcategories = Category.objects.all().filter(top_category='Violence')
+    subcategory_dict = []
+    for category in violence_subcategories:
+        subcategory_data_dict = {}
+        subcategory_data_dict["name"] = category.sn_sub_category
+        subcategory_data_dict["count"] = incidents.filter(category=category.id).count()
+        subcategory_dict.append(subcategory_data_dict)
+    violence_category_dict["subCategories"] = subcategory_dict
+
+    # collect 'violation of law' top category data
+    violation_category_dict = {}
+    violation_category_dict["categoryNameSinhala"] = "මැතිවරණ නීති උල්ලංඝනය"
+    violation_category_dict["categoryNameTamil"] = "தேர்தல் சட்டங்களை மீறுதல்"
+
+    violation_subcategories = Category.objects.all().filter(top_category='Violation of election law')
+    subcategory_dict = []
+    for category in violation_subcategories:
+        subcategory_data_dict = {}
+        subcategory_data_dict["name"] = category.sn_sub_category
+        subcategory_data_dict["count"] = incidents.filter(category=category.id).count()
+        subcategory_dict.append(subcategory_data_dict)
+    violation_category_dict["subCategories"] = subcategory_dict
+
+    # complete category data
+    category_dict.append(violence_category_dict)
+    category_dict.append(violation_category_dict)
+    file_dict["categories"] = category_dict
+
+    return file_dict
+
 def get_weekly_closed_complain_organization_data():
     """ Function to get daily categories data on complaints for PDF export. """
     # TODO: signify the category types, so that helps to pull up category values without hardcoding as bellow
