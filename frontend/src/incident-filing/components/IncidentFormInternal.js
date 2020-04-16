@@ -339,17 +339,21 @@ function IncidentFormInternal(props) {
 
   const getInitialValues = () => {
     const { paramIncidentId } = props.match.params;
+
+    // TODO: move hooks out of this function.
+    const incident = incidentUtils.getIncident(paramIncidentId);
+    const reporters = useSelector( state => state.incident.reporters)
+
     if (!paramIncidentId) {
       // new incident form
       return state;
     }
-    const incident = incidentUtils.getIncident(paramIncidentId);
     var initData = { ...state, ...incident };
 
-    // get current reporter details
     const reporter = incident
-      ? incidentUtils.getReporter(incident.reporter)
+      ? reporters.byIds[incident.reporter]
       : "";
+
     if (reporter) {
       Object.assign(initData, {
         reporterName: reporter.name,

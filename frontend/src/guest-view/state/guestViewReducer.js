@@ -23,6 +23,8 @@ import {
 
     uploadFileGuestSuccess,
 
+    createGuestIncidentWithReporterSuccess
+
 } from '../../incident/state/incidentActions'
 
 import {
@@ -65,6 +67,10 @@ const incidentReducer = createReducer(initialState, {
     [moveStepper]  : (state, action) => {
         state.activeStep = action.payload.step
     },
+    [createGuestIncidentWithReporterSuccess] : (state, action) => {
+        state.activeStep = state.activeStep + 1;
+        state.isLoading = false;
+    }
 
 })
 

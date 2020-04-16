@@ -255,4 +255,22 @@ export const loadGuestIncident = (uniqueId) => {
 //reset state
 export const resetIncidentState = createAction('INCIDENT/RESET_INCIDENT_STATE');
 
+//create incident from public endpoint with reporter
+export const createGuestIncidentWithReporterRequest = createAction('INCIDENT/CREATE_GUEST_INCIDENT_WITH_REPORTER_REQUEST');
+export const createGuestIncidentWithReporterSuccess = createAction('INCIDENT/CREATE_GUEST_INCIDENT_WITH_REPORTER_SUCCESS');
+export const createGuestIncidentWithReporterError = createAction('INCIDENT/CREATE_GUEST_INCIDENT_WITH_REPORTER_ERROR');
+
+export const createGuestIncidentWithReporter = (incidentData, reporterData) => {
+    return async function(dispatch) {
+        dispatch(createGuestIncidentWithReporterRequest());
+        try{
+            const response = await publicApi.createIncident(incidentData);
+            const reporterResponse = await publicApi.updateReporter(response.data.reporter, reporterData);
+            dispatch(createGuestIncidentWithReporterSuccess({reporter:reporterResponse.data, incident:response.data}));
+        }catch(error){
+            console.log(error);
+            dispatch(createGuestIncidentWithReporterError(error));
+        }
+    }
+}
 
