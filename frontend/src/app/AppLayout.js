@@ -51,7 +51,8 @@ import { API_BASE_URL } from '../config'
 
 import { userCan, USER_ACTIONS } from '../user/userUtils';
 
-import * as notificationsAPI from '../api/notifications' 
+import * as notificationsAPI from '../api/notifications';
+import {WEB_SOCKET_BASE_URL} from '../config'
 
 const HomeLink = props => <Link to="/app/home" {...props} />
 const ReportLink = props => <Link to="/app/create" {...props} />
@@ -294,9 +295,8 @@ class DomainContainer extends React.Component {
             <div className={classes.root}>
                 {authToken &&
                     <Websocket
-                        url={`ws://127.0.0.1:8000/ws/notifications?token=${authToken}`}
+                        url={`${WEB_SOCKET_BASE_URL}/ws/notifications?token=${authToken}`}
                         onMessage={this.handleSokcetData.bind(this)}
-                        onOpen={() => { console.log('socket connection initiated') }}
                     />
                 }
                 <CssBaseline />
