@@ -28,6 +28,8 @@ from .file_upload import views as file_views
 
 from .reporting import views as report_views
 
+from .notifications import views as notification_views
+
 # JWT
 from rest_framework_jwt.views import obtain_jwt_token
 
@@ -111,6 +113,14 @@ urlpatterns = [
     path(
         "incidents/auto-escalate",
         incident_views.IncidentAutoEscalate.as_view()
+    ),
+    path(
+        "notifications",
+        notification_views.NotificationList.as_view()
+    ),
+    path(
+        "notifications/<uuid:notification_id>/read",
+        notification_views.NotificationRead.as_view()
     ),
 
     # public paths
