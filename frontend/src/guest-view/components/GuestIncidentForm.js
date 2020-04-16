@@ -43,7 +43,9 @@ import {
     createGuestIncident,
     updateGuestIncident,
     updateGuestIncidentReporter,
-    uploadFileGuest
+    uploadFileGuest,
+    createGuestIncidentWithReporter,
+    createGuestIncidentWithReporterSuccess
 } from '../../incident/state/incidentActions'
 
 import {
@@ -178,9 +180,22 @@ const VerticalLinearStepper = (props) => {
         return valid;
     }
 
+    const createIncidentWithReporter = (reporterData) => {
+        const initData = {
+            description: "Incomplete submission",
+            title: "Guest user submit",
+            infoChannel: "Web",
+            occured_date: "2020-01-01T01:00:00+05:30",
+            receivedDate: "2020-01-01",
+            letterDate: "2020-01-01",
+            recaptcha: incidentRecaptcha
+        }
+        dispatch(createGuestIncidentWithReporter(initData, reporterData))
+    }
+
     const stepDefinitions = {
 
-        0: {
+        2: {
             title: f({ id: "eclk.incident.management.report.incidents.section.describe", defaultMessage: "Describe the incident" }),
             content: <>
                 <DescriptionSection
@@ -198,14 +213,6 @@ const VerticalLinearStepper = (props) => {
                     setDateTime={setIncidentDateTime}
                     formErrors={formErrors}
                 />
-                <ReCAPTCHA
-                    ref={recaptchaRef}
-                    sitekey={process.env.REACT_APP_RECAPTCHA_SITEKEY}
-                    onChange={ (e) => {
-                        formErrors.incidentRecaptchaErrorMsg = null;
-                        setIncidentRecaptcha(recaptchaRef.current.getValue()); 
-                    }}
-                />
                 <p style={{ color:'red', marginTop:0}}>{formErrors.incidentRecaptchaErrorMsg}</p>
             </>,
             handler: () => {
@@ -213,7 +220,6 @@ const VerticalLinearStepper = (props) => {
                     //creating new incident
                     if (validInputs()) {
                         let incidentData = {
-                            election: incidentElection,
                             description: incidentDescription,
                             title: 'Guest user submit',
                             infoChannel: webInfoChannelId, //info channel is web by default.
@@ -223,14 +229,16 @@ const VerticalLinearStepper = (props) => {
                         if (dateTime) {
                             incidentData['occured_date'] = dateTime;
                         }
+                        incidentData['receivedDate'] = '2020-01-01';
+                        incidentData['letterDate'] = '2020-01-01';
                         dispatch(createGuestIncident(incidentData));
                     }
                 } else {
                     //updating an existing incident.
-                    //changing description/title is not allowed
                     if (validInputs()) {
                         let incidentUpdate = incidentData
                         incidentUpdate["election"] = incidentElection;
+                        incidentUpdate["description"] = incidentDescription;
                         const dateTime = getFormattedDateTime()
                         if (dateTime) {
                             incidentUpdate['occured_date'] = dateTime
@@ -263,7 +271,7 @@ const VerticalLinearStepper = (props) => {
             }
         },
 
-        2: {
+        3: {
             title: f({ id: "eclk.incident.management.report.incidents.section.attachment", defaultMessage: "Attach files related to incident" }),
             content: <FileUploader
                 files={incidentFiles}
@@ -282,20 +290,38 @@ const VerticalLinearStepper = (props) => {
             }
         },
 
-        3: {
+        0: {
             title: f({ id: "eclk.incident.management.report.incidents.section.contact", defaultMessage: "Your contact details" }),
-            content: < ContactSection
+            content: 
+            <>
+            < ContactSection
                 contactDetials={incidentContact}
-                handleContactDetailsChange={setIncidentContact} />,
+                handleContactDetailsChange={setIncidentContact} />
+            <ReCAPTCHA
+                ref={recaptchaRef}
+                sitekey={process.env.REACT_APP_RECAPTCHA_SITEKEY}
+                onChange={ (e) => {
+                    formErrors.incidentRecaptchaErrorMsg = null;
+                    setIncidentRecaptcha(recaptchaRef.current.getValue()); 
+                }}
+            />
+            </>,
             handler: () => {
-                if (incidentContact.name || incidentContact.phone || incidentContact.email) {
+                if (!incidentId) {
+                    if (incidentContact.name || incidentContact.phone || incidentContact.email) {
+                        const reporterData = {}
+                        reporterData.name = incidentContact.name;
+                        reporterData.telephone = incidentContact.phone;
+                        reporterData.mobile = incidentContact.mobile;
+                        reporterData.email = incidentContact.email;
+                        createIncidentWithReporter(reporterData)
+                    }
+                }else{
                     incidentReporterData.name = incidentContact.name;
                     incidentReporterData.telephone = incidentContact.phone;
                     incidentReporterData.mobile = incidentContact.mobile;
                     incidentReporterData.email = incidentContact.email;
                     dispatch(updateGuestIncidentReporter(incidentReporterData.id, incidentReporterData))
-                } else {
-                    dispatch(moveStepper({ step: activeStep + 1 }));
                 }
             }
         },
@@ -325,7 +351,7 @@ const VerticalLinearStepper = (props) => {
         steps[stepNumber] = stepDefinitions[stepNumber].title
     });
 
-    const optionalSteps = new Set([1, 2, 3, 4, 5])
+    const optionalSteps = new Set([1, 3, 4, 5])
 
     const isStepOptional = step => optionalSteps.has(step);
 
@@ -423,7 +449,6 @@ const VerticalLinearStepper = (props) => {
             <Typography style={{ width: '100%' }} align="left" variant="" marginTop="20">
                 {f({ id: "eclk.incident.management.report.incidents.helper.text", defaultMessage: "*fields are mandatory" })}
             </Typography>
-
             <Stepper activeStep={activeStep} orientation="vertical">
                 {steps.map((label, index) => {
 
@@ -471,7 +496,7 @@ const VerticalLinearStepper = (props) => {
                                             color="primary"
                                             onClick={handleNext}
                                             className={classes.button}
-                                            disabled={isLoading}
+                                            disabled={isLoading || !incidentRecaptcha}
                                         >
                                             {activeStep === steps.length - 1 ?
                                                 f({ id: "eclk.incident.management.report.incidents.forms.button.finish", defaultMessage: "Finish" }) :
@@ -484,6 +509,7 @@ const VerticalLinearStepper = (props) => {
                         </Step>)
                 })}
             </Stepper>
+            
             {activeStep === steps.length && (
                 <Paper square elevation={0} className={classes.resetContainer}>
                     <Typography>Your complaint has been submitted successfully</Typography>
