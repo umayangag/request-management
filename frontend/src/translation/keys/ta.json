@@ -10,7 +10,7 @@
   "eclk.incident.management.report.incidents.forms.button.skip": "தாண்டிச்செல்க",
   "eclk.incident.management.report.incidents.forms.button.finish": "நிறைவு செய்க ",
 
-  "eclk.incident.management.report.incidents": "சம்பவம் தொடர்பாக முறைப்பாடு செய்ய",
+  "eclk.incident.management.report.incidents": "ஒரு கோரிக்கை வைக்கவும்",
   "eclk.incident.management.report.incidents.helper.text": "*நிரப்புதல் கட்டாயமானது",
 
   "eclk.incident.management.report.incidents.section.describe": "சம்பவத்தினை விபரிக்குக",
@@ -37,7 +37,7 @@
   "eclk.incident.management.report.incidents.contact.landline": "நிலையான தொலைபேசி",
   "eclk.incident.management.report.incidents.contact.email": "மின்னஞ்சல்",
 
-  "eclk.incident.management.check.incident.status": "சம்பவ அறிக்கையின் நிலையை சரிபார்க்கவும்",
+  "eclk.incident.management.check.incident.status": "முன்னுரை",
   "eclk.incident.management.historic.reports": "சம்பவ  அறிக்கைகள்",
 
   "eclk.incident.management.filing.guest.form.steps.basic.details": "சம்பவ விபரங்கள்",

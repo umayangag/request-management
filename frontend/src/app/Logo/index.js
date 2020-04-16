@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from 'prop-types';
 
-import ECLogo from "../../static/img/ec-logo.png";
+import ECLogo from "../../static/img/ps-logo.jpg";
 import './Logo.css';
 
 function Logo(props) {
