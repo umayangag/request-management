@@ -6,17 +6,24 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
+import Websocket from 'react-websocket';
 
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { Button } from '@material-ui/core';
 
 import AccountCircle from '@material-ui/icons/AccountCircle';
+import ActiveNotificationIcon from '@material-ui/icons/NotificationsActive';
 import ArrowDropDown from '@material-ui/icons/ArrowDropDown';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
+import IconButton from '@material-ui/core/IconButton';
+import NotificationsIcon from '@material-ui/icons/Notifications';
+import Badge from '@material-ui/core/Badge';
 
 import { Link, withRouter } from 'react-router-dom';
+import * as localStorage from '../utils/localStorage';
+
 
 import {
     initiateSignOut,
@@ -32,7 +39,8 @@ import {
     fetchPollingStations,
     fetchPoliceStations,
     fetchPoliceDivisions,
-    fetchWards } from '../shared/state/sharedActions'
+    fetchWards
+} from '../shared/state/sharedActions'
 import { changeLanguage } from '../shared/state/sharedActions';
 import { loadUsers } from '../user/state/userActions'
 
@@ -42,6 +50,8 @@ import Breadcrumbs from './Breadcrumbs';
 import { API_BASE_URL } from '../config'
 
 import { userCan, USER_ACTIONS } from '../user/userUtils';
+
+import * as notificationsAPI from '../api/notifications' 
 
 const HomeLink = props => <Link to="/app/home" {...props} />
 const ReportLink = props => <Link to="/app/create" {...props} />
@@ -129,111 +139,186 @@ const styles = theme => ({
     }
 });
 
+
 class DomainContainer extends React.Component {
-  state = {
-    open: true,
-    anchorEl: null,
-    anchorLang: null,
-    menuAnchorEl: null
-  };
+    state = {
+        open: true,
+        anchorEl: null,
+        anchorLang: null,
+        menuAnchorEl: null,
+        authToken: null,
+        anchorNotification: null,
+        notifications:[],
+        unreadNotificationCount:0
+    };
 
-  componentDidMount() {
-    this.props.getChannels();
-    this.props.getElections();
-    this.props.getCategories();
-    this.props.getInstitutions();
-    this.props.getProvinces();
-    this.props.getDistricts();
-    this.props.getDivisionalSecretariats();
-    this.props.getGramaNiladharis();
-    this.props.getPollingDivisions();
-    this.props.getPollingStations();
-    this.props.getPoliceStations();
-    this.props.getPoliceDivisions();
-    this.props.getWards();
-    this.props.loadAllUsers();
-  }
+    componentDidMount() {
+        this.props.getChannels();
+        this.props.getElections();
+        this.props.getCategories();
+        this.props.getInstitutions();
+        this.props.getProvinces();
+        this.props.getDistricts();
+        this.props.getDivisionalSecretariats();
+        this.props.getGramaNiladharis();
+        this.props.getPollingDivisions();
+        this.props.getPollingStations();
+        this.props.getPoliceStations();
+        this.props.getPoliceDivisions();
+        this.props.getWards();
+        this.props.loadAllUsers();
+        const signInData = localStorage.read('ECIncidentManagementUser');
+        signInData && this.setState({ authToken: signInData.token })
+        this.loadNotifications()
+    }
 
-  handleDrawerOpen = () => {
-    this.setState({ open: true });
-  };
+    loadNotifications = async () => {
+        const notificationResponse = await notificationsAPI.getNotifications()
+        let unread = 0
+        let notifs =  notificationResponse.data
+        for(let i= 0; i<notifs.length; i++){
+            if(!notifs[i].is_read){
+                unread++
+            }
+        }
+        this.setState({notifications:notifs, unreadNotificationCount:unread})
+    }
 
-  handleDrawerClose = () => {
-    this.setState({ open: false });
-  };
+    handleDrawerOpen = () => {
+        this.setState({ open: true });
+    };
 
-  handleLangMenu = event => {
-    this.setState({ anchorLang: event.currentTarget });
-  };
+    handleDrawerClose = () => {
+        this.setState({ open: false });
+    };
 
-  handleLangMenuClose = () => {
-    this.setState({ anchorLang: null });
-  };
+    handleLangMenu = event => {
+        this.setState({ anchorLang: event.currentTarget });
+    };
 
-  handleMenu = event => {
-    this.setState({ anchorEl: event.currentTarget });
-  };
+    handleLangMenuClose = () => {
+        this.setState({ anchorLang: null });
+    };
 
-  handleMenuClose = () => {
-    this.setState({ anchorEl: null });
-  };
+    handleMenu = event => {
+        this.setState({ anchorEl: event.currentTarget });
+    };
 
-  handleSignOut = () => {
-      const {signOut} = this.props;
-      signOut();
-  }
+    handleMenuClose = () => {
+        this.setState({ anchorEl: null });
+    };
 
-  handleLanguageChange = (lang) => {
-    const {changeLanguage} = this.props;
-    changeLanguage(lang);
-  }
+    handleNotificationList = event => {
+        this.setState({ anchorNotification: event.currentTarget });
+    };
 
-  handlePasswordChange = () => {
-    window.open(API_BASE_URL+'/admin/password_change/', '_blank');
-  }
+    handleNotificationListClose = () => {
+        this.setState({ anchorNotification: null });
+    };
 
-  handleOnClickReviewMenuOpenButton = (e) => {
-    this.setState({ menuAnchorEl: e.currentTarget });
-  }
+    handleSignOut = () => {
+        const { signOut } = this.props;
+        signOut();
+    }
 
-  handleReviewMenuClose = () => {
-      this.setState({ menuAnchorEl: null });
-  }
+    handleLanguageChange = (lang) => {
+        const { changeLanguage } = this.props;
+        changeLanguage(lang);
+    }
 
-  handleOnClickReviewMenuItem = (e) => {
-      this.setState({ menuAnchorEl: null });
-  }
+    handlePasswordChange = () => {
+        window.open(API_BASE_URL + '/admin/password_change/', '_blank');
+    }
 
-  render() {
-    const { classes, selectedLanguage, signedInUser, location } = this.props;
-    const { open, anchorEl, anchorLang } = this.state;
-    const menuOpen = Boolean(anchorEl);
-    const langMenuOpen = Boolean(anchorLang);
+    handleOnClickReviewMenuOpenButton = (e) => {
+        this.setState({ menuAnchorEl: e.currentTarget });
+    }
 
-    const selectedMainSection = location.pathname.split('/')[2]
+    handleReviewMenuClose = () => {
+        this.setState({ menuAnchorEl: null });
+    }
 
-    return (
-      <div className={classes.root}>
-        <CssBaseline />
-        <AppBar
-          position="static"
-        >
-            <Toolbar disableGutters={!open}>
+    handleOnClickReviewMenuItem = (e) => {
+        this.setState({ menuAnchorEl: null });
+    }
 
-                <Typography variant="h6" color="inherit" className={classes.grow}>
-                    Tell The President
+    handleSokcetData(data) {
+        let result = JSON.parse(data);
+        let notificationUpdate= this.state.notifications.slice()
+        notificationUpdate.unshift(result.payload)
+        this.setState({
+            notifications:notificationUpdate,
+            unreadNotificationCount:this.state.unreadNotificationCount +1
+        })
+    }
+
+    getNotifiactionText(notification){
+        if(notification.custom_messsage){
+            return notification.custom_messsage
+        }else{
+            switch(notification.notification_type){
+                case 'INCIDENT_ASSIGNED':
+                    return 'Incident Assigned'
+                default:
+                    return 'notification'
+            }
+        }
+    }
+
+    handleNotificationClick(notification){
+        if(!notification.is_read){
+            this.setState({
+                unreadNotificationCount:this.state.unreadNotificationCount-1
+            })
+            this.handleNotificationListClose()
+            try{
+                notificationsAPI.markAsRead(notification.id)
+            }catch(e){
+                console.log(e)
+            }
+        }
+        window.location = `/app/review/${notification.incident}`
+    }
+
+    render() {
+        const { classes, selectedLanguage, signedInUser, location } = this.props;
+        const { open, anchorEl, anchorLang, anchorNotification, authToken, notifications } = this.state;
+        const menuOpen = Boolean(anchorEl);
+        const langMenuOpen = Boolean(anchorLang);
+        const notificationsOpen = Boolean(anchorNotification);
+
+
+        const selectedMainSection = location.pathname.split('/')[2]
+
+        return (
+            <div className={classes.root}>
+                {authToken &&
+                    <Websocket
+                        url={`ws://127.0.0.1:8000/ws/notifications?token=${authToken}`}
+                        onMessage={this.handleSokcetData.bind(this)}
+                        onOpen={() => { console.log('socket connection initiated') }}
+                    />
+                }
+                <CssBaseline />
+                <AppBar
+                    position="static"
+                >
+                    <Toolbar disableGutters={!open}>
+
+                        <Typography variant="h6" color="inherit" className={classes.grow}>
+                            Tell The President
 
                     <Button
-                        variant={selectedMainSection==='home'?'outlined': 'flat'}
-                        color="inherit" component={HomeLink} className={classes.homeButton}>Home</Button>
-                    <Button variant={selectedMainSection==='create'?'outlined': 'flat'}
-                        color="inherit" component={ReportLink}>Create</Button>
+                                variant={selectedMainSection === 'home' ? 'outlined' : 'flat'}
+                                color="inherit" component={HomeLink} className={classes.homeButton}>Home</Button>
+                            <Button variant={selectedMainSection === 'create' ? 'outlined' : 'flat'}
+                                color="inherit" component={ReportLink}>Create</Button>
 
-                    {userCan(signedInUser, null, USER_ACTIONS.CAN_REVIEW_INCIDENTS) && (
-                        <spanner>
-                            <Button variant={selectedMainSection==='review-complaints' || selectedMainSection === 'review-inquiries'?'outlined': 'flat'}
-                               component={ReviewComplaintsLink}     color="inherit"  aria-owns="review-menu">Review</Button>
-                            {/* <Menu id="review-menu" open={Boolean(this.state.menuAnchorEl)}
+                            {userCan(signedInUser, null, USER_ACTIONS.CAN_REVIEW_INCIDENTS) && (
+                                <spanner>
+                                    <Button variant={selectedMainSection === 'review-complaints' || selectedMainSection === 'review-inquiries' ? 'outlined' : 'flat'}
+                                        component={ReviewComplaintsLink} color="inherit" aria-owns="review-menu">Review</Button>
+                                    {/* <Menu id="review-menu" open={Boolean(this.state.menuAnchorEl)}
                                   onClose={this.handleReviewMenuClose} anchorEl={this.state.menuAnchorEl} className={classes.reviewMenu}
                                   anchorOrigin={{
                                       horizontal: 'center',
@@ -250,48 +335,84 @@ class DomainContainer extends React.Component {
                                 </MenuItem>
 
                             </Menu> */}
-                        </spanner>
-                    )}
+                                </spanner>
+                            )}
 
-                    {userCan(signedInUser, null, USER_ACTIONS.CAN_VIEW_REPORTS) && (
-                        <Button variant={selectedMainSection==='reports'?'outlined': 'flat'}
-                            color="inherit" component={StaticReportLink}>Reports</Button>
-                    )}
+                            {userCan(signedInUser, null, USER_ACTIONS.CAN_VIEW_REPORTS) && (
+                                <Button variant={selectedMainSection === 'reports' ? 'outlined' : 'flat'}
+                                    color="inherit" component={StaticReportLink}>Reports</Button>
+                            )}
 
-                    {userCan(signedInUser, null, USER_ACTIONS.CAN_REVIEW_INCIDENTS) && (
-                        <Button variant={selectedMainSection==='archive'?'outlined': 'flat'}
-                            color="inherit" component={ArchiveLink}>Archive</Button>
-                    )}
+                            {userCan(signedInUser, null, USER_ACTIONS.CAN_REVIEW_INCIDENTS) && (
+                                <Button variant={selectedMainSection === 'archive' ? 'outlined' : 'flat'}
+                                    color="inherit" component={ArchiveLink}>Archive</Button>
+                            )}
 
-                </Typography>
+                        </Typography>
 
-                <Button
-                    aria-owns={open ? 'menu-appbar' : undefined}
-                    aria-haspopup="true"
-                    onClick={this.handleLangMenu}
-                    color="inherit"
-                    >
-                {selectedLanguage}
-                </Button>
-                <Menu
-                    id="menu-appbar"
-                    anchorEl={anchorLang}
-                    anchorOrigin={{
-                        vertical: 'top',
-                        horizontal: 'right',
-                    }}
-                    transformOrigin={{
-                        vertical: 'top',
-                        horizontal: 'right',
-                    }}
-                    open={langMenuOpen}
-                    onClose={this.handleLangMenuClose}
-                    >
-                    <MenuItem onClick={() => (this.handleLanguageChange('si'))}>Sinhala</MenuItem>
-                    <MenuItem onClick={() => (this.handleLanguageChange('ta'))}>Tamil</MenuItem>
-                    <MenuItem onClick={() => (this.handleLanguageChange('en'))}>English</MenuItem>
-                </Menu>
-                <Menu
+
+                        <IconButton color="inherit" onClick={this.handleNotificationList} >
+                            <Badge badgeContent={this.state.unreadNotificationCount} color="secondary">
+                                <NotificationsIcon style={{color:"white"}} />
+                            </Badge>
+                        </IconButton>
+
+                        <Button
+                            aria-owns={open ? 'menu-appbar' : undefined}
+                            aria-haspopup="true"
+                            onClick={this.handleLangMenu}
+                            color="inherit"
+                        >
+                            {selectedLanguage}
+                        </Button>
+
+                        <Menu
+                            id="notifications-appbar"
+                            anchorEl={anchorNotification}
+                            anchorOrigin={{
+                                vertical: 'top',
+                                horizontal: 'right',
+                            }}
+                            transformOrigin={{
+                                vertical: 'top',
+                                horizontal: 'right',
+                            }}
+                            open={notificationsOpen}
+                            onClose={this.handleNotificationListClose}
+                        >
+                            {notifications.map((notification, index)=>{
+                                return (
+                                <MenuItem 
+                                    key={notification.id}
+                                    onClick={() => (this.handleNotificationClick(notification))}
+                                >
+                                    {this.getNotifiactionText(notification)}
+                                    {!notification.is_read && <ActiveNotificationIcon style={{color:'red'}}/>}
+                                </MenuItem>)
+
+                            })}
+                        </Menu>
+
+                        <Menu
+                            id="menu-appbar"
+                            anchorEl={anchorLang}
+                            anchorOrigin={{
+                                vertical: 'top',
+                                horizontal: 'right',
+                            }}
+                            transformOrigin={{
+                                vertical: 'top',
+                                horizontal: 'right',
+                            }}
+                            open={langMenuOpen}
+                            onClose={this.handleLangMenuClose}
+                        >
+                            <MenuItem onClick={() => (this.handleLanguageChange('si'))}>Sinhala</MenuItem>
+                            <MenuItem onClick={() => (this.handleLanguageChange('ta'))}>Tamil</MenuItem>
+                            <MenuItem onClick={() => (this.handleLanguageChange('en'))}>English</MenuItem>
+                        </Menu>
+
+                        <Menu
                             id="menu-appbar"
                             anchorEl={anchorEl}
                             anchorOrigin={{
