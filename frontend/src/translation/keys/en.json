@@ -107,6 +107,30 @@
 
   "eclk.incident.management.incident.review.logged_date": "Logged Date",
   "eclk.incident.management.incident.review.logged_time": "Logged Time",
-  "eclk.incident.management.incident.review.institution": "Institution"
+  "eclk.incident.management.incident.review.institution": "Institution",
+
+  "eclk.incident.management.nav.home": "Home",
+  "eclk.incident.management.nav.create": "Create",
+  "eclk.incident.management.nav.review": "Review",
+  "eclk.incident.management.nav.complaints": "Complaints",
+  "eclk.incident.management.nav.inquiries": "Inquiries",
+  "eclk.incident.management.nav.reports": "Reports",
+  "eclk.incident.management.nav.archive": "Archive",
+  "eclk.incident.management.nav.profile": "Profile",
+  "eclk.incident.management.nav.change_password": "Change Password",
+  "eclk.incident.management.nav.sign_out": "Sign out",
+
+  "eclk.incident.management.nav.language.english": "English",
+  "eclk.incident.management.nav.language.sinhala": "Sinhala",
+  "eclk.incident.management.nav.language.tamil": "Tamil",
+
+  "eclk.incident.management.landing.alredy_signed_in": "Already registered user?",
+  "eclk.incident.management.landing.sign_in": "Sign In",
+
+  "eclk.incident.management.login.sign_in": "Sign In",
+  "eclk.incident.management.login.username": "Username",
+  "eclk.incident.management.login.password": "Password",
+  "eclk.incident.management.login.remember_me": "Remember me"
+
 
 }
