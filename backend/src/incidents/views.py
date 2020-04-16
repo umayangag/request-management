@@ -94,7 +94,7 @@ class IncidentList(APIView, IncidentResultsSetPagination):
         # _user = get_guest_user()
         # _user = User.objects.get(username="police1")
         # print("assigneee", find_incident_assignee(_user))
-        
+
         # following was set default on one election
         # election_code = settings.ELECTION
         # incidents = Incident.objects.all().filter(election=election_code).order_by('created_date').reverse()
@@ -168,12 +168,11 @@ class IncidentList(APIView, IncidentResultsSetPagination):
                 raise IncidentException("Severity level must be a number")
 
         param_closed = self.request.query_params.get('show_closed', None)
-
         if param_closed is not None and param_closed == "true":
-            # by default CLOSED incidents are not shown
-            incidents = incidents.filter(current_status=StatusType.CLOSED.name)
+            # by default CLOSED incidents are not shown, and also INVALIDATED.
+            incidents = incidents.filter(Q(current_status=StatusType.CLOSED.name) | Q(current_status=StatusType.INVALIDATED.name))
         else:
-            incidents = incidents.exclude(current_status=StatusType.CLOSED.name)
+            incidents = incidents.exclude(current_status=StatusType.CLOSED.name).exclude(current_status=StatusType.INVALIDATED.name)
 
         param_institution = self.request.query_params.get('institution', None)
         if param_institution is not None:
