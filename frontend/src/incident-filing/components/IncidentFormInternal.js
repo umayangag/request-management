@@ -68,6 +68,7 @@ import { withRouter } from "react-router";
 import { withStyles } from "@material-ui/core/styles";
 import yellow from "@material-ui/core/colors/yellow";
 import TitleAutoComplete from "./TitleAutoComplete";
+import { useIntl } from "react-intl";
 
 const styles = (theme) => ({
   root: {
@@ -282,6 +283,8 @@ function IncidentFormInternal(props) {
       dispatch(resetActiveIncident());
     }
   }, []);
+
+  const { formatMessage: f } = useIntl();
 
   const getSimilarInquiries = async (title) => {
     if (title.length > 2) {
@@ -572,7 +575,7 @@ function IncidentFormInternal(props) {
               {/* basic incident detail information */}
               <Paper className={classes.paper}>
                 <Typography variant="h5" gutterBottom>
-                  Basic Information
+                  {f({id: "eclk.incident.management.incident.create.basic_information"})}
                 </Typography>
                 <Grid container spacing={24}>
                   <Grid item xs={12}>
@@ -611,7 +614,7 @@ function IncidentFormInternal(props) {
                               : null,
                         }}
                       >
-                        Mode of receipt*{" "}
+                        {f({id: "eclk.incident.management.incident.create.mode_of_receipt"})}*{" "}*{" "}
                       </div>
                     </FormLabel>
 
@@ -667,7 +670,7 @@ function IncidentFormInternal(props) {
                       label={
                         values.incidentType === "INQUIRY"
                           ? "Letter reference number*"
-                          : "Description*"
+                          : f({id: "eclk.incident.management.incident.create.description"})
                       }
                       placeholder="Press enter for new lines."
                       className={classes.textField}
@@ -719,7 +722,7 @@ function IncidentFormInternal(props) {
                       className={classes.formControl}
                       error={touched.category && errors.category}
                     >
-                      <InputLabel htmlFor="category">Category*</InputLabel>
+                      <InputLabel htmlFor="category">{f({id: "eclk.incident.management.incident.create.category"})}*</InputLabel>
                       <Select
                         value={values.category}
                         onChange={handleChange}
@@ -805,7 +808,7 @@ function IncidentFormInternal(props) {
                       <Grid item xs={12} sm={6}>
                         <TextField
                           id="occured_date_date"
-                          label="Incident date"
+                          label={f({id: "eclk.incident.management.incident.create.date"})}
                           type="date"
                           value={values.occured_date_date}
                           InputLabelProps={{ shrink: true }}
@@ -1060,7 +1063,7 @@ function IncidentFormInternal(props) {
                     <Grid item xs={12} sm={3}>
                       <TextField
                         id="receivedDate"
-                        label="Received date"
+                        label={f({id: "eclk.incident.management.incident.create.date"})}
                         type="date"
                         value={values.receivedDate}
                         InputLabelProps={{ shrink: true }}
@@ -1077,7 +1080,7 @@ function IncidentFormInternal(props) {
                     <Grid item xs={12} sm={3}>
                       <TextField
                         id="letterDate"
-                        label="Letter date"
+                        label={f({id: "eclk.incident.management.incident.create.date"})}
                         type="date"
                         value={values.letterDate}
                         InputLabelProps={{ shrink: true }}
@@ -1144,7 +1147,7 @@ function IncidentFormInternal(props) {
                   {!paramIncidentId && (
                     <Grid item xs={12} sm={12}>
                       <InputLabel htmlFor="election">
-                        Upload File (You can upload multiple files)
+                        {f({id: "eclk.incident.management.incident.create.upload_file"})}
                       </InputLabel>
                       <FileUploader
                         files={state.files}
@@ -1222,7 +1225,7 @@ function IncidentFormInternal(props) {
                     <TextField
                       id="reporterAddress"
                       name="reporterAddress"
-                      label="Reporter Address"
+                      label={f({id: "eclk.incident.management.incident.create.reporter.address"})}
                       variant="outlined"
                       multiline
                       className={classes.textField}
@@ -1234,14 +1237,14 @@ function IncidentFormInternal(props) {
                     <TelephoneInput
                       className={classes.textField}
                       name="reporterMobile"
-                      label="Mobile No"
+                      label={f({id: "eclk.incident.management.incident.create.reporter.mobile"})}
                     />
                   </Grid>
                   <Grid item xs={12} sm={6}>
                     <TextField
                       id="reporterEmail"
                       name="reporterEmail"
-                      label="Email"
+                      label={f({id: "eclk.incident.management.incident.create.reporter.email"})}
                       className={classes.textField}
                       value={values.reporterEmail}
                       onChange={handleChange}
@@ -1315,13 +1318,13 @@ function IncidentFormInternal(props) {
                   {/* Incident location information */}
                   <Paper className={classes.paper}>
                     <Typography variant="h5" gutterBottom>
-                      Location Information
+                      {f({id: "eclk.incident.management.incident.create.location_information"})}
                     </Typography>
                     <Grid container spacing={24}>
                       <Grid item xs={12} sm={12}>
                         <TextField
                           id="address"
-                          label="Address"
+                          label={f({id: "eclk.incident.management.incident.create.location.address"})}
                           variant="outlined"
                           multiline
                           className={classes.textField}
@@ -1332,7 +1335,7 @@ function IncidentFormInternal(props) {
                       <Grid item xs={12}>
                         <TextField
                           id="location"
-                          label="Additional Information / (e.g. Landmarks)"
+                          label={f({id: "eclk.incident.management.incident.create.location.description"})}
                           className={classes.textField}
                           value={values.location}
                           onChange={handleChange}
@@ -1342,7 +1345,7 @@ function IncidentFormInternal(props) {
                       <Grid item xs={12} sm={4}>
                         <TextField
                           id="city"
-                          label="City"
+                          label={f({id: "eclk.incident.management.incident.create.location.city"})}
                           className={classes.textField}
                           value={values.city}
                           onChange={handleChange}
@@ -1378,7 +1381,7 @@ function IncidentFormInternal(props) {
                           error={touched.district && errors.district}
                           className={classes.formControl}
                         >
-                          <InputLabel htmlFor="district">District*</InputLabel>
+                          <InputLabel htmlFor="district">{f({id: "eclk.incident.management.incident.create.location.district"})}*</InputLabel>
                           <Select
                             value={values.district}
                             onChange={handleChange}
@@ -1447,7 +1450,7 @@ function IncidentFormInternal(props) {
                       <Grid item xs={12} sm={4}>
                         <FormControl className={classes.formControl}>
                           <InputLabel htmlFor="gramaNiladhari">
-                            Grama Niladhari Division
+                            {f({id: "eclk.incident.management.incident.create.location.gn_division"})}
                           </InputLabel>
                           <IntlSelect
                             value={values.gramaNiladhari}

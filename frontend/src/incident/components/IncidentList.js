@@ -11,6 +11,7 @@ import {
   TablePagination,
 } from "@material-ui/core";
 import { withRouter } from "react-router";
+import { useIntl } from "react-intl";
 
 const CustomTableCell = withRouter(
   withStyles((theme) => ({
@@ -98,6 +99,7 @@ function IncidentList({
   handlePageChange,
 }) {
   const categories = useSelector((state) => state.shared.categories);
+  const { formatMessage: f } = useIntl();
 
   return (
     <Table className={classes.table}>
@@ -112,12 +114,12 @@ function IncidentList({
       </colgroup>
       <TableHead>
         <TableRow>
-          <CustomTableCell align="center">Ref Id</CustomTableCell>
-          <CustomTableCell align="center">Category</CustomTableCell>
-          <CustomTableCell align="center">Description</CustomTableCell>
-          <CustomTableCell align="center">Status</CustomTableCell>
-          <CustomTableCell align="center">Priority</CustomTableCell>
-          <CustomTableCell align="center">Response Time</CustomTableCell>
+          <CustomTableCell align="center">{f({id: "eclk.incident.management.home.incidents.list.refid"})}</CustomTableCell>
+          <CustomTableCell align="center">{f({id: "eclk.incident.management.home.incidents.list.category"})}</CustomTableCell>
+          <CustomTableCell align="center">{f({id: "eclk.incident.management.home.incidents.list.description"})}</CustomTableCell>
+          <CustomTableCell align="center">{f({id: "eclk.incident.management.home.incidents.list.status"})}</CustomTableCell>
+          <CustomTableCell align="center">{f({id: "eclk.incident.management.home.incidents.list.severity"})}</CustomTableCell>
+          <CustomTableCell align="center">{f({id: "eclk.incident.management.home.incidents.list.response_time"})}</CustomTableCell>
           {/* <CustomTableCell align="center">Category</CustomTableCell> */}
           {/* <CustomTableCell align="center">Last Action At</CustomTableCell> */}
         </TableRow>

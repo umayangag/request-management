@@ -12,6 +12,7 @@ import {
 } from "@material-ui/core";
 import { withRouter } from "react-router";
 import moment from "moment";
+import { useIntl } from "react-intl";
 
 const CustomTableCell = withRouter(
   withStyles((theme) => ({
@@ -100,6 +101,7 @@ function IncidentList({
   handlePageChange,
 }) {
   const { channels, districts, categories } = useSelector((state) => state.shared);
+  const { formatMessage: f } = useIntl();
 
   return (
     <Table className={classes.table}>
@@ -113,12 +115,12 @@ function IncidentList({
       </colgroup>
       <TableHead>
         <TableRow>
-          <CustomTableCell align="center">Ref Id</CustomTableCell>
-          <CustomTableCell align="center">Created Date</CustomTableCell>
-          <CustomTableCell align="center">District</CustomTableCell>
-          <CustomTableCell align="center">Status</CustomTableCell>
-          <CustomTableCell align="center">Category</CustomTableCell>
-          <CustomTableCell align="center">Description</CustomTableCell>
+          <CustomTableCell align="center">{f({id: "eclk.incident.management.home.incidents.list.refid"})}</CustomTableCell>
+          <CustomTableCell align="center">{f({id: "eclk.incident.management.home.incidents.list.created_date"})}</CustomTableCell>
+          <CustomTableCell align="center">{f({id: "eclk.incident.management.incident.create.location.district"})}</CustomTableCell>
+          <CustomTableCell align="center">{f({id: "eclk.incident.management.home.incidents.list.status"})}</CustomTableCell>
+          <CustomTableCell align="center">{f({id: "eclk.incident.management.home.incidents.list.category"})}</CustomTableCell>
+          <CustomTableCell align="center">{f({id: "eclk.incident.management.home.incidents.list.description"})}</CustomTableCell>
           {/* <CustomTableCell align="center">Final Resolution</CustomTableCell> */}
         </TableRow>
       </TableHead>

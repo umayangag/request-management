@@ -12,6 +12,7 @@ import * as incidentsApi from '../../api/incident';
 import SearchForm from "./SearchForm";
 import { Grid, Button } from "@material-ui/core";
 import IncidentListReview from "./IncidentListReview";
+import { useIntl } from "react-intl";
 
 
 const styles = theme => ({
@@ -42,6 +43,7 @@ function ReviewComplaintsListView({ classes, ...props }) {
   const categories = useSelector(state => state.shared.categories);
   const incidentSearchFilter = useSelector(state => state.incident.incidents.searchFilter);
   let incidents = useSelector(state => state.incident.incidents);
+  const { formatMessage: f } = useIntl();
 
   const handlePageChange = (event, newPage) => dispatch(loadAllIncidents(incidentSearchFilter, newPage+1));
 
@@ -82,7 +84,7 @@ function ReviewComplaintsListView({ classes, ...props }) {
     
   return (
     <Paper className={classes.root}>
-      <h3>Review Complaints</h3>
+      <h3>{f({id: "eclk.incident.management.incident.review.review_complaints"})}</h3>
       <Grid container direction={"row"} className={classes.exportContainer}>
       <Grid item xs={12} sm={12}>
       <SearchForm
@@ -97,12 +99,12 @@ function ReviewComplaintsListView({ classes, ...props }) {
       <Grid container direction={"row"} className={classes.exportContainer}>
         <Grid item>
           <Button variant={"contained"} onClick={() => handleExportClick("csv")} className={classes.exportButton}>
-            Export as CSV
+            {f({id: "eclk.incident.management.incident.review.export_csv"})}
           </Button>
         </Grid>
         <Grid item>
           <Button variant={"contained"} onClick={() => handleExportClick("html")} className={classes.exportButton}>
-            Export as PDF
+            {f({id: "eclk.incident.management.incident.review.export_pdf"})}
           </Button>
         </Grid>
       </Grid>

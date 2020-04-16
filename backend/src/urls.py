@@ -48,6 +48,7 @@ urlpatterns = [
     path("channels/", common_views.ChannelList.as_view()),
     path("districts/", common_views.DistrictList.as_view()),
     path("provinces/", common_views.ProvinceList.as_view()),
+    path("gndivisions/", common_views.GNDivisionList.as_view()),
     
     path("wards/", common_views.WardList.as_view()),
 
