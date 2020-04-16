@@ -7,6 +7,7 @@ import { Card, Grid, CardContent, CardHeader } from '@material-ui/core';
 import ManagedIncidentList from './ManagedIncidentList';
 import { useSelector } from 'react-redux';
 import { userCan, USER_ACTIONS } from '../../user/userUtils';
+import { useIntl } from 'react-intl';
 
 const drawerWidth = 240;
 const styles = theme => ({
@@ -16,6 +17,7 @@ const styles = theme => ({
 });
 const Home = ({classes, ...props}) =>{
     const user = useSelector(state => state.shared.signedInUser.data);
+    const { formatMessage: f } = useIntl();
 
     return (
         <Grid direction="column" container>
@@ -24,7 +26,7 @@ const Home = ({classes, ...props}) =>{
                 <Grid xs={12} item>
                     <Card xs={6}>
                         <CardHeader 
-                            title="Complaints Assigned to You"
+                            title={f({id: "eclk.incident.management.home.incidents_assigned"})}
                         />
                         <CardContent>
                             <ManagedIncidentList 
@@ -37,7 +39,7 @@ const Home = ({classes, ...props}) =>{
                 <Grid xs={12} item style={{paddingTop:"10px"}}>
                     <Card xs={6}>
                         <CardHeader 
-                            title="Complaints Linked to You"
+                            title={f({id: "eclk.incident.management.home.incident_linked"})}
                         />
                         <CardContent>
                             <ManagedIncidentList 
