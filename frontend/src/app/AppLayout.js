@@ -52,28 +52,27 @@ import { API_BASE_URL } from '../config'
 import { userCan, USER_ACTIONS } from '../user/userUtils';
 
 import * as notificationsAPI from '../api/notifications';
-import {WEB_SOCKET_BASE_URL} from '../config'
+import { WEB_SOCKET_BASE_URL } from '../config'
 
 const HomeLink = props => <Link to="/app/home" {...props} />
 const ReportLink = props => <Link to="/app/create" {...props} />
-const ReviewComplaintsLink = props => <Link to="/app/review-complaints" {...props} />
-const ReviewInquiriesLink = props => <Link to="/app/review-inquiries" {...props} />
+const ReviewComplaintsLink = props => <Link to="/app/review" {...props} />
 const StaticReportLink = props => <Link to="/app/reports" {...props} />
 const ArchiveLink = props => <Link to="/app/archive" {...props} />
 
 
 const drawerWidth = 240;
 
-const styles = theme => ({
+const styles = (theme) => ({
     root: {
         // display: 'flex',
-        flexGrow: 1
+        flexGrow: 1,
     },
     homeButton: {
-        marginLeft: theme.spacing.unit * 4
+        marginLeft: theme.spacing.unit * 4,
     },
     appBar: {
-        transition: theme.transitions.create(['margin', 'width'], {
+        transition: theme.transitions.create(["margin", "width"], {
             easing: theme.transitions.easing.sharp,
             duration: theme.transitions.duration.leavingScreen,
         }),
@@ -81,7 +80,7 @@ const styles = theme => ({
     appBarShift: {
         width: `calc(100% - ${drawerWidth}px)`,
         marginLeft: drawerWidth,
-        transition: theme.transitions.create(['margin', 'width'], {
+        transition: theme.transitions.create(["margin", "width"], {
             easing: theme.transitions.easing.easeOut,
             duration: theme.transitions.duration.enteringScreen,
         }),
@@ -91,7 +90,7 @@ const styles = theme => ({
         marginRight: 20,
     },
     hide: {
-        display: 'none',
+        display: "none",
     },
     drawer: {
         width: drawerWidth,
@@ -101,32 +100,32 @@ const styles = theme => ({
         width: drawerWidth,
     },
     drawerHeader: {
-        display: 'flex',
-        alignItems: 'center',
-        padding: '0 8px',
+        display: "flex",
+        alignItems: "center",
+        padding: "0 8px",
         ...theme.mixins.toolbar,
-        justifyContent: 'flex-end',
+        justifyContent: "flex-end",
     },
     reviewMenu: {
         li: {
             paddingTop: 8,
-            paddingBottom: 8
+            paddingBottom: 8,
         },
-        boxShadow: 'none'
+        boxShadow: "none",
     },
     content: {
         flexGrow: 1,
         paddingTop: theme.spacing.unit * 3,
         paddingLeft: theme.spacing.unit * 8,
         paddingRight: theme.spacing.unit * 8,
-        transition: theme.transitions.create('margin', {
+        transition: theme.transitions.create("margin", {
             easing: theme.transitions.easing.sharp,
             duration: theme.transitions.duration.leavingScreen,
         }),
-        marginTop: theme.spacing.unit * 1
+        marginTop: theme.spacing.unit * 1,
     },
     contentShift: {
-        transition: theme.transitions.create('margin', {
+        transition: theme.transitions.create("margin", {
             easing: theme.transitions.easing.easeOut,
             duration: theme.transitions.duration.enteringScreen,
         }),
@@ -136,8 +135,8 @@ const styles = theme => ({
         flexGrow: 1,
     },
     breadCrumbWrapper: {
-        marginBottom: theme.spacing.unit * 4
-    }
+        marginBottom: theme.spacing.unit * 4,
+    },
 });
 
 
@@ -149,8 +148,8 @@ class DomainContainer extends React.Component {
         menuAnchorEl: null,
         authToken: null,
         anchorNotification: null,
-        notifications:[],
-        unreadNotificationCount:0
+        notifications: [],
+        unreadNotificationCount: 0
     };
 
     componentDidMount() {
@@ -176,13 +175,13 @@ class DomainContainer extends React.Component {
     loadNotifications = async () => {
         const notificationResponse = await notificationsAPI.getNotifications()
         let unread = 0
-        let notifs =  notificationResponse.data
-        for(let i= 0; i<notifs.length; i++){
-            if(!notifs[i].is_read){
+        let notifs = notificationResponse.data
+        for (let i = 0; i < notifs.length; i++) {
+            if (!notifs[i].is_read) {
                 unread++
             }
         }
-        this.setState({notifications:notifs, unreadNotificationCount:unread})
+        this.setState({ notifications: notifs, unreadNotificationCount: unread })
     }
 
     handleDrawerOpen = () => {
@@ -245,19 +244,19 @@ class DomainContainer extends React.Component {
 
     handleSokcetData(data) {
         let result = JSON.parse(data);
-        let notificationUpdate= this.state.notifications.slice()
+        let notificationUpdate = this.state.notifications.slice()
         notificationUpdate.unshift(result.payload)
         this.setState({
-            notifications:notificationUpdate,
-            unreadNotificationCount:this.state.unreadNotificationCount +1
+            notifications: notificationUpdate,
+            unreadNotificationCount: this.state.unreadNotificationCount + 1
         })
     }
 
-    getNotifiactionText(notification){
-        if(notification.custom_messsage){
+    getNotifiactionText(notification) {
+        if (notification.custom_messsage) {
             return notification.custom_messsage
-        }else{
-            switch(notification.notification_type){
+        } else {
+            switch (notification.notification_type) {
                 case 'INCIDENT_ASSIGNED':
                     return 'Incident Assigned'
                 default:
@@ -266,15 +265,15 @@ class DomainContainer extends React.Component {
         }
     }
 
-    handleNotificationClick(notification){
-        if(!notification.is_read){
+    handleNotificationClick(notification) {
+        if (!notification.is_read) {
             this.setState({
-                unreadNotificationCount:this.state.unreadNotificationCount-1
+                unreadNotificationCount: this.state.unreadNotificationCount - 1
             })
             this.handleNotificationListClose()
-            try{
+            try {
                 notificationsAPI.markAsRead(notification.id)
-            }catch(e){
+            } catch (e) {
                 console.log(e)
             }
         }
@@ -308,7 +307,7 @@ class DomainContainer extends React.Component {
                         <Typography variant="h6" color="inherit" className={classes.grow}>
                             Tell The President
 
-                    <Button
+                            <Button
                                 variant={selectedMainSection === 'home' ? 'outlined' : 'flat'}
                                 color="inherit" component={HomeLink} className={classes.homeButton}>Home</Button>
                             <Button variant={selectedMainSection === 'create' ? 'outlined' : 'flat'}
@@ -318,23 +317,6 @@ class DomainContainer extends React.Component {
                                 <spanner>
                                     <Button variant={selectedMainSection === 'review-complaints' || selectedMainSection === 'review-inquiries' ? 'outlined' : 'flat'}
                                         component={ReviewComplaintsLink} color="inherit" aria-owns="review-menu">Review</Button>
-                                    {/* <Menu id="review-menu" open={Boolean(this.state.menuAnchorEl)}
-                                  onClose={this.handleReviewMenuClose} anchorEl={this.state.menuAnchorEl} className={classes.reviewMenu}
-                                  anchorOrigin={{
-                                      horizontal: 'center',
-                                  }}
-                                  transformOrigin={{
-                                      vertical: 'top',
-                                      horizontal: 'center',
-                                  }}>
-                                <MenuItem component={ReviewComplaintsLink} onClick={this.handleOnClickReviewMenuItem}>
-                                    Complaints
-                                </MenuItem>
-                                <MenuItem component={ReviewInquiriesLink} onClick={this.handleOnClickReviewMenuItem}>
-                                    Inquiries
-                                </MenuItem>
-
-                            </Menu> */}
                                 </spanner>
                             )}
 
@@ -353,7 +335,7 @@ class DomainContainer extends React.Component {
 
                         <IconButton color="inherit" onClick={this.handleNotificationList} >
                             <Badge badgeContent={this.state.unreadNotificationCount} color="secondary">
-                                <NotificationsIcon style={{color:"white"}} />
+                                <NotificationsIcon style={{ color: "white" }} />
                             </Badge>
                         </IconButton>
 
@@ -380,15 +362,15 @@ class DomainContainer extends React.Component {
                             open={notificationsOpen}
                             onClose={this.handleNotificationListClose}
                         >
-                            {notifications.map((notification, index)=>{
+                            {notifications.map((notification, index) => {
                                 return (
-                                <MenuItem 
-                                    key={notification.id}
-                                    onClick={() => (this.handleNotificationClick(notification))}
-                                >
-                                    {this.getNotifiactionText(notification)}
-                                    {!notification.is_read && <ActiveNotificationIcon style={{color:'red'}}/>}
-                                </MenuItem>)
+                                    <MenuItem
+                                        key={notification.id}
+                                        onClick={() => (this.handleNotificationClick(notification))}
+                                    >
+                                        {this.getNotifiactionText(notification)}
+                                        {!notification.is_read && <ActiveNotificationIcon style={{ color: 'red' }} />}
+                                    </MenuItem>)
 
                             })}
                         </Menu>
@@ -449,10 +431,11 @@ class DomainContainer extends React.Component {
                 >
                     <RootModal />
 
-                    <div className={classes.breadCrumbWrapper}><Breadcrumbs pathname={location.pathname} /></div>
+                    <div className={classes.breadCrumbWrapper}>
+                        <Breadcrumbs pathname={location.pathname} />
+                    </div>
 
                     {this.props.children}
-
                 </main>
             </div>
         );
@@ -468,73 +451,78 @@ const mapStateToProps = (state, ownProps) => {
     return {
         isSignedIn: state.shared.signedInUser.isSignedIn,
         selectedLanguage: state.shared.selectedLanguage,
-        signedInUser: state.shared.signedInUser.data
-    }
-}
+        signedInUser: state.shared.signedInUser.data,
+    };
+};
 
 const mapDispatchToProps = (dispatch) => {
     return {
         signOut: () => {
-            dispatch(initiateSignOut())
+            dispatch(initiateSignOut());
         },
         changeLanguage: (lang) => {
-            dispatch(changeLanguage(lang))
+            dispatch(changeLanguage(lang));
         },
         showError: (error) => {
             dispatch({
                 type: "SHOW_NOTIFICATION",
                 error: {
-                    message: "Major error in data! Fallback"
-                }
-            })
+                    message: "Major error in data! Fallback",
+                },
+            });
         },
 
         getChannels: () => {
-            dispatch(fetchChannels())
+            dispatch(fetchChannels());
         },
         getElections: () => {
             dispatch(fetchElections());
         },
         getCategories: () => {
-            dispatch(fetchCategories())
+            dispatch(fetchCategories());
         },
         getInstitutions: () => {
-            dispatch(fetchInstitutions())
+            dispatch(fetchInstitutions());
         },
         getProvinces: () => {
-            dispatch(fetchProvinces())
+            dispatch(fetchProvinces());
         },
         getDistricts: () => {
-            dispatch(fetchDistricts())
+            dispatch(fetchDistricts());
         },
         getDivisionalSecretariats: () => {
-            dispatch(fetchDivisionalSecretariats())
+            dispatch(fetchDivisionalSecretariats());
         },
         getGramaNiladharis: () => {
-            dispatch(fetchGramaNiladharis())
+            dispatch(fetchGramaNiladharis());
         },
         getPollingDivisions: () => {
-            dispatch(fetchPollingDivisions())
+            dispatch(fetchPollingDivisions());
         },
         getPollingStations: () => {
-            dispatch(fetchPollingStations())
+            dispatch(fetchPollingStations());
         },
         getPoliceStations: () => {
-            dispatch(fetchPoliceStations())
+            dispatch(fetchPoliceStations());
         },
         getPoliceDivisions: () => {
-            dispatch(fetchPoliceDivisions())
+            dispatch(fetchPoliceDivisions());
         },
         getWards: () => {
-            dispatch(fetchWards())
+            dispatch(fetchWards());
         },
         loadAllUsers: () => {
-            dispatch(loadUsers())
-        }
-    }
-}
+            dispatch(loadUsers());
+        },
+    };
+};
 
-export default withRouter(compose(
-    withStyles(styles, { withTheme: true }),
-    connect(mapStateToProps, mapDispatchToProps))
-    (DomainContainer));
+export default withRouter(
+    compose(
+        withStyles(styles, { withTheme: true }),
+        connect(
+            mapStateToProps,
+            mapDispatchToProps
+        )
+    )(DomainContainer)
+);
