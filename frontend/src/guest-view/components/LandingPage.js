@@ -47,7 +47,7 @@ function HomePage(props) {
     <div className={classes.root}>
       <Grid container spacing={24}>
         <Grid item xs={12} sm={6}>
-          <Grid item xs={12} sm={6}>
+          <Grid item xs={12} sm={8}>
             <Logo />
           </Grid>
         </Grid>
@@ -91,7 +91,6 @@ function HomePage(props) {
         alignItems="center"
         justify="center"
         style={{ minHeight: "80vh" }}
-        className={classes.hide}
       >
         <Grid item xs={12} sm={6} md={3} >
           <Card className={classes.card}>
@@ -107,7 +106,7 @@ function HomePage(props) {
                   >
                     <FormattedMessage
                       id="eclk.incident.management.report.incidents"
-                      defaultMessage={"Report an Incident"}
+                      defaultMessage={"Make a Request"}
                     />
                   </Typography>
                   <Typography
@@ -138,7 +137,7 @@ function HomePage(props) {
                   >
                     <FormattedMessage
                       id="eclk.incident.management.check.incident.status"
-                      defaultMessage={"Check Status on Incident"}
+                      defaultMessage={"Check Status"}
                     />
                   </Typography>
 
@@ -163,7 +162,7 @@ function HomePage(props) {
         spacing={24}
         alignItems="center"
         justify="center"
-        style={{ minHeight: "80vh" }}
+        // style={{ minHeight: "80vh" }}
       >
         <Grid xs={12}>
           <Typography

@@ -11,7 +11,7 @@
   "eclk.incident.management.report.incidents.forms.button.finish": "අවසන් කරන්න",
 
 
-  "eclk.incident.management.report.incidents": "සිදුවීමක් වාර්තා කිරීම",
+  "eclk.incident.management.report.incidents": "ඉල්ලීමක් කරන්න",
   "eclk.incident.management.report.incidents.helper.text": "*අනිවාර්ය වේ",
 
   "eclk.incident.management.report.incidents.section.describe": "සිදුවීම පිළිබඳ තොරතුරු",
@@ -38,7 +38,7 @@
   "eclk.incident.management.report.incidents.contact.landline": "ස්ථාවර දුරකථන",
   "eclk.incident.management.report.incidents.contact.email": "ඊමේල්",
 
-  "eclk.incident.management.check.incident.status": "පෙර යොමු කල සිදුවීම්",
+  "eclk.incident.management.check.incident.status": "පෙර යොමුව",
   "eclk.incident.management.historic.reports": "සිදුවීම් වාර්තා",
   
   "eclk.incident.management.filing.guest.form.steps.basic.details": "සිදුවීම් තොරතුරු",

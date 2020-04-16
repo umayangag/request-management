@@ -11,7 +11,7 @@
   "eclk.incident.management.report.incidents.forms.button.finish": "Finish",
 
 
-  "eclk.incident.management.report.incidents": "Report an Incident",
+  "eclk.incident.management.report.incidents": "Make a Request",
   "eclk.incident.management.report.incidents.helper.text": "*fields are mandatory",
 
   "eclk.incident.management.report.incidents.section.describe": "Describe the incident",
@@ -39,7 +39,7 @@
   "eclk.incident.management.report.incidents.contact.email": "Email",
 
 
-  "eclk.incident.management.check.incident.status": "Check Status on Incident",
+  "eclk.incident.management.check.incident.status": "Check Status",
   "eclk.incident.management.historic.reports": "Incident Reports",
 
   "eclk.incident.management.filing.guest.form.steps.basic.details": "Incident Details",
