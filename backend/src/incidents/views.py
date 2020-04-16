@@ -157,12 +157,9 @@ class IncidentList(APIView, IncidentResultsSetPagination):
         param_severity = self.request.query_params.get('severity', None)
         if param_severity is not None:
             try:
-                param_severity = int(param_severity)
-                if param_severity < 1 or param_severity > 10:
-                    raise IncidentException("Severity level must be between 1 - 10")
-                incidents = incidents.filter(severity=param_severity)
-            except:
-                raise IncidentException("Severity level must be a number")
+                incidents = incidents.filter(current_severity=param_severity)
+            except Exception as e:
+                raise IncidentException(e)
 
         param_closed = self.request.query_params.get('show_closed', None)
 
