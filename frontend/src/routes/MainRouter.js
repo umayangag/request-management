@@ -37,17 +37,17 @@ class MainRouter extends Component {
         locale={selectedLanguage}
         key={selectedLanguage}
         messages={i18n.translationMessages[selectedLanguage]}
-      > 
+      >
         <Router history={history}>
           <div>
             <PrivateRoute path="/app" component={AppLayout}>
               <Switch>
-                <PrivateRoute exact path="/app/home" component={Home} /> 
-                <PrivateRoute exact path="/app/reports" component={TempReportList} /> 
-                <PrivateRoute exact path="/app/reports/view" component={ReportViewer} /> 
+                <PrivateRoute exact path="/app/home" component={Home} />
+                <PrivateRoute exact path="/app/reports" component={TempReportList} />
+                <PrivateRoute exact path="/app/reports/view" component={ReportViewer} />
                 <PrivateRoute exact path="/app/create" component={IncidentFormInternal} />
-                <PrivateRoute exact path="/app/review-complaints" component={ReviewComplaintsListView} />
-                <PrivateRoute exact path="/app/review-inquiries" component={ReviewInquiriesListView} />
+                <PrivateRoute exact path="/app/review" component={ReviewComplaintsListView} />
+                {/* <PrivateRoute exact path="/app/review-inquiries" component={ReviewInquiriesListView} /> */}
                 <PrivateRoute exact path="/app/review/:paramIncidentId" component={IncidentView} />
                 <PrivateRoute exact path="/app/review/:paramIncidentId/edit" component={IncidentFormInternal} />
                 <PrivateRoute exact path="/app/archive" component={ArchiveIncidentListView} />

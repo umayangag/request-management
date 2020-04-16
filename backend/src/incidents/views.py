@@ -94,7 +94,7 @@ class IncidentList(APIView, IncidentResultsSetPagination):
         # _user = get_guest_user()
         # _user = User.objects.get(username="police1")
         # print("assigneee", find_incident_assignee(_user))
-        
+
         # following was set default on one election
         # election_code = settings.ELECTION
         # incidents = Incident.objects.all().filter(election=election_code).order_by('created_date').reverse()
@@ -160,20 +160,16 @@ class IncidentList(APIView, IncidentResultsSetPagination):
         param_severity = self.request.query_params.get('severity', None)
         if param_severity is not None:
             try:
-                param_severity = int(param_severity)
-                if param_severity < 1 or param_severity > 10:
-                    raise IncidentException("Severity level must be between 1 - 10")
-                incidents = incidents.filter(severity=param_severity)
-            except:
-                raise IncidentException("Severity level must be a number")
+                incidents = incidents.filter(current_severity=param_severity)
+            except Exception as e:
+                raise IncidentException(e)
 
         param_closed = self.request.query_params.get('show_closed', None)
-
         if param_closed is not None and param_closed == "true":
-            # by default CLOSED incidents are not shown
-            incidents = incidents.filter(current_status=StatusType.CLOSED.name)
+            # by default CLOSED incidents are not shown, and also INVALIDATED.
+            incidents = incidents.filter(Q(current_status=StatusType.CLOSED.name) | Q(current_status=StatusType.INVALIDATED.name))
         else:
-            incidents = incidents.exclude(current_status=StatusType.CLOSED.name)
+            incidents = incidents.exclude(current_status=StatusType.CLOSED.name).exclude(current_status=StatusType.INVALIDATED.name)
 
         param_institution = self.request.query_params.get('institution', None)
         if param_institution is not None:
