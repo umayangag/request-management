@@ -37,6 +37,9 @@ from rest_framework.renderers import StaticHTMLRenderer
 from django.db.models import Q
 from .permissions import *
 
+from ..notifications.services import add_notification
+from ..notifications.models import NotificationType
+
 def is_valid_incident(incident_id: str) -> bool:
     try:
         incident = Incident.objects.get(id=incident_id)
@@ -480,9 +483,13 @@ def incident_escalate_external_action(user: User, incident: Incident, entity: ob
     if is_internal_user:
         escalated_user = get_user_by_id(entity["name"])
         incident.linked_individuals.add(escalated_user)
+        incident.assignee = escalated_user
         incident.save()
 
         workflow.escalated_user = escalated_user
+
+        # send notification
+        add_notification(NotificationType.INCIDENT_ASSIGNED, user, escalated_user, incident)
     else:
         workflow.escalated_entity_other = entity["type"]
         workflow.escalated_user_other = entity["name"]
@@ -498,6 +505,8 @@ def incident_escalate_external_action(user: User, incident: Incident, entity: ob
     status.save()
 
     event_services.update_workflow_event(user, incident, workflow)
+
+    
 
 
 def incident_complete_external_action(user: User, incident: Incident, comment: str, start_event: Event):
