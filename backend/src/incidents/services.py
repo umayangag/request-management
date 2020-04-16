@@ -1,5 +1,6 @@
 import os
 import requests
+import _thread
 
 from .models import (
     Incident,
@@ -39,6 +40,17 @@ from .permissions import *
 
 from ..notifications.services import add_notification
 from ..notifications.models import NotificationType
+
+from django.core.mail import send_mail
+
+def send_email(subject, message, receivers):
+    send_mail(
+        subject,
+        message,
+        'tellpresident_noreply@lgc2.gov.lk',
+        receivers,
+        fail_silently=False,
+    )
 
 def is_valid_incident(incident_id: str) -> bool:
     try:
@@ -258,6 +270,7 @@ def create_reporter():
 
 def create_incident_postscript(incident: Incident, user: User) -> None:
     """Function to take care of event, status and severity creation"""
+    
     if user is None:
         # public user case
         # if no auth token, then we assign the guest user as public user
@@ -272,6 +285,18 @@ def create_incident_postscript(incident: Incident, user: User) -> None:
     # incident.reporter = reporter
     incident.assignee = user
     incident.save()
+
+    # request created email
+    print("sending request created email")
+    subject = 'Your Request Recieved'
+    message = 'We recieved your request. Reference ID' + incident.refId
+    # recievers = ["aijdissanayake@gmail.com", "achala.ec@mailinator.com"]
+    recievers = [incident.reporter.id, "aijdissanayake@gmail.com", "achala.ec@mailinator.com"]
+    try:
+        _thread.start_new_thread( send_email, ( subject, message, recievers) )
+    except:
+        print ("Error: unable to start thread")
+    print("request created email sent")
 
     event_services.create_incident_event(user, incident)
 
@@ -428,6 +453,17 @@ def incident_change_assignee(user: User, incident: Incident, assignee: User):
     incident.assignee = assignee
     incident.save()
 
+    # request created email
+    print("sending request assigned email")
+    subject = 'Request Assigned'
+    message = 'You have been assigned to a request. Reference ID' + incident.refId
+    recievers = [assignee.email, "aijdissanayake@gmail.com", "achala.ec@mailinator.com"]
+    try:
+        _thread.start_new_thread( send_email, ( subject, message, recievers) )
+    except:
+        print ("Error: unable to start thread")
+    print("request assigned email sent")
+
     event_services.update_workflow_event(user, incident, workflow)
 
 
@@ -467,7 +503,20 @@ def incident_close(user: User, incident: Incident, details: str):
     )
     workflow.save()
 
+    # request closed email
+    print("sending request closed email")
+    subject = 'Your Request Closed'
+    message = 'We closed your request. Reference ID' + incident.refId
+    recievers = [incident.reporter.email, "aijdissanayake@gmail.com", "achala.ec@mailinator.com"]
+    try:
+        _thread.start_new_thread( send_email, ( subject, message, recievers) )
+    except:
+        print ("Error: unable to start thread")
+    print("request closed email sent")
+
     event_services.update_workflow_event(user, incident, workflow)
+
+
 
 
 def incident_escalate_external_action(user: User, incident: Incident, entity: object, comment: str):

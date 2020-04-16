@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_extensions',
 
     'rest_framework',
     'corsheaders',
@@ -201,3 +202,12 @@ PDF_SERVICE_ENDPOINT = env_var('PDF_SERVICE_ENDPOINT')
 
 # election constant - not in use
 # ELECTION = env_var('ELECTION')
+
+#Email parameters
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = env_var('EMAIL_HOST')
+EMAIL_PORT = env_var('EMAIL_PORT')
+EMAIL_HOST_USER = env_var('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = env_var('EMAIL_HOST_PASSWORD')
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
