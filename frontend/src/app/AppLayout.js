@@ -43,6 +43,7 @@ import Breadcrumbs from "./Breadcrumbs";
 import { API_BASE_URL } from "../config";
 
 import { userCan, USER_ACTIONS } from "../user/userUtils";
+import { FormattedMessage } from "react-intl";
 
 const HomeLink = (props) => <Link to="/app/home" {...props} />;
 const ReportLink = (props) => <Link to="/app/create" {...props} />;
@@ -230,14 +231,14 @@ class DomainContainer extends React.Component {
                 component={HomeLink}
                 className={classes.homeButton}
               >
-                Home
+                <FormattedMessage id="eclk.incident.management.nav.home" />
               </Button>
               <Button
                 variant={selectedMainSection === "create" ? "outlined" : "flat"}
                 color="inherit"
                 component={ReportLink}
               >
-                Create
+                <FormattedMessage id="eclk.incident.management.nav.create" />
               </Button>
               {/* {userCan(signedInUser, null, USER_ACTIONS.CAN_REVIEW_INCIDENTS) && (
                         <spanner>
@@ -270,7 +271,7 @@ class DomainContainer extends React.Component {
                   color="inherit"
                   component={ReviewLink}
                 >
-                  Review
+                  <FormattedMessage id="eclk.incident.management.nav.review" />
                 </Button>
               )}
               {userCan(signedInUser, null, USER_ACTIONS.CAN_VIEW_REPORTS) && (
@@ -281,7 +282,7 @@ class DomainContainer extends React.Component {
                   color="inherit"
                   component={StaticReportLink}
                 >
-                  Reports
+                  <FormattedMessage id="eclk.incident.management.nav.reports" />
                 </Button>
               )}
               {userCan(
@@ -296,7 +297,7 @@ class DomainContainer extends React.Component {
                   color="inherit"
                   component={ArchiveLink}
                 >
-                  Archive
+                  <FormattedMessage id="eclk.incident.management.nav.archive" />
                 </Button>
               )}
             </Typography>
@@ -324,13 +325,13 @@ class DomainContainer extends React.Component {
               onClose={this.handleLangMenuClose}
             >
               <MenuItem onClick={() => this.handleLanguageChange("si")}>
-                Sinhala
+                <FormattedMessage id="eclk.incident.management.nav.language.sinhala" />
               </MenuItem>
               <MenuItem onClick={() => this.handleLanguageChange("ta")}>
-                Tamil
+                <FormattedMessage id="eclk.incident.management.nav.language.tamil" />
               </MenuItem>
               <MenuItem onClick={() => this.handleLanguageChange("en")}>
-                English
+                <FormattedMessage id="eclk.incident.management.nav.language.english" />
               </MenuItem>
             </Menu>
             <Menu
@@ -347,11 +348,11 @@ class DomainContainer extends React.Component {
               open={menuOpen}
               onClose={this.handleMenuClose}
             >
-              <MenuItem>Profile</MenuItem>
+              <MenuItem><FormattedMessage id="eclk.incident.management.nav.profile" /></MenuItem>
               <MenuItem onClick={this.handlePasswordChange}>
-                Change Password
+                <FormattedMessage id="eclk.incident.management.nav.change_password" />
               </MenuItem>
-              <MenuItem onClick={this.handleSignOut}>Sign Out</MenuItem>
+              <MenuItem onClick={this.handleSignOut}><FormattedMessage id="eclk.incident.management.nav.sign_out" /></MenuItem>
             </Menu>
 
             <Button

@@ -19,6 +19,7 @@ import Typography from "@material-ui/core/Typography";
 import moment from "moment";
 import { useSelector } from 'react-redux'
 import { withStyles } from "@material-ui/core/styles";
+import { useIntl } from "react-intl";
 
 const styles = theme => ({
   root: {
@@ -94,6 +95,7 @@ function SearchForm(props) {
   const districts = useSelector(state => state.shared.districts);
   const [selectedInstitution, setSelectedInstitution] = useState("");
   const [selectedDistrict, setSelectedDistrict] = useState("");
+  const { formatMessage: f } = useIntl();
 
   let orgSearch = props.incidentType === 'INQUIRY' ?
       (<Search
@@ -136,12 +138,12 @@ function SearchForm(props) {
             <Grid container spacing={8}>
               <TextField
                 id="outlined-full-width"
-                label="Text Search"
+                label={f({id: "eclk.incident.management.incident.review.text_search"})}
                 style={{
                   margin: "15px 4px",
                   width: "calc(100% - 88px)"
                 }}
-                placeholder="Search Text / Reference ID"
+                placeholder={f({id: "eclk.incident.management.incident.review.search_placeholder"})}
                 margin="normal"
                 variant="outlined"
                 name="textSearch"
@@ -241,8 +243,8 @@ function SearchForm(props) {
                         <MenuItem value="">
                           <em>None</em>
                         </MenuItem>
-                        {categories.map(({ sub_category }) => (
-                          <MenuItem value={sub_category}>
+                        {categories.map(({ sub_category,id }) => (
+                          <MenuItem value={id}>
                             {sub_category}
                           </MenuItem>
                         ))}
