@@ -40,10 +40,6 @@ export const getIncidents = async (filters, page = 1) => {
     query += "&incident_type=" + filters.incidentType;
   }
 
-  if (filters.severity) {
-    query += "&severity=" + filters.severity;
-  }
-
   if (filters.assignee) {
     query += "&assignee=" + filters.assignee;
   }
@@ -76,6 +72,10 @@ export const getIncidents = async (filters, page = 1) => {
 
   if (filters.title) {
     query += "&title=" + filters.title;
+  }
+
+  if (filters.category) {
+    query += "&category=" + filters.category;
   }
 
   return (await handler.get(`/incidents/?${query}`)).data;
