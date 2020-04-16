@@ -219,11 +219,15 @@ const VerticalLinearStepper = (props) => {
                 if (!incidentId) {
                     //creating new incident
                     if (validInputs()) {
+
                         let incidentData = {
                             description: incidentDescription,
                             title: 'Guest user submit',
                             infoChannel: webInfoChannelId, //info channel is web by default.
-                            recaptcha: incidentRecaptcha
+                            recaptcha: incidentRecaptcha,
+                            location: incidentLocation,
+                            address: incidentAddress,
+                            city: incidentCity
                         }
                         const dateTime = getFormattedDateTime()
                         if (dateTime) {
@@ -231,7 +235,14 @@ const VerticalLinearStepper = (props) => {
                         }
                         incidentData['receivedDate'] = '2020-01-01';
                         incidentData['letterDate'] = '2020-01-01';
-                        dispatch(createGuestIncident(incidentData));
+
+                        let reporterData = {}
+                        reporterData.name = incidentContact.name;
+                        reporterData.telephone = incidentContact.phone;
+                        reporterData.mobile = incidentContact.mobile;
+                        reporterData.email = incidentContact.email;
+
+                        dispatch(createGuestIncidentWithReporter( incidentData, reporterData))
                     }
                 } else {
                     //updating an existing incident.
@@ -239,6 +250,10 @@ const VerticalLinearStepper = (props) => {
                         let incidentUpdate = incidentData
                         incidentUpdate["election"] = incidentElection;
                         incidentUpdate["description"] = incidentDescription;
+                        incidentUpdate["location"] = incidentLocation;
+                        incidentUpdate["address"] = incidentAddress;
+                        incidentUpdate["city"] = incidentCity;
+
                         const dateTime = getFormattedDateTime()
                         if (dateTime) {
                             incidentUpdate['occured_date'] = dateTime
@@ -260,14 +275,15 @@ const VerticalLinearStepper = (props) => {
                 handleCityChange={setIncidentCity}
             />,
             handler: () => {
-                if (incidentLocation) {
-                    incidentData.location = incidentLocation;
-                    incidentData.address = incidentAddress;
-                    incidentData.city = incidentCity;
-                    dispatch(updateGuestIncident(incidentId, incidentData))
-                } else {
-                    dispatch(moveStepper({ step: activeStep + 1 }));
-                }
+                // if (incidentLocation) {
+                //     incidentData.location = incidentLocation;
+                //     incidentData.address = incidentAddress;
+                //     incidentData.city = incidentCity;
+                //     dispatch(updateGuestIncident(incidentId, incidentData))
+                // } else {
+                //     dispatch(moveStepper({ step: activeStep + 1 }));
+                // }
+                dispatch(moveStepper({ step: activeStep + 1 }));
             }
         },
 
@@ -309,12 +325,13 @@ const VerticalLinearStepper = (props) => {
             handler: () => {
                 if (!incidentId) {
                     if (incidentContact.name || incidentContact.phone || incidentContact.email) {
-                        const reporterData = {}
-                        reporterData.name = incidentContact.name;
-                        reporterData.telephone = incidentContact.phone;
-                        reporterData.mobile = incidentContact.mobile;
-                        reporterData.email = incidentContact.email;
-                        createIncidentWithReporter(reporterData)
+                        // const reporterData = {}
+                        // reporterData.name = incidentContact.name;
+                        // reporterData.telephone = incidentContact.phone;
+                        // reporterData.mobile = incidentContact.mobile;
+                        // reporterData.email = incidentContact.email;
+                        // createIncidentWithReporter(reporterData)
+                        dispatch(moveStepper({ step: activeStep + 1 }));
                     }
                 }else{
                     incidentReporterData.name = incidentContact.name;
@@ -499,7 +516,7 @@ const VerticalLinearStepper = (props) => {
                                             disabled={isLoading || !incidentRecaptcha}
                                         >
                                             {activeStep === steps.length - 1 ?
-                                                f({ id: "eclk.incident.management.report.incidents.forms.button.finish", defaultMessage: "Finish" }) :
+                                                f({ id: "eclk.incident.management.report.incidents.forms.button.finish", defaultMessage: "Submit" }) :
                                                 f({ id: "eclk.incident.management.report.incidents.forms.button.next", defaultMessage: "Next" })}
                                         </Button>
                                         {isLoading && <CircularProgress size={24} className={classes.buttonProgress} />}
