@@ -140,7 +140,7 @@ function IncidentList({
                 <p>{moment(row.createdDate).format("YYYY-MM-DD  h:mm a")}</p>
               </CustomTableCell>
               <CustomTableCell align="center">
-                <p>{districts.byCode[row.district]["name"]}</p>
+                <p>{districts.byCode[row.district] && districts.byCode[row.district]["name"]}</p>
               </CustomTableCell>
               <CustomTableCell align="center">
                 <p>{row.currentStatus}</p>
