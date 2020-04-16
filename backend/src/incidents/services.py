@@ -52,6 +52,21 @@ def send_email(subject, message, receivers):
         fail_silently=False,
     )
 
+def send_incident_created_mail(reporter_id):
+    # request created email
+    reporter = get_reporter_by_id(reporter_id)
+    incident = Incident.objects.get(reporter=reporter)
+    print("sending request created email")
+    subject = 'Your Request Recieved'
+    message = 'We recieved your request. Reference ID' + incident.refId
+    # recievers = ["aijdissanayake@gmail.com", "achala.ec@mailinator.com"]
+    recievers = [incident.reporter.email, "aijdissanayake@gmail.com", "achala.ec@mailinator.com"]
+    try:
+        _thread.start_new_thread( send_email, ( subject, message, recievers) )
+    except:
+        print ("Error: unable to start thread")
+    print("request created email sent")
+
 def is_valid_incident(incident_id: str) -> bool:
     try:
         incident = Incident.objects.get(id=incident_id)
@@ -286,17 +301,19 @@ def create_incident_postscript(incident: Incident, user: User) -> None:
     incident.assignee = user
     incident.save()
 
-    # request created email
-    print("sending request created email")
-    subject = 'Your Request Recieved'
-    message = 'We recieved your request. Reference ID' + incident.refId
-    # recievers = ["aijdissanayake@gmail.com", "achala.ec@mailinator.com"]
-    recievers = [incident.reporter.id, "aijdissanayake@gmail.com", "achala.ec@mailinator.com"]
-    try:
-        _thread.start_new_thread( send_email, ( subject, message, recievers) )
-    except:
-        print ("Error: unable to start thread")
-    print("request created email sent")
+
+    if (incident.reporter.email):
+        # request created email
+        print("sending request created email")
+        subject = 'Your Request Recieved'
+        message = 'We recieved your request. Reference ID' + incident.refId
+        # recievers = ["aijdissanayake@gmail.com", "achala.ec@mailinator.com"]
+        recievers = [incident.reporter.email, "aijdissanayake@gmail.com", "achala.ec@mailinator.com"]
+        try:
+            _thread.start_new_thread( send_email, ( subject, message, recievers) )
+        except:
+            print ("Error: unable to start thread")
+        print("request created email sent")
 
     event_services.create_incident_event(user, incident)
 
