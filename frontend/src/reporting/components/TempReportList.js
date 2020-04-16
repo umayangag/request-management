@@ -80,11 +80,16 @@ export default function TempReportList(){
     });
 
     const handleSubmit = (values, actions) => {
+      var startTime = new Date(values.startTime);
+          startTime = moment(startTime).format("YYYY-MM-DD HH:mm");
+      var endTime = new Date(values.endTime);
+          endTime = moment(endTime).format("YYYY-MM-DD HH:mm");
+
       if(expanded==="panel2"){
-        window.open(`${API_BASE_URL}/pdfgen/?template_type=daily_category_with_timefilter&startTime="${values.startTime}"&endTime="${values.endTime}"`,"_blank");
+        window.open(`${API_BASE_URL}/pdfgen/?template_type=daily_category_with_timefilter&startTime="${startTime}"&endTime="${endTime}"`,"_blank");
       }
       if(expanded==="panel3"){
-        window.open(`${API_BASE_URL}/pdfgen/?template_type=organizationwise_total_request_with_timefilter&startTime="${values.startTime}"&endTime="${values.endTime}"`,"_blank");
+        window.open(`${API_BASE_URL}/pdfgen/?template_type=organizationwise_total_request_with_timefilter&startTime="${startTime}"&endTime="${endTime}"`,"_blank");
       }
     };
 
