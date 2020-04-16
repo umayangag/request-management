@@ -19,12 +19,9 @@ import collections, functools, operator
 def get_daily_incidents(incidentType):
     """
     List dialy incidents to the given incident-type.
-    Daily incidents concidered in election commission is, incidents logged from yesterday 4pm to today 4pm.
     """
-    # yesterday at 4pm
-    start_datetime = (date.today() - timedelta(days=1)).strftime("%Y-%m-%d 16:00:00")
-    # today at 3:59pm
-    end_datetime = date.today().strftime("%Y-%m-%d 15:59:00")
+    start_datetime = date.today().strftime("%Y-%m-%d 00:00:00")
+    end_datetime = date.today().strftime("%Y-%m-%d 23:59:00")
     incidents = Incident.objects.all().filter(incidentType=incidentType, created_date__range=(start_datetime, end_datetime))
     return incidents
 
