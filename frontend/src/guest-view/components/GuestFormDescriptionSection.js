@@ -63,7 +63,7 @@ const IncidentDescription = props => {
           />
         </Grid>
 
-        <Grid item xs={12}>
+        <Grid hidden={true} item xs={12}>
           <TextField
             id="election"
             select

@@ -24,7 +24,7 @@ import green from '@material-ui/core/colors/green';
 import red from '@material-ui/core/colors/red';
 
 import DescriptionSection from './GuestFormDescriptionSection';
-// import CategorySection from './GuestFormCatogorySection';
+import CategorySection from './GuestFormCatogorySection';
 import FileUploadSection from './GuestFormFileUploadSection';
 import DateTimeSection from './GuestFormDateTimeSection';
 import LocationSection from './GuestFromLocationSection';
@@ -34,6 +34,7 @@ import {
     fetchElections,
     fetchCategories,
     fetchChannels,
+    fetchDistricts,
 
     requestIncidentCatogories,
 
@@ -91,12 +92,13 @@ const VerticalLinearStepper = (props) => {
         dispatch(fetchElections());
         dispatch(fetchCategories());
         dispatch(fetchChannels());
+        dispatch(fetchDistricts());
     }, []);
 
     const { formatMessage: f } = useIntl();
 
     const dispatch = useDispatch();
-    const { elections, categories, channels } = useSelector((state) => (state.shared));
+    const { elections, categories, channels, districts } = useSelector((state) => (state.shared));
     
     let webInfoChannelId = "Web";
     // for(var channel of channels){
@@ -121,7 +123,7 @@ const VerticalLinearStepper = (props) => {
     const [incidentRecaptcha, setIncidentRecaptcha] = useState(null);
 
 
-    // const [incidentCatogory, setIncidentCatogory] = useState(incidentId? incidentData.category:"");
+    const [incidentCatogory, setIncidentCatogory] = useState(incidentId? incidentData.category:"");
     const [incidentFiles, setIncidentFiles] = useState(null);
     const [incidentDateTime, setIncidentDateTime] = useState({
         date: incidentId && incidentData.occured_date ? moment(incidentData.occured_date).format('YYYY-MM-DD') : null,
@@ -132,6 +134,7 @@ const VerticalLinearStepper = (props) => {
     const [incidentLocation, setIncidentLocation] = useState(incidentId ? incidentData.location : '');
     const [incidentAddress, setIncidentAddress] = useState(incidentId ? incidentData.address : '');
     const [incidentCity, setIncidentCity] = useState(incidentId ? incidentData.city : '');
+    const [incidentDistrict, setIncidentDistrict] = useState(incidentId ? incidentData.district : '');
 
     const [incidentContact, setIncidentContact] = useState({
         name: incidentReporterData ? incidentReporterData.name : '',
@@ -195,7 +198,7 @@ const VerticalLinearStepper = (props) => {
 
     const stepDefinitions = {
 
-        2: {
+        3: {
             title: f({ id: "eclk.incident.management.report.incidents.section.describe", defaultMessage: "Describe the incident" }),
             content: <>
                 <DescriptionSection
@@ -227,7 +230,9 @@ const VerticalLinearStepper = (props) => {
                             recaptcha: incidentRecaptcha,
                             location: incidentLocation,
                             address: incidentAddress,
-                            city: incidentCity
+                            city: incidentCity,
+                            category: incidentCatogory,
+                            district:incidentDistrict
                         }
                         const dateTime = getFormattedDateTime()
                         if (dateTime) {
@@ -253,6 +258,8 @@ const VerticalLinearStepper = (props) => {
                         incidentUpdate["location"] = incidentLocation;
                         incidentUpdate["address"] = incidentAddress;
                         incidentUpdate["city"] = incidentCity;
+                        incidentData["category"] = incidentCatogory;
+                        incidentData["district"] = incidentDistrict;
 
                         const dateTime = getFormattedDateTime()
                         if (dateTime) {
@@ -272,7 +279,10 @@ const VerticalLinearStepper = (props) => {
                 address={incidentAddress}
                 handleAddressChange={setIncidentAddress}
                 city={incidentCity}
+                district={incidentDistrict}
+                handleDistrictChange={setIncidentDistrict}
                 handleCityChange={setIncidentCity}
+                districts={districts}
             />,
             handler: () => {
                 // if (incidentLocation) {
@@ -287,7 +297,7 @@ const VerticalLinearStepper = (props) => {
             }
         },
 
-        3: {
+        4: {
             title: f({ id: "eclk.incident.management.report.incidents.section.attachment", defaultMessage: "Attach files related to incident" }),
             content: <FileUploader
                 files={incidentFiles}
@@ -343,22 +353,19 @@ const VerticalLinearStepper = (props) => {
             }
         },
 
-        // 4:{
-        //     title:'Select the most suitable category for the incident',
-        //     content: <CategorySection
-        //                 categories={categories}
-        //                 selectedCategory={incidentCatogory}
-        //                 setSelectedCategory={setIncidentCatogory} />,
-        //     handler: () => {
-        //         if(incidentCatogory){
-        //             incidentData.category = incidentCatogory;
-        //             dispatch(updateGuestIncident(incidentId, incidentData))
-        //         }else{
-        //             dispatch(moveStepper({step:activeStep+1})) 
-        //         }
+        2:{
+            title:'Select the most suitable category for the incident',
+            content: <CategorySection
+                        categories={categories}
+                        selectedCategory={incidentCatogory}
+                        setSelectedCategory={setIncidentCatogory} />,
+            handler: () => {
+                if(incidentCatogory){
+                    dispatch(moveStepper({step:activeStep+1}))
+                }
 
-        //     }
-        // },
+            }
+        },
 
     }
 
@@ -368,7 +375,7 @@ const VerticalLinearStepper = (props) => {
         steps[stepNumber] = stepDefinitions[stepNumber].title
     });
 
-    const optionalSteps = new Set([1, 3, 4, 5])
+    const optionalSteps = new Set([1, 4])
 
     const isStepOptional = step => optionalSteps.has(step);
 
