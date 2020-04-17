@@ -126,7 +126,7 @@ def user_level_has_permission(user_level: UserLevel, permission: Permission):
     return permission in permissions
 
 def get_user_from_level(user_level: UserLevel, division: Division) -> User:
-    print(user_level, division)
+    
     """ This function would take in a user level and find the user
         within the level that has the least workload
         It will query the assignee counts for each user and get the
@@ -134,17 +134,16 @@ def get_user_from_level(user_level: UserLevel, division: Division) -> User:
     """
 
     sql = """
-            SELECT usr.id, COUNT(incident.id) as incident_count FROM `auth_user` as usr WHERE usr.is_active = true
+            SELECT usr.id, COUNT(incident.id) as incident_count FROM `auth_user` as usr
             LEFT JOIN incidents_incident as incident on incident.assignee_id = usr.id
             INNER JOIN custom_auth_profile as prf on prf.user_id = usr.id
             INNER JOIN custom_auth_userlevel as ulvl on prf.level_id = ulvl.id
             INNER JOIN auth_group as grp on ulvl.role_id = grp.id
             INNER JOIN custom_auth_division as udiv on prf.division_id = udiv.id
-            WHERE ulvl.code = "%s" AND udiv.code = "%s"
+            WHERE ulvl.code = "%s" AND udiv.code = "%s" AND usr.is_active = true
             GROUP BY usr.id
             ORDER BY incident_count ASC
           """ % (user_level.code, division.code)
-    print(sql)
 
     with connection.cursor() as cursor:
         cursor.execute(sql)

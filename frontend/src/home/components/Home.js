@@ -7,6 +7,7 @@ import { Card, Grid, CardContent, CardHeader } from '@material-ui/core';
 import ManagedIncidentList from './ManagedIncidentList';
 import { useSelector } from 'react-redux';
 import { userCan, USER_ACTIONS } from '../../user/userUtils';
+import { useIntl } from 'react-intl';
 
 const drawerWidth = 240;
 const styles = theme => ({
@@ -16,15 +17,16 @@ const styles = theme => ({
 });
 const Home = ({classes, ...props}) =>{
     const user = useSelector(state => state.shared.signedInUser.data);
+    const { formatMessage: f } = useIntl();
 
     return (
-        <Grid container>
+        <Grid direction="column" container>
             {userCan(user, null, USER_ACTIONS.CAN_REVIEW_ALL_INCIDENTS) && (
                 <>
-                <Grid item>
+                <Grid xs={12} item>
                     <Card xs={6}>
                         <CardHeader 
-                            title="Incidents Assigned to You"
+                            title={f({id: "eclk.incident.management.home.incidents_assigned"})}
                         />
                         <CardContent>
                             <ManagedIncidentList 
@@ -34,10 +36,10 @@ const Home = ({classes, ...props}) =>{
                     </Card>
                 </Grid>
                 
-                <Grid item style={{paddingTop:"10px"}}>
+                <Grid xs={12} item style={{paddingTop:"10px"}}>
                     <Card xs={6}>
                         <CardHeader 
-                            title="Incidents Linked to You"
+                            title={f({id: "eclk.incident.management.home.incident_linked"})}
                         />
                         <CardContent>
                             <ManagedIncidentList 
@@ -51,7 +53,7 @@ const Home = ({classes, ...props}) =>{
 
             {!userCan(user, null, USER_ACTIONS.CAN_REVIEW_ALL_INCIDENTS) && (
                 <>
-                <Grid item style={{paddingTop:"10px"}}>
+                <Grid xs={12} item style={{paddingTop:"10px"}}>
                     <Card xs={6}>
                         <CardHeader 
                             title="Your Incidents"

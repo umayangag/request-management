@@ -199,5 +199,5 @@ FIXTURE_DIRS = [
 # PDF endpoint for report generation
 PDF_SERVICE_ENDPOINT = env_var('PDF_SERVICE_ENDPOINT')
 
-# election constant
-ELECTION = env_var('ELECTION')
+# election constant - not in use
+# ELECTION = env_var('ELECTION')

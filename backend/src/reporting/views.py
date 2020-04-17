@@ -14,12 +14,17 @@ import os
 
 from .services import get_police_division_summary, get_category_summary, \
     get_mode_summary, get_severity_summary, get_status_summary, get_subcategory_summary, get_district_summary, \
-    get_incident_date_summary, get_slip_data, get_daily_category_data, get_daily_summary_data, get_daily_district_data
+    get_incident_date_summary, get_slip_data, get_daily_category_data, get_daily_summary_data, get_daily_district_data, \
+    get_weekly_closed_complain_category_data, get_weekly_closed_complain_organization_data, \
+    get_organizationwise_data_with_timefilter, \
+    get_total_requests_by_category_for_a_selected_time
 from .functions import apply_style, decode_column_names, incident_type_title, incident_type_query
 
 '''
 middleware to access PDF-service
 '''
+
+
 class ReportingAccessView(APIView):
     '''
     Based on https://github.com/ECLK/pdf-service
@@ -30,12 +35,13 @@ class ReportingAccessView(APIView):
     Response would be a pdf stream to be opened in a different tab
     '''
     permission_classes = []
+
     def get(self, request):
         endpoint_uri = settings.PDF_SERVICE_ENDPOINT
         json_dict = {}
         template_type = request.query_params.get('template_type')
 
-        if(template_type == "simple-template"):
+        if (template_type == "simple-template"):
             file_dict = {}
             file_dict['template'] = "exTemplateBootstrap.js"
             file_dict['title'] = "This is my title on test"
@@ -58,6 +64,46 @@ class ReportingAccessView(APIView):
             """
             json_dict["file"] = get_daily_category_data()
 
+        elif (template_type == "daily_category_with_timefilter"):
+            """
+            daily_summery_report_categorywise_with_timefilter
+            GET parameters => /?template_type=daily_category_with_timefilter&startTime=<startTime>&endTime=<endTime>
+            """
+            start_time = request.query_params.get('startTime').replace('"', '') + ":00"
+            end_time = request.query_params.get('endTime').replace('"', '') + ":00"
+
+            json_dict["file"] = get_total_requests_by_category_for_a_selected_time(start_time, end_time)
+
+        elif (template_type == "organizationwise_total_request_with_timefilter"):
+            """
+            summery_report_organizationwise_with_timefilter
+            GET parameters => /?template_type=organizationwise_total_request_with_timefilter&startTime=<startTime>&endTime=<endTime>
+            """
+            start_time = request.query_params.get('startTime')
+            end_time = request.query_params.get('endTime')
+            json_dict["file"] = get_organizationwise_data_with_timefilter()
+
+        elif (template_type == "weekly_closed_request_category"):
+            """
+            weeekly_closed_request_report_categorywise
+            GET parameters => /?template_type=weekly_closed_request_category
+            """
+            json_dict["file"] = get_weekly_closed_complain_category_data()
+
+        elif (template_type == "weekly_closed_request_organization"):
+            """
+            weeekly_closed_request_report_organizationwise
+            GET parameters => /?template_type=weekly_closed_request_organization
+            """
+            json_dict["file"] = get_weekly_closed_complain_organization_data()
+
+        elif (template_type == "total_requests_by_category_for_a_selected_time"):
+            """
+            Total_requests_by_category_for_a_selected_time
+            GET parameters => /?total_requests_by_category_for_a_selected_time
+            """
+            json_dict["file"] = get_total_requests_by_category_for_a_selected_time()
+
         elif (template_type == "daily_summary"):
             """
             daily_summary_report_main
@@ -72,9 +118,9 @@ class ReportingAccessView(APIView):
             """
             json_dict["file"] = get_daily_district_data()
 
-
+        print(json_dict)
         request_data = json.dumps(json_dict)
-        res = requests.post(url=endpoint_uri, data = request_data, headers={'content-type': 'application/json'})
+        res = requests.post(url=endpoint_uri, data=request_data, headers={'content-type': 'application/json'})
 
         if res.status_code == 200:
             pdf_file = requests.get(res.json()["url"])
@@ -86,6 +132,7 @@ class ReportingAccessView(APIView):
             return response
         else:
             return HttpResponse(status=res.status_code, content=res.text, content_type='application/json')
+
 
 class ReportingView(APIView):
     """

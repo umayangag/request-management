@@ -23,6 +23,8 @@ import {
     loadAllIncidentsSuccess,
     updateIncidentSearchFilter,
 
+    createGuestIncidentWithReporterSuccess
+
 } from './incidentActions'
 
 
@@ -130,6 +132,10 @@ const incidentReducer = createReducer(initialState, {
     },
     [updateIncidentSearchFilter] : (state, action) => {
         state.incidents.searchFilter = action.payload;
+    },
+    [createGuestIncidentWithReporterSuccess] : (state, action) => {
+        state.activeIncident.data = action.payload.incident;
+        state.activeIncidentReporter.data = action.payload.reporter
     }
 
 });

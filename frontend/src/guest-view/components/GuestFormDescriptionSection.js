@@ -51,14 +51,13 @@ const IncidentDescription = props => {
             multiline
             fullWidth
             rowsMax="4"
-            value={description}
+            value={description==='Incomplete submission'? null: description}
             onChange={e => {
               handledDescriptionChange(e.target.value);
               formErrors.incidentDescriptionErrorMsg = null;
             }}
             className={classes.textField}
             margin="normal"
-            disabled={disableDescription}
             helperText={formErrors.incidentDescriptionErrorMsg || ""}
             error={formErrors.incidentDescriptionErrorMsg ? true : false}
           />

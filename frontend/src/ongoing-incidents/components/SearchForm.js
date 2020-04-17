@@ -19,6 +19,7 @@ import Typography from "@material-ui/core/Typography";
 import moment from "moment";
 import { useSelector } from 'react-redux'
 import { withStyles } from "@material-ui/core/styles";
+import { useIntl } from "react-intl";
 
 const styles = theme => ({
   root: {
@@ -88,11 +89,13 @@ function SearchForm(props) {
     filterIncidents(props.filters);
   }, []);
   const { classes, categories } = props;
-  const severityValues = Array(10).fill(0).map((e, i) => i + 1);
+  // const severityValues = Array(10).fill(0).map((e, i) => i + 1);
+  const severityValues = ['High','Low','Medium'];
   const institutions = useSelector(state => state.shared.institutions);
   const districts = useSelector(state => state.shared.districts);
   const [selectedInstitution, setSelectedInstitution] = useState("");
   const [selectedDistrict, setSelectedDistrict] = useState("");
+  const { formatMessage: f } = useIntl();
 
   let orgSearch = props.incidentType === 'INQUIRY' ?
       (<Search
@@ -135,12 +138,12 @@ function SearchForm(props) {
             <Grid container spacing={8}>
               <TextField
                 id="outlined-full-width"
-                label="Text Search"
+                label={f({id: "eclk.incident.management.incident.review.text_search"})}
                 style={{
                   margin: "15px 4px",
                   width: "calc(100% - 88px)"
                 }}
-                placeholder="Search Text / Incident Id"
+                placeholder={f({id: "eclk.incident.management.incident.review.search_placeholder"})}
                 margin="normal"
                 variant="outlined"
                 name="textSearch"
@@ -186,18 +189,18 @@ function SearchForm(props) {
                         <MenuItem value="">
                           <em>None</em>
                         </MenuItem>
-                        <MenuItem value={"NEW"}>New</MenuItem>
-                        <MenuItem value={"CLOSED"}>Closed</MenuItem>
-                        <MenuItem value={"ACTION_TAKEN"}>Action Taken</MenuItem>
-                        <MenuItem value={"ACTION_PENDING"}>Action Pending</MenuItem>
-                        <MenuItem value={"ADVICE_PROVIDED"}>Advice Provided</MenuItem>
-                        <MenuItem value={"ADVICE_REQESTED"}>Advice Requested</MenuItem>
+                        <MenuItem value={"NEW"}>New/Unverified</MenuItem>
                         <MenuItem value={"VERIFIED"}>Verified</MenuItem>
+                        {/* <MenuItem value={"CLOSED"}>Closed</MenuItem> */}
+                        {/* <MenuItem value={"ACTION_TAKEN"}>Action Taken</MenuItem> */}
+                        <MenuItem value={"ACTION_PENDING"}>Action Pending</MenuItem>
+                        {/* <MenuItem value={"ADVICE_PROVIDED"}>Advice Provided</MenuItem>
+                        <MenuItem value={"ADVICE_REQESTED"}>Advice Requested</MenuItem> */}
                       </Select>
                     </FormControl>
                     <FormControl className={classes.formControl}>
                       <InputLabel shrink htmlFor="status-label-placeholder">
-                        Severity
+                      Priority
                       </InputLabel>
                       <Select
                         input={
@@ -240,8 +243,8 @@ function SearchForm(props) {
                         <MenuItem value="">
                           <em>None</em>
                         </MenuItem>
-                        {categories.map(({ sub_category }) => (
-                          <MenuItem value={sub_category}>
+                        {categories.map(({ sub_category,id }) => (
+                          <MenuItem value={id}>
                             {sub_category}
                           </MenuItem>
                         ))}
@@ -252,7 +255,7 @@ function SearchForm(props) {
                     <FormControl className={classes.formControl}>
                       <TextField
                         id="start-time"
-                        label="Start Time"
+                        label="Start Date/Time"
                         name="startTime"
                         type="datetime-local"
                         value={values.startTime}
@@ -266,7 +269,7 @@ function SearchForm(props) {
                     <FormControl className={classes.formControl}>
                       <TextField
                         id="end-time"
-                        label="End Time"
+                        label="End Date/Time"
                         name="endTime"
                         type="datetime-local"
                         value={values.endTime}

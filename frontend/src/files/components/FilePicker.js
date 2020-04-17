@@ -14,14 +14,21 @@ export default function FileUploader({ files, setFiles, watchedActions }) {
     
     const pond = useRef(null);
     const isLoading = useLoadingStatus(watchedActions);
-
+     const FilePondLanguage = {
+        labelIdle: `Drag and Drop your files or <span class="filepond--label-action">Browse</span>
+            </br><span style="font-size:8pt">maximum upload size is 100MB</span>.
+            </br><span style="font-size:8pt">all common video,audio and image formats are accepted</span>.`,
+    }
     return (
         <>
         <FilePond
             ref={pond}
             files={files}
             allowMultiple={true}
+            acceptedFileTypes={['image/*', 'audio/*', 'video/*']}
             maxTotalFileSize= '100MB'
+            {...FilePondLanguage}
+            // labelIdle="Drag and Drop your files or Browse. maximum upload size is 100MB"
             // oninit={() => this.handleInit()}
             onupdatefiles={fileItems => {
                 // Set currently active file objects to this.state

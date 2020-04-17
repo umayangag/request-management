@@ -7,6 +7,7 @@ import Paper from '@material-ui/core/Paper';
 import PropTypes from 'prop-types';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
+import { useIntl } from 'react-intl';
 
 function TabContainer(props) {
     return (
@@ -50,6 +51,7 @@ const occurrence = {
  */
 function BasicDetailTab(props) {
     const { classes, incident, elections, categories, channels, institutions } = props;
+    const { formatMessage: f } = useIntl();
 
     return (
         <div>
@@ -59,43 +61,43 @@ function BasicDetailTab(props) {
 
                         <Grid container spacing={24}>
                             <Grid item xs>
-                                <Typography className={classes.label}> {(incident.incidentType === 'COMPLAINT') ? 'Complaint' : 'Inquiry'} Ref ID </Typography>
+                                <Typography className={classes.label}> {f({id: "eclk.incident.management.home.incidents.list.refid"})} </Typography>
                                 <Typography variant="h4" gutterBottom> {incident.refId} </Typography>
                             </Grid>
                         </Grid>
 
                         <Grid container spacing={24}>
                             <Grid item xs>
-                                <Typography variant="caption" className={classes.label}> Title </Typography>
+                                <Typography variant="caption" className={classes.label}> {f({id: "eclk.incident.management.incident.create.title"})} </Typography>
                                 <Typography gutterBottom> {incident.title} </Typography>
                             </Grid>
                         </Grid>
 
                         <Grid container spacing={24}>
                             <Grid item xs>
-                                <Typography variant="caption" className={classes.label}> Description </Typography>
+                                <Typography variant="caption" className={classes.label}> {f({id: "eclk.incident.management.incident.create.description"})} </Typography>
                                 <Typography gutterBottom> {incident.description} </Typography>
                             </Grid>
                         </Grid>
 
                         {incident.incidentType === 'COMPLAINT' &&
                             <>
-                                <Grid container spacing={24}>
+                                {/* <Grid container spacing={24}>
                                     <Grid item xs>
                                         <Typography variant="caption" className={classes.label}> Occurrence </Typography>
                                         <Typography gutterBottom> {occurrence[incident.occurrence]} </Typography>
                                     </Grid>
-                                </Grid>
+                                </Grid> */}
 
                                 <Grid container spacing={24}>
                                     <Grid item xs>
-                                        <Typography variant="caption" className={classes.label}>Incident Date </Typography>
+                                        <Typography variant="caption" className={classes.label}>{f({id: "eclk.incident.management.incident.create.date"})} </Typography>
                                         <Typography gutterBottom>
                                             {(incident.occured_date) ? <Moment format="YYYY/MM/DD">{incident.occured_date}</Moment> : "No date set"}
                                         </Typography>
                                     </Grid>
                                     <Grid item xs>
-                                        <Typography variant="caption" className={classes.label}> Incident Time </Typography>
+                                        <Typography variant="caption" className={classes.label}> {f({id: "eclk.incident.management.incident.create.time"})} </Typography>
                                         <Typography gutterBottom>
                                             {(incident.occured_date) ? <Moment format="HH:mm">{incident.occured_date}</Moment> : "No time set"}
                                         </Typography>
@@ -107,11 +109,11 @@ function BasicDetailTab(props) {
                         {incident.incidentType === 'INQUIRY' &&
                             <Grid container spacing={24}>
                                 <Grid item xs>
-                                    <Typography variant="caption" className={classes.label}>Received date</Typography>
+                                    <Typography variant="caption" className={classes.label}>{f({id: "eclk.incident.management.incident.create.date"})}</Typography>
                                     <Typography gutterBottom> {incident.receivedDate} </Typography>
                                 </Grid>
                                 <Grid item xs>
-                                    <Typography variant="caption" className={classes.label}>Letter date</Typography>
+                                    <Typography variant="caption" className={classes.label}>{f({id: "eclk.incident.management.incident.create.date"})}</Typography>
                                     <Typography gutterBottom> {incident.letterDate} </Typography>
                                 </Grid>
                             </Grid>
@@ -119,11 +121,11 @@ function BasicDetailTab(props) {
 
                         <Grid container spacing={24}>
                             <Grid item xs>
-                                <Typography variant="caption" className={classes.label}> Logged Date </Typography>
+                                <Typography variant="caption" className={classes.label}> {f({id: "eclk.incident.management.incident.review.logged_date"})} </Typography>
                                 <Typography gutterBottom> <Moment format="YYYY/MM/DD">{incident.createdDate}</Moment> </Typography>
                             </Grid>
                             <Grid item xs>
-                                <Typography variant="caption" className={classes.label}> Logged Time </Typography>
+                                <Typography variant="caption" className={classes.label}> {f({id: "eclk.incident.management.incident.review.logged_time"})} </Typography>
                                 <Typography gutterBottom> <Moment format="HH:mm">{incident.createdDate}</Moment> </Typography>
                             </Grid>
                         </Grid>
@@ -136,18 +138,18 @@ function BasicDetailTab(props) {
                 <Grid item xs={12}>
                     <Paper elevation={1} className={classes.paper}>
 
-                        <Grid container spacing={24}>
+                        {/* <Grid container spacing={24}>
                             <Grid item xs>
                                 <Typography className={classes.label}> Election </Typography>
                                 <Typography variant="h6" gutterBottom>
                                     {elections.map((value, index) => (value.code === incident.election ? value.name : null))}
                                 </Typography>
                             </Grid>
-                        </Grid>
+                        </Grid> */}
 
                         <Grid container spacing={24}>
                             <Grid item xs>
-                                <Typography variant="caption" className={classes.label}> Category </Typography>
+                                <Typography variant="caption" className={classes.label}> {f({id: "eclk.incident.management.incident.create.category"})} </Typography>
                                 <Typography gutterBottom>
                                     {categories.map((value, index) => (value.id == incident.category ? value.sub_category : null))}
                                 </Typography>
@@ -161,7 +163,7 @@ function BasicDetailTab(props) {
                         {incident.incidentType === 'INQUIRY' &&
                             <Grid container spacing={24}>
                                 <Grid item xs>
-                                    <Typography variant="caption" className={classes.label}> Institute </Typography>
+                                    <Typography variant="caption" className={classes.label}> {f({id: "eclk.incident.management.incident.review.institution"})} </Typography>
                                     <Typography gutterBottom>
                                         {
                                             incident.institution && institutions.byCode[incident.institution] ?
@@ -174,7 +176,7 @@ function BasicDetailTab(props) {
 
                         <Grid container spacing={24}>
                             <Grid item xs>
-                                <Typography variant="caption" className={classes.label}> Received Mode </Typography>
+                                <Typography variant="caption" className={classes.label}> {f({id: "eclk.incident.management.incident.create.mode_of_receipt"})}</Typography>
                                 <Typography gutterBottom>
                                     {channels.map((value, index) => (value.id == incident.infoChannel ? value.name : null))}
                                 </Typography>
@@ -204,6 +206,7 @@ const resolveLocationName = (locationId, locatoinData) => {
 function LocationTab(props) {
 
     const { classes, incident, provinces, districts, pollingDivisions, policeStations } = props;
+    const { formatMessage: f } = useIntl();
 
     return (
         <div>
@@ -213,14 +216,14 @@ function LocationTab(props) {
 
                         <Grid container spacing={24}>
                             <Grid item xs>
-                                <Typography variant="caption" className={classes.label}> Name / Description </Typography>
+                                <Typography variant="caption" className={classes.label}> {f({id: "eclk.incident.management.incident.create.location.description"})} </Typography>
                                 <Typography gutterBottom> {incident.location} </Typography>
                             </Grid>
                         </Grid>
 
                         <Grid container spacing={24}>
                             <Grid item xs>
-                                <Typography variant="caption" className={classes.label}> Address </Typography>
+                                <Typography variant="caption" className={classes.label}> {f({id: "eclk.incident.management.incident.create.location.address"})} </Typography>
                                 <Typography gutterBottom> {incident.address}</Typography>
                             </Grid>
                         </Grid>
@@ -240,7 +243,7 @@ function LocationTab(props) {
                 <Grid item xs={12}>
                     <Paper elevation={1} className={classes.paper}>
 
-                        <Grid container spacing={24}>
+                        {/* <Grid container spacing={24}>
                             <Grid item xs>
                                 <Typography variant="caption" className={classes.label}> Province </Typography>
                                 <Typography variant="" gutterBottom>
@@ -250,11 +253,11 @@ function LocationTab(props) {
                                     }
                                 </Typography>
                             </Grid>
-                        </Grid>
+                        </Grid> */}
 
                         <Grid container spacing={24}>
                             <Grid item xs>
-                                <Typography variant="caption" className={classes.label}> District </Typography>
+                                <Typography variant="caption" className={classes.label}> {f({id: "eclk.incident.management.incident.create.location.district"})} </Typography>
                                 <Typography variant="" gutterBottom>
                                     {
                                         incident.district && districts.byCode[incident.district] ?
@@ -302,7 +305,8 @@ function LocationTab(props) {
 function ContactTab(props) {
 
     const { classes, reporter } = props;
-
+    const { formatMessage: f } = useIntl();
+    
     return (
         <div>
             <Grid container spacing={24}>
@@ -311,35 +315,35 @@ function ContactTab(props) {
 
                         <Grid container spacing={24}>
                             <Grid item xs>
-                                <Typography variant="caption" className={classes.label}> Name </Typography>
+                                <Typography variant="caption" className={classes.label}> {f({id: "eclk.incident.management.incident.create.reporter.name"})} </Typography>
                                 <Typography gutterBottom> {reporter.name} </Typography>
                             </Grid>
                         </Grid>
 
-                        <Grid container spacing={24}>
+                        {/* <Grid container spacing={24}>
                             <Grid item xs>
                                 <Typography variant="caption" className={classes.label}> Landline </Typography>
+                                <Typography gutterBottom> {reporter.telephone} </Typography>
+                            </Grid>
+                        </Grid> */}
+
+                        <Grid container spacing={24}>
+                            <Grid item xs>
+                                <Typography variant="caption" className={classes.label}> {f({id: "eclk.incident.management.incident.create.reporter.Mobile"})} </Typography>
                                 <Typography gutterBottom> {reporter.telephone} </Typography>
                             </Grid>
                         </Grid>
 
                         <Grid container spacing={24}>
                             <Grid item xs>
-                                <Typography variant="caption" className={classes.label}> Mobile </Typography>
-                                <Typography gutterBottom> {reporter.mobile} </Typography>
-                            </Grid>
-                        </Grid>
-
-                        <Grid container spacing={24}>
-                            <Grid item xs>
-                                <Typography variant="caption" className={classes.label}> Email </Typography>
+                                <Typography variant="caption" className={classes.label}> {f({id: "eclk.incident.management.incident.create.reporter.email"})} </Typography>
                                 <Typography gutterBottom> {reporter.email} </Typography>
                             </Grid>
                         </Grid>
 
                         <Grid container spacing={24}>
                             <Grid item xs>
-                                <Typography variant="caption" className={classes.label}> Address </Typography>
+                                <Typography variant="caption" className={classes.label}> {f({id: "eclk.incident.management.incident.create.reporter.Address"})} </Typography>
                                 <Typography gutterBottom> {reporter.address} </Typography>
                             </Grid>
                         </Grid>
@@ -477,7 +481,7 @@ function SummaryTabView(props) {
                 <LinkTab label="Basic Information" href="page1" />
                 <LinkTab label="Contact Information" href="page2" />
                 <LinkTab label="Location Information" href="page3" style={{ display: incident.incidentType === 'INQUIRY' ? 'none' : ''}}/>
-                <LinkTab label="Police Information" href="page4" style={{ display: incident.incidentType === 'INQUIRY' ? 'none' : ''}}/>
+                {/* <LinkTab label="Police Information" href="page4" style={{ display: incident.incidentType === 'INQUIRY' ? 'none' : ''}}/> */}
             </Tabs>
 
             {currentTab === 0 && <TabContainer>
