@@ -231,10 +231,12 @@ class Incident(models.Model):
     current_decision = models.CharField(max_length=50, default=None, null=True, blank=True)
 
     def save(self, *args, **kwargs):
-        if self.incidentType == IncidentType.INQUIRY.name :
-            self.refId = generate_inquiry_refId(election=self.election, category=self.category, institution=self.institution)
-        else:
+        # if self.incidentType == IncidentType.INQUIRY.name :
+        #     self.refId = generate_inquiry_refId(election=self.election, category=self.category, institution=self.institution)
+        # else:
+        if(not self.refId): 
             self.refId = generate_request_refId(category=self.category)
+            
         super(Incident, self).save(*args, **kwargs)
 
     class Meta:
