@@ -50,7 +50,8 @@ from .services import (
     find_incident_assignee,
     find_escalation_candidate,
     create_reporter,
-    validateRecaptcha
+    validateRecaptcha,
+    send_incident_created_mail
 )
 
 from ..events import services as event_service
@@ -321,6 +322,8 @@ class ReporterDetail(APIView):
         serializer = ReporterSerializer(snippet, data=request.data)
         if serializer.is_valid():
             serializer.save()
+            # send the incident created email once the reporter details are saved
+            send_incident_created_mail(reporter_id)
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
