@@ -22,7 +22,7 @@ const styles = theme => ({
 
 const IncidentLocation = (props) => {
 
-    const { formatMessage: f} = useIntl();
+    const { formatMessage: f } = useIntl();
 
     const {
         classes,
@@ -31,7 +31,11 @@ const IncidentLocation = (props) => {
         address,
         handleAddressChange,
         city,
-        handleCityChange
+        handleCityChange,
+        district,
+        handleDistrictChange,
+        districts
+
     } = props;
 
     return (
@@ -41,7 +45,7 @@ const IncidentLocation = (props) => {
                     <TextField
                         autoFocus
                         id="incidentLocation"
-                        label= {f({ id: "eclk.incident.management.report.incidents.location", defaultMessage: "Location name or description" })}
+                        label={f({ id: "eclk.incident.management.report.incidents.location", defaultMessage: "Location name or description" })}
                         multiline
                         fullWidth
                         rowsMax="5"
@@ -54,7 +58,7 @@ const IncidentLocation = (props) => {
                 <Grid item xs={12} sm={8}>
                     <TextField
                         id="incidentAddress"
-                        label= {f({ id: "eclk.incident.management.report.incidents.address", defaultMessage: "Address" })}
+                        label={f({ id: "eclk.incident.management.report.incidents.address", defaultMessage: "Address" })}
                         multiline
                         fullWidth
                         rowsMax="5"
@@ -67,13 +71,36 @@ const IncidentLocation = (props) => {
                 <Grid item xs={12} sm={4}>
                     <TextField
                         id="incidentCity"
-                        label= {f({ id: "eclk.incident.management.report.incidents.city", defaultMessage: "City" })}
+                        label={f({ id: "eclk.incident.management.report.incidents.city", defaultMessage: "City" })}
                         fullWidth
                         value={city}
                         onChange={(e) => { handleCityChange(e.target.value) }}
                         className={classes.textField}
                         margin="normal"
                     />
+                </Grid>
+                <Grid item xs={12} sm={6} >
+                    <TextField
+                        id="district"
+                        select
+                        label={f({
+                            id: "eclk.incident.management.report.incidents.district",
+                            defaultMessage: "District"
+                        }) + "*"}
+                        className={classes.textField}
+                        value={district}
+                        onChange={e => {
+                            handleDistrictChange(e.target.value);
+                        }}
+                        margin="normal"
+                        fullWidth
+                    >
+                        {districts.allCodes.map(code => (
+                            <MenuItem key={code} value={code}>
+                                {districts.byCode[code].name} | {districts.byCode[code].sn_name} | {districts.byCode[code].tm_name}
+                            </MenuItem>
+                        ))}
+                    </TextField>
                 </Grid>
             </Grid>
         </form>
