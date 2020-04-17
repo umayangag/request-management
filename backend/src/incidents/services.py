@@ -44,28 +44,37 @@ from ..notifications.models import NotificationType
 from django.core.mail import send_mail
 
 def send_email(subject, message, receivers):
-    send_mail(
-        subject,
-        message,
-        'tellpresident_noreply@lgc2.gov.lk',
-        receivers,
-        fail_silently=False,
-    )
+    try :
+        send_mail(
+            subject,
+            message,
+            'tellpresident_noreply@lgc2.gov.lk',
+            receivers,
+            fail_silently=False,
+        )
+        print("email sent to:")
+        print(*receivers)
+
+    except Exception as e:
+        print("email sending failed to :")
+        print(*receivers)
+        print(e)
+    
 
 def send_incident_created_mail(reporter_id):
     # request created email
     reporter = get_reporter_by_id(reporter_id)
-    incident = Incident.objects.get(reporter=reporter)
-    print("sending request created email")
-    subject = 'Your Request Recieved'
-    message = 'We recieved your request. Reference ID' + incident.refId
-    # recievers = ["aijdissanayake@gmail.com", "achala.ec@mailinator.com"]
-    recievers = [incident.reporter.email, "aijdissanayake@gmail.com", "achala.ec@mailinator.com"]
-    try:
-        _thread.start_new_thread( send_email, ( subject, message, recievers) )
-    except:
-        print ("Error: unable to start thread")
-    print("request created email sent")
+    if reporter.email :
+        incident = Incident.objects.get(reporter=reporter)
+        print("sending request created email")
+        subject = 'Your Request Recieved'
+        message = 'We recieved your request. Reference ID' + incident.refId
+        recievers = [incident.reporter.email]
+        try:
+            _thread.start_new_thread( send_email, ( subject, message, recievers) )
+        except:
+            print ("Error: unable to start thread")
+        print("request created email sent")
 
 def is_valid_incident(incident_id: str) -> bool:
     try:
@@ -301,20 +310,6 @@ def create_incident_postscript(incident: Incident, user: User) -> None:
     incident.assignee = user
     incident.save()
 
-
-    if (incident.reporter.email):
-        # request created email
-        print("sending request created email")
-        subject = 'Your Request Recieved'
-        message = 'We recieved your request. Reference ID' + incident.refId
-        # recievers = ["aijdissanayake@gmail.com", "achala.ec@mailinator.com"]
-        recievers = [incident.reporter.email, "aijdissanayake@gmail.com", "achala.ec@mailinator.com"]
-        try:
-            _thread.start_new_thread( send_email, ( subject, message, recievers) )
-        except:
-            print ("Error: unable to start thread")
-        print("request created email sent")
-
     event_services.create_incident_event(user, incident)
 
     assignee = find_incident_assignee(user)
@@ -472,14 +467,15 @@ def incident_change_assignee(user: User, incident: Incident, assignee: User):
 
     # request created email
     print("sending request assigned email")
-    subject = 'Request Assigned'
-    message = 'You have been assigned to a request. Reference ID' + incident.refId
-    recievers = [assignee.email, "aijdissanayake@gmail.com", "achala.ec@mailinator.com"]
-    try:
-        _thread.start_new_thread( send_email, ( subject, message, recievers) )
-    except:
-        print ("Error: unable to start thread")
-    print("request assigned email sent")
+    if assignee.email:
+        subject = 'Request Assigned'
+        message = 'You have been assigned to a request. Reference ID' + incident.refId
+        recievers = [assignee.email]
+        try:
+            _thread.start_new_thread( send_email, ( subject, message, recievers) )
+        except:
+            print ("Error: unable to start thread")
+        print("request assigned email sent")
 
     event_services.update_workflow_event(user, incident, workflow)
 
@@ -521,15 +517,16 @@ def incident_close(user: User, incident: Incident, details: str):
     workflow.save()
 
     # request closed email
-    print("sending request closed email")
-    subject = 'Your Request Closed'
-    message = 'We closed your request. Reference ID' + incident.refId
-    recievers = [incident.reporter.email, "aijdissanayake@gmail.com", "achala.ec@mailinator.com"]
-    try:
-        _thread.start_new_thread( send_email, ( subject, message, recievers) )
-    except:
-        print ("Error: unable to start thread")
-    print("request closed email sent")
+    if (incident.reporter.email):
+        print("sending request closed email")
+        subject = 'Your Request Closed'
+        message = 'We closed your request. Reference ID' + incident.refId
+        recievers = [incident.reporter.email]
+        try:
+            _thread.start_new_thread( send_email, ( subject, message, recievers) )
+        except:
+            print ("Error: unable to start thread")
+        print("request closed email sent")
 
     event_services.update_workflow_event(user, incident, workflow)
 
