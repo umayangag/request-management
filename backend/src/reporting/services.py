@@ -12,7 +12,7 @@ from ..incidents.services import get_incident_by_id
 from .functions import get_detailed_report, get_general_report, encode_column_names, get_subcategory_report, \
     incident_type_query, incident_list_query, date_list_query, encode_value, get_subcategory_categorized_report
 from ..common.data.Institutions import institutions
-from django.conf import settings
+# from django.conf import settings
 from django.db.models import Count
 import collections, functools, operator
 
@@ -139,7 +139,7 @@ def get_daily_district_data():
     start_datetime = (date.today() - timedelta(days=100)).strftime("%Y-%m-%d 16:00:00")
     end_datetime = date.today().strftime("%Y-%m-%d 15:59:00")
 
-    incidents = Incident.objects.all().filter(incidentType=IncidentType.COMPLAINT.name, election=settings.ELECTION, created_date__range=(start_datetime, end_datetime))
+    incidents = Incident.objects.all().filter(incidentType=IncidentType.COMPLAINT.name, created_date__range=(start_datetime, end_datetime))
 
     file_dict["complaintByDistrict"] = []
 
