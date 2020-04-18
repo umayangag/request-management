@@ -315,7 +315,7 @@ def get_weekly_closed_complain_category_data():
     file_dict["template"] = "/incidents/complaints/weeekly_closed_request_report_categorywise.js"
     file_dict["date"] = date.today().strftime("%Y/%m/%d")
 
-    incidents = get_daily_incidents(IncidentType.COMPLAINT)
+    incidents = get_daily_incidents(IncidentType.COMPLAINT).filter(current_status="CLOSED")
     file_dict["total"] = incidents.count()
 
     other_category = Category.objects.get(top_category='Other')
@@ -360,7 +360,7 @@ def get_weekly_closed_complain_category_data():
     return file_dict
 
 
-def get_organizationwise_data_with_timefilter():
+def get_organizationwise_data_with_timefilter(start_time, end_time):
     """ Function to get daily categories data on complaints for PDF export. """
     # TODO: signify the category types, so that helps to pull up category values without hardcoding as bellow
     file_dict = {}
@@ -368,7 +368,8 @@ def get_organizationwise_data_with_timefilter():
     file_dict["template"] = "/incidents/complaints/summery_report_organizationwise_with_timefilter.js"
     file_dict["date"] = date.today().strftime("%Y/%m/%d")
 
-    incidents = get_daily_incidents(IncidentType.COMPLAINT)
+    incidents = Incident.objects.all().filter(incidentType=IncidentType.COMPLAINT,
+                                              created_date__range=(start_time, end_time))
     file_dict["total"] = incidents.count()
 
     other_category = Category.objects.get(top_category='Other')
