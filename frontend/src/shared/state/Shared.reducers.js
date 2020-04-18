@@ -91,6 +91,24 @@ const transformArray = (array) => {
     return transformedData;
 }
 
+const transformGramaNiladariArray = (array) => {
+    let transformedData = {
+        byCode: {},
+        allCodes : [],
+        byDistrict:{}
+    };
+    array.reduce((accumulator, currValue) => {
+        transformedData.byCode[currValue.code] = currValue;
+        transformedData.allCodes.push(currValue.code);
+        if(transformedData.byDistrict[currValue.district]){
+            transformedData.byDistrict[currValue.district].push(currValue)
+        }else{
+            transformedData.byDistrict[currValue.district] = [currValue]
+        }
+    },0)
+    return transformedData;
+}
+
 const initialState = {
     channels: [],
     elections: [],
@@ -220,7 +238,7 @@ export default function sharedReducer(state, action) {
             case REQUEST_INCIDENT_GRAMA_NILADHARIS:
                 return draft
             case REQUEST_INCIDENT_GRAMA_NILADHARIS_SUCCESS:
-                draft.gramaNiladharis = transformArray(action.data);
+                draft.gramaNiladharis = transformGramaNiladariArray(action.data);
                 return draft
             case REQUEST_INCIDENT_GRAMA_NILADHARIS_FAILURE:
                 return draft

@@ -28,8 +28,8 @@ export const getDivisionalSecretariats = async () => {
 }
 
 export const getGramaNiladharis = async () => {
-    // return (await handler.get('/gndivisions')).data;
-    return mockapi.getGramaNiladharis();
+    return (await handler.get('/gndivisions')).data;
+    // return mockapi.getGramaNiladharis();
 }
 
 export const getPollingStations = async () => {
