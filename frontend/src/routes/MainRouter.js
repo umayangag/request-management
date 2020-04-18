@@ -25,6 +25,7 @@ import IncidentView from "../ongoing-incidents/components/IncidentView";
 import ArchiveIncidentListView from "../ongoing-incidents/components/ArchiveIncidentListView";
 import GuestIncidentFormSuccessPage from "../guest-view/components/GuestFormSuccessPage"
 import TempReportList from "../reporting/components/TempReportList";
+import GuestRefIdCheck from "../guest-view/components/GuestRefIdCheck"
 
 
 
@@ -58,6 +59,7 @@ class MainRouter extends Component {
           <Route path="/sign-in" component={SignInPage} />
           <Route exact path="/report" component={GuestIncidentForm} />
           <Route exact path="/report/success" component={GuestIncidentFormSuccessPage} />
+          <Route exact path="/report/status" component={GuestRefIdCheck} />
           </div>
         </Router>
       </IntlProvider>
