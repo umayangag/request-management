@@ -106,7 +106,7 @@ function HomePage(props) {
                   >
                     <FormattedMessage
                       id="eclk.incident.management.report.incidents"
-                      defaultMessage={"Make a Request"}
+                      defaultMessage={"Submit a request"}
                     />
                   </Typography>
                   <Typography
@@ -137,7 +137,7 @@ function HomePage(props) {
                   >
                     <FormattedMessage
                       id="eclk.incident.management.check.incident.status"
-                      defaultMessage={"Check Status"}
+                      defaultMessage={"Check request status"}
                     />
                   </Typography>
 
@@ -171,7 +171,7 @@ function HomePage(props) {
             className={classes.cardText}
             color="primary"
           >
-            Already registered user?
+             Registered user ?  
             <Button color="primary" className={classes.button} href="/sign-in">
               Sign In
             </Button>
