@@ -73,7 +73,7 @@ const IncidentContact = (props) => {
                 <Grid item xs={8}>
                     <TextField
                         id="contactLandline"
-                        label={f({id:"eclk.incident.management.report.incidents.contact.mobile", defaultMessage:"Mobile"})}
+                        label={f({id:"eclk.incident.management.report.incidents.contact.mobile", defaultMessage:"Primary contact number / Mobile number*"})}
                         multiline
                         fullWidth
                         rowsMax="4"
