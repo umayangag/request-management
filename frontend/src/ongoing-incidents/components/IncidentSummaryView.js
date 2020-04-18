@@ -329,7 +329,7 @@ function ContactTab(props) {
 
                         <Grid container spacing={24}>
                             <Grid item xs>
-                                <Typography variant="caption" className={classes.label}> {f({id: "eclk.incident.management.incident.create.reporter.Mobile"})} </Typography>
+                                <Typography variant="caption" className={classes.label}> {f({id: "eclk.incident.management.incident.create.reporter.mobile"})} </Typography>
                                 <Typography gutterBottom> {reporter.telephone} </Typography>
                             </Grid>
                         </Grid>
@@ -343,7 +343,7 @@ function ContactTab(props) {
 
                         <Grid container spacing={24}>
                             <Grid item xs>
-                                <Typography variant="caption" className={classes.label}> {f({id: "eclk.incident.management.incident.create.reporter.Address"})} </Typography>
+                                <Typography variant="caption" className={classes.label}> {f({id: "eclk.incident.management.incident.create.reporter.address"})} </Typography>
                                 <Typography gutterBottom> {reporter.address} </Typography>
                             </Grid>
                         </Grid>
