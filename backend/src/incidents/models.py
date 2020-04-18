@@ -128,8 +128,9 @@ def generate_complaint_refId(election, district):
     refID = "EC/EDR/%s/%s/%0.4d" % (election, district, current_count+1)
     return refID
 
-def generate_request_refId(category):
+def generate_request_refId(category_id):
     ''' Function to generate refId for requests '''
+    category = Category.objects.get(id=int(category_id))
     today = datetime.now().replace(hour=0, minute=0, second=0)
     month = ("0" + str(today.month)) if today.month < 10 else str(today.month)
     date_info = str(today.day) + month  + str(today.year)[2:]
@@ -137,7 +138,7 @@ def generate_request_refId(category):
             incidentType=IncidentType.COMPLAINT,
             created_date__gte=today
         ).count()
-    refID = "%s/%s/%0.4d" % (category, date_info,current_count+1)
+    refID = "%s/%s/%0.4d" % (category.code, date_info,current_count+1)
     return refID
 
 class Incident(models.Model):
@@ -231,10 +232,12 @@ class Incident(models.Model):
     current_decision = models.CharField(max_length=50, default=None, null=True, blank=True)
 
     def save(self, *args, **kwargs):
-        if self.incidentType == IncidentType.INQUIRY.name :
-            self.refId = generate_inquiry_refId(election=self.election, category=self.category, institution=self.institution)
-        else:
-            self.refId = generate_request_refId(category=self.category)
+        # if self.incidentType == IncidentType.INQUIRY.name :
+        #     self.refId = generate_inquiry_refId(election=self.election, category=self.category, institution=self.institution)
+        # else:
+        if(not self.refId): 
+            self.refId = generate_request_refId(self.category)
+            
         super(Incident, self).save(*args, **kwargs)
 
     class Meta:

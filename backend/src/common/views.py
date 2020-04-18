@@ -27,6 +27,7 @@ class ProvinceList(generics.ListCreateAPIView):
 class DistrictList(generics.ListCreateAPIView):
     queryset = District.objects.all().order_by('name')
     serializer_class = DistrictSerializer
+    permission_classes = []
 
 class PoliceStationList(generics.ListCreateAPIView):
     queryset = PoliceStation.objects.all().order_by('name')

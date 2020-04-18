@@ -342,7 +342,7 @@ function IncidentFormInternal(props) {
 
     // TODO: move hooks out of this function.
     const incident = incidentUtils.getIncident(paramIncidentId);
-    const reporters = useSelector( state => state.incident.reporters)
+    const reporters = useSelector(state => state.incident.reporters)
 
     if (!paramIncidentId) {
       // new incident form
@@ -526,6 +526,23 @@ function IncidentFormInternal(props) {
     ),
   });
 
+  const getGramaNilidariDivisions = (district) => {
+    if(district && districts){
+      const districtId = districts.byCode[district].id
+      let transformedData = {
+        byCode: {},
+        allCodes: []
+      };
+      gramaNiladharis.byDistrict[districtId].reduce((accumulator, currValue) => {
+        transformedData.byCode[currValue.code] = currValue;
+        transformedData.allCodes.push(currValue.code);
+      }, 0)
+      return transformedData;
+    }else{
+      return { byCode: {}, allCodes: [] }
+    }
+  }
+
   return (
     <div className={classes.root}>
       <Formik
@@ -575,7 +592,7 @@ function IncidentFormInternal(props) {
               {/* basic incident detail information */}
               <Paper className={classes.paper}>
                 <Typography variant="h5" gutterBottom>
-                  {f({id: "eclk.incident.management.incident.create.basic_information"})}
+                  {f({ id: "eclk.incident.management.incident.create.basic_information" })}
                 </Typography>
                 <Grid container spacing={24}>
                   <Grid item xs={12}>
@@ -614,7 +631,7 @@ function IncidentFormInternal(props) {
                               : null,
                         }}
                       >
-                        {f({id: "eclk.incident.management.incident.create.mode_of_receipt"})}*{" "}*{" "}
+                        {f({ id: "eclk.incident.management.incident.create.mode_of_receipt" })}*{" "}*{" "}
                       </div>
                     </FormLabel>
 
@@ -636,8 +653,8 @@ function IncidentFormInternal(props) {
                       {errors.infoChannel && touched.infoChannel ? (
                         <div style={{ color: "red" }}>Required</div>
                       ) : (
-                        ""
-                      )}
+                          ""
+                        )}
                     </FormHelperText>
 
                     {/* testbox to keep value of channel selected */}
@@ -670,7 +687,7 @@ function IncidentFormInternal(props) {
                       label={
                         values.incidentType === "INQUIRY"
                           ? "Letter reference number*"
-                          : f({id: "eclk.incident.management.incident.create.description"})
+                          : f({ id: "eclk.incident.management.incident.create.description" })
                       }
                       placeholder="Press enter for new lines."
                       className={classes.textField}
@@ -722,7 +739,7 @@ function IncidentFormInternal(props) {
                       className={classes.formControl}
                       error={touched.category && errors.category}
                     >
-                      <InputLabel htmlFor="category">{f({id: "eclk.incident.management.incident.create.category"})}*</InputLabel>
+                      <InputLabel htmlFor="category">{f({ id: "eclk.incident.management.incident.create.category" })}*</InputLabel>
                       <Select
                         value={values.category}
                         onChange={handleChange}
@@ -808,7 +825,7 @@ function IncidentFormInternal(props) {
                       <Grid item xs={12} sm={6}>
                         <TextField
                           id="occured_date_date"
-                          label={f({id: "eclk.incident.management.incident.create.date"})}
+                          label={f({ id: "eclk.incident.management.incident.create.date" })}
                           type="date"
                           value={values.occured_date_date}
                           InputLabelProps={{ shrink: true }}
@@ -1063,7 +1080,7 @@ function IncidentFormInternal(props) {
                     <Grid item xs={12} sm={3}>
                       <TextField
                         id="receivedDate"
-                        label={f({id: "eclk.incident.management.incident.create.date"})}
+                        label={f({ id: "eclk.incident.management.incident.create.date" })}
                         type="date"
                         value={values.receivedDate}
                         InputLabelProps={{ shrink: true }}
@@ -1080,7 +1097,7 @@ function IncidentFormInternal(props) {
                     <Grid item xs={12} sm={3}>
                       <TextField
                         id="letterDate"
-                        label={f({id: "eclk.incident.management.incident.create.date"})}
+                        label={f({ id: "eclk.incident.management.incident.create.date" })}
                         type="date"
                         value={values.letterDate}
                         InputLabelProps={{ shrink: true }}
@@ -1147,7 +1164,7 @@ function IncidentFormInternal(props) {
                   {!paramIncidentId && (
                     <Grid item xs={12} sm={12}>
                       <InputLabel htmlFor="election">
-                        {f({id: "eclk.incident.management.incident.create.upload_file"})}
+                        {f({ id: "eclk.incident.management.incident.create.upload_file" })}
                       </InputLabel>
                       <FileUploader
                         files={state.files}
@@ -1225,7 +1242,7 @@ function IncidentFormInternal(props) {
                     <TextField
                       id="reporterAddress"
                       name="reporterAddress"
-                      label={f({id: "eclk.incident.management.incident.create.reporter.address"})}
+                      label={f({ id: "eclk.incident.management.incident.create.reporter.address" })}
                       variant="outlined"
                       multiline
                       className={classes.textField}
@@ -1237,14 +1254,14 @@ function IncidentFormInternal(props) {
                     <TelephoneInput
                       className={classes.textField}
                       name="reporterMobile"
-                      label={f({id: "eclk.incident.management.incident.create.reporter.mobile"})}
+                      label={f({ id: "eclk.incident.management.incident.create.reporter.mobile" })}
                     />
                   </Grid>
                   <Grid item xs={12} sm={6}>
                     <TextField
                       id="reporterEmail"
                       name="reporterEmail"
-                      label={f({id: "eclk.incident.management.incident.create.reporter.email"})}
+                      label={f({ id: "eclk.incident.management.incident.create.reporter.email" })}
                       className={classes.textField}
                       value={values.reporterEmail}
                       onChange={handleChange}
@@ -1318,13 +1335,13 @@ function IncidentFormInternal(props) {
                   {/* Incident location information */}
                   <Paper className={classes.paper}>
                     <Typography variant="h5" gutterBottom>
-                      {f({id: "eclk.incident.management.incident.create.location_information"})}
+                      {f({ id: "eclk.incident.management.incident.create.location_information" })}
                     </Typography>
                     <Grid container spacing={24}>
                       <Grid item xs={12} sm={12}>
                         <TextField
                           id="address"
-                          label={f({id: "eclk.incident.management.incident.create.location.address"})}
+                          label={f({ id: "eclk.incident.management.incident.create.location.address" })}
                           variant="outlined"
                           multiline
                           className={classes.textField}
@@ -1335,7 +1352,7 @@ function IncidentFormInternal(props) {
                       <Grid item xs={12}>
                         <TextField
                           id="location"
-                          label={f({id: "eclk.incident.management.incident.create.location.description"})}
+                          label={f({ id: "eclk.incident.management.incident.create.location.description" })}
                           className={classes.textField}
                           value={values.location}
                           onChange={handleChange}
@@ -1345,7 +1362,7 @@ function IncidentFormInternal(props) {
                       <Grid item xs={12} sm={4}>
                         <TextField
                           id="city"
-                          label={f({id: "eclk.incident.management.incident.create.location.city"})}
+                          label={f({ id: "eclk.incident.management.incident.create.location.city" })}
                           className={classes.textField}
                           value={values.city}
                           onChange={handleChange}
@@ -1381,7 +1398,7 @@ function IncidentFormInternal(props) {
                           error={touched.district && errors.district}
                           className={classes.formControl}
                         >
-                          <InputLabel htmlFor="district">{f({id: "eclk.incident.management.incident.create.location.district"})}*</InputLabel>
+                          <InputLabel htmlFor="district">{f({ id: "eclk.incident.management.incident.create.location.district" })}*</InputLabel>
                           <Select
                             value={values.district}
                             onChange={handleChange}
@@ -1450,13 +1467,13 @@ function IncidentFormInternal(props) {
                       <Grid item xs={12} sm={4}>
                         <FormControl className={classes.formControl}>
                           <InputLabel htmlFor="gramaNiladhari">
-                            {f({id: "eclk.incident.management.incident.create.location.gn_division"})}
+                            {f({ id: "eclk.incident.management.incident.create.location.gn_division" })}
                           </InputLabel>
                           <IntlSelect
                             value={values.gramaNiladhari}
                             handleChange={handleChange}
                             name="gramaNiladhari"
-                            dataObj={gramaNiladharis}
+                            dataObj={getGramaNilidariDivisions(values.district)}
                           />
                         </FormControl>
                       </Grid>

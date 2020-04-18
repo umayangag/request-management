@@ -52,7 +52,7 @@ const CatogorySection = (props) => {
             {fullCategories.map(value => (
               <Grid key={value} item>
                 <Paper 
-                    className={ selectedCategory===value.id? classes.paperSelected : classes.paper} 
+                    className={ parseInt(selectedCategory)===value.id? classes.paperSelected : classes.paper} 
                     onClick={()=>{setSelectedCategory(value.id)}}>
                     <h5 className={classes.categoryText}>{value.sub_category}</h5>
                     {/* <h5 className={classes.categoryText}>{value.sn_sub_category}</h5> */}

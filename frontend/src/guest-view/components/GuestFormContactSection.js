@@ -27,6 +27,12 @@ const IncidentContact = (props) => {
         contactDetials,
     } = props;
 
+    const handlePhoneNumberInput = (update, newValue) => {
+        if(!isNaN(newValue) && newValue.length<11){
+            handleContactDetailsChange(update)
+        }
+    }
+
     return (
         <form className={classes.container} noValidate autoComplete="off">
 
@@ -34,7 +40,7 @@ const IncidentContact = (props) => {
 
                 <Grid item xs={8}>
                     <TextField
-                        id="incidentDescription"
+                        id="contactName"
                         label={f({id:"eclk.incident.management.report.incidents.contact.name", defaultMessage:"Name" })}
                         autoFocus
                         multiline
@@ -48,44 +54,47 @@ const IncidentContact = (props) => {
                 </Grid>
                 <Grid item xs={4}></Grid>
 
-                <Grid item xs={8}>
+                {/* <Grid item xs={8}>
                     <TextField
-                        id="incidentDescription"
+                        id="contactMobile"
                         label={f({id:"eclk.incident.management.report.incidents.contact.mobile", defaultMessage:"Mobile"})}
                         multiline
                         fullWidth
                         rowsMax="4"
                         value={contactDetials.mobile}
-                        onChange={(e) => { handleContactDetailsChange({ ...contactDetials, mobile:e.target.value}) }}
+                        // onChange={(e) => { handleContactDetailsChange({ ...contactDetials, mobile:e.target.value}) }}
+                        onChange={(e) => { handlePhoneNumberInput({ ...contactDetials, mobile:e.target.value}, e.target.value) }}
                         className={classes.textField}
                         margin="normal"
                     />
                 </Grid>
-                <Grid item xs={4}></Grid>
+                <Grid item xs={4}></Grid> */}
 
                 <Grid item xs={8}>
                     <TextField
-                        id="incidentDescription"
-                        label={f({id:"eclk.incident.management.report.incidents.contact.landline", defaultMessage:"Landline"})}
+                        id="contactLandline"
+                        label={f({id:"eclk.incident.management.report.incidents.contact.mobile", defaultMessage:"Primary contact number / Mobile number*"})}
                         multiline
                         fullWidth
                         rowsMax="4"
                         value={contactDetials.phone}
-                        onChange={(e) => { handleContactDetailsChange({ ...contactDetials, phone:e.target.value}) }}
+                        onChange={(e) => { handlePhoneNumberInput({ ...contactDetials, phone:e.target.value}, e.target.value)}}
                         className={classes.textField}
                         margin="normal"
+                        type="number"
                     />
                 </Grid>
                 <Grid item xs={4}></Grid>
 
                 <Grid item xs={8}>
                     <TextField
-                        id="incidentDescription"
+                        id="contactEmail"
                         label={f({id:"eclk.incident.management.report.incidents.contact.email", defaultMessage:"Email"})}
                         multiline
                         fullWidth
                         rowsMax="4"
                         value={contactDetials.email}
+                        type="email"
                         onChange={(e) => { handleContactDetailsChange({...contactDetials, email:e.target.value}) }}
                         className={classes.textField}
                         margin="normal"
