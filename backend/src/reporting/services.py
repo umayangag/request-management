@@ -366,7 +366,8 @@ def get_organizationwise_data_with_timefilter(start_time, end_time):
     file_dict = {}
 
     file_dict["template"] = "/incidents/complaints/summery_report_organizationwise_with_timefilter.js"
-    file_dict["date"] = date.today().strftime("%Y/%m/%d")
+    file_dict["start_date"] = start_time
+    file_dict["end_date"] = end_time
 
     incidents = Incident.objects.all().filter(incidentType=IncidentType.COMPLAINT,
                                               created_date__range=(start_time, end_time))
