@@ -140,7 +140,9 @@ function NavTabs({ classes, match }) {
     const onResolveEvent = (eventId, decision) => { /* do nothing, event resolving is depreciated */ }
 
     const modalActionOnVerify = (modalType) => {
-        if (activeIncident.currentStatus != "NEW"){
+        if (modalType == 'CHANGE_ASSIGNEE_MODAL') {
+            dispatch(showModal('CHANGE_ASSIGNEE_MODAL', { activeIncident, users, divisions }))
+        } else if (activeIncident.currentStatus != "NEW"){
             switch (modalType) {
                 case 'ESCALATE_MODAL':
                     dispatch(showModal('ESCALATE_MODAL', { incidentId: activeIncident.id }))
@@ -153,9 +155,6 @@ function NavTabs({ classes, match }) {
                     break
                 case 'RESPONSE_TIME_EDIT':
                     dispatch(showModal('RESPONSE_TIME_EDIT', { activeIncident }))
-                    break
-                case 'CHANGE_ASSIGNEE_MODAL':
-                    dispatch(showModal('CHANGE_ASSIGNEE_MODAL', { activeIncident, users, divisions }))
                     break
 
                 default:
