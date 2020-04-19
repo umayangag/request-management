@@ -45,7 +45,7 @@ const IncidentDescription = props => {
             autoFocus
             id="incidentDescription"
             label={intl.formatMessage({
-              id: "eclk.incident.management.report.incidents.description",
+              id: "request.management.report.incidents.description",
               defaultMessage: "Description"
             })+"*"}
             multiline
@@ -68,7 +68,7 @@ const IncidentDescription = props => {
             id="election"
             select
             label={intl.formatMessage({
-              id: "eclk.incident.management.report.incidents.election",
+              id: "request.management.report.incidents.election",
               defaultMessage: "Election"
             })+"*"}
             className={classes.textField}

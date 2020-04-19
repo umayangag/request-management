@@ -41,7 +41,7 @@ const IncidentContact = (props) => {
                 <Grid item xs={8}>
                     <TextField
                         id="contactName"
-                        label={f({id:"eclk.incident.management.report.incidents.contact.name", defaultMessage:"Name" })}
+                        label={f({id:"request.management.report.incidents.contact.name", defaultMessage:"Name" })}
                         autoFocus
                         multiline
                         fullWidth
@@ -57,7 +57,7 @@ const IncidentContact = (props) => {
                 {/* <Grid item xs={8}>
                     <TextField
                         id="contactMobile"
-                        label={f({id:"eclk.incident.management.report.incidents.contact.mobile", defaultMessage:"Mobile"})}
+                        label={f({id:"request.management.report.incidents.contact.mobile", defaultMessage:"Mobile"})}
                         multiline
                         fullWidth
                         rowsMax="4"
@@ -73,7 +73,7 @@ const IncidentContact = (props) => {
                 <Grid item xs={8}>
                     <TextField
                         id="contactLandline"
-                        label={f({id:"eclk.incident.management.report.incidents.contact.mobile", defaultMessage:"Primary contact number / Mobile number*"})}
+                        label={f({id:"request.management.report.incidents.contact.mobile", defaultMessage:"Primary contact number / Mobile number*"})}
                         multiline
                         fullWidth
                         rowsMax="4"
@@ -89,7 +89,7 @@ const IncidentContact = (props) => {
                 <Grid item xs={8}>
                     <TextField
                         id="contactEmail"
-                        label={f({id:"eclk.incident.management.report.incidents.contact.email", defaultMessage:"Email"})}
+                        label={f({id:"request.management.report.incidents.contact.email", defaultMessage:"Email"})}
                         multiline
                         fullWidth
                         rowsMax="4"
@@ -101,9 +101,6 @@ const IncidentContact = (props) => {
                     />
                 </Grid>
                 <Grid item xs={4}></Grid>
-
-                
-
             </Grid>
 
         </form>

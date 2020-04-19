@@ -105,7 +105,7 @@ function HomePage(props) {
                     color="primary"
                   >
                     <FormattedMessage
-                      id="eclk.incident.management.report.incidents"
+                      id="request.management.report.incidents"
                       defaultMessage={"Submit a request"}
                     />
                   </Typography>
@@ -136,7 +136,7 @@ function HomePage(props) {
                     color="primary"
                   >
                     <FormattedMessage
-                      id="eclk.incident.management.check.incident.status"
+                      id="request.management.check.incident.status"
                       defaultMessage={"Check request status"}
                     />
                   </Typography>

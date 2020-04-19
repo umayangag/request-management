@@ -138,12 +138,12 @@ function SearchForm(props) {
             <Grid container spacing={8}>
               <TextField
                 id="outlined-full-width"
-                label={f({id: "eclk.incident.management.incident.review.text_search"})}
+                label={f({id: "request.management.incident.review.text_search"})}
                 style={{
                   margin: "15px 4px",
                   width: "calc(100% - 88px)"
                 }}
-                placeholder={f({id: "eclk.incident.management.incident.review.search_placeholder"})}
+                placeholder={f({id: "request.management.incident.review.search_placeholder"})}
                 margin="normal"
                 variant="outlined"
                 name="textSearch"

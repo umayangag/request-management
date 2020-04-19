@@ -48,7 +48,7 @@ def get_incident_status_guest(refId):
     try:
         incident = Incident.objects.get(refId=refId)
     except Incident.DoesNotExist:
-        return "No records for the given reference number. Please check again."
+        return "No records for the given reference number. Please check and submit."
 
     public_status = ""
     if incident.current_status == StatusType.NEW.name:
@@ -78,7 +78,7 @@ def send_email(subject, message, receivers):
         print("email sending failed to :")
         print(*receivers)
         print(e)
-    
+
 
 def send_incident_created_mail(reporter_id):
     # request created email
@@ -181,7 +181,7 @@ def user_level_has_permission(user_level: UserLevel, permission: Permission):
     return permission in permissions
 
 def get_user_from_level(user_level: UserLevel, division: Division) -> User:
-    
+
     """ This function would take in a user level and find the user
         within the level that has the least workload
         It will query the assignee counts for each user and get the
@@ -312,7 +312,7 @@ def create_reporter():
 
 def create_incident_postscript(incident: Incident, user: User) -> None:
     """Function to take care of event, status and severity creation"""
-    
+
     if user is None:
         # public user case
         # if no auth token, then we assign the guest user as public user
@@ -588,7 +588,7 @@ def incident_escalate_external_action(user: User, incident: Incident, entity: ob
 
     event_services.update_workflow_event(user, incident, workflow)
 
-    
+
 
 
 def incident_complete_external_action(user: User, incident: Incident, comment: str, start_event: Event):
