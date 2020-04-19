@@ -25,6 +25,8 @@ import InputLabel from "@material-ui/core/InputLabel";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import SearchIcon from "@material-ui/icons/Search";
 
+import * as publicApi from "../../api/public"
+
 import green from "@material-ui/core/colors/green";
 import red from "@material-ui/core/colors/red";
 
@@ -85,8 +87,13 @@ const GuestRefIdCheck = (props) => {
   const [status, setStatus] = useState("")
 
   const handleSubmit = () => {
-    //TODO: complete handleSubmit
-    setStatus("Your request has been received.")
+    let response
+    try {
+      response = publicApi.checkIncidentStatus(refId)
+    } catch (error) {
+      console.log(error)
+    }
+    setStatus(response)
   };
 
   return (

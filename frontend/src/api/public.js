@@ -23,3 +23,7 @@ export const attachMedia = async (incidentId, mediaData) => {
 export const loadIncident = async (loadData) => {
     return (await handler.post(`/public/reporter/get_incident`, loadData)).data;
 }
+
+export const checkIncidentStatus = async (refId) => {
+    return (await handler.get(`/public/incidents/?refId=`, refId)).data;
+}

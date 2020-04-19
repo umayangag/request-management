@@ -51,7 +51,8 @@ from .services import (
     find_escalation_candidate,
     create_reporter,
     validateRecaptcha,
-    send_incident_created_mail
+    send_incident_created_mail,
+    get_incident_status_guest
 )
 
 from ..events import services as event_service
@@ -470,6 +471,11 @@ class Test(APIView):
 class IncidentPublicUserView(APIView):
     permission_classes = []
     serializer_class = IncidentSerializer
+
+    def get(self, request, format=None):
+        param_refId = self.request.query_params.get('refId', None)
+        return_data = get_incident_status_guest(param_refId)
+        return Response(return_data, status=status.HTTP_200_OK)
 
     def post(self, request, format=None):
         serializer = IncidentSerializer(data=request.data)
