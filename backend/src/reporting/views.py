@@ -80,9 +80,9 @@ class ReportingAccessView(APIView):
             summery_report_organizationwise_with_timefilter
             GET parameters => /?template_type=organizationwise_total_request_with_timefilter&startTime=<startTime>&endTime=<endTime>
             """
-            start_time = request.query_params.get('startTime')
-            end_time = request.query_params.get('endTime')
-            json_dict["file"] = get_organizationwise_data_with_timefilter()
+            start_time = request.query_params.get('startTime').replace('"', '') + ":00"
+            end_time = request.query_params.get('endTime').replace('"', '') + ":00"
+            json_dict["file"] = get_organizationwise_data_with_timefilter(start_time, end_time)
 
         elif (template_type == "weekly_closed_request_category"):
             """

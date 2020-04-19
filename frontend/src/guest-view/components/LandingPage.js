@@ -125,7 +125,7 @@ function HomePage(props) {
         </Grid>
         <Grid item xs={12} sm={6} md={3}>
           <Card className={classes.card}>
-            <Link to="/">
+            <Link to="/report/status">
               <CardActionArea>
                 <CardContent className={classes.cardContent}>
                   <Typography
@@ -171,7 +171,7 @@ function HomePage(props) {
             className={classes.cardText}
             color="primary"
           >
-             Registered user ?  
+             Registered user ?
             <Button color="primary" className={classes.button} href="/sign-in">
               Sign In
             </Button>
