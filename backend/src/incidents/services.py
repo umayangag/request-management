@@ -52,11 +52,13 @@ def get_incident_status_guest(refId):
 
     public_status = ""
     if incident.current_status == StatusType.NEW.name:
-        public_status = "Your request has been received"
+        public_status = "Your request has been received. Await updates on email."
     elif incident.current_status == StatusType.VERIFIED.name:
-        public_status = "Your request has been acknowledged"
-    elif (incident.current_status == StatusType.ACTION_PENDING.name or incident.current_status == StatusType.ACTION_TAKEN.name):
-        public_status = "Your request is currently being attended to"
+        public_status = "Your request has been acknowledged."
+    elif incident.current_status == StatusType.ACTION_PENDING.name or incident.current_status == StatusType.ACTION_TAKEN.name:
+        public_status = "Your request is currently being attended to."
+    elif incident.current_status == StatusType.CLOSED.name or incident.current_status == StatusType.INVALIDATED.name:
+        public_status = "Your request has been actioned and closed."
 
     return public_status
 

@@ -86,14 +86,13 @@ const GuestRefIdCheck = (props) => {
   const [refId, setRefId] = useState("")
   const [status, setStatus] = useState("")
 
-  const handleSubmit = () => {
-    let response
+  const handleSubmit = async () => {
     try {
-      response = publicApi.checkIncidentStatus(refId)
+      const response = await publicApi.checkIncidentStatus(refId)
+      setStatus(response.data)
     } catch (error) {
       console.log(error)
     }
-    setStatus(response)
   };
 
   return (
@@ -218,4 +217,4 @@ GuestRefIdCheck.propTypes = {
   classes: PropTypes.object,
 };
 
-export default withRouter(withStyles(styles)(GuestRefIdCheck));
+export default withStyles(styles)(GuestRefIdCheck)
