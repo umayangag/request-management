@@ -29,6 +29,8 @@ import FileUploadSection from './GuestFormFileUploadSection';
 import DateTimeSection from './GuestFormDateTimeSection';
 import LocationSection from './GuestFromLocationSection';
 import ContactSection from './GuestFormContactSection';
+import _ from 'lodash';
+
 
 import {
     fetchElections,
@@ -99,6 +101,25 @@ const VerticalLinearStepper = (props) => {
 
     const dispatch = useDispatch();
     const { elections, categories, channels, districts } = useSelector((state) => (state.shared));
+
+    function removeDuplicates(originalArray, prop) {
+        var newArray = [];
+        var lookupObject  = {};
+   
+        for(var i in originalArray) {
+           lookupObject[originalArray[i][prop]] = originalArray[i];
+        }
+   
+        for(i in lookupObject) {
+            newArray.push(lookupObject[i]);
+        }
+         return newArray;
+    }
+   
+   var mainCategories = removeDuplicates(categories, "top_category");
+
+   
+
     
     let webInfoChannelId = "Web";
     // for(var channel of channels){
@@ -124,6 +145,12 @@ const VerticalLinearStepper = (props) => {
 
 
     const [incidentCatogory, setIncidentCatogory] = useState(incidentId? incidentData.category:"");
+    const [incidentMainCatogory, setIncidentMainCatogory] = useState(incidentId? incidentData.mainCategory:"");
+
+    if(incidentMainCatogory){
+        var subCategories = _.filter(categories, item => item.top_category === incidentMainCatogory);
+       }
+
     const [incidentFiles, setIncidentFiles] = useState(null);
     const [incidentDateTime, setIncidentDateTime] = useState({
         date: incidentId && incidentData.occured_date ? moment(incidentData.occured_date).format('YYYY-MM-DD') : null,
@@ -159,7 +186,7 @@ const VerticalLinearStepper = (props) => {
     }
 
     const validInputs = () => {
-        setFormErrors({ ...formErrors, incidentDescriptionErrorMsg: null, incidentElectionErrorMsg: null, incidentDatetimeErrorMsg: null })
+        setFormErrors({ ...formErrors, incidentDescriptionErrorMsg: null, incidentElectionErrorMsg: null, incidentDatetimeErrorMsg: null, incidentContactErrorMsg: null,incidentNameErrorMsg: null })
         let errorMsg = { ...formErrors };
         let valid = true;
 
@@ -175,13 +202,71 @@ const VerticalLinearStepper = (props) => {
             errorMsg = { ...errorMsg, incidentDatetimeErrorMsg: f({ id: "eclk.incident.management.report.incidents.datetime.error.message", defaultMessage: "Date and time are required" }) };
             valid = false;
         }
+       
+        
+        setFormErrors({ ...errorMsg });
+        return valid;
+    }
+
+    const validCentactInputs = () => {
+        setFormErrors({ ...formErrors, incidentDescriptionErrorMsg: null, incidentElectionErrorMsg: null, incidentDatetimeErrorMsg: null, incidentContactErrorMsg: null,incidentNameErrorMsg: null })
+        let errorMsg = { ...formErrors };
+        let valid = true;
         if(!incidentRecaptcha){
             errorMsg = { ...errorMsg, incidentRecaptchaErrorMsg: f({ id: "eclk.incident.management.report.incidents.recaptcha.error.message", defaultMessage: "This verification is required" }) };
             valid = false;
         }
+
+        if(!incidentContact.phone){
+            errorMsg = { ...errorMsg, incidentContactErrorMsg: f({ id: "eclk.incident.management.report.incidents.phone.error.message", defaultMessage: "Contact number is required" }) };
+            valid = false;
+        }
+        if(!incidentContact.name){
+            errorMsg = { ...errorMsg, incidentNameErrorMsg: f({ id: "eclk.incident.management.report.incidents.phone.error.message", defaultMessage: "Name is required" }) };
+            valid = false;
+        }
+        
         setFormErrors({ ...errorMsg });
         return valid;
     }
+
+    const validLocationInputs = () => {
+        setFormErrors({ ...formErrors, incidentAddressErrorMsg: null, incidentDistrictErrorMsg: null })
+        let errorMsg = { ...formErrors };
+        let valid = true;
+
+        if(!incidentAddress){
+            errorMsg = { ...errorMsg, incidentAddressErrorMsg: f({ id: "eclk.incident.management.report.incidents.phone.error.message", defaultMessage: "Address is required" }) };
+            valid = false;
+        }
+        if(!incidentDistrict){
+            errorMsg = { ...errorMsg, incidentDistrictErrorMsg: f({ id: "eclk.incident.management.report.incidents.phone.error.message", defaultMessage: "District is required" }) };
+            valid = false;
+        }
+        
+        setFormErrors({ ...errorMsg });
+        return valid;
+    }
+
+    const validCategoryInputs = () => {
+        setFormErrors({ ...formErrors, incidentMainCategoryErrorMsg: null, incidentSubCategoryErrorMsg: null })
+        let errorMsg = { ...formErrors };
+        let valid = true;
+
+        if(!incidentCatogory){
+            errorMsg = { ...errorMsg, incidentSubCategoryErrorMsg: f({ id: "eclk.incident.management.report.incidents.phone.error.message", defaultMessage: "Sub category is required" }) };
+            valid = false;
+        }
+        if(!incidentMainCatogory){
+            errorMsg = { ...errorMsg, incidentMainCategoryErrorMsg: f({ id: "eclk.incident.management.report.incidents.phone.error.message", defaultMessage: "Category is required" }) };
+            valid = false;
+        }
+        
+        setFormErrors({ ...errorMsg });
+        return valid;
+    }
+    
+    
 
     const createIncidentWithReporter = (reporterData) => {
         const initData = {
@@ -232,6 +317,7 @@ const VerticalLinearStepper = (props) => {
                             address: incidentAddress,
                             city: incidentCity,
                             category: incidentCatogory,
+                            mainCategory:incidentMainCatogory,
                             district:incidentDistrict
                         }
                         const dateTime = getFormattedDateTime()
@@ -248,6 +334,7 @@ const VerticalLinearStepper = (props) => {
                         reporterData.email = incidentContact.email;
 
                         dispatch(createGuestIncidentWithReporter( incidentData, reporterData))
+                        dispatch(moveStepper({ step: activeStep + 1 }));
                     }
                 } else {
                     //updating an existing incident.
@@ -259,6 +346,7 @@ const VerticalLinearStepper = (props) => {
                         incidentUpdate["address"] = incidentAddress;
                         incidentUpdate["city"] = incidentCity;
                         incidentData["category"] = incidentCatogory;
+                        incidentData["mainCategory"] = incidentMainCatogory;
                         incidentData["district"] = incidentDistrict;
 
                         const dateTime = getFormattedDateTime()
@@ -266,6 +354,7 @@ const VerticalLinearStepper = (props) => {
                             incidentUpdate['occured_date'] = dateTime
                         }
                         dispatch(updateGuestIncident(incidentId, incidentUpdate))
+                        dispatch(moveStepper({ step: activeStep + 1 }));
                     }
                 }
             }
@@ -283,8 +372,10 @@ const VerticalLinearStepper = (props) => {
                 handleDistrictChange={setIncidentDistrict}
                 handleCityChange={setIncidentCity}
                 districts={districts}
+                formErrors={formErrors}
             />,
             handler: () => {
+                if (validLocationInputs()) {
                 // if (incidentLocation) {
                 //     incidentData.location = incidentLocation;
                 //     incidentData.address = incidentAddress;
@@ -294,6 +385,7 @@ const VerticalLinearStepper = (props) => {
                 //     dispatch(moveStepper({ step: activeStep + 1 }));
                 // }
                 dispatch(moveStepper({ step: activeStep + 1 }));
+                }
             }
         },
 
@@ -310,8 +402,7 @@ const VerticalLinearStepper = (props) => {
                         fileData.append("files[]", file);
                     }
                     dispatch(uploadFileGuest(incidentId, fileData))
-                } else {
-                    dispatch(moveStepper({ step: activeStep + 1 }));
+                    // dispatch(moveStepper({ step: activeStep + 1 }));
                 }
             }
         },
@@ -322,7 +413,7 @@ const VerticalLinearStepper = (props) => {
             <>
             < ContactSection
                 contactDetials={incidentContact}
-                handleContactDetailsChange={setIncidentContact} />
+                handleContactDetailsChange={setIncidentContact} formErrors={formErrors} />
             <ReCAPTCHA
                 ref={recaptchaRef}
                 sitekey={process.env.REACT_APP_RECAPTCHA_SITEKEY}
@@ -334,7 +425,7 @@ const VerticalLinearStepper = (props) => {
             </>,
             handler: () => {
                 if (!incidentId) {
-                    if (incidentContact.name || incidentContact.phone || incidentContact.email) {
+                    if (validCentactInputs()) {
                         // const reporterData = {}
                         // reporterData.name = incidentContact.name;
                         // reporterData.telephone = incidentContact.phone;
@@ -344,11 +435,13 @@ const VerticalLinearStepper = (props) => {
                         dispatch(moveStepper({ step: activeStep + 1 }));
                     }
                 }else{
+                    if (validCentactInputs()) {
                     incidentReporterData.name = incidentContact.name;
                     incidentReporterData.telephone = incidentContact.phone;
                     incidentReporterData.mobile = incidentContact.mobile;
                     incidentReporterData.email = incidentContact.email;
                     dispatch(updateGuestIncidentReporter(incidentReporterData.id, incidentReporterData))
+                    }
                 }
             }
         },
@@ -356,11 +449,15 @@ const VerticalLinearStepper = (props) => {
         2:{
             title:'Select the most suitable category for the incident',
             content: <CategorySection
-                        categories={categories}
+                        mainCategories={mainCategories}
+                        subCategories={subCategories}
                         selectedCategory={incidentCatogory}
-                        setSelectedCategory={setIncidentCatogory} />,
+                        selectedMainCategory={incidentMainCatogory}
+                        setSelectedCategory={setIncidentCatogory}
+                        setSelectedMainCategory={setIncidentMainCatogory}
+                        formErrors={formErrors} />,
             handler: () => {
-                if(incidentCatogory){
+                if(validCategoryInputs()){
                     dispatch(moveStepper({step:activeStep+1}))
                 }
 
@@ -375,7 +472,7 @@ const VerticalLinearStepper = (props) => {
         steps[stepNumber] = stepDefinitions[stepNumber].title
     });
 
-    const optionalSteps = new Set([1, 4])
+    const optionalSteps = new Set([])
 
     const isStepOptional = step => optionalSteps.has(step);
 
@@ -415,13 +512,11 @@ const VerticalLinearStepper = (props) => {
 
     const { classes } = props;
     const GoBackLink = props => <Link to="/" {...props} />
-
     if (activeStep === Object.keys(stepDefinitions).length) {
         return <Redirect to='/report/success' />
     }
 
     const isLoading = isLoadingIncident || isLoadingMetaData
-
     return (
 
         <div className={classes.root}>

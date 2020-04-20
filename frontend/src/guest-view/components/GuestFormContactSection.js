@@ -25,6 +25,7 @@ const IncidentContact = (props) => {
         classes,
         handleContactDetailsChange,
         contactDetials,
+        formErrors
     } = props;
 
     const handlePhoneNumberInput = (update, newValue) => {
@@ -47,9 +48,16 @@ const IncidentContact = (props) => {
                         fullWidth
                         rowsMax="4"
                         value={contactDetials.name}
-                        onChange={(e) => { handleContactDetailsChange({...contactDetials, name:e.target.value}) }}
+                        // onChange={(e) => { handleContactDetailsChange({...contactDetials, name:e.target.value}) }}
+                        onChange={e => {
+                            handleContactDetailsChange({...contactDetials, name:e.target.value});
+                            formErrors.incidentNameErrorMsg = null;
+                          }}
                         className={classes.textField}
                         margin="normal"
+                        helperText={formErrors.incidentNameErrorMsg || ""}
+                        error={formErrors.incidentNameErrorMsg ? true : false}
+                        
                     />
                 </Grid>
                 <Grid item xs={4}></Grid>
@@ -78,10 +86,16 @@ const IncidentContact = (props) => {
                         fullWidth
                         rowsMax="4"
                         value={contactDetials.phone}
-                        onChange={(e) => { handlePhoneNumberInput({ ...contactDetials, phone:e.target.value}, e.target.value)}}
+                        onChange={e => {
+                            handlePhoneNumberInput({ ...contactDetials, phone:e.target.value}, e.target.value);
+                            formErrors.incidentContactErrorMsg = null;
+                          }}
+                        // onChange={(e) => { handlePhoneNumberInput({ ...contactDetials, phone:e.target.value}, e.target.value)}}
                         className={classes.textField}
                         margin="normal"
                         type="number"
+                        helperText={formErrors.incidentContactErrorMsg || ""}
+                        error={formErrors.incidentContactErrorMsg ? true : false}
                     />
                 </Grid>
                 <Grid item xs={4}></Grid>
