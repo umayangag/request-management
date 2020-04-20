@@ -298,8 +298,9 @@ def get_daily_category_data():
 def get_category_data_by_date_range(start_time, end_time):
     file_dict = {}
 
-    file_dict["template"] = "/incidents/complaints/daily_summery_report_categorywise.js"
-    file_dict["date"] = start_time + " - " + end_time
+    file_dict["template"] = "/incidents/complaints/daily_summery_report_categorywise_with_timefilter.js"
+    file_dict["StartDate"] = start_time
+    file_dict["EndDate"] = end_time
     incidents = Incident.objects.all().filter(
         incidentType=IncidentType.COMPLAINT,
         created_date__range=(start_time, end_time))
