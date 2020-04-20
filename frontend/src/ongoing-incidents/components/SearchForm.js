@@ -90,7 +90,7 @@ function SearchForm(props) {
   }, []);
   const { classes, categories } = props;
   // const severityValues = Array(10).fill(0).map((e, i) => i + 1);
-  const severityValues = ['High','Low','Medium'];
+  const severityValues = ['High','Medium','Low'];
   const institutions = useSelector(state => state.shared.institutions);
   const districts = useSelector(state => state.shared.districts);
   const [selectedInstitution, setSelectedInstitution] = useState("");
@@ -133,6 +133,7 @@ function SearchForm(props) {
           handleSubmit,
           handleReset
         } = props;
+        debugger;
         return (
           <form onSubmit={handleSubmit}>
             <Grid container spacing={8}>
@@ -280,8 +281,37 @@ function SearchForm(props) {
                         onChange={handleChange}
                       />
                     </FormControl>
-                    <FormControl className={classes.formControlSearch}>
-                      { orgSearch }
+                    <FormControl className={classes.formControl}>
+                      <InputLabel shrink htmlFor="status-label-placeholder">
+                        District
+                      </InputLabel>
+                      <Select
+                        input={
+                          <Input
+                            name="district"
+                            id="severity-label-placeholder"
+                          />
+                        }
+                        displayEmpty
+                        name="district"
+                        value={values.district}
+                        onChange={handleChange}
+                        className={classes.selectEmpty}
+                      >
+                        <MenuItem value="">
+                          <em>None</em>
+                        </MenuItem>
+                        {districts.allCodes.map((c, k) => {
+                              let currDistrict = districts.byCode[c];
+                              return (
+                                currDistrict.name !== "NONE" && (
+                                  <MenuItem value={currDistrict.code} key={k}>
+                                    {currDistrict.name}
+                                  </MenuItem>
+                                )
+                              );
+                            })}
+                      </Select>
                     </FormControl>
                     <FormControl className={classes.buttonContainer}>
                       {/* Reset workflow is pending

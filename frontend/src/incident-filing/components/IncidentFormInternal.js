@@ -486,7 +486,11 @@ function IncidentFormInternal(props) {
   const IncidentSchema = Yup.object().shape({
     incidentType: Yup.mixed().required("Required"),
     infoChannel: Yup.mixed().required("Required"),
-    // title: Yup.string().required("Required"),
+    city: Yup.string().required("Required"),
+    reporterAddress: Yup.string().required("Required"),
+    reporterType: Yup.string().required("Required"),
+    reporterName: Yup.string().required("Required"),
+    address: Yup.string().required("Required"),
     description: Yup.string().required("Required"),
     // occurrence: Yup.mixed().when('incidentType', (incidentType, IncidentSchema) => (incidentType == 'COMPLAINT' ? IncidentSchema.required("Required") : IncidentSchema)),
     category: Yup.mixed().required("Required"),
@@ -631,7 +635,7 @@ function IncidentFormInternal(props) {
                               : null,
                         }}
                       >
-                        {f({ id: "request.management.incident.create.mode_of_receipt" })}*{" "}*{" "}
+                        {f({ id: "request.management.incident.create.mode_of_receipt" })}
                       </div>
                     </FormLabel>
 
@@ -845,7 +849,7 @@ function IncidentFormInternal(props) {
                         />
                         <TextField
                           id="occured_date_time"
-                          label="Incident time"
+                          label="Request time"
                           type="time"
                           value={values.occured_date_time}
                           InputLabelProps={{ shrink: true }}
@@ -1184,16 +1188,20 @@ function IncidentFormInternal(props) {
                     <TextField
                       id="reporterName"
                       name="reporterName"
-                      label="Reporter Name"
+                      label="Reporter Name*"
                       className={classes.textField}
                       value={values.reporterName}
                       onChange={handleChange}
+                      error={touched.reporterName && errors.reporterName}
+                      helperText={
+                        touched.reporterName ? errors.reporterName : null
+                      }
                     />
                   </Grid>
                   <Grid item xs={12} sm={3}>
-                    <FormControl className={classes.formControl}>
+                    <FormControl  error={touched.reporterType && errors.reporterType} className={classes.formControl}>
                       <InputLabel htmlFor="reporterType">
-                        Individual/Organization
+                        Individual/Organization*
                       </InputLabel>
                       <Select
                         value={values.reporterType}
@@ -1210,6 +1218,11 @@ function IncidentFormInternal(props) {
                         <MenuItem value={"Individual"}>Individual</MenuItem>
                         <MenuItem value={"Organization"}>Organization</MenuItem>
                       </Select>
+                      <FormHelperText>
+                            {touched.reporterType && errors.reporterType
+                              ? errors.reporterType
+                              : ""}
+                          </FormHelperText>
                     </FormControl>
                   </Grid>
                   {/* {values.incidentType === "COMPLAINT" && (
@@ -1248,6 +1261,10 @@ function IncidentFormInternal(props) {
                       className={classes.textField}
                       value={values.reporterAddress}
                       onChange={handleChange}
+                      error={touched.reporterAddress && errors.reporterAddress}
+                      helperText={
+                        touched.reporterAddress ? errors.reporterAddress : null
+                      }
                     />
                   </Grid>
                   <Grid item xs={12} sm={6}>
@@ -1347,6 +1364,10 @@ function IncidentFormInternal(props) {
                           className={classes.textField}
                           value={values.address}
                           onChange={handleChange}
+                          error={touched.address && errors.address}
+                      helperText={
+                        touched.address ? errors.address : null
+                      }
                         />
                       </Grid>
                       <Grid item xs={12}>
@@ -1361,11 +1382,15 @@ function IncidentFormInternal(props) {
                       </Grid>
                       <Grid item xs={12} sm={4}>
                         <TextField
+                          error={touched.city && errors.city}
                           id="city"
                           label={f({ id: "request.management.incident.create.location.city" })}
                           className={classes.textField}
                           value={values.city}
                           onChange={handleChange}
+                          helperText={
+                            touched.city ? errors.city : null
+                          }
                         />
                       </Grid>
                       {/* <Grid item xs={12} sm={4}>
@@ -1726,7 +1751,7 @@ function IncidentFormInternal(props) {
         ContentProps={{
           "aria-describedby": "message-id",
         }}
-        message={<span id="message-id">Incident submitted successfully!</span>}
+        message={<span id="message-id">Request submitted successfully!</span>}
       />
 
       {/* confirmation dialog */}
@@ -1737,11 +1762,11 @@ function IncidentFormInternal(props) {
         aria-describedby="alert-dialog-description"
       >
         <DialogTitle id="alert-dialog-title">
-          {"Submit without occured date?"}
+          {"Submit without Request date?"}
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            You are trying to submit an incident without an occured date.
+            You are trying to submit without an request date.
           </DialogContentText>
         </DialogContent>
         <DialogActions>
