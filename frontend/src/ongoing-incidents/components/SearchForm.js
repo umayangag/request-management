@@ -133,7 +133,7 @@ function SearchForm(props) {
           handleSubmit,
           handleReset
         } = props;
-        debugger;
+
         return (
           <form onSubmit={handleSubmit}>
             <Grid container spacing={8}>

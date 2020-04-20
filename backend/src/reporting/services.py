@@ -24,7 +24,7 @@ def get_daily_incidents():
     current_date = datetime.now(tz=get_current_timezone())
     start_date = current_date.replace(hour=0, minute=0, second=0, microsecond=0)
     end_date = start_date + timedelta(1)
-    incidents = Incident.objects.filter(created_date__range=(str(start_date), str(end_date)))
+    incidents = Incident.objects.filter(created_date__range=(start_date, end_date))
     return incidents
 
 def get_weekly_incidents():
@@ -32,7 +32,7 @@ def get_weekly_incidents():
     current_date = datetime.now(tz=get_current_timezone())
     start_date = current_date - timedelta(current_date.weekday())
     end_date = start_date + timedelta(6)
-    incidents = Incident.objects.filter(created_date__range=(str(start_date), str(end_date)))
+    incidents = Incident.objects.filter(created_date__range=(start_date, end_date))
     return incidents
 
 def parse_date_timezone(datetimeValue):
