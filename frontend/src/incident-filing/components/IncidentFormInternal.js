@@ -828,7 +828,7 @@ function IncidentFormInternal(props) {
                                                     ) : null}
                                                 </FormControl>
                                             </Grid> */}
-                      <Grid item xs={12} sm={6}>
+                      <Grid item xs={12} sm={3}>
                         <TextField
                           id="occured_date_date"
                           label={f({ id: "request.management.incident.create.date" })}
@@ -863,13 +863,13 @@ function IncidentFormInternal(props) {
                     </>
                   ) : null}
                   {values.incidentType === "COMPLAINT" ? (
-                    <Grid item xs={12} sm={6}>
+                    <Grid item xs={12} sm={3}>
                       <FormControl
                         error={touched.severity && errors.severity}
                         component="fieldset"
                         className={classes.formControl}
                       >
-                        <FormLabel component="legend">Priority*</FormLabel>
+                        <FormLabel component="legend">{f({ id: "request.management.incident.create.severity" })}</FormLabel>
                         <RadioGroup
                           name="severity"
                           id="severity"
