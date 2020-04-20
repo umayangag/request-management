@@ -42,38 +42,5 @@
       "order": 1,
       "created_date": "2019-06-27T00:00:00Z"
     }
-  },
-  {
-    "model": "common.channel",
-    "pk": 5,
-    "fields": {
-      "name": "SMS",
-      "sn_name": "කෙටි පණිවිඩ",
-      "tm_name": "எஸ்எம்எஸ்",
-      "order": 5,
-      "created_date": "2019-06-27T00:00:00Z"
-    }
-  },
-  {
-    "model": "common.channel",
-    "pk": 10,
-    "fields": {
-      "name": "Social Media",
-      "sn_name": "සමාජ මාධ්‍ය",
-      "tm_name": "சமூக ஊடகங்கள்",
-      "order": 6,
-      "created_date": "2019-06-27T00:00:00Z"
-    }
-  },
-  {
-    "model": "common.channel",
-    "pk": 11,
-    "fields": {
-      "name": "Web",
-      "sn_name": "වෙබ් අඩවිය",
-      "tm_name": "இணையதளம்",
-      "order": 7,
-      "created_date": "2019-06-27T00:00:00Z"
-    }
   }
 ]
