@@ -164,7 +164,7 @@ function HomePage(props) {
         justify="center"
         // style={{ minHeight: "80vh" }}
       >
-        <Grid xs={12}>
+        <Grid item xs={12}>
           <Typography
             variant="h5"
             component="h5"

@@ -13,31 +13,31 @@ import {
   fetchCategories,
   fetchChannels,
   fetchDistricts,
-  fetchDivisionalSecretariats,
+  // fetchDivisionalSecretariats,
   // fetchElections,
   fetchGramaNiladharis,
-  fetchInstitutions,
-  fetchPoliceDivisions,
-  fetchPoliceStations,
+  // fetchInstitutions,
+  // fetchPoliceDivisions,
+  // fetchPoliceStations,
   // fetchPoliticalParties,
-  fetchPollingDivisions,
-  fetchPollingStations,
-  fetchProvinces,
-  fetchWards,
+  // fetchPollingDivisions,
+  // fetchPollingStations,
+  // fetchProvinces,
+  // fetchWards,
   resetActiveIncident,
 } from "../../shared/state/sharedActions";
 
 import Button from "@material-ui/core/Button";
-import Checkbox from "@material-ui/core/Checkbox";
+// import Checkbox from "@material-ui/core/Checkbox";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import ExpansionPanel from "@material-ui/core/ExpansionPanel";
-import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
-import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
+// import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+// import ExpansionPanel from "@material-ui/core/ExpansionPanel";
+// import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
+// import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
 import FileUploader from "../../files/components/FilePicker";
 import FormControl from "@material-ui/core/FormControl";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
@@ -47,7 +47,7 @@ import { Formik } from "formik";
 import Grid from "@material-ui/core/Grid";
 import InputLabel from "@material-ui/core/InputLabel";
 import IntlSelect from "./IntlSelect";
-import MaterialTable from "material-table";
+// import MaterialTable from "material-table";
 import MenuItem from "@material-ui/core/MenuItem";
 import Paper from "@material-ui/core/Paper";
 import Radio from "@material-ui/core/Radio";
@@ -67,7 +67,7 @@ import { useLoadingStatus } from "../../loading-spinners/loadingHook";
 import { withRouter } from "react-router";
 import { withStyles } from "@material-ui/core/styles";
 import yellow from "@material-ui/core/colors/yellow";
-import TitleAutoComplete from "./TitleAutoComplete";
+// import TitleAutoComplete from "./TitleAutoComplete";
 import { useIntl } from "react-intl";
 
 const styles = (theme) => ({
@@ -205,7 +205,7 @@ function IncidentFormInternal(props) {
     reporterType: "",
     reporterAddress: "",
     reporterMobile: "",
-    reporterLandline: "",
+    reporterTelephone: "",
     reporterEmail: "",
     reporterAffiliation: "",
     accusedName: "",
@@ -260,16 +260,16 @@ function IncidentFormInternal(props) {
     dispatch(fetchChannels());
     // dispatch(fetchElections());
     dispatch(fetchCategories());
-    dispatch(fetchInstitutions());
-    dispatch(fetchProvinces());
+    // dispatch(fetchInstitutions());
+    // dispatch(fetchProvinces());
     dispatch(fetchDistricts());
-    dispatch(fetchDivisionalSecretariats());
+    // dispatch(fetchDivisionalSecretariats());
     dispatch(fetchGramaNiladharis());
-    dispatch(fetchPollingDivisions());
-    dispatch(fetchPollingStations());
-    dispatch(fetchPoliceStations());
-    dispatch(fetchPoliceDivisions());
-    dispatch(fetchWards());
+    // dispatch(fetchPollingDivisions());
+    // dispatch(fetchPollingStations());
+    // dispatch(fetchPoliceStations());
+    // dispatch(fetchPoliceDivisions());
+    // dispatch(fetchWards());
     // dispatch(fetchPoliticalParties());
 
     // depreciated
@@ -359,7 +359,8 @@ function IncidentFormInternal(props) {
         reporterName: reporter.name,
         reporterType: reporter.reporter_type,
         reporterEmail: reporter.email,
-        reporterMobile: reporter.telephone,
+        reporterMobile: reporter.mobile,
+        reporterTelephone: reporter.telephone,
         reporterAddress: reporter.address,
         reporterAffiliation: reporter.politicalAffiliation,
         accusedName: reporter.accusedName,
@@ -506,6 +507,7 @@ function IncidentFormInternal(props) {
         : IncidentSchema
     ),
     reporterMobile: Yup.number(),
+    reporterTelephone: Yup.number(),
     reporterEmail: Yup.string().email("Invalid email"),
     institution: Yup.mixed().when(
       "incidentType",
@@ -599,8 +601,8 @@ function IncidentFormInternal(props) {
                   {f({ id: "request.management.incident.create.basic_information" })}
                 </Typography>
                 <Grid container spacing={24}>
-                  <Grid item xs={12}>
-                    {/* <FormControl component="fieldset" className={classes.formControl}>
+                  {/* <Grid item xs={12}>
+                    <FormControl component="fieldset" className={classes.formControl}>
                                             <FormLabel component="legend">Type*</FormLabel>
                                             <RadioGroup
                                                 id="incidentType"
@@ -623,8 +625,8 @@ function IncidentFormInternal(props) {
                                             {errors.incidentType ? (
                                                 <FormHelperText>{errors.incidentType}</FormHelperText>
                                             ) : null}
-                                        </FormControl> */}
-                  </Grid>
+                                        </FormControl>
+                  </Grid> */}
                   <Grid item xs={12}>
                     <FormLabel component="legend">
                       <div
@@ -826,7 +828,7 @@ function IncidentFormInternal(props) {
                                                     ) : null}
                                                 </FormControl>
                                             </Grid> */}
-                      <Grid item xs={12} sm={6}>
+                      <Grid item xs={12} sm={3}>
                         <TextField
                           id="occured_date_date"
                           label={f({ id: "request.management.incident.create.date" })}
@@ -861,13 +863,13 @@ function IncidentFormInternal(props) {
                     </>
                   ) : null}
                   {values.incidentType === "COMPLAINT" ? (
-                    <Grid item xs={12} sm={6}>
+                    <Grid item xs={12} sm={3}>
                       <FormControl
                         error={touched.severity && errors.severity}
                         component="fieldset"
                         className={classes.formControl}
                       >
-                        <FormLabel component="legend">Priority*</FormLabel>
+                        <FormLabel component="legend">{f({ id: "request.management.incident.create.severity" })}</FormLabel>
                         <RadioGroup
                           name="severity"
                           id="severity"
@@ -1272,6 +1274,13 @@ function IncidentFormInternal(props) {
                       className={classes.textField}
                       name="reporterMobile"
                       label={f({ id: "request.management.incident.create.reporter.mobile" })}
+                    />
+                  </Grid>
+                  <Grid item xs={12} sm={6}>
+                    <TelephoneInput
+                      className={classes.textField}
+                      name="reporterTelephone"
+                      label={f({ id: "request.management.incident.create.reporter.telephone", defaultMessage: "Landline" })}
                     />
                   </Grid>
                   <Grid item xs={12} sm={6}>

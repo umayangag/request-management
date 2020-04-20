@@ -254,7 +254,7 @@ const EventActions = (props) => {
                 <SubdirectoryArrowLeftIcon
                   className={classes.actionButtonIcon}
                 />
-                Assign Incident
+                Assign
               </Button>
             )}
 
@@ -277,7 +277,7 @@ const EventActions = (props) => {
                 onClick={() => props.modalAction("CLOSE_MODAL")}
               >
                 <CancelIcon className={classes.actionButtonIcon} />
-                Close Incident
+                Close
               </Button>
             )}
 
@@ -298,7 +298,7 @@ const EventActions = (props) => {
                   }}
                 >
                   <ErrorIcon className={classes.actionButtonIcon} />
-                  Invalidate Incident
+                  Invalidate
                 </Button>
               )}
           </>

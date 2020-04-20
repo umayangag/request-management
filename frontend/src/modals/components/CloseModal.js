@@ -39,7 +39,7 @@ const CloseModal = (props) => {
 
     return (
         <div>
-            <DialogTitle id="form-dialog-title">Close Incident</DialogTitle>
+            <DialogTitle id="form-dialog-title">Close</DialogTitle>
             <DialogContent>
                 <DialogContentText>
                     Assignee(s)/ contact point(s)
@@ -115,8 +115,8 @@ const CloseModal = (props) => {
                 <Button onClick={() => { dispatch(hideModal()) }} color="primary">
                     Cancel
                 </Button>
-                <Button 
-                    onClick={() => onSubmitClick(dispatch, props.activeIncident.id, details)} 
+                <Button
+                    onClick={() => onSubmitClick(dispatch, props.activeIncident.id, details)}
                     color="secondary">
                     Close
                 </Button>

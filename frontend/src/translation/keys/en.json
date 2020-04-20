@@ -34,8 +34,8 @@
 
   "request.management.report.incidents.section.contact": "Your contact details",
   "request.management.report.incidents.contact.name": "Name*",
-  "request.management.report.incidents.contact.mobile": "Primary contact number / Mobile number*",
-  "request.management.report.incidents.contact.landline": "Landline",
+  "request.management.report.incidents.contact.mobile": "Primary Contact / Mobile number*",
+  "request.management.report.incidents.contact.telephone": "Secondary Contact / Landline",
   "request.management.report.incidents.contact.email": "Email",
 
   "request.management.check.incident.status": "Check request status",
@@ -78,7 +78,7 @@
 
   "request.management.incident.create.date": "Request Date",
   "request.management.incident.create.time": "Request Time",
-  "request.management.incident.create.severity": "Severity",
+  "request.management.incident.create.severity": "Priority*",
   "request.management.incident.create.upload_file": "Upload File (You can upload multiple files)",
 
   "request.management.incident.create.reporter_information": "Reporter / Compiler Information",
