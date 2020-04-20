@@ -3,7 +3,9 @@
 from django.db import connection
 import pandas as pd
 import numpy as np
-from datetime import date, timedelta, datetime
+from datetime import date, timedelta, datetime, time
+from django.utils.timezone import get_current_timezone
+from django.utils.dateparse import parse_datetime
 
 from ..common.models import Category, Channel, District
 from ..incidents.models import Incident, IncidentType, CloseWorkflow, StatusType
@@ -17,16 +19,26 @@ from django.db.models import Count
 import collections, functools, operator
 
 
-def get_daily_incidents(incidentType):
-    """
-    List dialy incidents to the given incident-type.
-    """
-    start_datetime = date.today().strftime("%Y-%m-%d 00:00:00")
-    end_datetime = date.today().strftime("%Y-%m-%d 23:59:00")
-    incidents = Incident.objects.all().filter(
-        incidentType=incidentType,
-        created_date__range=(start_datetime, end_datetime))
+def get_daily_incidents():
+    """ List dialy incidents to the current date """
+    current_date = datetime.now(tz=get_current_timezone())
+    start_date = current_date.replace(hour=0, minute=0, second=0, microsecond=0)
+    end_date = start_date + timedelta(1)
+    incidents = Incident.objects.filter(created_date__range=(str(start_date), str(end_date)))
     return incidents
+
+def get_weekly_incidents():
+    """ List weekly incident from Sunday through Saturday of the current week. """
+    current_date = datetime.now(tz=get_current_timezone())
+    start_date = current_date - timedelta(current_date.weekday())
+    end_date = start_date + timedelta(6)
+    incidents = Incident.objects.filter(created_date__range=(str(start_date), str(end_date)))
+    return incidents
+
+def parse_date_timezone(datetimeValue):
+    """ parsing string datetime (eg: '2020-04-20 06:00:00') to date with timezone for accurate search """
+    datetimeValue = get_current_timezone().localize(parse_datetime(datetimeValue))
+    return datetimeValue
 
 
 def map_category(cat_voilence, cat_law, cat_other, total_list):
@@ -80,7 +92,7 @@ def get_daily_summary_data():
     file_dict["date"] = date.today().strftime("%Y/%m/%d")
 
     # get incident list
-    incidents = get_daily_incidents(IncidentType.COMPLAINT)
+    incidents = get_daily_incidents()
 
     # preload categories
     cat_voilence = Category.objects.all().filter(top_category='Violence')
@@ -287,7 +299,7 @@ def get_daily_category_data():
     file_dict["template"] = "/incidents/complaints/daily_summery_report_categorywise.js"
     file_dict["date"] = date.today().strftime("%Y/%m/%d")
 
-    incidents = get_daily_incidents(IncidentType.COMPLAINT)
+    incidents = get_daily_incidents()
     file_dict["total"] = incidents.count()
 
     file_dict["categories"] = get_category_dict(incidents)
@@ -300,9 +312,7 @@ def get_category_data_by_date_range(start_time, end_time):
 
     file_dict["template"] = "/incidents/complaints/daily_summery_report_categorywise.js"
     file_dict["date"] = start_time + " - " + end_time
-    incidents = Incident.objects.all().filter(
-        incidentType=IncidentType.COMPLAINT,
-        created_date__range=(start_time, end_time))
+    incidents = Incident.objects.filter(created_date__range=(parse_date_timezone(start_time), parse_date_timezone(end_time)))
     file_dict["total"] = incidents.count()
 
     file_dict["categories"] = get_category_dict(incidents)
@@ -317,7 +327,7 @@ def get_weekly_closed_complain_category_data():
         "template"] = "/incidents/complaints/weeekly_closed_request_report_categorywise.js"
     file_dict["date"] = date.today().strftime("%Y/%m/%d")
 
-    incidents = get_daily_incidents(IncidentType.COMPLAINT).filter(current_status=StatusType.CLOSED.name)
+    incidents = get_weekly_incidents().filter(current_status=StatusType.CLOSED.name)
     file_dict["total"] = incidents.count()
 
     file_dict["categories"] = get_category_dict(incidents)
@@ -331,7 +341,7 @@ def get_organizationwise_data_with_timefilter():
     file_dict["template"] = "/incidents/complaints/summery_report_organizationwise_with_timefilter.js"
     file_dict["date"] = date.today().strftime("%Y/%m/%d")
 
-    incidents = get_daily_incidents(IncidentType.COMPLAINT).filter()
+    incidents = get_daily_incidents().filter()
     file_dict["total"] = incidents.count()
 
     file_dict["categories"] = get_category_dict(incidents)
