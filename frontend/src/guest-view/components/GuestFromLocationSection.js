@@ -34,7 +34,8 @@ const IncidentLocation = (props) => {
         handleCityChange,
         district,
         handleDistrictChange,
-        districts
+        districts,
+        formErrors
 
     } = props;
 
@@ -63,9 +64,15 @@ const IncidentLocation = (props) => {
                         fullWidth
                         rowsMax="5"
                         value={address}
-                        onChange={(e) => { handleAddressChange(e.target.value) }}
+                        // onChange={(e) => { handleAddressChange(e.target.value) }}
+                        onChange={e => {
+                            handleAddressChange(e.target.value);
+                            formErrors.incidentAddressErrorMsg = null;
+                          }}
                         className={classes.textField}
                         margin="normal"
+                        helperText={formErrors.incidentAddressErrorMsg || ""}
+                        error={formErrors.incidentAddressErrorMsg ? true : false}
                     />
                 </Grid>
                 <Grid item xs={12} sm={4}>
@@ -91,9 +98,12 @@ const IncidentLocation = (props) => {
                         value={district}
                         onChange={e => {
                             handleDistrictChange(e.target.value);
+                            formErrors.incidentDistrictErrorMsg = null;
                         }}
                         margin="normal"
                         fullWidth
+                        helperText={formErrors.incidentDistrictErrorMsg || ""}
+                        error={formErrors.incidentDistrictErrorMsg ? true : false}
                     >
                         {districts.allCodes.map(code => (
                             <MenuItem key={code} value={code}>
