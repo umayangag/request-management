@@ -334,7 +334,7 @@ const VerticalLinearStepper = (props) => {
                         reporterData.email = incidentContact.email;
 
                         dispatch(createGuestIncidentWithReporter( incidentData, reporterData))
-                        dispatch(moveStepper({ step: activeStep + 1 }));
+                        // dispatch(moveStepper({ step: activeStep + 1 }));
                     }
                 } else {
                     //updating an existing incident.
@@ -354,7 +354,7 @@ const VerticalLinearStepper = (props) => {
                             incidentUpdate['occured_date'] = dateTime
                         }
                         dispatch(updateGuestIncident(incidentId, incidentUpdate))
-                        dispatch(moveStepper({ step: activeStep + 1 }));
+                        // dispatch(moveStepper({ step: activeStep + 1 }));
                     }
                 }
             }
@@ -402,7 +402,9 @@ const VerticalLinearStepper = (props) => {
                         fileData.append("files[]", file);
                     }
                     dispatch(uploadFileGuest(incidentId, fileData))
-                    // dispatch(moveStepper({ step: activeStep + 1 }));
+                    dispatch(moveStepper({ step: activeStep + 1 }));
+                }else{
+                    dispatch(moveStepper({ step: activeStep + 1 }));
                 }
             }
         },
