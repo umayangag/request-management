@@ -50,51 +50,7 @@
       "name": "SMS",
       "sn_name": "කෙටි පණිවිඩ",
       "tm_name": "எஸ்எம்எஸ்",
-      "order": 10,
-      "created_date": "2019-06-27T00:00:00Z"
-    }
-  },
-  {
-    "model": "common.channel",
-    "pk": 6,
-    "fields": {
-      "name": "Tell Commission",
-      "sn_name": "කොමිසමට",
-      "tm_name": "கமிஷன்",
-      "order": 6,
-      "created_date": "2019-06-27T00:00:00Z"
-    }
-  },
-  {
-    "model": "common.channel",
-    "pk": 7,
-    "fields": {
-      "name": "Mobile App",
-      "sn_name": "ජංගම මෘදුකාංග",
-      "tm_name": "மொபைல் மென்பொருள்",
-      "order": 7,
-      "created_date": "2019-06-27T00:00:00Z"
-    }
-  },
-  {
-    "model": "common.channel",
-    "pk": 8,
-    "fields": {
-      "name": "Civil Society",
-      "sn_name": "සිවිල් සමාජය",
-      "tm_name": "சிவில் சமூகத்தின்",
-      "order": 9,
-      "created_date": "2019-06-27T00:00:00Z"
-    }
-  },
-  {
-    "model": "common.channel",
-    "pk": 9,
-    "fields": {
-      "name": "Mobile patrolling units",
-      "sn_name": "ජංගම මුර සංචාර ඒකක",
-      "tm_name": "மொபைல் ரோந்து அலகுகள்",
-      "order": 8,
+      "order": 5,
       "created_date": "2019-06-27T00:00:00Z"
     }
   },
@@ -105,7 +61,7 @@
       "name": "Social Media",
       "sn_name": "සමාජ මාධ්‍ය",
       "tm_name": "சமூக ஊடகங்கள்",
-      "order": 5,
+      "order": 6,
       "created_date": "2019-06-27T00:00:00Z"
     }
   },
@@ -116,7 +72,7 @@
       "name": "Web",
       "sn_name": "වෙබ් අඩවිය",
       "tm_name": "இணையதளம்",
-      "order": 11,
+      "order": 7,
       "created_date": "2019-06-27T00:00:00Z"
     }
   }
