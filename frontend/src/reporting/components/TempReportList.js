@@ -148,20 +148,14 @@ export default function TempReportList(){
                 <Grid item xs>
                     <Typography variant="h6"> View Reports </Typography>
                     <List>
-                        {/* <ListItemLink href={`${API_BASE_URL}/pdfgen/?template_type=daily_district`} target="_blank">
-                            <ListItemText primary="Daily Summary Report" />
-                        </ListItemLink> */}
                         <ListItemLink href={`${API_BASE_URL}/pdfgen/?template_type=daily_category`} target="_blank">
-                            <ListItemText primary="Categorywise Daily Summary Report" />
+                            <ListItemText primary="Daily Summary Report by Category" />
                         </ListItemLink>
                         <ListItemLink href={`${API_BASE_URL}/pdfgen/?template_type=weekly_closed_request_category`} target="_blank">
-                            <ListItemText primary="Categorywise Weekly Closed Request Summary Report" />
+                            <ListItemText primary="Weekly Summary Report - Closed Requests by Category" />
                         </ListItemLink>
-                        <ListItemLink href={`${API_BASE_URL}/pdfgen/?template_type=weekly_closed_request_organization`} target="_blank">
-                            <ListItemText primary="Organizationwise Weekly Closed Request Summary Report" />
-                        </ListItemLink>
-                        {/* <ListItemLink href={`${API_BASE_URL}/pdfgen/?template_type=daily_summary_report_districtwise`} target="_blank">
-                            <ListItemText primary="Districtwise Daily Summary Report" />
+                        {/* <ListItemLink href={`${API_BASE_URL}/pdfgen/?template_type=weekly_closed_request_organization`} target="_blank">
+                            <ListItemText primary="Weekly Summary Report - Closed Requests by Organization" />
                         </ListItemLink> */}
                     </List>
                     <form
@@ -178,7 +172,7 @@ export default function TempReportList(){
                             }}>
                     <ExpansionPanel square expanded={expanded === 'panel2'} onChange={handleChange2('panel2')}>
                         <ExpansionPanelSummary aria-controls="panel1d-content" id="panel1d-header">
-                        <Typography>Categorywise Summary Report ( Filter by time )</Typography>
+                        <Typography>Summary Report by Category ( Filter by time )</Typography>
                         </ExpansionPanelSummary>
                         <ExpansionPanelDetails>
                         <Grid container spacing={24}>
@@ -220,7 +214,7 @@ export default function TempReportList(){
                         </ExpansionPanelDetails>
                     </ExpansionPanel>
                     </form>
-                    <form
+                    {/* <form
                             // className={classes.container}
                             noValidate
                             autoComplete="off"
@@ -275,7 +269,7 @@ export default function TempReportList(){
                         </Grid>
                         </ExpansionPanelDetails>
                     </ExpansionPanel>
-                    </form>
+                    </form> */}
                 </Grid>
             </Grid>
         </Paper>

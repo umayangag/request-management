@@ -66,18 +66,19 @@ const EscallateOutsideModal = (props) => {
 
     return (
         <div>
-            <DialogTitle id="form-dialog-title">Refer to organization entity: </DialogTitle>
+            <DialogTitle id="form-dialog-title">Assign </DialogTitle>
 
             <DialogContent>
                 <DialogContentText>
-                    Describe outside entity.
+                Select organization to assign record to.
                 </DialogContentText>
 
                 <TextField
                     autoFocus
                     id="entity"
+                    style={{width:'60%'}}
                     select
-                    label="Entity"
+                    label="Organization"
                     // className={classes.textField}
                     value={escallationInfo.entity_type}
                     SelectProps={{
@@ -124,6 +125,7 @@ const EscallateOutsideModal = (props) => {
                         select
                         label="Division"
                         value={division}
+                        style={{width:'60%'}}
                         SelectProps={{
                             MenuProps: {
                             // className: classes.menu,
@@ -148,6 +150,7 @@ const EscallateOutsideModal = (props) => {
                         <TextField
                             autoFocus
                             id="entity"
+                            style={{width:'60%'}}
                             select
                             label="Entity User"
                             value={escallationInfo.entity_user}
@@ -187,12 +190,12 @@ const EscallateOutsideModal = (props) => {
 
             <DialogActions>
                 <Button onClick={()=>{dispatch(hideModal())}} color="primary">
-                    Close
+                   Cancel 
                 </Button>
                 <Button
                     onClick={()=>{  onSubmit(dispatch, incidentId, escallationInfo) }}
                     color="primary">
-                    Refer to organization
+                    Assign
                 </Button>
             </DialogActions>
         </div>
