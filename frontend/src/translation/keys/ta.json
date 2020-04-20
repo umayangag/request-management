@@ -25,15 +25,15 @@
 
   "request.management.report.incidents.section.location": "சம்பவம் நடந்த இடத்தை விபரிக்கவும்",
   "request.management.report.incidents.location": "இடத்தின் பெயர் அல்லது விபரம்",
-  "request.management.report.incidents.address": "முகவரி",
+  "request.management.report.incidents.address": "முகவரி*",
   "request.management.report.incidents.city": "நகரம்",
 
   "request.management.report.incidents.section.attachment": "சம்பவம் தொடர்பான கோப்பு / ஆவணங்களை இணைக்கவும்",
   "request.management.report.incidents.seleted.file": "தெரிவு செய்யப்பட்ட கோப்பு / ஆவணம்",
 
   "request.management.report.incidents.section.contact": "உங்களின் தொடர்பு விபரங்கள்",
-  "request.management.report.incidents.contact.name": "பெயர்",
-  "request.management.report.incidents.contact.mobile": "கைபேசி",
+  "request.management.report.incidents.contact.name": "பெயர்*",
+  "request.management.report.incidents.contact.mobile": "கைபேசி*",
   "request.management.report.incidents.contact.landline": "நிலையான தொலைபேசி",
   "request.management.report.incidents.contact.email": "மின்னஞ்சல்",
 

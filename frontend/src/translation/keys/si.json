@@ -26,15 +26,15 @@
 
   "request.management.report.incidents.section.location": "සිදුවූ ස්ථානය පිළිබඳ තොරතුරු",
   "request.management.report.incidents.location": "සිදුවූ ස්ථානයේ නාමය හෝ විස්තරය",
-  "request.management.report.incidents.address": "ලිපිනය",
+  "request.management.report.incidents.address": "ලිපිනය*",
   "request.management.report.incidents.city": "නගරය",
 
   "request.management.report.incidents.section.attachment": "සිදුවීමට අදාළ ඇමුණුම්",
   "request.management.report.incidents.seleted.file": "තෝරාගත් ඇමුණුම",
 
   "request.management.report.incidents.section.contact": "ඔබව සම්බන්ධ කරගත හැකි තොරතුරු",
-  "request.management.report.incidents.contact.name": "නම",
-  "request.management.report.incidents.contact.mobile": "ජංගම දුරකථන",
+  "request.management.report.incidents.contact.name": "නම*",
+  "request.management.report.incidents.contact.mobile": "ජංගම දුරකථන*",
   "request.management.report.incidents.contact.landline": "ස්ථාවර දුරකථන",
   "request.management.report.incidents.contact.email": "ඊමේල්",
 
