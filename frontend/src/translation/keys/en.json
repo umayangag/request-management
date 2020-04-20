@@ -77,7 +77,7 @@
   "request.management.incident.create.category": "Category",
 
   "request.management.incident.create.date": "Request Date",
-  "request.management.incident.create.time": "Incident Time",
+  "request.management.incident.create.time": "Request Time",
   "request.management.incident.create.severity": "Priority*",
   "request.management.incident.create.upload_file": "Upload File (You can upload multiple files)",
 

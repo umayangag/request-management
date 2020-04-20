@@ -1,7 +1,7 @@
 import moment from 'moment';
 
 export function getDateDiff(event){
-    const hours = moment(new Date().getTime()).diff(event.createdDate, "hours");
+    const hours = moment(new Date().getTime()).diff(event, "hours");
 
     if(hours < 24){
         if(hours === 0){
@@ -9,13 +9,13 @@ export function getDateDiff(event){
         }
         return `${hours} hours ago`;
     }else if(hours < 720){
-        const days = moment(new Date().getTime()).diff(event.createdDate, "days");
+        const days = moment(new Date().getTime()).diff(event, "days");
         return `${days} days ago`;
     }else if(hours < 8640){
-        const months = moment(new Date().getTime()).diff(event.createdDate, "months");
+        const months = moment(new Date().getTime()).diff(event, "months");
         return `${months} months ago`; 
     }else{
-        const years = moment(new Date().getTime()).diff(event.createdDate, "years")
+        const years = moment(new Date().getTime()).diff(event, "years")
         return `${years} years ago`;
     }
 }
