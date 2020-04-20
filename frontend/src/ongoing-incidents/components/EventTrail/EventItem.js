@@ -65,15 +65,15 @@ const styles = {
 function getActionText(event){
     switch(event.action){
         case "GENERIC_UPDATE":
-            return "edited incident information";
+            return "edited record information";
         case "COMMENTED":
-            return "commented on the incident";
+            return "commented on this record";
         case "OUTCOME_ADDED":
-            return "added new outcome for the incident";
+            return "added new outcome for this record";
         case "MEDIA_ATTACHED":
             return "attached media";
         case "CREATED":
-            return ` created the incident`
+            return ` created this record`
         case "WORKFLOW_ACTIONED":
                 if(!event.data){
                     return "unknown workflow action";
@@ -81,10 +81,10 @@ function getActionText(event){
 
                 switch(event.data.workflow.type){
                     case "Verify":
-                        return "verified the incident";
-                    
+                        return "verified the record";
+
                     case "Escalate External":
-                        return "escallated the incident to an outside entity";
+                        return "escallated the record to an outside entity";
 
                     case "Complete Action":
                             return "provided action";
@@ -96,19 +96,19 @@ function getActionText(event){
                             return "provided advice";
 
                     case "Assign":
-                            return `assigned ${event.data.workflow.data.assignee} to the incident`;
+                            return `assigned ${event.data.workflow.data.assignee} to the record`;
 
                     case "Escalate":
-                        return `escalated the incident to ${event.data.workflow.data.assignee}`
+                        return `escalated the record to ${event.data.workflow.data.assignee}`
 
                     case "Close":
-                        return `closed the incident`
+                        return `closed the record`
 
                     case "Invalidate":
-                        return `invalidated the incident`
+                        return `invalidated the record`
 
                     case "Reopen":
-                        return `reopened the incident`
+                        return `reopened the record`
                 }
         default:
             return "unknown action"
@@ -140,7 +140,7 @@ function getSecondaryItem(event){
         const file = event.data.media.file;
         return (
             <div>
-                <FilePreviewer 
+                <FilePreviewer
                     url={`${API_BASE_URL}/incidents/files/download/${file.id}`}
                     filename={file.name}
                     ext={file.extension}
@@ -153,7 +153,7 @@ function getSecondaryItem(event){
 
         if(workflowType === "Verify"){
             return (
-                <div><b>Has Proof?</b> <br /> 
+                <div><b>Has Proof?</b> <br />
                     {workflowData.hasProof ? "Yes" : "No"}
                 </div>
             )
@@ -259,7 +259,7 @@ const EventItemView = ({ event, classes }) => {
             <div className={classes.eventItemUserDetails}>
                 <div className={classes.truncate}>
                     {/* left end */}
-                    <div> 
+                    <div>
                         <strong>
                             {initiator}
                         </strong>{' '}
@@ -273,9 +273,9 @@ const EventItemView = ({ event, classes }) => {
                 {
                     hasPendingAction(event) && (
                         <div className={classes.eventItemActions}>
-                            <Button 
+                            <Button
                                 color="primary"
-                                className={classes.button} 
+                                className={classes.button}
                                 onClick={() => {
                                     dispatch(
                                         showModal(
@@ -292,14 +292,14 @@ const EventItemView = ({ event, classes }) => {
                     )
                 }
 
-                {hasPendingAdvice(event) && 
+                {hasPendingAdvice(event) &&
                  (
                     <div className={classes.eventItemActions}>
-                        <Button 
-                            color="primary" 
-                            className={classes.button} 
+                        <Button
+                            color="primary"
+                            className={classes.button}
                             onClick={() => dispatch(showModal(
-                                            'PROVIDE_ADVICE_MODAL', 
+                                            'PROVIDE_ADVICE_MODAL',
                                             {  event }))}
                         >
                             Provide Advice
@@ -311,8 +311,8 @@ const EventItemView = ({ event, classes }) => {
         { hasEventBody(event) && (
             <div className={classes.eventItemBody}>
                 {getSecondaryItem(event)}
-            </div>    
-        )}        
+            </div>
+        )}
     </li>
 )};
 

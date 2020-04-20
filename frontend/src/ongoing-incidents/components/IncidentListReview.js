@@ -115,12 +115,12 @@ function IncidentList({
       </colgroup>
       <TableHead>
         <TableRow>
-          <CustomTableCell align="center">{f({id: "eclk.incident.management.home.incidents.list.refid"})}</CustomTableCell>
-          <CustomTableCell align="center">{f({id: "eclk.incident.management.home.incidents.list.created_date"})}</CustomTableCell>
-          <CustomTableCell align="center">{f({id: "eclk.incident.management.incident.create.location.district"})}</CustomTableCell>
-          <CustomTableCell align="center">{f({id: "eclk.incident.management.home.incidents.list.status"})}</CustomTableCell>
-          <CustomTableCell align="center">{f({id: "eclk.incident.management.home.incidents.list.category"})}</CustomTableCell>
-          <CustomTableCell align="center">{f({id: "eclk.incident.management.home.incidents.list.description"})}</CustomTableCell>
+          <CustomTableCell align="center">{f({id: "request.management.home.incidents.list.refid"})}</CustomTableCell>
+          <CustomTableCell align="center">{f({id: "request.management.home.incidents.list.created_date"})}</CustomTableCell>
+          <CustomTableCell align="center">{f({id: "request.management.incident.create.location.district"})}</CustomTableCell>
+          <CustomTableCell align="center">{f({id: "request.management.home.incidents.list.status"})}</CustomTableCell>
+          <CustomTableCell align="center">{f({id: "request.management.home.incidents.list.category"})}</CustomTableCell>
+          <CustomTableCell align="center">{f({id: "request.management.home.incidents.list.description"})}</CustomTableCell>
           {/* <CustomTableCell align="center">Final Resolution</CustomTableCell> */}
         </TableRow>
       </TableHead>

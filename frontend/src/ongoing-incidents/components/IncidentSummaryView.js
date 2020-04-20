@@ -61,21 +61,21 @@ function BasicDetailTab(props) {
 
                         <Grid container spacing={24}>
                             <Grid item xs>
-                                <Typography className={classes.label}> {f({id: "eclk.incident.management.home.incidents.list.refid"})} </Typography>
+                                <Typography className={classes.label}> {f({id: "request.management.home.incidents.list.refid"})} </Typography>
                                 <Typography variant="h4" gutterBottom> {incident.refId} </Typography>
                             </Grid>
                         </Grid>
 
                         <Grid container spacing={24}>
                             <Grid item xs>
-                                <Typography variant="caption" className={classes.label}> {f({id: "eclk.incident.management.incident.create.title"})} </Typography>
+                                <Typography variant="caption" className={classes.label}> {f({id: "request.management.incident.create.title"})} </Typography>
                                 <Typography gutterBottom> {incident.title} </Typography>
                             </Grid>
                         </Grid>
 
                         <Grid container spacing={24}>
                             <Grid item xs>
-                                <Typography variant="caption" className={classes.label}> {f({id: "eclk.incident.management.incident.create.description"})} </Typography>
+                                <Typography variant="caption" className={classes.label}> {f({id: "request.management.incident.create.description"})} </Typography>
                                 <Typography gutterBottom> {incident.description} </Typography>
                             </Grid>
                         </Grid>
@@ -91,13 +91,13 @@ function BasicDetailTab(props) {
 
                                 <Grid container spacing={24}>
                                     <Grid item xs>
-                                        <Typography variant="caption" className={classes.label}>{f({id: "eclk.incident.management.incident.create.date"})} </Typography>
+                                        <Typography variant="caption" className={classes.label}>{f({id: "request.management.incident.create.date"})} </Typography>
                                         <Typography gutterBottom>
                                             {(incident.occured_date) ? <Moment format="YYYY/MM/DD">{incident.occured_date}</Moment> : "No date set"}
                                         </Typography>
                                     </Grid>
                                     <Grid item xs>
-                                        <Typography variant="caption" className={classes.label}> {f({id: "eclk.incident.management.incident.create.time"})} </Typography>
+                                        <Typography variant="caption" className={classes.label}> {f({id: "request.management.incident.create.time"})} </Typography>
                                         <Typography gutterBottom>
                                             {(incident.occured_date) ? <Moment format="HH:mm">{incident.occured_date}</Moment> : "No time set"}
                                         </Typography>
@@ -109,11 +109,11 @@ function BasicDetailTab(props) {
                         {incident.incidentType === 'INQUIRY' &&
                             <Grid container spacing={24}>
                                 <Grid item xs>
-                                    <Typography variant="caption" className={classes.label}>{f({id: "eclk.incident.management.incident.create.date"})}</Typography>
+                                    <Typography variant="caption" className={classes.label}>{f({id: "request.management.incident.create.date"})}</Typography>
                                     <Typography gutterBottom> {incident.receivedDate} </Typography>
                                 </Grid>
                                 <Grid item xs>
-                                    <Typography variant="caption" className={classes.label}>{f({id: "eclk.incident.management.incident.create.date"})}</Typography>
+                                    <Typography variant="caption" className={classes.label}>{f({id: "request.management.incident.create.date"})}</Typography>
                                     <Typography gutterBottom> {incident.letterDate} </Typography>
                                 </Grid>
                             </Grid>
@@ -121,11 +121,11 @@ function BasicDetailTab(props) {
 
                         <Grid container spacing={24}>
                             <Grid item xs>
-                                <Typography variant="caption" className={classes.label}> {f({id: "eclk.incident.management.incident.review.logged_date"})} </Typography>
+                                <Typography variant="caption" className={classes.label}> {f({id: "request.management.incident.review.logged_date"})} </Typography>
                                 <Typography gutterBottom> <Moment format="YYYY/MM/DD">{incident.createdDate}</Moment> </Typography>
                             </Grid>
                             <Grid item xs>
-                                <Typography variant="caption" className={classes.label}> {f({id: "eclk.incident.management.incident.review.logged_time"})} </Typography>
+                                <Typography variant="caption" className={classes.label}> {f({id: "request.management.incident.review.logged_time"})} </Typography>
                                 <Typography gutterBottom> <Moment format="HH:mm">{incident.createdDate}</Moment> </Typography>
                             </Grid>
                         </Grid>
@@ -149,7 +149,7 @@ function BasicDetailTab(props) {
 
                         <Grid container spacing={24}>
                             <Grid item xs>
-                                <Typography variant="caption" className={classes.label}> {f({id: "eclk.incident.management.incident.create.category"})} </Typography>
+                                <Typography variant="caption" className={classes.label}> {f({id: "request.management.incident.create.category"})} </Typography>
                                 <Typography gutterBottom>
                                     {categories.map((value, index) => (value.id == incident.category ? value.sub_category : null))}
                                 </Typography>
@@ -163,7 +163,7 @@ function BasicDetailTab(props) {
                         {incident.incidentType === 'INQUIRY' &&
                             <Grid container spacing={24}>
                                 <Grid item xs>
-                                    <Typography variant="caption" className={classes.label}> {f({id: "eclk.incident.management.incident.review.institution"})} </Typography>
+                                    <Typography variant="caption" className={classes.label}> {f({id: "request.management.incident.review.institution"})} </Typography>
                                     <Typography gutterBottom>
                                         {
                                             incident.institution && institutions.byCode[incident.institution] ?
@@ -176,7 +176,7 @@ function BasicDetailTab(props) {
 
                         <Grid container spacing={24}>
                             <Grid item xs>
-                                <Typography variant="caption" className={classes.label}> {f({id: "eclk.incident.management.incident.create.mode_of_receipt"})}</Typography>
+                                <Typography variant="caption" className={classes.label}> {f({id: "request.management.incident.create.mode_of_receipt"})}</Typography>
                                 <Typography gutterBottom>
                                     {channels.map((value, index) => (value.id == incident.infoChannel ? value.name : null))}
                                 </Typography>
@@ -216,14 +216,14 @@ function LocationTab(props) {
 
                         <Grid container spacing={24}>
                             <Grid item xs>
-                                <Typography variant="caption" className={classes.label}> {f({id: "eclk.incident.management.incident.create.location.description"})} </Typography>
+                                <Typography variant="caption" className={classes.label}> {f({id: "request.management.incident.create.location.description"})} </Typography>
                                 <Typography gutterBottom> {incident.location} </Typography>
                             </Grid>
                         </Grid>
 
                         <Grid container spacing={24}>
                             <Grid item xs>
-                                <Typography variant="caption" className={classes.label}> {f({id: "eclk.incident.management.incident.create.location.address"})} </Typography>
+                                <Typography variant="caption" className={classes.label}> {f({id: "request.management.incident.create.location.address"})} </Typography>
                                 <Typography gutterBottom> {incident.address}</Typography>
                             </Grid>
                         </Grid>
@@ -257,7 +257,7 @@ function LocationTab(props) {
 
                         <Grid container spacing={24}>
                             <Grid item xs>
-                                <Typography variant="caption" className={classes.label}> {f({id: "eclk.incident.management.incident.create.location.district"})} </Typography>
+                                <Typography variant="caption" className={classes.label}> {f({id: "request.management.incident.create.location.district"})} </Typography>
                                 <Typography variant="" gutterBottom>
                                     {
                                         incident.district && districts.byCode[incident.district] ?
@@ -306,7 +306,7 @@ function ContactTab(props) {
 
     const { classes, reporter } = props;
     const { formatMessage: f } = useIntl();
-    
+
     return (
         <div>
             <Grid container spacing={24}>
@@ -315,35 +315,35 @@ function ContactTab(props) {
 
                         <Grid container spacing={24}>
                             <Grid item xs>
-                                <Typography variant="caption" className={classes.label}> {f({id: "eclk.incident.management.incident.create.reporter.name"})} </Typography>
+                                <Typography variant="caption" className={classes.label}> {f({id: "request.management.incident.create.reporter.name"})} </Typography>
                                 <Typography gutterBottom> {reporter.name} </Typography>
                             </Grid>
                         </Grid>
 
-                        {/* <Grid container spacing={24}>
-                            <Grid item xs>
-                                <Typography variant="caption" className={classes.label}> Landline </Typography>
-                                <Typography gutterBottom> {reporter.telephone} </Typography>
-                            </Grid>
-                        </Grid> */}
-
                         <Grid container spacing={24}>
                             <Grid item xs>
-                                <Typography variant="caption" className={classes.label}> {f({id: "eclk.incident.management.incident.create.reporter.mobile"})} </Typography>
+                                <Typography variant="caption" className={classes.label}> Landline {f({id: "request.management.incident.create.reporter.mobile"})} </Typography>
                                 <Typography gutterBottom> {reporter.telephone} </Typography>
                             </Grid>
                         </Grid>
 
                         <Grid container spacing={24}>
                             <Grid item xs>
-                                <Typography variant="caption" className={classes.label}> {f({id: "eclk.incident.management.incident.create.reporter.email"})} </Typography>
+                                <Typography variant="caption" className={classes.label}> {f({id: "request.management.incident.create.reporter.mobile"})} </Typography>
+                                <Typography gutterBottom> {reporter.mobile} </Typography>
+                            </Grid>
+                        </Grid>
+
+                        <Grid container spacing={24}>
+                            <Grid item xs>
+                                <Typography variant="caption" className={classes.label}> {f({id: "request.management.incident.create.reporter.email"})} </Typography>
                                 <Typography gutterBottom> {reporter.email} </Typography>
                             </Grid>
                         </Grid>
 
                         <Grid container spacing={24}>
                             <Grid item xs>
-                                <Typography variant="caption" className={classes.label}> {f({id: "eclk.incident.management.incident.create.reporter.address"})} </Typography>
+                                <Typography variant="caption" className={classes.label}> {f({id: "request.management.incident.create.reporter.address"})} </Typography>
                                 <Typography gutterBottom> {reporter.address} </Typography>
                             </Grid>
                         </Grid>

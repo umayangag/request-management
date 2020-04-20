@@ -114,12 +114,12 @@ function IncidentList({
       </colgroup>
       <TableHead>
         <TableRow>
-          <CustomTableCell align="center">{f({id: "eclk.incident.management.home.incidents.list.refid"})}</CustomTableCell>
-          <CustomTableCell align="center">{f({id: "eclk.incident.management.home.incidents.list.category"})}</CustomTableCell>
-          <CustomTableCell align="center">{f({id: "eclk.incident.management.home.incidents.list.description"})}</CustomTableCell>
-          <CustomTableCell align="center">{f({id: "eclk.incident.management.home.incidents.list.status"})}</CustomTableCell>
-          <CustomTableCell align="center">{f({id: "eclk.incident.management.home.incidents.list.severity"})}</CustomTableCell>
-          <CustomTableCell align="center">{f({id: "eclk.incident.management.home.incidents.list.response_time"})}</CustomTableCell>
+          <CustomTableCell align="center">{f({id: "request.management.home.incidents.list.refid"})}</CustomTableCell>
+          <CustomTableCell align="center">{f({id: "request.management.home.incidents.list.category"})}</CustomTableCell>
+          <CustomTableCell align="center">{f({id: "request.management.home.incidents.list.description"})}</CustomTableCell>
+          <CustomTableCell align="left">{f({id: "request.management.home.incidents.list.status"})}</CustomTableCell>
+          <CustomTableCell align="left">{f({id: "request.management.home.incidents.list.severity"})}</CustomTableCell>
+          <CustomTableCell align="left">{f({id: "request.management.home.incidents.list.response_time"})}</CustomTableCell>
           {/* <CustomTableCell align="center">Category</CustomTableCell> */}
           {/* <CustomTableCell align="center">Last Action At</CustomTableCell> */}
         </TableRow>
@@ -149,13 +149,13 @@ function IncidentList({
                   : row.description}
               </p>
             </CustomTableCell>
-            <CustomTableCell align="center">
+            <CustomTableCell align="left">
               <p>{row.currentStatus}</p>
             </CustomTableCell>
-            <CustomTableCell align="center">
+            <CustomTableCell align="left">
               <p>{row.severity}</p>
             </CustomTableCell>
-            <CustomTableCell align="center">
+            <CustomTableCell align="left">
               <p>{row.response_time} h</p>
             </CustomTableCell>
             {/* <CustomTableCell align="center">

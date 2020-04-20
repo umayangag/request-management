@@ -145,7 +145,7 @@ const GuestRefIdCheck = (props) => {
             </Avatar>
             <Typography component="h1" variant="h5">
               <FormattedMessage
-                id="eclk.incident.management.report.check.status"
+                id="request.management.report.check.status"
                 defaultMessage="Check Status"
               />
             </Typography>
@@ -157,7 +157,7 @@ const GuestRefIdCheck = (props) => {
               }}
             >
               <FormControl margin="normal" required fullWidth>
-                {/* <InputLabel htmlFor="email"><FormattedMessage id="eclk.incident.management.login.username" /></InputLabel> */}
+                {/* <InputLabel htmlFor="email"><FormattedMessage id="request.management.login.username" /></InputLabel> */}
                 <Input
                   id="email"
                   name="email"
@@ -177,7 +177,7 @@ const GuestRefIdCheck = (props) => {
                 onClick={handleSubmit}
               >
                 <FormattedMessage
-                  id="eclk.incident.management.report.check.status.submit"
+                  id="request.management.report.check.status.submit"
                   defaultMessage="Submit Reference ID"
                 />
               </Button>
@@ -195,12 +195,12 @@ const GuestRefIdCheck = (props) => {
             marginTop="20"
           >
             {f({
-              id: "eclk.incident.management.report.check.status",
+              id: "request.management.report.check.status",
               defaultMessage: "Report Check Status",
             })}
           </Typography> */}
           {/* <Typography style={{ width: '100%' }} align="left" variant="" marginTop="20">
-                {f({ id: "eclk.incident.management.report.incidents.helper.text", defaultMessage: "*fields are mandatory" })}
+                {f({ id: "request.management.report.incidents.helper.text", defaultMessage: "*fields are mandatory" })}
             </Typography> */}
         </Grid>
         <Grid item xs={12}>

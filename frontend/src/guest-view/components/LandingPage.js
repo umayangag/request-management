@@ -105,7 +105,7 @@ function HomePage(props) {
                     color="primary"
                   >
                     <FormattedMessage
-                      id="eclk.incident.management.report.incidents"
+                      id="request.management.report.incidents"
                       defaultMessage={"Submit a request"}
                     />
                   </Typography>
@@ -116,7 +116,7 @@ function HomePage(props) {
                     className={classes.cardText}
                     color="primary"
                   >
-                    <NoteAddIcon className={classes.icon} />
+                    <NoteAddIcon style={{marginTop:63}} className={classes.icon} />
                   </Typography>
                 </CardContent>
               </CardActionArea>
@@ -136,7 +136,7 @@ function HomePage(props) {
                     color="primary"
                   >
                     <FormattedMessage
-                      id="eclk.incident.management.check.incident.status"
+                      id="request.management.check.incident.status"
                       defaultMessage={"Check request status"}
                     />
                   </Typography>
@@ -164,16 +164,16 @@ function HomePage(props) {
         justify="center"
         // style={{ minHeight: "80vh" }}
       >
-        <Grid xs={12}>
+        <Grid item xs={12}>
           <Typography
             variant="h5"
             component="h5"
             className={classes.cardText}
             color="primary"
           >
-             Registered user ?
+             Registered user  -
             <Button color="primary" className={classes.button} href="/sign-in">
-              Sign In
+            Sign In
             </Button>
           </Typography>
         </Grid>

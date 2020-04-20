@@ -8,13 +8,13 @@ import i18n from "../translation/i18n.js";
 
 import IncidentFormInternal from "../incident-filing/components/IncidentFormInternal";
 
-import { ReportList, ReportViewer } from "../reporting";
+import { ReportViewer } from "../reporting";
 
 import SignInPage from "../app/SignInPage";
 import PrivateRoute from "./PrivateRoute";
 
 import ReviewComplaintsListView from '../ongoing-incidents/components/ReviewComplaintsListView';
-import ReviewInquiriesListView from "../ongoing-incidents/components/ReviewInquiriesListView";
+// import ReviewInquiriesListView from "../ongoing-incidents/components/ReviewInquiriesListView";
 import AppLayout from '../app/AppLayout';
 
 import { LandingPage } from '../guest-view';

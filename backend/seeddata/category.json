@@ -5,7 +5,7 @@
     "fields": {
       "code": "CVD19-1",
       "top_category": "COVID19",
-      "sub_category": "Report a matter/incident",
+      "sub_category": "Report a matter / incident",
       "sn_top_category": "COVID19",
       "sn_sub_category": "කාරණයක් / සිද්ධියක් වාර්තා කරන්න",
       "tm_top_category": "COVID19",
@@ -173,11 +173,11 @@
     "fields": {
       "code": "DIPLO-1",
       "top_category": "DIPLOMAT / EMBASSIES / NGOs",
-      "sub_category": "Expatriates / Residents of Sri Lanka with foreign citizenship / Diplomatic embassies",
+      "sub_category": "Residents of Sri Lanka with foreign citizenship / Diplomatic embassies",
       "sn_top_category": "තානාපතියන් / තානාපති කාර්යාල / රාජ්‍ය නොවන සංවිධාන",
-      "sn_sub_category": "විදේශිකයන් / විදේශීය පුරවැසිභාවය සහිත ශ්‍රී ලංකාවේ පදිංචිකරුවන් / රාජ්‍ය තාන්ත්‍රික තානාපති කාර්යාල",
+      "sn_sub_category": "විදේශීය පුරවැසිභාවය සහිත ශ්‍රී ලංකාවේ පදිංචිකරුවන් / රාජ්‍ය තාන්ත්‍රික තානාපති කාර්යාල",
       "tm_top_category": "தூதர்கள் / தூதரகங்கள் / தன்னார்வ தொண்டு நிறுவனம்",
-      "tm_sub_category": "வெளிநாட்டவர்கள் / வெளிநாட்டு குடியுரிமையுடன் இலங்கையில் வசிப்பவர்கள் / இராஜதந்திர தூதரகங்கள்",
+      "tm_sub_category": "வெளிநாட்டு குடியுரிமையுடன் இலங்கையில் வசிப்பவர்கள் / இராஜதந்திர தூதரகங்கள்",
       "created_date": "2020-01-01T00:00:00Z"
     }
   },
@@ -201,7 +201,7 @@
     "fields": {
       "code": "DIPLO-3",
       "top_category": "DIPLOMAT / EMBASSIES / NGOs",
-      "sub_category": "DIPLOMAT / EMBASSIES / UN / NGOs",
+      "sub_category": "Diplomat / Embassies / UN / NGOs",
       "sn_top_category": "තානාපතියන් / තානාපති කාර්යාල / රාජ්‍ය නොවන සංවිධාන",
       "sn_sub_category": "තානාපතියන් / තානාපති කාර්යාල / UN / රාජ්‍ය නොවන සංවිධාන",
       "tm_top_category": "தூதர்கள் / தூதரகங்கள் / தன்னார்வ தொண்டு நிறுவனம்",
@@ -215,7 +215,7 @@
     "fields": {
       "code": "GOV-1",
       "top_category": "GOVT ORG",
-      "sub_category": "Request authorization/ approval",
+      "sub_category": "Request authorization / approval",
       "sn_top_category": "රාජ්‍ය සංවිධානය",
       "sn_sub_category": "අවසරය / අනුමැතිය ඉල්ලා සිටින්න",
       "tm_top_category": "அரசு நிறுவனங்கள்",
