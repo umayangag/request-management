@@ -334,7 +334,6 @@ const VerticalLinearStepper = (props) => {
                         reporterData.email = incidentContact.email;
 
                         dispatch(createGuestIncidentWithReporter( incidentData, reporterData))
-                        dispatch(moveStepper({ step: activeStep + 1 }));
                     }
                 } else {
                     //updating an existing incident.
@@ -354,7 +353,6 @@ const VerticalLinearStepper = (props) => {
                             incidentUpdate['occured_date'] = dateTime
                         }
                         dispatch(updateGuestIncident(incidentId, incidentUpdate))
-                        dispatch(moveStepper({ step: activeStep + 1 }));
                     }
                 }
             }
@@ -618,7 +616,7 @@ const VerticalLinearStepper = (props) => {
                                             disabled={isLoading || !incidentRecaptcha}
                                         >
                                             {activeStep === steps.length - 1 ?
-                                                f({ id: "request.management.report.incidents.forms.button.finish", defaultMessage: "Submit" }) :
+                                                f({ id: "request.management.report.incidents.forms.button.finish", defaultMessage: "Finish" }) :
                                                 f({ id: "request.management.report.incidents.forms.button.next", defaultMessage: "Next" })}
                                         </Button>
                                         {isLoading && <CircularProgress size={24} className={classes.buttonProgress} />}
