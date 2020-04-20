@@ -62,7 +62,7 @@ const IncidentContact = (props) => {
                 </Grid>
                 <Grid item xs={4}></Grid>
 
-                {/* <Grid item xs={8}>
+                <Grid item xs={8}>
                     <TextField
                         id="contactMobile"
                         label={f({id:"request.management.report.incidents.contact.mobile", defaultMessage:"Mobile"})}
@@ -76,12 +76,12 @@ const IncidentContact = (props) => {
                         margin="normal"
                     />
                 </Grid>
-                <Grid item xs={4}></Grid> */}
+                <Grid item xs={4}></Grid>
 
                 <Grid item xs={8}>
                     <TextField
                         id="contactLandline"
-                        label={f({id:"request.management.report.incidents.contact.mobile", defaultMessage:"Primary contact number / Mobile number*"})}
+                        label={f({id:"request.management.report.incidents.contact.telephone", defaultMessage:"Landline"})}
                         multiline
                         fullWidth
                         rowsMax="4"

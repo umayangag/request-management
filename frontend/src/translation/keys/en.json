@@ -34,8 +34,8 @@
 
   "request.management.report.incidents.section.contact": "Your contact details",
   "request.management.report.incidents.contact.name": "Name*",
-  "request.management.report.incidents.contact.mobile": "Primary contact number / Mobile number*",
-  "request.management.report.incidents.contact.landline": "Landline",
+  "request.management.report.incidents.contact.mobile": "Primary Contact / Mobile number*",
+  "request.management.report.incidents.contact.landline": "Secondary Contact / Landline",
   "request.management.report.incidents.contact.email": "Email",
 
   "request.management.check.incident.status": "Check request status",
@@ -61,7 +61,7 @@
 
   "request.management.incident.create.basic_information": "Basic Information",
   "request.management.incident.create.type": "Type",
-  "request.management.incident.create.mode_of_receipt": "Mode of receipt",
+  "request.management.incident.create.mode_of_receipt": "Mode of receipt*",
   "request.management.incident.create.phone": "Phone",
   "request.management.incident.create.email": "Email",
   "request.management.incident.create.letter": "Letter",

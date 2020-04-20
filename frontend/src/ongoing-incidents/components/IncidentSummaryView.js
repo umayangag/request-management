@@ -306,7 +306,7 @@ function ContactTab(props) {
 
     const { classes, reporter } = props;
     const { formatMessage: f } = useIntl();
-    
+
     return (
         <div>
             <Grid container spacing={24}>
@@ -320,17 +320,17 @@ function ContactTab(props) {
                             </Grid>
                         </Grid>
 
-                        {/* <Grid container spacing={24}>
+                        <Grid container spacing={24}>
                             <Grid item xs>
-                                <Typography variant="caption" className={classes.label}> Landline </Typography>
+                                <Typography variant="caption" className={classes.label}> Landline {f({id: "request.management.incident.create.reporter.mobile"})} </Typography>
                                 <Typography gutterBottom> {reporter.telephone} </Typography>
                             </Grid>
-                        </Grid> */}
+                        </Grid>
 
                         <Grid container spacing={24}>
                             <Grid item xs>
                                 <Typography variant="caption" className={classes.label}> {f({id: "request.management.incident.create.reporter.mobile"})} </Typography>
-                                <Typography gutterBottom> {reporter.telephone} </Typography>
+                                <Typography gutterBottom> {reporter.mobile} </Typography>
                             </Grid>
                         </Grid>
 
