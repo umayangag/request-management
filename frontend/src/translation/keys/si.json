@@ -77,8 +77,8 @@
   "request.management.incident.create.category": "Category",
 
   "request.management.incident.create.date": "Request Date",
-  "request.management.incident.create.time": "Incident Time",
-  "request.management.incident.create.severity": "Severity*",
+  "request.management.incident.create.time": "Request Time",
+  "request.management.incident.create.severity": "Priority*",
   "request.management.incident.create.upload_file": "Upload File (You can upload multiple files)",
 
   "request.management.incident.create.reporter_information": "Reporter / Compiler Information",
