@@ -25,5 +25,5 @@ export const loadIncident = async (loadData) => {
 }
 
 export const checkIncidentStatus = async (refId) => {
-    return (await handler.get(`/public/incidents/?refId=`, refId)).data;
+    return (await handler.get(`/public/incidents/?refId=`+refId)).data;
 }

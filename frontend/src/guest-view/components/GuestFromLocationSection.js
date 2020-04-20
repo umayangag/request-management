@@ -46,7 +46,7 @@ const IncidentLocation = (props) => {
                     <TextField
                         autoFocus
                         id="incidentLocation"
-                        label={f({ id: "eclk.incident.management.report.incidents.location", defaultMessage: "Location name or description" })}
+                        label={f({ id: "request.management.report.incidents.location", defaultMessage: "Location name or description" })}
                         multiline
                         fullWidth
                         rowsMax="5"
@@ -59,7 +59,7 @@ const IncidentLocation = (props) => {
                 <Grid item xs={12} sm={8}>
                     <TextField
                         id="incidentAddress"
-                        label={f({ id: "eclk.incident.management.report.incidents.address", defaultMessage: "Address" })}
+                        label={f({ id: "request.management.report.incidents.address", defaultMessage: "Address" })}
                         multiline
                         fullWidth
                         rowsMax="5"
@@ -78,7 +78,7 @@ const IncidentLocation = (props) => {
                 <Grid item xs={12} sm={4}>
                     <TextField
                         id="incidentCity"
-                        label={f({ id: "eclk.incident.management.report.incidents.city", defaultMessage: "City" })}
+                        label={f({ id: "request.management.report.incidents.city", defaultMessage: "City" })}
                         fullWidth
                         value={city}
                         onChange={(e) => { handleCityChange(e.target.value) }}
@@ -91,7 +91,7 @@ const IncidentLocation = (props) => {
                         id="district"
                         select
                         label={f({
-                            id: "eclk.incident.management.report.incidents.district",
+                            id: "request.management.report.incidents.district",
                             defaultMessage: "District"
                         }) + "*"}
                         className={classes.textField}

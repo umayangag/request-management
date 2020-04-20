@@ -65,7 +65,7 @@ function ReviewComplaintsListView({ classes, ...props }) {
       if (exportType === "csv") {
           const url = window.URL.createObjectURL(new Blob([response]));
           const link = document.createElement('a');
-          link.href = url;     
+          link.href = url;
           link.setAttribute('download', 'incidents.' + exportType);
           document.body.appendChild(link);
           link.click();
@@ -81,15 +81,15 @@ function ReviewComplaintsListView({ classes, ...props }) {
 
     }
   }
-    
+
   return (
     <Paper className={classes.root}>
-      <h3>{f({id: "eclk.incident.management.incident.review.review_complaints"})}</h3>
+      <h3>{f({id: "request.management.incident.review.review_complaints"})}</h3>
       <Grid container direction={"row"} className={classes.exportContainer}>
       <Grid item xs={12} sm={12}>
       <SearchForm
         incidentType='COMPLAINT'
-        categories={categories} 
+        categories={categories}
         handleSearchClick={handleSearchClick}
         filters={filters}
         showClosed={false}
@@ -99,12 +99,12 @@ function ReviewComplaintsListView({ classes, ...props }) {
       <Grid container direction={"row"} className={classes.exportContainer}>
         <Grid item>
           <Button variant={"contained"} onClick={() => handleExportClick("csv")} className={classes.exportButton}>
-            {f({id: "eclk.incident.management.incident.review.export_csv"})}
+            {f({id: "request.management.incident.review.export_csv"})}
           </Button>
         </Grid>
         <Grid item>
           <Button variant={"contained"} onClick={() => handleExportClick("html")} className={classes.exportButton}>
-            {f({id: "eclk.incident.management.incident.review.export_pdf"})}
+            {f({id: "request.management.incident.review.export_pdf"})}
           </Button>
         </Grid>
       </Grid>

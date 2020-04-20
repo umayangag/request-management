@@ -25,24 +25,24 @@ const Home = ({classes, ...props}) =>{
                 <>
                 <Grid xs={12} item>
                     <Card xs={6}>
-                        <CardHeader 
-                            title={f({id: "eclk.incident.management.home.incidents_assigned"})}
+                        <CardHeader
+                            title={f({id: "request.management.home.incidents_assigned"})}
                         />
                         <CardContent>
-                            <ManagedIncidentList 
+                            <ManagedIncidentList
                                 filters={ { assignee: "me" } }
                             />
                         </CardContent>
                     </Card>
                 </Grid>
-                
+
                 <Grid xs={12} item style={{paddingTop:"10px"}}>
                     <Card xs={6}>
-                        <CardHeader 
-                            title={f({id: "eclk.incident.management.home.incident_linked"})}
+                        <CardHeader
+                            title={f({id: "request.management.home.incident_linked"})}
                         />
                         <CardContent>
-                            <ManagedIncidentList 
+                            <ManagedIncidentList
                                 filters={ { user_linked: "me" } }
                             />
                         </CardContent>
@@ -55,11 +55,11 @@ const Home = ({classes, ...props}) =>{
                 <>
                 <Grid xs={12} item style={{paddingTop:"10px"}}>
                     <Card xs={6}>
-                        <CardHeader 
+                        <CardHeader
                             title="Your Incidents"
                         />
                         <CardContent>
-                            <ManagedIncidentList 
+                            <ManagedIncidentList
                                 filters={ { user_linked: "me" } }
                             />
                         </CardContent>
@@ -68,7 +68,7 @@ const Home = ({classes, ...props}) =>{
                 </>
             )}
         </Grid>
-        
+
     )
 }
 

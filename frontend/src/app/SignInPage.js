@@ -82,16 +82,16 @@ class SignInPage extends Component {
                         <LockOutlinedIcon />
                     </Avatar>
                     <Typography component="h1" variant="h5">
-                        <FormattedMessage id="eclk.incident.management.login.sign_in" />
+                        <FormattedMessage id="request.management.login.sign_in" />
                 </Typography>
                     <form className={classes.form} onSubmit={(e)=>{e.preventDefault(); this.handleSignIn()}}>
                         <FormControl margin="normal" required fullWidth>
-                            <InputLabel htmlFor="email"><FormattedMessage id="eclk.incident.management.login.username" /></InputLabel>
+                            <InputLabel htmlFor="email"><FormattedMessage id="request.management.login.username" /></InputLabel>
                             <Input id="email" name="email" value={this.state.userName} 
                                 onChange={(e)=>{this.setState({userName:e.target.value})}} autoFocus />
                         </FormControl>
                         <FormControl margin="normal" required fullWidth>
-                            <InputLabel htmlFor="password"><FormattedMessage id="eclk.incident.management.login.password" /></InputLabel>
+                            <InputLabel htmlFor="password"><FormattedMessage id="request.management.login.password" /></InputLabel>
                             <Input name="password" type="password" id="password" autoComplete="current-password"
                                 onChange={(e)=>{this.setState({password:e.target.value})}} />
                             <input type="submit" style={{height: 0, width: 0, border: 'none', padding: 0,}} hidefocus="true" />
@@ -108,7 +108,7 @@ class SignInPage extends Component {
                             className={classes.submit}
                             onClick={this.handleSignIn}
                         >
-                            <FormattedMessage id="eclk.incident.management.login.sign_in" />
+                            <FormattedMessage id="request.management.login.sign_in" />
                     </Button>
                     </form>
                 </Paper>

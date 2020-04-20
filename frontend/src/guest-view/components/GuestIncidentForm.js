@@ -191,15 +191,15 @@ const VerticalLinearStepper = (props) => {
         let valid = true;
 
         if (!incidentDescription) {
-            errorMsg = { ...errorMsg, incidentDescriptionErrorMsg: f({ id: "eclk.incident.management.report.incidents.description.error.message", defaultMessage: "Description is required" }) };
+            errorMsg = { ...errorMsg, incidentDescriptionErrorMsg: f({ id: "request.management.report.incidents.description.error.message", defaultMessage: "Description is required" }) };
             valid = false;
         }
         if (!incidentElection) {
-            errorMsg = { ...errorMsg, incidentElectionErrorMsg: f({ id: "eclk.incident.management.report.incidents.election.error.message", defaultMessage: "Election is required" }) };
+            errorMsg = { ...errorMsg, incidentElectionErrorMsg: f({ id: "request.management.report.incidents.election.error.message", defaultMessage: "Election is required" }) };
             valid = false;
         }
         if (getFormattedDateTime() == null) {
-            errorMsg = { ...errorMsg, incidentDatetimeErrorMsg: f({ id: "eclk.incident.management.report.incidents.datetime.error.message", defaultMessage: "Date and time are required" }) };
+            errorMsg = { ...errorMsg, incidentDatetimeErrorMsg: f({ id: "request.management.report.incidents.datetime.error.message", defaultMessage: "Date and time are required" }) };
             valid = false;
         }
        
@@ -213,7 +213,7 @@ const VerticalLinearStepper = (props) => {
         let errorMsg = { ...formErrors };
         let valid = true;
         if(!incidentRecaptcha){
-            errorMsg = { ...errorMsg, incidentRecaptchaErrorMsg: f({ id: "eclk.incident.management.report.incidents.recaptcha.error.message", defaultMessage: "This verification is required" }) };
+            errorMsg = { ...errorMsg, incidentRecaptchaErrorMsg: f({ id: "request.management.report.incidents.recaptcha.error.message", defaultMessage: "This verification is required" }) };
             valid = false;
         }
 
@@ -284,7 +284,7 @@ const VerticalLinearStepper = (props) => {
     const stepDefinitions = {
 
         3: {
-            title: f({ id: "eclk.incident.management.report.incidents.section.describe", defaultMessage: "Describe the incident" }),
+            title: f({ id: "request.management.report.incidents.section.describe", defaultMessage: "Describe the incident" }),
             content: <>
                 <DescriptionSection
                     handledDescriptionChange={setIncidentDescription}
@@ -361,7 +361,7 @@ const VerticalLinearStepper = (props) => {
         },
 
         1: {
-            title: f({ id: "eclk.incident.management.report.incidents.section.location", defaultMessage: "Describe the incident location" }),
+            title: f({ id: "request.management.report.incidents.section.location", defaultMessage: "Describe the incident location" }),
             content: < LocationSection
                 location={incidentLocation}
                 handledLocationChange={setIncidentLocation}
@@ -390,7 +390,7 @@ const VerticalLinearStepper = (props) => {
         },
 
         4: {
-            title: f({ id: "eclk.incident.management.report.incidents.section.attachment", defaultMessage: "Attach files related to incident" }),
+            title: f({ id: "request.management.report.incidents.section.attachment", defaultMessage: "Attach files related to incident" }),
             content: <FileUploader
                 files={incidentFiles}
                 setFiles={setIncidentFiles}
@@ -408,7 +408,7 @@ const VerticalLinearStepper = (props) => {
         },
 
         0: {
-            title: f({ id: "eclk.incident.management.report.incidents.section.contact", defaultMessage: "Your contact details" }),
+            title: f({ id: "request.management.report.incidents.section.contact", defaultMessage: "Your contact details" }),
             content: 
             <>
             < ContactSection
@@ -563,10 +563,10 @@ const VerticalLinearStepper = (props) => {
 
             {/* <Button variant="outlined" onClick={() => { window.history.back(); }}> Back </Button> */}
             <Typography style={{ width: '100%' }} align="center" variant="h5" marginTop="20">
-                {f({ id: "eclk.incident.management.report.incidents", defaultMessage: "Report Complaint" })}
+                {f({ id: "request.management.report.incidents", defaultMessage: "Report Complaint" })}
             </Typography>
             <Typography style={{ width: '100%' }} align="left" variant="" marginTop="20">
-                {f({ id: "eclk.incident.management.report.incidents.helper.text", defaultMessage: "*fields are mandatory" })}
+                {f({ id: "request.management.report.incidents.helper.text", defaultMessage: "*fields are mandatory" })}
             </Typography>
             <Stepper activeStep={activeStep} orientation="vertical">
                 {steps.map((label, index) => {
@@ -576,9 +576,9 @@ const VerticalLinearStepper = (props) => {
                     if (isStepOptional(index)) {
                         if (index === 3) {
                             // expected here to gives more information on 'contact info'
-                            labelProps.optional = <Typography variant="caption">{f({ id: "eclk.incident.management.report.incidents.forms.label.optional", defaultMessage: "Optional" })}</Typography>;
+                            labelProps.optional = <Typography variant="caption">{f({ id: "request.management.report.incidents.forms.label.optional", defaultMessage: "Optional" })}</Typography>;
                         } else {
-                            labelProps.optional = <Typography variant="caption">{f({ id: "eclk.incident.management.report.incidents.forms.label.optional", defaultMessage: "Optional" })}</Typography>;
+                            labelProps.optional = <Typography variant="caption">{f({ id: "request.management.report.incidents.forms.label.optional", defaultMessage: "Optional" })}</Typography>;
                         }
                     }
                     if (isStepSkipped(index)) {
@@ -597,7 +597,7 @@ const VerticalLinearStepper = (props) => {
                                             onClick={handleBack}
                                             className={classes.button}
                                         >
-                                            {f({ id: "eclk.incident.management.report.incidents.forms.button.back", defaultMessage: "Back" })}
+                                            {f({ id: "request.management.report.incidents.forms.button.back", defaultMessage: "Back" })}
                                         </Button>
                                         {isStepOptional(activeStep) && (
                                             <Button
@@ -607,7 +607,7 @@ const VerticalLinearStepper = (props) => {
                                                 className={classes.button}
                                                 disabled={isLoading}
                                             >
-                                                {f({ id: "eclk.incident.management.report.incidents.forms.button.skip", defaultMessage: "Skip" })}
+                                                {f({ id: "request.management.report.incidents.forms.button.skip", defaultMessage: "Skip" })}
                                             </Button>
                                         )}
                                         <Button
@@ -618,8 +618,8 @@ const VerticalLinearStepper = (props) => {
                                             disabled={isLoading || !incidentRecaptcha}
                                         >
                                             {activeStep === steps.length - 1 ?
-                                                f({ id: "eclk.incident.management.report.incidents.forms.button.finish", defaultMessage: "Submit" }) :
-                                                f({ id: "eclk.incident.management.report.incidents.forms.button.next", defaultMessage: "Next" })}
+                                                f({ id: "request.management.report.incidents.forms.button.finish", defaultMessage: "Submit" }) :
+                                                f({ id: "request.management.report.incidents.forms.button.next", defaultMessage: "Next" })}
                                         </Button>
                                         {isLoading && <CircularProgress size={24} className={classes.buttonProgress} />}
                                     </div>
@@ -628,7 +628,7 @@ const VerticalLinearStepper = (props) => {
                         </Step>)
                 })}
             </Stepper>
-            
+
             {activeStep === steps.length && (
                 <Paper square elevation={0} className={classes.resetContainer}>
                     <Typography>Your complaint has been submitted successfully</Typography>

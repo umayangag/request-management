@@ -6,7 +6,7 @@ import numpy as np
 from datetime import date, timedelta, datetime
 
 from ..common.models import Category, Channel, District
-from ..incidents.models import Incident, IncidentType, CloseWorkflow
+from ..incidents.models import Incident, IncidentType, CloseWorkflow, StatusType
 from django.contrib.auth.models import User
 from ..incidents.services import get_incident_by_id
 from .functions import get_detailed_report, get_general_report, encode_column_names, get_subcategory_report, \
@@ -317,7 +317,7 @@ def get_weekly_closed_complain_category_data():
         "template"] = "/incidents/complaints/weeekly_closed_request_report_categorywise.js"
     file_dict["date"] = date.today().strftime("%Y/%m/%d")
 
-    incidents = get_daily_incidents(IncidentType.COMPLAINT)
+    incidents = get_daily_incidents(IncidentType.COMPLAINT).filter(current_status=StatusType.CLOSED.name)
     file_dict["total"] = incidents.count()
 
     file_dict["categories"] = get_category_dict(incidents)
@@ -331,7 +331,7 @@ def get_organizationwise_data_with_timefilter():
     file_dict["template"] = "/incidents/complaints/summery_report_organizationwise_with_timefilter.js"
     file_dict["date"] = date.today().strftime("%Y/%m/%d")
 
-    incidents = get_daily_incidents(IncidentType.COMPLAINT)
+    incidents = get_daily_incidents(IncidentType.COMPLAINT).filter()
     file_dict["total"] = incidents.count()
 
     file_dict["categories"] = get_category_dict(incidents)
