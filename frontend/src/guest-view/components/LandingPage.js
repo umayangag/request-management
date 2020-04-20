@@ -116,7 +116,7 @@ function HomePage(props) {
                     className={classes.cardText}
                     color="primary"
                   >
-                    <NoteAddIcon className={classes.icon} />
+                    <NoteAddIcon style={{marginTop:63}} className={classes.icon} />
                   </Typography>
                 </CardContent>
               </CardActionArea>
@@ -171,9 +171,9 @@ function HomePage(props) {
             className={classes.cardText}
             color="primary"
           >
-             Registered user ?
+             Registered user  -
             <Button color="primary" className={classes.button} href="/sign-in">
-              Sign In
+            Sign In
             </Button>
           </Typography>
         </Grid>
