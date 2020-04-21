@@ -98,7 +98,7 @@ const CloseModal = (props) => {
                 />
 
                 <DialogContentText>
-                    Additional remark
+                    Final resolution
                 </DialogContentText>
                 <TextField
                     autoFocus
