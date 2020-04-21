@@ -30,7 +30,7 @@ const onSubmitClick = (dispatch, incidentId, comment, assignee) => {
 }
 
 const RequestAdviceModal = (props) => {
-    const defaultOrg = "eclk";
+    const defaultOrg = "pslk";
     const { users, divisions } = props;
     const dispatch = useDispatch();
 

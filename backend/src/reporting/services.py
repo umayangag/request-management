@@ -101,7 +101,7 @@ def get_daily_summary_data():
     cat_other = Category.objects.all().filter(top_category='Other')
 
     # find eclk complaints
-    eclk_users = User.objects.all().filter(profile__organization__code="eclk")
+    eclk_users = User.objects.all().filter(profile__organization__code="pslk")
     eclk_hq_users = eclk_users.filter(profile__division__is_hq=True)
     eclk_district_users = eclk_users.filter(profile__division__is_hq=False)
 
