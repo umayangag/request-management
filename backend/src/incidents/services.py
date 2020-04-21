@@ -43,6 +43,8 @@ from ..notifications.models import NotificationType
 
 from django.core.mail import send_mail
 
+from .serializers import IncidentCommentSerializer
+
 def get_incident_status_guest(refId):
     """This function is to annouce public on a incident status"""
     try:
@@ -499,9 +501,13 @@ def incident_change_assignee(user: User, incident: Incident, assignee: User):
 
 
 def incident_close(user: User, incident: Incident, details: str):
+    if details["remark"] == "":
+        raise WorkflowException(
+            "Final resolution comment must not be blank")
+
     # find number of outcomes for the incident
-    outcomes = IncidentComment.objects.filter(
-        incident=incident, is_outcome=True).count()
+    # outcomes = IncidentComment.objects.filter(
+    #     incident=incident, is_outcome=True).count()
 
     if incident.current_status == StatusType.ADVICE_REQESTED.name:
         raise WorkflowException(
@@ -511,9 +517,23 @@ def incident_close(user: User, incident: Incident, details: str):
         raise WorkflowException(
             "All pending actions needs to be resolved first")
 
-    if outcomes == 0:
-        raise WorkflowException(
-            "Incident need at least 1 resolution outcome before closing")
+    # if outcomes == 0:
+    #     raise WorkflowException(
+    #         "Incident need at least 1 resolution outcome before closing")
+
+
+    comment_data = {
+        "comment": details["remark"],
+        "is_outcome": True
+    }
+    comment = IncidentComment(
+        body=details["remark"],
+        is_outcome=True,
+        user=user,
+        incident=incident
+    )
+    comment.save()
+    create_incident_comment_postscript(incident, user, comment)
 
     status = IncidentStatus(
         current_status=StatusType.CLOSED,
