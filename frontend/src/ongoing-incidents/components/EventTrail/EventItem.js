@@ -125,6 +125,10 @@ function hasEventBody(event){
         "WORKFLOW_ACTIONED"
     ];
 
+    if(event.action === "WORKFLOW_ACTIONED" && event.data.workflow.type === "Close"){
+        return false;
+    }
+
     return actionsWithBody.indexOf(event.action) !== -1;
 }
 
@@ -153,7 +157,7 @@ function getSecondaryItem(event){
 
         if(workflowType === "Verify"){
             return (
-                <div><b>Has Proof?</b> <br />
+                <div><b>Is verified with support documents?</b> <br />
                     {workflowData.hasProof ? "Yes" : "No"}
                 </div>
             )
@@ -203,7 +207,7 @@ function getSecondaryItem(event){
                     <div><b>Name of external entities /internal entities:</b><br /> {workflowData.entities}</div><br/>
                     <div><b>Department(s), if any:</b><br /> {workflowData.departments}</div><br/>
                     <div><b>Name of individual(s), if any:</b><br /> {workflowData.individuals}</div><br/>
-                    <div><b>Additional remarks:</b><br /> {workflowData.remark}</div>
+                    {/* <div><b>Additional remarks:</b><br /> {workflowData.remark}</div> */}
                 </div>
             )
         }else if(workflowType === "Invalidate"){

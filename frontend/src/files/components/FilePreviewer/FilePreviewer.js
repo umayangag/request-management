@@ -7,9 +7,9 @@ const styles = theme => ({
     }
 })
 
-const Transition = React.forwardRef(function Transition(props, ref) {
-  return <Slide direction="up" ref={ref} {...props} />;
-});
+// const Transition = React.forwardRef(function Transition(props, ref) {
+//   return <Slide direction="up" ref={ref} {...props} />;
+// });
 
 function FilePreviewer({ url, filename, ext }){
     const [previewComponent, setPreviewComponent] = useState(null);

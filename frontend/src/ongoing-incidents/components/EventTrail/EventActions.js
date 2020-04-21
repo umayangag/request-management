@@ -84,7 +84,6 @@ const styles = (theme) => ({
 });
 
 const getLastActionTime = (events) => {
-  debugger;
   if (events.allIds.length === 0) {
     return "No action taken yet";
   }
