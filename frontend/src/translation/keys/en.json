@@ -14,7 +14,10 @@
   "request.management.report.incidents": "Submit a request",
   "request.management.report.incidents.helper.text": "*fields are mandatory",
 
-  "request.management.report.incidents.section.describe": "Describe the incident",
+  "request.management.report.incidents.section.describe": "Enter details here",
+  "request.management.report.incidents.section.listitem1": "Explain your matter clearly",
+  "request.management.report.incidents.section.listitem2": "Include facts and specific details",
+  "request.management.report.incidents.section.listitem3": "State any urgent circumstances",
   "request.management.report.incidents.description": "Description",
   "request.management.report.incidents.description.error.message": "Description is required",
   "request.management.report.incidents.election": "Election",
@@ -24,15 +27,16 @@
   "request.management.report.incidents.datetime.error.message": "Date and time are required",
   "request.management.report.incidents.recaptcha.error.message": "This verification is required",
 
-  "request.management.report.incidents.section.location": "Describe the incident location",
+  "request.management.report.incidents.section.location": "Your location details",
   "request.management.report.incidents.location": "Location name or description",
   "request.management.report.incidents.address": "Address*",
   "request.management.report.incidents.city": "City",
 
-  "request.management.report.incidents.section.attachment": "Attach files related to incident",
+  "request.management.report.incidents.section.attachment": "Attach related files (documents, images, audio/video)",
   "request.management.report.incidents.seleted.file": "Selected File",
 
   "request.management.report.incidents.section.contact": "Your contact details",
+  "request.management.report.incidents.section.category": "Select the most suitable category",
   "request.management.report.incidents.contact.name": "Name*",
   "request.management.report.incidents.contact.mobile": "Primary Contact / Mobile number*",
   "request.management.report.incidents.contact.telephone": "Secondary Contact / Landline",
@@ -56,6 +60,7 @@
   "request.management.home.incidents.list.severity": "Severity",
   "request.management.home.incidents.list.response_time": "Response Time",
   "request.management.home.incidents.list.category": "Category",
+  "request.management.home.incidents.list.subcategory": "Subcategory",
   "request.management.home.incidents.list.last_actioned_at": "Last Actioned At",
   "request.management.home.incidents.list.created_date": "Created_date",
 
