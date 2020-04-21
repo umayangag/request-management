@@ -9,16 +9,16 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 
 // react-redux hooks
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 
 import { hideModal  } from '../state/modal.actions'
 import { fetchUpdateWorkflow } from '../../ongoing-incidents/state/OngoingIncidents.actions'
 
 const ChangeAssigneeModal = (props) => {
     const defaultOrg = "eclk";
-    const { users, divisions, activeIncident } = props;
+    const { users, divisions } = props;
     const dispatch = useDispatch();
-    
+
     //maintains selected value in local state until change is confirmed
     const [division, setDivision] = useState(null);
     const [assignee, setAssignee] = useState(null);
@@ -40,7 +40,7 @@ const ChangeAssigneeModal = (props) => {
                         return (<MenuItem key={index} value={divisions.byIds[did].code}>{divisions.byIds[did].name}</MenuItem>)
                     })}
                 </Select>
-                
+
                 { division !== null && (
                     <>
                     <DialogContentText>
@@ -63,7 +63,7 @@ const ChangeAssigneeModal = (props) => {
                 <Button onClick={()=>{dispatch(hideModal())}} color="secondary">
                     Close
                 </Button>
-                <Button 
+                <Button
                     onClick={ () =>
                         {
                             dispatch(fetchUpdateWorkflow(props.activeIncident.id, "assign", {
@@ -71,7 +71,7 @@ const ChangeAssigneeModal = (props) => {
                             } ));
                             dispatch(hideModal());
                         }
-                    } 
+                    }
                     color="primary">
                     Change Assignee
                 </Button>

@@ -1,6 +1,6 @@
-import React, { Component, useEffect, useState } from 'react';
-import {Link} from 'react-router-dom';
-import {withRouter} from "react-router";
+import React, { useState } from 'react';
+// import {Link} from 'react-router-dom';
+// import {withRouter} from "react-router";
 import MuiExpansionPanel from '@material-ui/core/ExpansionPanel';
 import MuiExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import MuiExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
@@ -13,7 +13,7 @@ import moment from "moment";
 import * as Yup from "yup";
 import { showNotification } from "../../notifications/state/notifications.actions";
 import { Button } from '@material-ui/core';
-import { connect, useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 
 const styles = theme => ({
     root: {
@@ -42,7 +42,7 @@ const ExpansionPanel = withStyles({
     },
     expanded: {},
   })(MuiExpansionPanel);
-  
+
   const ExpansionPanelSummary = withStyles({
     root: {
       backgroundColor: 'rgba(0, 0, 0, .03)',
@@ -60,7 +60,7 @@ const ExpansionPanel = withStyles({
     },
     expanded: {},
   })(MuiExpansionPanelSummary);
-  
+
   const ExpansionPanelDetails = withStyles((theme) => ({
     root: {
       padding: theme.spacing.unit * 2,
@@ -101,7 +101,7 @@ export default function TempReportList(){
 
     const getInitialValues = () => {
         var initData = { ...state};
-        
+
         //TODO: Need to split the date values to date and time
         if (initData.startTime) {
             initData.startTime = moment(initData.from_date).format("YYYY-MM-DDTHH:mm");
@@ -130,7 +130,7 @@ export default function TempReportList(){
                 }}
                 validationSchema={reportSchema}
                 initialValues={getInitialValues()}
-                // validate={customValidations} 
+                // validate={customValidations}
                 // above customValidation commented due to removing of occurrence
                 render={({
                     handleSubmit,
