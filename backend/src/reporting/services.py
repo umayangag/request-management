@@ -36,8 +36,8 @@ def get_weekly_incidents():
 
     week_data = {}
     week_data["incidents"] = incidents
-    week_data["start_date"] = start_date.strftime("%Y/%m/%d")
-    week_data["end_date"] = start_date.strftime("%Y/%m/%d")
+    week_data["start_date"] = start_date.strftime("%Y-%m-%d")
+    week_data["end_date"] = end_date.strftime("%Y-%m-%d")
     return week_data
 
 def parse_date_timezone(datetimeValue):
