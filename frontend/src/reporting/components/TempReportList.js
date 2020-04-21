@@ -1,6 +1,6 @@
-import React, { Component, useEffect, useState } from 'react';
-import {Link} from 'react-router-dom';
-import {withRouter} from "react-router";
+import React, { useState } from 'react';
+// import {Link} from 'react-router-dom';
+// import {withRouter} from "react-router";
 import MuiExpansionPanel from '@material-ui/core/ExpansionPanel';
 import MuiExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import MuiExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
@@ -13,7 +13,7 @@ import moment from "moment";
 import * as Yup from "yup";
 import { showNotification } from "../../notifications/state/notifications.actions";
 import { Button } from '@material-ui/core';
-import { connect, useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 
 const styles = theme => ({
     root: {
@@ -42,7 +42,7 @@ const ExpansionPanel = withStyles({
     },
     expanded: {},
   })(MuiExpansionPanel);
-  
+
   const ExpansionPanelSummary = withStyles({
     root: {
       backgroundColor: 'rgba(0, 0, 0, .03)',
@@ -60,7 +60,7 @@ const ExpansionPanel = withStyles({
     },
     expanded: {},
   })(MuiExpansionPanelSummary);
-  
+
   const ExpansionPanelDetails = withStyles((theme) => ({
     root: {
       padding: theme.spacing.unit * 2,
@@ -101,7 +101,7 @@ export default function TempReportList(){
 
     const getInitialValues = () => {
         var initData = { ...state};
-        
+
         //TODO: Need to split the date values to date and time
         if (initData.startTime) {
             initData.startTime = moment(initData.from_date).format("YYYY-MM-DDTHH:mm");
@@ -130,7 +130,7 @@ export default function TempReportList(){
                 }}
                 validationSchema={reportSchema}
                 initialValues={getInitialValues()}
-                // validate={customValidations} 
+                // validate={customValidations}
                 // above customValidation commented due to removing of occurrence
                 render={({
                     handleSubmit,
@@ -148,20 +148,14 @@ export default function TempReportList(){
                 <Grid item xs>
                     <Typography variant="h6"> View Reports </Typography>
                     <List>
-                        {/* <ListItemLink href={`${API_BASE_URL}/pdfgen/?template_type=daily_district`} target="_blank">
-                            <ListItemText primary="Daily Summary Report" />
-                        </ListItemLink> */}
                         <ListItemLink href={`${API_BASE_URL}/pdfgen/?template_type=daily_category`} target="_blank">
-                            <ListItemText primary="Categorywise Daily Summary Report" />
+                            <ListItemText primary="Daily Summary Report by Category" />
                         </ListItemLink>
                         <ListItemLink href={`${API_BASE_URL}/pdfgen/?template_type=weekly_closed_request_category`} target="_blank">
-                            <ListItemText primary="Categorywise Weekly Closed Request Summary Report" />
+                            <ListItemText primary="Weekly Summary Report - Closed Requests by Category" />
                         </ListItemLink>
-                        <ListItemLink href={`${API_BASE_URL}/pdfgen/?template_type=weekly_closed_request_organization`} target="_blank">
-                            <ListItemText primary="Organizationwise Weekly Closed Request Summary Report" />
-                        </ListItemLink>
-                        {/* <ListItemLink href={`${API_BASE_URL}/pdfgen/?template_type=daily_summary_report_districtwise`} target="_blank">
-                            <ListItemText primary="Districtwise Daily Summary Report" />
+                        {/* <ListItemLink href={`${API_BASE_URL}/pdfgen/?template_type=weekly_closed_request_organization`} target="_blank">
+                            <ListItemText primary="Weekly Summary Report - Closed Requests by Organization" />
                         </ListItemLink> */}
                     </List>
                     <form
@@ -178,7 +172,7 @@ export default function TempReportList(){
                             }}>
                     <ExpansionPanel square expanded={expanded === 'panel2'} onChange={handleChange2('panel2')}>
                         <ExpansionPanelSummary aria-controls="panel1d-content" id="panel1d-header">
-                        <Typography>Categorywise Summary Report ( Filter by time )</Typography>
+                        <Typography>Summary Report by Category ( Filter by time )</Typography>
                         </ExpansionPanelSummary>
                         <ExpansionPanelDetails>
                         <Grid container spacing={24}>
@@ -220,7 +214,7 @@ export default function TempReportList(){
                         </ExpansionPanelDetails>
                     </ExpansionPanel>
                     </form>
-                    <form
+                    {/* <form
                             // className={classes.container}
                             noValidate
                             autoComplete="off"
@@ -275,7 +269,7 @@ export default function TempReportList(){
                         </Grid>
                         </ExpansionPanelDetails>
                     </ExpansionPanel>
-                    </form>
+                    </form> */}
                 </Grid>
             </Grid>
         </Paper>

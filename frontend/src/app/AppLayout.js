@@ -14,7 +14,7 @@ import { Button } from '@material-ui/core';
 
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import ActiveNotificationIcon from '@material-ui/icons/NotificationsActive';
-import ArrowDropDown from '@material-ui/icons/ArrowDropDown';
+// import ArrowDropDown from '@material-ui/icons/ArrowDropDown';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import IconButton from '@material-ui/core/IconButton';
@@ -308,25 +308,25 @@ class DomainContainer extends React.Component {
                             Tell The President
 
                             <Button
-                                variant={selectedMainSection === 'home' ? 'outlined' : 'flat'}
+                                variant={selectedMainSection === 'home' ? 'outlined' : 'text'}
                                 color="inherit" component={HomeLink} className={classes.homeButton}>Home</Button>
-                            <Button variant={selectedMainSection === 'create' ? 'outlined' : 'flat'}
+                            <Button variant={selectedMainSection === 'create' ? 'outlined' : 'text'}
                                 color="inherit" component={ReportLink}>Create</Button>
 
                             {userCan(signedInUser, null, USER_ACTIONS.CAN_REVIEW_INCIDENTS) && (
-                                <spanner>
-                                    <Button variant={selectedMainSection === 'review-complaints' || selectedMainSection === 'review-inquiries' ? 'outlined' : 'flat'}
+                                // <spanner>
+                                    <Button variant={selectedMainSection === 'review-complaints' || selectedMainSection === 'review-inquiries' ? 'outlined' : 'text'}
                                         component={ReviewComplaintsLink} color="inherit" aria-owns="review-menu">Review</Button>
-                                </spanner>
+                                // </spanner>
                             )}
 
                             {userCan(signedInUser, null, USER_ACTIONS.CAN_VIEW_REPORTS) && (
-                                <Button variant={selectedMainSection === 'reports' ? 'outlined' : 'flat'}
+                                <Button variant={selectedMainSection === 'reports' ? 'outlined' : 'text'}
                                     color="inherit" component={StaticReportLink}>Reports</Button>
                             )}
 
                             {userCan(signedInUser, null, USER_ACTIONS.CAN_REVIEW_INCIDENTS) && (
-                                <Button variant={selectedMainSection === 'archive' ? 'outlined' : 'flat'}
+                                <Button variant={selectedMainSection === 'archive' ? 'outlined' : 'text'}
                                     color="inherit" component={ArchiveLink}>Archive</Button>
                             )}
 
