@@ -42,62 +42,6 @@ const CloseModal = (props) => {
             <DialogTitle id="form-dialog-title">Close</DialogTitle>
             <DialogContent>
                 <DialogContentText>
-                    Assignee(s)/ contact point(s)
-                </DialogContentText>
-                <TextField
-                    autoFocus
-                    margin="dense"
-                    id="assignee"
-                    type="text"
-                    value={details.assignee}
-                    onChange={(e)=>{handleValueChange(details, 'assignee', e.target.value, setDetails)}}
-                    fullWidth
-                    multiline
-                />
-
-                <DialogContentText>
-                    Name of external entities /internal entities
-                </DialogContentText>
-                <TextField
-                    autoFocus
-                    margin="dense"
-                    id="entities"
-                    type="text"
-                    value={details.entities}
-                    onChange={(e)=>{handleValueChange(details, 'entities', e.target.value, setDetails)}}
-                    fullWidth
-                    multiline
-                />
-
-                <DialogContentText>
-                    Department(s), if any
-                </DialogContentText>
-                <TextField
-                    autoFocus
-                    margin="dense"
-                    id="departments"
-                    type="text"
-                    value={details.departments}
-                    onChange={(e)=>{handleValueChange(details, 'departments', e.target.value, setDetails)}}
-                    fullWidth
-                    multiline
-                />
-
-                <DialogContentText>
-                    Name of individual(s), if any
-                </DialogContentText>
-                <TextField
-                    autoFocus
-                    margin="dense"
-                    id="individuals"
-                    type="text"
-                    value={details.individuals}
-                    onChange={(e)=>{handleValueChange(details, 'individuals', e.target.value, setDetails)}}
-                    fullWidth
-                    multiline
-                />
-
-                <DialogContentText>
                     Final resolution
                 </DialogContentText>
                 <TextField
