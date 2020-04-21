@@ -29,6 +29,10 @@ import FileUploadSection from './GuestFormFileUploadSection';
 import DateTimeSection from './GuestFormDateTimeSection';
 import LocationSection from './GuestFromLocationSection';
 import ContactSection from './GuestFormContactSection';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
 import _ from 'lodash';
 
 
@@ -82,7 +86,10 @@ const styles = theme => ({
     wrapper: {
         margin: theme.spacing.unit,
         position: 'relative',
-    }
+    },
+    list: {
+        marginLeft:-20
+      },
 });
 
 
@@ -196,10 +203,10 @@ const VerticalLinearStepper = (props) => {
             errorMsg = { ...errorMsg, incidentElectionErrorMsg: f({ id: "request.management.report.incidents.election.error.message", defaultMessage: "Election is required" }) };
             valid = false;
         }
-        if (getFormattedDateTime() == null) {
-            errorMsg = { ...errorMsg, incidentDatetimeErrorMsg: f({ id: "request.management.report.incidents.datetime.error.message", defaultMessage: "Date and time are required" }) };
-            valid = false;
-        }
+        // if (getFormattedDateTime() == null) {
+        //     errorMsg = { ...errorMsg, incidentDatetimeErrorMsg: f({ id: "request.management.report.incidents.datetime.error.message", defaultMessage: "Date and time are required" }) };
+        //     valid = false;
+        // }
 
 
         setFormErrors({ ...errorMsg });
@@ -220,7 +227,7 @@ const VerticalLinearStepper = (props) => {
             valid = false;
         }
         if(!incidentContact.name){
-            errorMsg = { ...errorMsg, incidentNameErrorMsg: f({ id: "request.management.report.incidents.phone.error.message", defaultMessage: "Name is required" }) };
+            errorMsg = { ...errorMsg, incidentNameErrorMsg: f({ id: "request.management.report.incidents.name.error.message", defaultMessage: "Name is required" }) };
             valid = false;
         }
 
@@ -234,11 +241,11 @@ const VerticalLinearStepper = (props) => {
         let valid = true;
 
         if(!incidentAddress){
-            errorMsg = { ...errorMsg, incidentAddressErrorMsg: f({ id: "request.management.report.incidents.phone.error.message", defaultMessage: "Address is required" }) };
+            errorMsg = { ...errorMsg, incidentAddressErrorMsg: f({ id: "request.management.report.incidents.address.error.message", defaultMessage: "Address is required" }) };
             valid = false;
         }
         if(!incidentDistrict){
-            errorMsg = { ...errorMsg, incidentDistrictErrorMsg: f({ id: "request.management.report.incidents.phone.error.message", defaultMessage: "District is required" }) };
+            errorMsg = { ...errorMsg, incidentDistrictErrorMsg: f({ id: "request.management.report.incidents.district.error.message", defaultMessage: "District is required" }) };
             valid = false;
         }
 
@@ -252,11 +259,11 @@ const VerticalLinearStepper = (props) => {
         let valid = true;
 
         if(!incidentCatogory){
-            errorMsg = { ...errorMsg, incidentSubCategoryErrorMsg: f({ id: "request.management.report.incidents.phone.error.message", defaultMessage: "Sub category is required" }) };
+            errorMsg = { ...errorMsg, incidentSubCategoryErrorMsg: f({ id: "request.management.report.incidents.subcategory.error.message", defaultMessage: "Sub category is required" }) };
             valid = false;
         }
         if(!incidentMainCatogory){
-            errorMsg = { ...errorMsg, incidentMainCategoryErrorMsg: f({ id: "request.management.report.incidents.phone.error.message", defaultMessage: "Category is required" }) };
+            errorMsg = { ...errorMsg, incidentMainCategoryErrorMsg: f({ id: "request.management.report.incidents.topcategory.error.message", defaultMessage: "Category is required" }) };
             valid = false;
         }
 
@@ -282,8 +289,13 @@ const VerticalLinearStepper = (props) => {
     const stepDefinitions = {
 
         3: {
-            title: f({ id: "request.management.report.incidents.section.describe", defaultMessage: "Describe the incident" }),
+            title: f({ id: "request.management.report.incidents.section.describe", defaultMessage: "Enter details here" }),
             content: <>
+                    <ul className={props.classes.list}>
+                        <li>{f({ id: "request.management.report.incidents.section.listitem1", defaultMessage: "Explain your matter clearly" })}</li>
+                        <li>{f({ id: "request.management.report.incidents.section.listitem2", defaultMessage: "Include facts and specific details" })}</li>
+                        <li>{f({ id: "request.management.report.incidents.section.listitem3", defaultMessage: "State any urgent circumstances" })}</li>
+                    </ul>
                 <DescriptionSection
                     handledDescriptionChange={setIncidentDescription}
                     handleElectionChange={setIncidentElection}
@@ -294,11 +306,11 @@ const VerticalLinearStepper = (props) => {
                     formErrors={formErrors}
                 />
                 <div style={{ height: 20 }}></div>
-                < DateTimeSection
+                {/* < DateTimeSection
                     dateTime={incidentDateTime}
                     setDateTime={setIncidentDateTime}
                     formErrors={formErrors}
-                />
+                /> */}
                 <p style={{ color:'red', marginTop:0}}>{formErrors.incidentRecaptchaErrorMsg}</p>
             </>,
             handler: () => {
@@ -359,7 +371,7 @@ const VerticalLinearStepper = (props) => {
         },
 
         1: {
-            title: f({ id: "request.management.report.incidents.section.location", defaultMessage: "Describe the incident location" }),
+            title: f({ id: "request.management.report.incidents.section.location", defaultMessage: "Describe the location" }),
             content: < LocationSection
                 location={incidentLocation}
                 handledLocationChange={setIncidentLocation}
@@ -447,7 +459,7 @@ const VerticalLinearStepper = (props) => {
         },
 
         2:{
-            title:'Select the most suitable category for the incident',
+            title:f({ id: "request.management.report.incidents.section.category", defaultMessage: "Select the most suitable category" }),
             content: <CategorySection
                         mainCategories={mainCategories}
                         subCategories={subCategories}

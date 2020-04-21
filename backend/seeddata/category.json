@@ -4,11 +4,11 @@
     "pk": 1,
     "fields": {
       "code": "CVD19-1",
-      "top_category": "COVID19",
+      "top_category": "COVID-19",
       "sub_category": "Report a matter / incident",
-      "sn_top_category": "COVID19",
+      "sn_top_category": "COVID-19",
       "sn_sub_category": "කාරණයක් / සිද්ධියක් වාර්තා කරන්න",
-      "tm_top_category": "COVID19",
+      "tm_top_category": "COVID-19",
       "tm_sub_category": "ஒரு விஷயம் / சம்பவத்தைப் புகாரளிக்கவும்",
       "created_date": "2020-01-01T00:00:00Z"
     }
@@ -18,11 +18,11 @@
     "pk": 2,
     "fields": {
       "code": "CVD19-2",
-      "top_category": "COVID19",
+      "top_category": "COVID-19",
       "sub_category": "Report a suspected case of COVID-19",
-      "sn_top_category": "COVID19",
+      "sn_top_category": "COVID-19",
       "sn_sub_category": "COVID-19 හි සැක සහිත නඩුවක් වාර්තා කරන්න",
-      "tm_top_category": "COVID19",
+      "tm_top_category": "COVID-19",
       "tm_sub_category": "COVID-19 இன் சந்தேகத்திற்குரிய வழக்கைப் புகாரளிக்கவும்",
       "created_date": "2020-01-01T00:00:00Z"
     }
@@ -32,12 +32,12 @@
     "pk": 3,
     "fields": {
       "code": "CVD19-3",
-      "top_category": "COVID19",
-      "sub_category": "Request help - Access or delivery of essential grocery supplies or medicines",
-      "sn_top_category": "COVID19",
-      "sn_sub_category": "සහය පැතීම - අත්‍යවශ්‍ය සිල්ලර බඩු හෝ ඖෂධ ලබා දීම",
-      "tm_top_category": "COVID19",
-      "tm_sub_category": "உதவி கோருங்கள் - அத்தியாவசிய மளிகை பொருட்கள் அல்லது மருந்துகளை அணுகல் அல்லது வழங்குதல்",
+      "top_category": "COVID-19",
+      "sub_category": "Essential grocery supplies or medicines",
+      "sn_top_category": "COVID-19",
+      "sn_sub_category": "අත්‍යවශ්‍ය සිල්ලර සැපයුම් හෝ ඖෂධ",
+      "tm_top_category": "COVID-19",
+      "tm_sub_category": "அத்தியாவசிய மளிகை பொருட்கள் அல்லது மருந்துகள்",
       "created_date": "2020-01-01T00:00:00Z"
     }
   },
@@ -46,12 +46,12 @@
     "pk": 4,
     "fields": {
       "code": "CVD19-4",
-      "top_category": "COVID19",
-      "sub_category": "Request help - Financial assistance towards essential grocery supplies or medicines",
-      "sn_top_category": "COVID19",
-      "sn_sub_category": "සහය පැතීම - අත්‍යවශ්‍ය සිල්ලර බඩු හෝ ඖෂධ සඳහා මූල්‍ය ආධාර",
-      "tm_top_category": "COVID19",
-      "tm_sub_category": "உதவி கோருங்கள் - அத்தியாவசிய மளிகை பொருட்கள் அல்லது மருந்துகளுக்கு நிதி உதவி",
+      "top_category": "COVID-19",
+      "sub_category": "Allowances",
+      "sn_top_category": "COVID-19",
+      "sn_sub_category": "දීමනා",
+      "tm_top_category": "COVID-19",
+      "tm_sub_category": "கொடுப்பனவுகள்",
       "created_date": "2020-01-01T00:00:00Z"
     }
   },
@@ -60,12 +60,12 @@
     "pk": 5,
     "fields": {
       "code": "CVD19-5",
-      "top_category": "COVID19",
-      "sub_category": "Request help - Elders allowances",
-      "sn_top_category": "COVID19",
-      "sn_sub_category": "සහය පැතීම - වැඩිහිටි දීමනා",
-      "tm_top_category": "COVID19",
-      "tm_sub_category": "உதவி கோருங்கள் - முதியோர் கொடுப்பனவுகள்",
+      "top_category": "COVID-19",
+      "sub_category": "Pensioners",
+      "sn_top_category": "COVID-19",
+      "sn_sub_category": "විශ්‍රාමිකයන්",
+      "tm_top_category": "COVID-19",
+      "tm_sub_category": "ஓய்வூதியம் பெறுவோர்",
       "created_date": "2020-01-01T00:00:00Z"
     }
   },
@@ -74,12 +74,12 @@
     "pk": 6,
     "fields": {
       "code": "CVD19-6",
-      "top_category": "COVID19",
-      "sub_category": "Request help - Temporary allowances",
-      "sn_top_category": "COVID19",
-      "sn_sub_category": "සහය පැතීම - තාවකාලික දීමනා",
-      "tm_top_category": "COVID19",
-      "tm_sub_category": "உதவி கோருங்கள் - தற்காலிக கொடுப்பனவுகள்",
+      "top_category": "COVID-19",
+      "sub_category": "Sri Lankan citizen living overseas",
+      "sn_top_category": "COVID-19",
+      "sn_sub_category": "විදේශයක ජීවත්වන ශ්‍රී ලාංකික පුරවැසියන්",
+      "tm_top_category": "COVID-19",
+      "tm_sub_category": "வெளிநாட்டில் வாழும் இலங்கை குடிமகன்",
       "created_date": "2020-01-01T00:00:00Z"
     }
   },
@@ -88,12 +88,12 @@
     "pk": 7,
     "fields": {
       "code": "CVD19-7",
-      "top_category": "COVID19",
-      "sub_category": "Request help - Other allowances",
-      "sn_top_category": "COVID19",
-      "sn_sub_category": "සහය පැතීම - වෙනත් දීමනා",
-      "tm_top_category": "COVID19",
-      "tm_sub_category": "உதவி கோருங்கள் - பிற கொடுப்பனவுகள்",
+      "top_category": "COVID-19",
+      "sub_category": "Public utilities, repairs and waste disposal",
+      "sn_top_category": "COVID-19",
+      "sn_sub_category": "මහජන උපයෝගිතා, අළුත්වැඩියා සහ අපද්‍රව්‍ය බැහැර කිරීම",
+      "tm_top_category": "COVID-19",
+      "tm_sub_category": "பொது பயன்பாடுகள், பழுது மற்றும் கழிவுகளை அகற்றுவது",
       "created_date": "2020-01-01T00:00:00Z"
     }
   },
@@ -101,67 +101,11 @@
     "model": "common.category",
     "pk": 8,
     "fields": {
-      "code": "CVD19-8",
-      "top_category": "COVID19",
-      "sub_category": "Request help - Farming pensioners",
-      "sn_top_category": "COVID19",
-      "sn_sub_category": "සහය පැතීම - ගොවි විශ්‍රාමිකයන්",
-      "tm_top_category": "COVID19",
-      "tm_sub_category": "உதவி கோருங்கள் - விவசாய ஓய்வூதியம் பெறுவோர்",
-      "created_date": "2020-01-01T00:00:00Z"
-    }
-  },
-  {
-    "model": "common.category",
-    "pk": 9,
-    "fields": {
-      "code": "CVD19-9",
-      "top_category": "COVID19",
-      "sub_category": "Sri Lankan citizen living overseas - Help wanted in overseas country",
-      "sn_top_category": "COVID19",
-      "sn_sub_category": "විදේශයක ජීවත්වන ශ්‍රී ලාංකික පුරවැසියන් - විදේශ රටක උපකාර අවශ්‍ය වේ",
-      "tm_top_category": "COVID19",
-      "tm_sub_category": "வெளிநாட்டில் வாழும் இலங்கை குடிமகன் - வெளிநாட்டு நாட்டில் உதவி தேவை",
-      "created_date": "2020-01-01T00:00:00Z"
-    }
-  },
-  {
-    "model": "common.category",
-    "pk": 10,
-    "fields": {
-      "code": "CVD19-10",
-      "top_category": "COVID19",
-      "sub_category": "Sri Lankan citizen living overseas - Assistance for family members in SL",
-      "sn_top_category": "COVID19",
-      "sn_sub_category": "විදේශයක ජීවත්වන ශ්‍රී ලාංකික පුරවැසියන් - ශ්‍රී ලංකාවේ පවුලේ සාමාජිකයින් සඳහා උදව් උපකාර",
-      "tm_top_category": "COVID19",
-      "tm_sub_category": "வெளிநாட்டில் வாழும் இலங்கை குடிமகன் - எஸ்.எல். இல் குடும்ப உறுப்பினர்களுக்கு உதவி",
-      "created_date": "2020-01-01T00:00:00Z"
-    }
-  },
-  {
-    "model": "common.category",
-    "pk": 11,
-    "fields": {
-      "code": "CVD19-11",
-      "top_category": "COVID19",
-      "sub_category": "Public utilities, repairs and waste disposal",
-      "sn_top_category": "COVID19",
-      "sn_sub_category": "මහජන උපයෝගිතා, අළුත්වැඩියා සහ අපද්‍රව්‍ය බැහැර කිරීම",
-      "tm_top_category": "COVID19",
-      "tm_sub_category": "பொது பயன்பாடுகள், பழுது மற்றும் கழிவுகளை அகற்றுவது",
-      "created_date": "2020-01-01T00:00:00Z"
-    }
-  },
-  {
-    "model": "common.category",
-    "pk": 12,
-    "fields": {
       "code": "SAMURDHI-1",
       "top_category": "Samurdhi",
-      "sub_category": "Request help - Samurdhi allowances",
+      "sub_category": "Samurdhi allowances",
       "sn_top_category": "සමෘද්ධි",
-      "sn_sub_category": "සහය පැතීම - සමෘද්ධි දීමනා",
+      "sn_sub_category": "සමෘද්ධි දීමනා",
       "tm_top_category": "சமுர்த்தி",
       "tm_sub_category": "உதவி கோருங்கள் - சமுர்தி கொடுப்பனவுகள்",
       "created_date": "2020-01-01T00:00:00Z"
@@ -169,24 +113,24 @@
   },
   {
     "model": "common.category",
-    "pk": 13,
+    "pk": 9,
     "fields": {
       "code": "DIPLO-1",
-      "top_category": "DIPLOMAT / EMBASSIES / NGOs",
-      "sub_category": "Residents of Sri Lanka with foreign citizenship / Diplomatic embassies",
+      "top_category": "Diplomats / Embassies / NGOs / Tourists",
+      "sub_category": "Residents of Sri Lanka with foreign citizenship",
       "sn_top_category": "තානාපතියන් / තානාපති කාර්යාල / රාජ්‍ය නොවන සංවිධාන",
-      "sn_sub_category": "විදේශීය පුරවැසිභාවය සහිත ශ්‍රී ලංකාවේ පදිංචිකරුවන් / රාජ්‍ය තාන්ත්‍රික තානාපති කාර්යාල",
+      "sn_sub_category": "විදේශීය පුරවැසිභාවය සහිත ශ්‍රී ලංකාවේ පදිංචිකරුවන්",
       "tm_top_category": "தூதர்கள் / தூதரகங்கள் / தன்னார்வ தொண்டு நிறுவனம்",
-      "tm_sub_category": "வெளிநாட்டு குடியுரிமையுடன் இலங்கையில் வசிப்பவர்கள் / இராஜதந்திர தூதரகங்கள்",
+      "tm_sub_category": "வெளிநாட்டு குடியுரிமையுடன் இலங்கையில் வசிப்பவர்கள்",
       "created_date": "2020-01-01T00:00:00Z"
     }
   },
   {
     "model": "common.category",
-    "pk": 14,
+    "pk": 10,
     "fields": {
       "code": "DIPLO-2",
-      "top_category": "DIPLOMAT / EMBASSIES / NGOs",
+      "top_category": "Diplomats / Embassies / NGOs / Tourists",
       "sub_category": "Tourist",
       "sn_top_category": "තානාපතියන් / තානාපති කාර්යාල / රාජ්‍ය නොවන සංවිධාන",
       "sn_sub_category": "සංචාරකයන්",
@@ -197,10 +141,10 @@
   },
   {
     "model": "common.category",
-    "pk": 15,
+    "pk": 11,
     "fields": {
       "code": "DIPLO-3",
-      "top_category": "DIPLOMAT / EMBASSIES / NGOs",
+      "top_category": "Diplomats / Embassies / NGOs / Tourists",
       "sub_category": "Diplomat / Embassies / UN / NGOs",
       "sn_top_category": "තානාපතියන් / තානාපති කාර්යාල / රාජ්‍ය නොවන සංවිධාන",
       "sn_sub_category": "තානාපතියන් / තානාපති කාර්යාල / UN / රාජ්‍ය නොවන සංවිධාන",
@@ -211,10 +155,10 @@
   },
   {
     "model": "common.category",
-    "pk": 16,
+    "pk": 12,
     "fields": {
       "code": "GOV-1",
-      "top_category": "GOVT ORG",
+      "top_category": "Government Organization",
       "sub_category": "Request authorization / approval",
       "sn_top_category": "රාජ්‍ය සංවිධානය",
       "sn_sub_category": "අවසරය / අනුමැතිය ඉල්ලා සිටින්න",
@@ -225,10 +169,10 @@
   },
   {
     "model": "common.category",
-    "pk": 17,
+    "pk": 13,
     "fields": {
       "code": "GOV-2",
-      "top_category": "GOVT ORG",
+      "top_category": "Government Organization",
       "sub_category": "Request travel authorization",
       "sn_top_category": "රාජ්‍ය සංවිධානය",
       "sn_sub_category": "සංචාරක අවසරය ඉල්ලීම",
@@ -239,10 +183,10 @@
   },
   {
     "model": "common.category",
-    "pk": 18,
+    "pk": 14,
     "fields": {
       "code": "GOV-3",
-      "top_category": "GOVT ORG",
+      "top_category": "Government Organization",
       "sub_category": "Request financial assistance",
       "sn_top_category": "රාජ්‍ය සංවිධානය",
       "sn_sub_category": "මූල්‍ය ආධාර ඉල්ලීම",
