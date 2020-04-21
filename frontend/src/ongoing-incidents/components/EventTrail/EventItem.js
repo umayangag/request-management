@@ -125,6 +125,10 @@ function hasEventBody(event){
         "WORKFLOW_ACTIONED"
     ];
 
+    if(event.action === "WORKFLOW_ACTIONED" && event.data.workflow.type === "Close"){
+        return false;
+    }
+
     return actionsWithBody.indexOf(event.action) !== -1;
 }
 
