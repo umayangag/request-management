@@ -92,7 +92,7 @@ const IncidentLocation = (props) => {
                         select
                         label={f({
                             id: "request.management.report.incidents.district",
-                            defaultMessage: "District"
+                            defaultMessage: f({ id: "request.management.incident.create.location.district", defaultMessage: "District" })
                         }) + "*"}
                         className={classes.textField}
                         value={district}

@@ -13,7 +13,10 @@
   "request.management.report.incidents": "ஒரு கோரிக்கை வைக்கவும்",
   "request.management.report.incidents.helper.text": "*நிரப்புதல் கட்டாயமானது",
 
-  "request.management.report.incidents.section.describe": "சம்பவத்தினை விபரிக்குக",
+  "request.management.report.incidents.section.describe": "விவரங்களை இங்கே உள்ளிடவும்",
+  "request.management.report.incidents.section.listitem1": "உங்கள் விஷயத்தை தெளிவாக விளக்குங்கள்",
+  "request.management.report.incidents.section.listitem2": "உண்மைகள் மற்றும் குறிப்பிட்ட விவரங்களைச் சேர்க்கவும்",
+  "request.management.report.incidents.section.listitem3": "எந்த அவசர சூழ்நிலையையும் கூறுங்கள்",
   "request.management.report.incidents.description": "விளக்கம்",
   "request.management.report.incidents.description.error.message": "விளக்கம் தேவைப்படுகின்றது",
   "request.management.report.incidents.election": "தேர்தல்",
@@ -23,17 +26,19 @@
   "request.management.report.incidents.datetime.error.message": "திகதி மற்றும் நேரம் தேவைப்படுகின்றன",
   "request.management.report.incidents.recaptcha.error.message": "இந்த சரிபார்ப்பு தேவை",
 
-  "request.management.report.incidents.section.location": "சம்பவம் நடந்த இடத்தை விபரிக்கவும்",
+  "request.management.report.incidents.section.location": "உங்கள் இருப்பிட விவரங்கள்",
   "request.management.report.incidents.location": "இடத்தின் பெயர் அல்லது விபரம்",
   "request.management.report.incidents.address": "முகவரி*",
   "request.management.report.incidents.city": "நகரம்",
 
-  "request.management.report.incidents.section.attachment": "சம்பவம் தொடர்பான கோப்பு / ஆவணங்களை இணைக்கவும்",
+  "request.management.report.incidents.section.attachment": "தொடர்புடைய கோப்புகளை இணைக்கவும் (ஆவணங்கள், படங்கள், ஆடியோ / வீடியோ)",
   "request.management.report.incidents.seleted.file": "தெரிவு செய்யப்பட்ட கோப்பு / ஆவணம்",
 
   "request.management.report.incidents.section.contact": "உங்களின் தொடர்பு விபரங்கள்",
+  "request.management.report.incidents.section.category": "மிகவும் பொருத்தமான வகையைத் தேர்ந்தெடுக்கவும்",
   "request.management.report.incidents.contact.name": "பெயர்*",
   "request.management.report.incidents.contact.mobile": "கைபேசி*",
+  "request.management.report.incidents.contact.telephone": "நிலையான தொலைபேசி",
   "request.management.report.incidents.contact.landline": "நிலையான தொலைபேசி",
   "request.management.report.incidents.contact.email": "மின்னஞ்சல்",
 
@@ -54,7 +59,8 @@
   "request.management.home.incidents.list.status": "Status",
   "request.management.home.incidents.list.severity": "Severity*",
   "request.management.home.incidents.list.response_time": "Response Time",
-  "request.management.home.incidents.list.category": "Category",
+  "request.management.home.incidents.list.category": "வகை",
+  "request.management.home.incidents.list.subcategory": "துணைப்பிரிவு",
   "request.management.home.incidents.list.last_actioned_at": "Last Actioned At",
   "request.management.home.incidents.list.created_date": "Created_date",
 
@@ -94,7 +100,7 @@
   "request.management.incident.create.location.description": "Location / Description",
   "request.management.incident.create.location.address": "Address*",
   "request.management.incident.create.location.city": "City*",
-  "request.management.incident.create.location.district": "District",
+  "request.management.incident.create.location.district": "ஒரு மாவட்டம்",
   "request.management.incident.create.location.gn_division": "Grama Niladhari Division",
 
   "request.management.incident.review.review_complaints": "Review",

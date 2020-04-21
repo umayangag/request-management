@@ -29,6 +29,10 @@ import FileUploadSection from './GuestFormFileUploadSection';
 import DateTimeSection from './GuestFormDateTimeSection';
 import LocationSection from './GuestFromLocationSection';
 import ContactSection from './GuestFormContactSection';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
 import _ from 'lodash';
 
 
@@ -82,7 +86,10 @@ const styles = theme => ({
     wrapper: {
         margin: theme.spacing.unit,
         position: 'relative',
-    }
+    },
+    list: {
+        marginLeft:-20
+      },
 });
 
 
@@ -282,8 +289,13 @@ const VerticalLinearStepper = (props) => {
     const stepDefinitions = {
 
         3: {
-            title: f({ id: "request.management.report.incidents.section.describe", defaultMessage: "Describe the incident" }),
+            title: f({ id: "request.management.report.incidents.section.describe", defaultMessage: "Enter details here" }),
             content: <>
+                    <ul className={props.classes.list}>
+                        <li>{f({ id: "request.management.report.incidents.section.listitem1", defaultMessage: "Explain your matter clearly" })}</li>
+                        <li>{f({ id: "request.management.report.incidents.section.listitem2", defaultMessage: "Include facts and specific details" })}</li>
+                        <li>{f({ id: "request.management.report.incidents.section.listitem3", defaultMessage: "State any urgent circumstances" })}</li>
+                    </ul>
                 <DescriptionSection
                     handledDescriptionChange={setIncidentDescription}
                     handleElectionChange={setIncidentElection}
@@ -359,7 +371,7 @@ const VerticalLinearStepper = (props) => {
         },
 
         1: {
-            title: f({ id: "request.management.report.incidents.section.location", defaultMessage: "Describe the incident location" }),
+            title: f({ id: "request.management.report.incidents.section.location", defaultMessage: "Describe the location" }),
             content: < LocationSection
                 location={incidentLocation}
                 handledLocationChange={setIncidentLocation}
@@ -447,7 +459,7 @@ const VerticalLinearStepper = (props) => {
         },
 
         2:{
-            title:'Select the most suitable category for the incident',
+            title:f({ id: "request.management.report.incidents.section.category", defaultMessage: "Select the most suitable category" }),
             content: <CategorySection
                         mainCategories={mainCategories}
                         subCategories={subCategories}

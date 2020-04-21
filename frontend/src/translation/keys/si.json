@@ -14,7 +14,10 @@
   "request.management.report.incidents": "ඉල්ලීමක් කරන්න",
   "request.management.report.incidents.helper.text": "*අනිවාර්ය වේ",
 
-  "request.management.report.incidents.section.describe": "සිදුවීම පිළිබඳ තොරතුරු",
+  "request.management.report.incidents.section.describe": "විස්තර මෙහි ඇතුළත් කරන්න",
+  "request.management.report.incidents.section.listitem1": "ඔබේ කාරණය පැහැදිලි කරන්න",
+  "request.management.report.incidents.section.listitem2": "කරුණු සහ විශේෂිත තොරතුරු ඇතුළත් කරන්න",
+  "request.management.report.incidents.section.listitem3": "ඕනෑම හදිසි තත්වයක් සඳහන් කරන්න",
   "request.management.report.incidents.description": "විස්තරය",
   "request.management.report.incidents.description.error.message": "විස්තරය අවශ්‍ය වේ",
   "request.management.report.incidents.election": "මැතිවරණය",
@@ -24,17 +27,19 @@
   "request.management.report.incidents.datetime.error.message": "දිනය සහ වේලාව අවශ්‍ය වේ",
   "request.management.report.incidents.recaptcha.error.message": "මෙම සත්‍යාපනය අවශ්‍ය වේ",
 
-  "request.management.report.incidents.section.location": "සිදුවූ ස්ථානය පිළිබඳ තොරතුරු",
-  "request.management.report.incidents.location": "සිදුවූ ස්ථානයේ නාමය හෝ විස්තරය",
+  "request.management.report.incidents.section.location": "ඔබගේ ස්ථානය පිළිබඳ තොරතුරු",
+  "request.management.report.incidents.location": "ස්ථානයේ නාමය හෝ විස්තරය",
   "request.management.report.incidents.address": "ලිපිනය*",
   "request.management.report.incidents.city": "නගරය",
 
-  "request.management.report.incidents.section.attachment": "සිදුවීමට අදාළ ඇමුණුම්",
+  "request.management.report.incidents.section.attachment": "අදාළ ලිපිගොනු අමුණන්න (ලේඛන, රූප, ශ්‍රව්‍ය / දෘශ්‍ය)",
   "request.management.report.incidents.seleted.file": "තෝරාගත් ඇමුණුම",
 
   "request.management.report.incidents.section.contact": "ඔබව සම්බන්ධ කරගත හැකි තොරතුරු",
+  "request.management.report.incidents.section.category": "වඩාත් සුදුසු කාණ්ඩය තෝරන්න",
   "request.management.report.incidents.contact.name": "නම*",
   "request.management.report.incidents.contact.mobile": "ජංගම දුරකථන*",
+  "request.management.report.incidents.contact.telephone": "ස්ථාවර දුරකථන",
   "request.management.report.incidents.contact.landline": "ස්ථාවර දුරකථන",
   "request.management.report.incidents.contact.email": "ඊමේල්",
 
@@ -55,7 +60,8 @@
   "request.management.home.incidents.list.status": "Status",
   "request.management.home.incidents.list.severity": "Severity",
   "request.management.home.incidents.list.response_time": "Response Time",
-  "request.management.home.incidents.list.category": "Category",
+  "request.management.home.incidents.list.category": "වර්ගය",
+  "request.management.home.incidents.list.subcategory": "උප වර්ගය",
   "request.management.home.incidents.list.last_actioned_at": "Last Actioned At",
   "request.management.home.incidents.list.created_date": "Created_date",
 
@@ -95,7 +101,7 @@
   "request.management.incident.create.location.description": "Location / Description",
   "request.management.incident.create.location.address": "Address*",
   "request.management.incident.create.location.city": "City*",
-  "request.management.incident.create.location.district": "District",
+  "request.management.incident.create.location.district": "දිස්ත්‍රික්කය",
   "request.management.incident.create.location.gn_division": "Grama Niladhari Division",
 
   "request.management.incident.review.review_complaints": "Review",

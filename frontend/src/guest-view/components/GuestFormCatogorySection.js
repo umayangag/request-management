@@ -8,6 +8,8 @@ import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
 import FormHelperText from '@material-ui/core/FormHelperText';
+import { useIntl } from "react-intl";
+
 
 const styles = theme => ({
   root: {
@@ -49,6 +51,7 @@ const styles = theme => ({
 
 const CatogorySection = (props) => {
 
+  const { formatMessage: f } = useIntl();
 
     const { 
         classes, 
@@ -81,13 +84,13 @@ const CatogorySection = (props) => {
       //           </Paper>
       //         </Grid>
       //       ))}
-            <Grid container className={classes.demo} justify="left" spacing={16}>
-              <Grid item xs={12} sm={6}>
+            <Grid container className={classes.demo} justify="left" spacing={3}>
+              <Grid item xs={12} >
             <FormControl
                       className={classes.formControl}
                       error={formErrors.incidentMainCategoryErrorMsg ? true : false}
                     >
-                      <InputLabel htmlFor="category">Category*</InputLabel>
+                      <InputLabel htmlFor="category">{f({ id: "request.management.home.incidents.list.category", defaultMessage: "Category*" })}*</InputLabel>
                       <Select
                         value={selectedMainCategory}
                         onChange={e => {
@@ -117,12 +120,12 @@ const CatogorySection = (props) => {
                       <FormHelperText>{formErrors.incidentMainCategoryErrorMsg || ""}</FormHelperText>
                     </FormControl>
                     </Grid>
-                    <Grid item xs={12} sm={6}>
+                    <Grid item xs={12}>
             <FormControl
                       className={classes.formControl}
                       error={formErrors.incidentSubCategoryErrorMsg ? true : false}
                     >
-                      <InputLabel htmlFor="category">Sub category*</InputLabel>
+                      <InputLabel htmlFor="category">{f({ id: "request.management.home.incidents.list.subcategory", defaultMessage: "Sub Category*" })}*</InputLabel>
                       <Select
                         value={selectedCategory}
                         onChange={e => {
