@@ -153,7 +153,7 @@ function getSecondaryItem(event){
 
         if(workflowType === "Verify"){
             return (
-                <div><b>Has Proof?</b> <br />
+                <div><b>Is verified with support documents?</b> <br />
                     {workflowData.hasProof ? "Yes" : "No"}
                 </div>
             )
