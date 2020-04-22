@@ -11,7 +11,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 from django.db.models import Q
 
-from .models import Incident, StatusType, SeverityType
+from .models import Incident, StatusType, SeverityType, ReopenWorkflow as Reopened
 from django.contrib.auth.models import User, Group, Permission
 from .serializers import (
     IncidentSerializer,
@@ -263,6 +263,10 @@ class IncidentDetail(APIView):
         serializer = IncidentSerializer(incident)
         incident_data = serializer.data
 
+        # get the reopen count of the incident
+        reopened_incidents = Reopened.objects.filter(incident_id=incident_id)
+        incident_data["reopenedCount"] = len(reopened_incidents)
+
         police_report = get_police_report_by_incident(incident)
         if police_report is not None:
             police_report_data = IncidentPoliceReportSerializer(police_report).data
@@ -270,6 +274,7 @@ class IncidentDetail(APIView):
                 if key != "id" and key != "incident":
                     incident_data[key] = police_report_data[key]
 
+        print(incident_data)
         return Response(incident_data)
 
     def put(self, request, incident_id, format=None):
