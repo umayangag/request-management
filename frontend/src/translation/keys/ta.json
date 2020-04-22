@@ -73,9 +73,9 @@
 
   "request.management.incident.create.basic_information": "Basic Information",
   "request.management.incident.create.type": "Type",
-  "request.management.incident.create.mode_of_receipt": "Mode of receipt*",
+  "request.management.incident.create.mode_of_receipt": "ரசீது முறை*",
   "request.management.incident.create.title": "Title",
-  "request.management.incident.create.description": "Description*",
+  "request.management.incident.create.description": "வெளியீடு / கோரிக்கை விவரங்கள்*",
   "request.management.incident.create.category": "Category",
 
   "request.management.incident.create.date": "Request Date",
@@ -93,12 +93,14 @@
   "request.management.incident.create.accused.type": "Type",
   "request.management.incident.create.accused.political_affliation": "Political Affiliation",
 
-  "request.management.incident.create.location_information": "Location Information",
-  "request.management.incident.create.location.description": "Location / Description",
-  "request.management.incident.create.location.address": "Address",
-  "request.management.incident.create.location.city": "City",
+  "request.management.incident.create.location_information": "இருப்பிட தகவல்",
+  "request.management.incident.create.location.description": "இடம் / விளக்கம்",
+  "request.management.incident.create.location.address": "முகவரி",
+  "request.management.incident.create.location.city": "நகரம்*",
   "request.management.incident.create.location.district": "ஒரு மாவட்டம்",
-  "request.management.incident.create.location.gn_division": "Grama Niladhari Division",
+  "request.management.incident.create.location.gn_division": "கிராம நிலாதாரி பிரிவு",
+  "request.management.report.incidents.section.location.info": "உதவி தேவைப்படும் இடம் உங்கள் முகவரியிலிருந்து வேறுபட்டால், இருப்பிட விவரங்களுடன் இந்த பகுதியை நிரப்பவும்.",
+
 
   "request.management.incident.review.review_complaints": "Review",
   "request.management.incident.review.text_search": "Text Search",

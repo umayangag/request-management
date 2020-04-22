@@ -75,9 +75,9 @@
 
   "request.management.incident.create.basic_information": "Basic Information",
   "request.management.incident.create.type": "Type",
-  "request.management.incident.create.mode_of_receipt": "Mode of receipt*",
+  "request.management.incident.create.mode_of_receipt": "ලැබීමේ ආකාරය*",
   "request.management.incident.create.title": "Title",
-  "request.management.incident.create.description": "Description*",
+  "request.management.incident.create.description": "ප්‍රශ්නය / ඉල්ලීම පිළිබද විස්තර*",
   "request.management.incident.create.category": "Category",
 
   "request.management.incident.create.date": "Request Date",
@@ -95,12 +95,13 @@
   "request.management.incident.create.accused.type": "Type",
   "request.management.incident.create.accused.political_affliation": "Political Affiliation",
 
-  "request.management.incident.create.location_information": "Location Information",
-  "request.management.incident.create.location.description": "Location / Description",
-  "request.management.incident.create.location.address": "Address",
-  "request.management.incident.create.location.city": "City",
+  "request.management.incident.create.location_information": "ස්ථානය පිළිබද තොරතුරු",
+  "request.management.incident.create.location.description": "ස්ථානය / විස්තරය",
+  "request.management.incident.create.location.address": "ලිපිනය",
+  "request.management.incident.create.location.city": "නගරය*",
   "request.management.incident.create.location.district": "දිස්ත්‍රික්කය",
-  "request.management.incident.create.location.gn_division": "Grama Niladhari Division",
+  "request.management.incident.create.location.gn_division": "ග්‍රාම නිලධාරි කොට්ටාශය",
+  "request.management.report.incidents.section.location.info": "උදව් අවශ්‍ය ස්ථානය ඔබේ ලිපිනයට වඩා වෙනස් නම්, කරුණාකර ස්ථාන විස්තර සමඟ මෙම කොටස පුරවන්න.",
 
   "request.management.incident.review.review_complaints": "Review",
   "request.management.incident.review.text_search": "Text Search",
