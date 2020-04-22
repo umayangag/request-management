@@ -484,7 +484,7 @@ const VerticalLinearStepper = (props) => {
         steps[stepNumber] = stepDefinitions[stepNumber].title
     });
 
-    const optionalSteps = new Set([])
+    const optionalSteps = new Set([4])
 
     const isStepOptional = step => optionalSteps.has(step);
 
