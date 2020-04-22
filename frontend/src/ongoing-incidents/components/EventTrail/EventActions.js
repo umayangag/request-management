@@ -23,6 +23,7 @@ import SubdirectoryArrowLeftIcon from "@material-ui/icons/SubdirectoryArrowLeft"
 import EditIcon from "@material-ui/icons/Edit";
 import AccessTimeIcon from "@material-ui/icons/AccessTime";
 import PermIdentityIcon from "@material-ui/icons/PermIdentity";
+import OpenInBrowser from "@material-ui/icons/OpenInBrowser";
 import HourglassEmptyIcon from "@material-ui/icons/HourglassEmpty";
 import WhereToVoteIcon from "@material-ui/icons/WhereToVote";
 import PrintIcon from "@material-ui/icons/Print";
@@ -221,6 +222,16 @@ const EventActions = (props) => {
           <ListItemText
             primary="Status"
             secondary={activeIncident.currentStatus}
+          />
+        </ListItem>
+
+        <ListItem>
+          <Avatar>
+            <OpenInBrowser />
+          </Avatar>
+          <ListItemText
+            primary="Reopened Count"
+            secondary={activeIncident.reopenedCount}
           />
         </ListItem>
       </List>
