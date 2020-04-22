@@ -203,10 +203,10 @@ const VerticalLinearStepper = (props) => {
             errorMsg = { ...errorMsg, incidentElectionErrorMsg: f({ id: "request.management.report.incidents.election.error.message", defaultMessage: "Election is required" }) };
             valid = false;
         }
-        if (getFormattedDateTime() == null) {
-            errorMsg = { ...errorMsg, incidentDatetimeErrorMsg: f({ id: "request.management.report.incidents.datetime.error.message", defaultMessage: "Date and time are required" }) };
-            valid = false;
-        }
+        // if (getFormattedDateTime() == null) {
+        //     errorMsg = { ...errorMsg, incidentDatetimeErrorMsg: f({ id: "request.management.report.incidents.datetime.error.message", defaultMessage: "Date and time are required" }) };
+        //     valid = false;
+        // }
 
 
         setFormErrors({ ...errorMsg });
@@ -227,7 +227,7 @@ const VerticalLinearStepper = (props) => {
             valid = false;
         }
         if(!incidentContact.name){
-            errorMsg = { ...errorMsg, incidentNameErrorMsg: f({ id: "request.management.report.incidents.phone.error.message", defaultMessage: "Name is required" }) };
+            errorMsg = { ...errorMsg, incidentNameErrorMsg: f({ id: "request.management.report.incidents.name.error.message", defaultMessage: "Name is required" }) };
             valid = false;
         }
 
@@ -241,11 +241,11 @@ const VerticalLinearStepper = (props) => {
         let valid = true;
 
         if(!incidentAddress){
-            errorMsg = { ...errorMsg, incidentAddressErrorMsg: f({ id: "request.management.report.incidents.phone.error.message", defaultMessage: "Address is required" }) };
+            errorMsg = { ...errorMsg, incidentAddressErrorMsg: f({ id: "request.management.report.incidents.address.error.message", defaultMessage: "Address is required" }) };
             valid = false;
         }
         if(!incidentDistrict){
-            errorMsg = { ...errorMsg, incidentDistrictErrorMsg: f({ id: "request.management.report.incidents.phone.error.message", defaultMessage: "District is required" }) };
+            errorMsg = { ...errorMsg, incidentDistrictErrorMsg: f({ id: "request.management.report.incidents.district.error.message", defaultMessage: "District is required" }) };
             valid = false;
         }
 
@@ -259,11 +259,11 @@ const VerticalLinearStepper = (props) => {
         let valid = true;
 
         if(!incidentCatogory){
-            errorMsg = { ...errorMsg, incidentSubCategoryErrorMsg: f({ id: "request.management.report.incidents.phone.error.message", defaultMessage: "Sub category is required" }) };
+            errorMsg = { ...errorMsg, incidentSubCategoryErrorMsg: f({ id: "request.management.report.incidents.subcategory.error.message", defaultMessage: "Sub category is required" }) };
             valid = false;
         }
         if(!incidentMainCatogory){
-            errorMsg = { ...errorMsg, incidentMainCategoryErrorMsg: f({ id: "request.management.report.incidents.phone.error.message", defaultMessage: "Category is required" }) };
+            errorMsg = { ...errorMsg, incidentMainCategoryErrorMsg: f({ id: "request.management.report.incidents.topcategory.error.message", defaultMessage: "Category is required" }) };
             valid = false;
         }
 
@@ -306,11 +306,11 @@ const VerticalLinearStepper = (props) => {
                     formErrors={formErrors}
                 />
                 <div style={{ height: 20 }}></div>
-                < DateTimeSection
+                {/* < DateTimeSection
                     dateTime={incidentDateTime}
                     setDateTime={setIncidentDateTime}
                     formErrors={formErrors}
-                />
+                /> */}
                 <p style={{ color:'red', marginTop:0}}>{formErrors.incidentRecaptchaErrorMsg}</p>
             </>,
             handler: () => {

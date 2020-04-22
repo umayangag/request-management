@@ -33,7 +33,12 @@ def get_weekly_incidents():
     start_date = current_date - timedelta(current_date.weekday())
     end_date = start_date + timedelta(6)
     incidents = Incident.objects.filter(created_date__range=(start_date, end_date))
-    return incidents
+
+    week_data = {}
+    week_data["incidents"] = incidents
+    week_data["start_date"] = start_date.strftime("%Y-%m-%d")
+    week_data["end_date"] = end_date.strftime("%Y-%m-%d")
+    return week_data
 
 def parse_date_timezone(datetimeValue):
     """ parsing string datetime (eg: '2020-04-20 06:00:00') to date with timezone for accurate search """
@@ -324,11 +329,11 @@ def get_category_data_by_date_range(start_time, end_time):
 def get_weekly_closed_complain_category_data():
     file_dict = {}
 
-    file_dict[
-        "template"] = "/incidents/complaints/weeekly_closed_request_report_categorywise.js"
-    file_dict["date"] = date.today().strftime("%Y/%m/%d")
-
-    incidents = get_weekly_incidents().filter(current_status=StatusType.CLOSED.name)
+    file_dict["template"] = "/incidents/complaints/weeekly_closed_request_report_categorywise.js"
+    week_data = get_weekly_incidents()
+    file_dict["StartDate"] = week_data["start_date"]
+    file_dict["EndDate"] = week_data["end_date"]
+    incidents = week_data["incidents"].filter(current_status=StatusType.CLOSED.name)
     file_dict["total"] = incidents.count()
 
     file_dict["categories"] = get_category_dict(incidents)
