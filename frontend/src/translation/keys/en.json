@@ -26,7 +26,15 @@
   "request.management.report.incidents.time": "Time",
   "request.management.report.incidents.datetime.error.message": "Date and time are required",
   "request.management.report.incidents.recaptcha.error.message": "This verification is required",
+  "request.management.report.incidents.name.error.message": "Name is required",
+  "request.management.report.incidents.phone.error.message": "Contact number is required",
+  "request.management.report.incidents.address.error.message": "Address is required",
+  "request.management.report.incidents.district.error.message": "District is required",
+  "request.management.report.incidents.subcategory.error.message": "Sub category is required",
+  "request.management.report.incidents.topcategory.error.message": "Category is required",
 
+
+  
   "request.management.report.incidents.section.location": "Your location details",
   "request.management.report.incidents.location": "Location name or description",
   "request.management.report.incidents.address": "Address*",
