@@ -89,8 +89,8 @@
 
   "request.management.incident.create.location_information": "Location Information",
   "request.management.incident.create.location.description": "Location / Description",
-  "request.management.incident.create.location.address": "Address*",
-  "request.management.incident.create.location.city": "City*",
+  "request.management.incident.create.location.address": "Address",
+  "request.management.incident.create.location.city": "City",
   "request.management.incident.create.location.district": "දිස්ත්‍රික්කය",
   "request.management.incident.create.location.gn_division": "Grama Niladhari Division",
 
