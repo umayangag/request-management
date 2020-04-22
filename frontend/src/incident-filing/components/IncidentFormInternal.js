@@ -487,11 +487,11 @@ function IncidentFormInternal(props) {
   const IncidentSchema = Yup.object().shape({
     incidentType: Yup.mixed().required("Required"),
     infoChannel: Yup.mixed().required("Required"),
-    city: Yup.string().required("Required"),
+    // city: Yup.string().required("Required"),
     reporterAddress: Yup.string().required("Required"),
     reporterType: Yup.string().required("Required"),
     reporterName: Yup.string().required("Required"),
-    address: Yup.string().required("Required"),
+    // address: Yup.string().required("Required"),
     description: Yup.string().required("Required"),
     // occurrence: Yup.mixed().when('incidentType', (incidentType, IncidentSchema) => (incidentType == 'COMPLAINT' ? IncidentSchema.required("Required") : IncidentSchema)),
     category: Yup.mixed().required("Required"),

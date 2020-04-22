@@ -194,15 +194,15 @@ const VerticalLinearStepper = (props) => {
         setFormErrors({ ...formErrors, incidentDescriptionErrorMsg: null, incidentElectionErrorMsg: null, incidentDatetimeErrorMsg: null, incidentContactErrorMsg: null,incidentNameErrorMsg: null })
         let errorMsg = { ...formErrors };
         let valid = true;
-
+debugger;
         if (!incidentDescription) {
             errorMsg = { ...errorMsg, incidentDescriptionErrorMsg: f({ id: "request.management.report.incidents.description.error.message", defaultMessage: "Description is required" }) };
             valid = false;
         }
-        if (!incidentElection) {
-            errorMsg = { ...errorMsg, incidentElectionErrorMsg: f({ id: "request.management.report.incidents.election.error.message", defaultMessage: "Election is required" }) };
-            valid = false;
-        }
+        // if (!incidentElection) {
+        //     errorMsg = { ...errorMsg, incidentElectionErrorMsg: f({ id: "request.management.report.incidents.election.error.message", defaultMessage: "Election is required" }) };
+        //     valid = false;
+        // }
         // if (getFormattedDateTime() == null) {
         //     errorMsg = { ...errorMsg, incidentDatetimeErrorMsg: f({ id: "request.management.report.incidents.datetime.error.message", defaultMessage: "Date and time are required" }) };
         //     valid = false;
@@ -217,10 +217,6 @@ const VerticalLinearStepper = (props) => {
         setFormErrors({ ...formErrors, incidentDescriptionErrorMsg: null, incidentElectionErrorMsg: null, incidentDatetimeErrorMsg: null, incidentContactErrorMsg: null,incidentNameErrorMsg: null })
         let errorMsg = { ...formErrors };
         let valid = true;
-        if(!incidentRecaptcha){
-            errorMsg = { ...errorMsg, incidentRecaptchaErrorMsg: f({ id: "request.management.report.incidents.recaptcha.error.message", defaultMessage: "This verification is required" }) };
-            valid = false;
-        }
 
         if(!incidentContact.mobile){
             errorMsg = { ...errorMsg, incidentContactErrorMsg: f({ id: "request.management.report.incidents.phone.error.message", defaultMessage: "Contact number is required" }) };
@@ -234,6 +230,20 @@ const VerticalLinearStepper = (props) => {
         setFormErrors({ ...errorMsg });
         return valid;
     }
+
+    const validRecaptchaInputs = () => {
+        setFormErrors({ ...formErrors, incidentRecaptchaErrorMsg: null })
+        let errorMsg = { ...formErrors };
+        let valid = true;
+        if(!incidentRecaptcha){
+            errorMsg = { ...errorMsg, incidentRecaptchaErrorMsg: f({ id: "request.management.report.incidents.recaptcha.error.message", defaultMessage: "This verification is required" }) };
+            valid = false;
+        }
+
+        setFormErrors({ ...errorMsg });
+        return valid;
+    }
+    
 
     const validLocationInputs = () => {
         setFormErrors({ ...formErrors, incidentAddressErrorMsg: null, incidentDistrictErrorMsg: null })
@@ -344,7 +354,7 @@ const VerticalLinearStepper = (props) => {
                         reporterData.email = incidentContact.email;
 
                         dispatch(createGuestIncidentWithReporter( incidentData, reporterData))
-                        // dispatch(moveStepper({ step: activeStep + 1 }));
+                        dispatch(moveStepper({ step: activeStep + 1 }));
                     }
                 } else {
                     //updating an existing incident.
@@ -364,7 +374,7 @@ const VerticalLinearStepper = (props) => {
                             incidentUpdate['occured_date'] = dateTime
                         }
                         dispatch(updateGuestIncident(incidentId, incidentUpdate))
-                        // dispatch(moveStepper({ step: activeStep + 1 }));
+                        dispatch(moveStepper({ step: activeStep + 1 }));
                     }
                 }
             }
@@ -401,11 +411,21 @@ const VerticalLinearStepper = (props) => {
 
         4: {
             title: f({ id: "request.management.report.incidents.section.attachment", defaultMessage: "Attach files related to incident" }),
-            content: <FileUploader
+            content: <><FileUploader
                 files={incidentFiles}
                 setFiles={setIncidentFiles}
-            />,
+            />
+            <ReCAPTCHA
+            ref={recaptchaRef}
+            sitekey={process.env.REACT_APP_RECAPTCHA_SITEKEY}
+            onChange={ (e) => {
+                formErrors.incidentRecaptchaErrorMsg = null;
+                setIncidentRecaptcha(recaptchaRef.current.getValue());
+            }}
+            />
+            </>,
             handler: () => {
+                if (validRecaptchaInputs()) {
                 if (incidentFiles) {
                     const fileData = new FormData();
                     for (var file of incidentFiles) {
@@ -417,6 +437,7 @@ const VerticalLinearStepper = (props) => {
                     dispatch(moveStepper({ step: activeStep + 1 }));
                 }
             }
+        }
         },
 
         0: {
@@ -426,14 +447,6 @@ const VerticalLinearStepper = (props) => {
             < ContactSection
                 contactDetials={incidentContact}
                 handleContactDetailsChange={setIncidentContact} formErrors={formErrors} />
-            <ReCAPTCHA
-                ref={recaptchaRef}
-                sitekey={process.env.REACT_APP_RECAPTCHA_SITEKEY}
-                onChange={ (e) => {
-                    formErrors.incidentRecaptchaErrorMsg = null;
-                    setIncidentRecaptcha(recaptchaRef.current.getValue());
-                }}
-            />
             </>,
             handler: () => {
                 if (!incidentId) {
@@ -484,7 +497,7 @@ const VerticalLinearStepper = (props) => {
         steps[stepNumber] = stepDefinitions[stepNumber].title
     });
 
-    const optionalSteps = new Set([4])
+    const optionalSteps = new Set([])
 
     const isStepOptional = step => optionalSteps.has(step);
 
@@ -611,7 +624,7 @@ const VerticalLinearStepper = (props) => {
                                         >
                                             {f({ id: "request.management.report.incidents.forms.button.back", defaultMessage: "Back" })}
                                         </Button>
-                                        {isStepOptional(activeStep) && (
+                                        {/* {isStepOptional(activeStep) && (
                                             <Button
                                                 variant="contained"
                                                 color="primary"
@@ -621,13 +634,13 @@ const VerticalLinearStepper = (props) => {
                                             >
                                                 {f({ id: "request.management.report.incidents.forms.button.skip", defaultMessage: "Skip" })}
                                             </Button>
-                                        )}
+                                        )} */}
                                         <Button
                                             variant="contained"
                                             color="primary"
                                             onClick={handleNext}
                                             className={classes.button}
-                                            disabled={isLoading || !incidentRecaptcha}
+                                            disabled={index==4 ? isLoading || !incidentRecaptcha : isLoading}
                                         >
                                             {activeStep === steps.length - 1 ?
                                                 f({ id: "request.management.report.incidents.forms.button.finish", defaultMessage: "Submit" }) :
