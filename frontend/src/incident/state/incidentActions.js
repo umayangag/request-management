@@ -182,10 +182,13 @@ export const updateGuestIncidentRequest = createAction('INCIDENT/UPDATE_GUEST_IN
 export const updateGuestIncidentSuccess = createAction('INCIDENT/UPDATE_GUEST_INCIDENT_SUCCESS');
 export const updateGuestIncidentError = createAction('INCIDENT/UPDATE_GUEST_INCIDENT_ERROR');
 
-export const updateGuestIncident = (incidentId, incidentData) => {
+export const updateGuestIncident = (incidentId, incidentData, fileData) => {
     return async function(dispatch) {
         dispatch(updateGuestIncidentRequest());
         try{
+            if(fileData){
+                dispatch(uploadFileGuest(incidentId, fileData));
+                }
             const response = await publicApi.updateIncident(incidentId, incidentData);
             //reloading incident
             dispatch(updateGuestIncidentSuccess({data:response.data}));
@@ -262,11 +265,14 @@ export const createGuestIncidentWithReporterRequest = createAction('INCIDENT/CRE
 export const createGuestIncidentWithReporterSuccess = createAction('INCIDENT/CREATE_GUEST_INCIDENT_WITH_REPORTER_SUCCESS');
 export const createGuestIncidentWithReporterError = createAction('INCIDENT/CREATE_GUEST_INCIDENT_WITH_REPORTER_ERROR');
 
-export const createGuestIncidentWithReporter = (incidentData, reporterData) => {
+export const createGuestIncidentWithReporter = (incidentData, reporterData, fileData) => {
     return async function(dispatch) {
         dispatch(createGuestIncidentWithReporterRequest());
         try{
             const response = await publicApi.createIncident(incidentData);
+            if(fileData){
+            dispatch(uploadFileGuest(response.data.id, fileData));
+            }
             const reporterResponse = await publicApi.updateReporter(response.data.reporter, reporterData);
             dispatch(createGuestIncidentWithReporterSuccess({reporter:reporterResponse.data, incident:response.data}));
         }catch(error){
