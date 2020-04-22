@@ -8,7 +8,7 @@
   "request.management.report.incidents.forms.button.back": "Back",
   "request.management.report.incidents.forms.button.next": "Next",
   "request.management.report.incidents.forms.button.skip": "Skip",
-  "request.management.report.incidents.forms.button.finish": "Finish",
+  "request.management.report.incidents.forms.button.finish": "Submit",
 
 
   "request.management.report.incidents": "Submit a request",
@@ -88,8 +88,8 @@
 
   "request.management.incident.create.location_information": "Location Information",
   "request.management.incident.create.location.description": "Location / Description",
-  "request.management.incident.create.location.address": "Address*",
-  "request.management.incident.create.location.city": "City*",
+  "request.management.incident.create.location.address": "Address",
+  "request.management.incident.create.location.city": "City",
   "request.management.incident.create.location.district": "District",
   "request.management.incident.create.location.gn_division": "Grama Niladhari Division",
 
