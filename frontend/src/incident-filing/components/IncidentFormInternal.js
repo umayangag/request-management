@@ -656,6 +656,9 @@ function IncidentFormInternal(props) {
                         onClick={() => {
                           setFieldValue("infoChannel", c.id, true);
                         }}
+                        disabled={
+                          props.match.params.paramIncidentId ? true : false
+                        }
                       >
                         {c.name}
                       </Button>
@@ -864,6 +867,9 @@ function IncidentFormInternal(props) {
                           // }}
                           error={errors.occured_date_date}
                           helperText={errors.occured_date_date}
+                          disabled={
+                            props.match.params.paramIncidentId ? true : false
+                          }
                         />
                         <TextField
                           id="occured_date_time"
@@ -874,6 +880,9 @@ function IncidentFormInternal(props) {
                           onChange={handleChange}
                           error={errors.occured_date_time}
                           helperText={errors.occured_date_time}
+                          disabled={
+                            props.match.params.paramIncidentId ? true : false
+                          }
                         />
                       </Grid>
                     </>
@@ -1172,7 +1181,7 @@ function IncidentFormInternal(props) {
                                                 </Select>
                                             </FormControl>
                                         </Grid> */}
-                  {values.incidentType === "INQUIRY" ? (
+                  {/* {values.incidentType === "INQUIRY" ? (
                     <Grid item xs={12} sm={12}>
                       <FormControl
                         error={touched.institution && errors.institution}
@@ -1203,7 +1212,7 @@ function IncidentFormInternal(props) {
                         setFiles={handleFileSelect}
                       />
                     </Grid>
-                  )}
+                  )} */}
                 </Grid>
               </Paper>
               {/* contact information of the complianer */}
@@ -1224,6 +1233,9 @@ function IncidentFormInternal(props) {
                       helperText={
                         touched.reporterName ? errors.reporterName : null
                       }
+                      disabled={
+                        props.match.params.paramIncidentId ? true : false
+                      }
                     />
                   </Grid>
                   <Grid item xs={12} sm={6} md={3}>
@@ -1241,6 +1253,9 @@ function IncidentFormInternal(props) {
                           name: "reporterType",
                           id: "reporterType",
                         }}
+                        disabled={
+                          props.match.params.paramIncidentId ? true : false
+                        }
                       >
                         <MenuItem value="">
                           {" "}
