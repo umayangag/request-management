@@ -70,7 +70,7 @@
   "request.management.home.incidents.list.category": "Category",
   "request.management.home.incidents.list.subcategory": "Subcategory",
   "request.management.home.incidents.list.last_actioned_at": "Last Actioned At",
-  "request.management.home.incidents.list.created_date": "Created_date",
+  "request.management.home.incidents.list.created_date": "Created Date",
 
   "request.management.incident.create.basic_information": "Basic Information",
   "request.management.incident.create.type": "Type",
