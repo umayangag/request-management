@@ -342,7 +342,7 @@ function IncidentFormInternal(props) {
 
     // TODO: move hooks out of this function.
     const incident = incidentUtils.getIncident(paramIncidentId);
-    const reporters = useSelector(state => state.incident.reporters)
+    const reporters = useSelector((state) => state.incident.reporters);
 
     if (!paramIncidentId) {
       // new incident form
@@ -350,9 +350,7 @@ function IncidentFormInternal(props) {
     }
     var initData = { ...state, ...incident };
 
-    const reporter = incident
-      ? reporters.byIds[incident.reporter]
-      : "";
+    const reporter = incident ? reporters.byIds[incident.reporter] : "";
 
     if (reporter) {
       Object.assign(initData, {
@@ -533,21 +531,24 @@ function IncidentFormInternal(props) {
   });
 
   const getGramaNilidariDivisions = (district) => {
-    if(district && districts){
-      const districtId = districts.byCode[district].id
+    if (district && districts) {
+      const districtId = districts.byCode[district].id;
       let transformedData = {
         byCode: {},
-        allCodes: []
+        allCodes: [],
       };
-      gramaNiladharis.byDistrict[districtId].reduce((accumulator, currValue) => {
-        transformedData.byCode[currValue.code] = currValue;
-        transformedData.allCodes.push(currValue.code);
-      }, 0)
+      gramaNiladharis.byDistrict[districtId].reduce(
+        (accumulator, currValue) => {
+          transformedData.byCode[currValue.code] = currValue;
+          transformedData.allCodes.push(currValue.code);
+        },
+        0
+      );
       return transformedData;
-    }else{
-      return { byCode: {}, allCodes: [] }
+    } else {
+      return { byCode: {}, allCodes: [] };
     }
-  }
+  };
 
   return (
     <div className={classes.root}>
@@ -598,7 +599,9 @@ function IncidentFormInternal(props) {
               {/* basic incident detail information */}
               <Paper className={classes.paper}>
                 <Typography variant="h5" gutterBottom>
-                  {f({ id: "request.management.incident.create.basic_information" })}
+                  {f({
+                    id: "request.management.incident.create.basic_information",
+                  })}
                 </Typography>
                 <Grid container spacing={24}>
                   {/* <Grid item xs={12}>
@@ -637,7 +640,10 @@ function IncidentFormInternal(props) {
                               : null,
                         }}
                       >
-                        {f({ id: "request.management.incident.create.mode_of_receipt" })}
+                        {f({
+                          id:
+                            "request.management.incident.create.mode_of_receipt",
+                        })}
                       </div>
                     </FormLabel>
 
@@ -659,8 +665,8 @@ function IncidentFormInternal(props) {
                       {errors.infoChannel && touched.infoChannel ? (
                         <div style={{ color: "red" }}>Required</div>
                       ) : (
-                          ""
-                        )}
+                        ""
+                      )}
                     </FormHelperText>
 
                     {/* testbox to keep value of channel selected */}
@@ -693,7 +699,10 @@ function IncidentFormInternal(props) {
                       label={
                         values.incidentType === "INQUIRY"
                           ? "Letter reference number*"
-                          : f({ id: "request.management.incident.create.description" })
+                          : f({
+                              id:
+                                "request.management.incident.create.description",
+                            })
                       }
                       placeholder="Press enter for new lines."
                       className={classes.textField}
@@ -745,7 +754,12 @@ function IncidentFormInternal(props) {
                       className={classes.formControl}
                       error={touched.category && errors.category}
                     >
-                      <InputLabel htmlFor="category">{f({ id: "request.management.incident.create.category" })}*</InputLabel>
+                      <InputLabel htmlFor="category">
+                        {f({
+                          id: "request.management.incident.create.category",
+                        })}
+                        *
+                      </InputLabel>
                       <Select
                         value={values.category}
                         onChange={handleChange}
@@ -831,7 +845,9 @@ function IncidentFormInternal(props) {
                       <Grid item xs={12} sm={3}>
                         <TextField
                           id="occured_date_date"
-                          label={f({ id: "request.management.incident.create.date" })}
+                          label={f({
+                            id: "request.management.incident.create.date",
+                          })}
                           type="date"
                           value={values.occured_date_date}
                           InputLabelProps={{ shrink: true }}
@@ -869,7 +885,11 @@ function IncidentFormInternal(props) {
                         component="fieldset"
                         className={classes.formControl}
                       >
-                        <FormLabel component="legend">{f({ id: "request.management.incident.create.severity" })}</FormLabel>
+                        <FormLabel component="legend">
+                          {f({
+                            id: "request.management.incident.create.severity",
+                          })}
+                        </FormLabel>
                         <RadioGroup
                           name="severity"
                           id="severity"
@@ -1086,7 +1106,9 @@ function IncidentFormInternal(props) {
                     <Grid item xs={12} sm={3}>
                       <TextField
                         id="receivedDate"
-                        label={f({ id: "request.management.incident.create.date" })}
+                        label={f({
+                          id: "request.management.incident.create.date",
+                        })}
                         type="date"
                         value={values.receivedDate}
                         InputLabelProps={{ shrink: true }}
@@ -1103,7 +1125,9 @@ function IncidentFormInternal(props) {
                     <Grid item xs={12} sm={3}>
                       <TextField
                         id="letterDate"
-                        label={f({ id: "request.management.incident.create.date" })}
+                        label={f({
+                          id: "request.management.incident.create.date",
+                        })}
                         type="date"
                         value={values.letterDate}
                         InputLabelProps={{ shrink: true }}
@@ -1170,7 +1194,9 @@ function IncidentFormInternal(props) {
                   {!paramIncidentId && (
                     <Grid item xs={12} sm={12}>
                       <InputLabel htmlFor="election">
-                        {f({ id: "request.management.incident.create.upload_file" })}
+                        {f({
+                          id: "request.management.incident.create.upload_file",
+                        })}
                       </InputLabel>
                       <FileUploader
                         files={state.files}
@@ -1200,8 +1226,11 @@ function IncidentFormInternal(props) {
                       }
                     />
                   </Grid>
-                  <Grid item xs={12} sm={3}>
-                    <FormControl  error={touched.reporterType && errors.reporterType} className={classes.formControl}>
+                  <Grid item xs={12} sm={6} md={3}>
+                    <FormControl
+                      error={touched.reporterType && errors.reporterType}
+                      className={classes.formControl}
+                    >
                       <InputLabel htmlFor="reporterType">
                         Individual/Organization*
                       </InputLabel>
@@ -1221,10 +1250,10 @@ function IncidentFormInternal(props) {
                         <MenuItem value={"Organization"}>Organization</MenuItem>
                       </Select>
                       <FormHelperText>
-                            {touched.reporterType && errors.reporterType
-                              ? errors.reporterType
-                              : ""}
-                          </FormHelperText>
+                        {touched.reporterType && errors.reporterType
+                          ? errors.reporterType
+                          : ""}
+                      </FormHelperText>
                     </FormControl>
                   </Grid>
                   {/* {values.incidentType === "COMPLAINT" && (
@@ -1257,7 +1286,10 @@ function IncidentFormInternal(props) {
                     <TextField
                       id="reporterAddress"
                       name="reporterAddress"
-                      label={f({ id: "request.management.incident.create.reporter.address" })}
+                      label={f({
+                        id:
+                          "request.management.incident.create.reporter.address",
+                      })}
                       variant="outlined"
                       multiline
                       className={classes.textField}
@@ -1269,25 +1301,34 @@ function IncidentFormInternal(props) {
                       }
                     />
                   </Grid>
-                  <Grid item xs={12} sm={6}>
+                  <Grid item xs={12} sm={6} md={4}>
                     <TelephoneInput
                       className={classes.textField}
                       name="reporterMobile"
-                      label={f({ id: "request.management.incident.create.reporter.mobile" })}
+                      label={f({
+                        id:
+                          "request.management.incident.create.reporter.mobile",
+                      })}
                     />
                   </Grid>
-                  <Grid item xs={12} sm={6}>
+                  <Grid item xs={12} sm={6} md={4}>
                     <TelephoneInput
                       className={classes.textField}
                       name="reporterTelephone"
-                      label={f({ id: "request.management.incident.create.reporter.telephone", defaultMessage: "Landline" })}
+                      label={f({
+                        id:
+                          "request.management.incident.create.reporter.telephone",
+                        defaultMessage: "Landline",
+                      })}
                     />
                   </Grid>
-                  <Grid item xs={12} sm={6}>
+                  <Grid item xs={12} sm={6} md={4}>
                     <TextField
                       id="reporterEmail"
                       name="reporterEmail"
-                      label={f({ id: "request.management.incident.create.reporter.email" })}
+                      label={f({
+                        id: "request.management.incident.create.reporter.email",
+                      })}
                       className={classes.textField}
                       value={values.reporterEmail}
                       onChange={handleChange}
@@ -1297,68 +1338,81 @@ function IncidentFormInternal(props) {
                       }
                     />
                   </Grid>
-                  <Grid item xs={12} sm={4}>
-                        <TextField
-                          error={touched.city && errors.city}
-                          id="city"
-                          label={f({ id: "request.management.incident.create.location.city" })}
-                          className={classes.textField}
-                          value={values.city}
+
+                    <Grid item xs={12} sm={6} md={4}>
+                      <TextField
+                        error={touched.city && errors.city}
+                        id="city"
+                        label={f({
+                          id:
+                            "request.management.incident.create.location.city",
+                        })}
+                        className={classes.textField}
+                        value={values.city}
+                        onChange={handleChange}
+                        helperText={touched.city ? errors.city : null}
+                      />
+                    </Grid>
+                    <Grid item xs={12} sm={6} md={4}>
+                      <FormControl
+                        error={touched.district && errors.district}
+                        className={classes.formControl}
+                      >
+                        <InputLabel htmlFor="district">
+                          {f({
+                            id:
+                              "request.management.incident.create.location.district",
+                          })}
+                          *
+                        </InputLabel>
+                        <Select
+                          value={values.district}
                           onChange={handleChange}
-                          helperText={
-                            touched.city ? errors.city : null
-                          }
-                        />
-                      </Grid>
-                      <Grid item xs={12} sm={4}>
-                        <FormControl
-                          error={touched.district && errors.district}
-                          className={classes.formControl}
+                          inputProps={{
+                            name: "district",
+                            id: "district",
+                          }}
                         >
-                          <InputLabel htmlFor="district">{f({ id: "request.management.incident.create.location.district" })}*</InputLabel>
-                          <Select
-                            value={values.district}
-                            onChange={handleChange}
-                            inputProps={{
-                              name: "district",
-                              id: "district",
-                            }}
-                          >
-                            <MenuItem value="">
-                              {" "}
-                              <em>None</em>{" "}
-                            </MenuItem>
-                            {districts.allCodes.map((c, k) => {
-                              let currDistrict = districts.byCode[c];
-                              return (
-                                currDistrict.name !== "NONE" && (
-                                  <MenuItem value={currDistrict.code} key={k}>
-                                    {currDistrict.name}
-                                  </MenuItem>
-                                )
-                              );
-                            })}
-                          </Select>
-                          <FormHelperText>
-                            {touched.district && errors.district
-                              ? errors.district
-                              : ""}
-                          </FormHelperText>
-                        </FormControl>
-                      </Grid>
-                      <Grid item xs={12} sm={4}>
-                        <FormControl className={classes.formControl}>
-                          <InputLabel htmlFor="gramaNiladhari">
-                            {f({ id: "request.management.incident.create.location.gn_division" })}
-                          </InputLabel>
-                          <IntlSelect
-                            value={values.gramaNiladhari}
-                            handleChange={handleChange}
-                            name="gramaNiladhari"
-                            dataObj={getGramaNilidariDivisions(values.district)}
-                          />
-                        </FormControl>
-                      </Grid>
+                          <MenuItem value="">
+                            {" "}
+                            <em>None</em>{" "}
+                          </MenuItem>
+                          {districts.allCodes.map((c, k) => {
+                            let currDistrict = districts.byCode[c];
+                            return (
+                              currDistrict.name !== "NONE" && (
+                                <MenuItem value={currDistrict.code} key={k}>
+                                  {currDistrict.name}
+                                </MenuItem>
+                              )
+                            );
+                          })}
+                        </Select>
+                        <FormHelperText>
+                          {touched.district && errors.district
+                            ? errors.district
+                            : ""}
+                        </FormHelperText>
+                      </FormControl>
+                    </Grid>
+                    <Grid item xs={12} sm={6} md={4}>
+                      <FormControl className={classes.formControl}>
+                        <InputLabel htmlFor="gramaNiladhari">
+                          {f({
+                            id:
+                              "request.management.incident.create.location.gn_division",
+                          })}
+                        </InputLabel>
+                        <IntlSelect
+                          value={values.gramaNiladhari}
+                          handleChange={handleChange}
+                          name="gramaNiladhari"
+                          dataObj={getGramaNilidariDivisions(values.district)}
+                        />
+                      </FormControl>
+                    </Grid>
+
+                  
                   {values.incidentType === "COMPLAINT" ? (
                     <>
                       {/* <Grid item xs={12} sm={6}>
@@ -1423,31 +1477,45 @@ function IncidentFormInternal(props) {
                   {/* Incident location information */}
                   <Paper className={classes.paper}>
                     <Typography variant="h5" gutterBottom>
-                      {f({ id: "request.management.incident.create.location_information" })}
+                      {f({
+                        id:
+                          "request.management.incident.create.location_information",
+                      })}
                     </Typography>
                     <ul className={props.classes.list}>
-                        <li>{f({ id: "request.management.report.incidents.section.location.info", defaultMessage: "If the location where help is required differs from your address, please fill in this section w/ the location details." })}</li>
+                      <li>
+                        {f({
+                          id:
+                            "request.management.report.incidents.section.location.info",
+                          defaultMessage:
+                            "If the location where help is required differs from your address, please fill in this section w/ the location details.",
+                        })}
+                      </li>
                     </ul>
                     <Grid container spacing={24}>
                       <Grid item xs={12} sm={12}>
                         <TextField
                           id="address"
-                          label={f({ id: "request.management.incident.create.location.address" })}
+                          label={f({
+                            id:
+                              "request.management.incident.create.location.address",
+                          })}
                           variant="outlined"
                           multiline
                           className={classes.textField}
                           value={values.address}
                           onChange={handleChange}
                           error={touched.address && errors.address}
-                      helperText={
-                        touched.address ? errors.address : null
-                      }
+                          helperText={touched.address ? errors.address : null}
                         />
                       </Grid>
                       <Grid item xs={12}>
                         <TextField
                           id="location"
-                          label={f({ id: "request.management.incident.create.location.description" })}
+                          label={f({
+                            id:
+                              "request.management.incident.create.location.description",
+                          })}
                           className={classes.textField}
                           value={values.location}
                           onChange={handleChange}
@@ -1479,7 +1547,7 @@ function IncidentFormInternal(props) {
                                             </Select>
                                         </FormControl>
                                     </Grid> */}
-                      
+
                       {/* <Grid item xs={12} sm={4}>
                                         <FormControl className={classes.formControl}>
                                             <InputLabel htmlFor="divisionalSecretariat">
@@ -1515,7 +1583,7 @@ function IncidentFormInternal(props) {
                                             />
                                         </FormControl>
                                     </Grid> */}
-                      
+
                       {/* <Grid item xs={12} sm={4}>
                                         <FormControl className={classes.formControl}>
                                             <InputLabel htmlFor="policeDivision">Police Division</InputLabel> */}
