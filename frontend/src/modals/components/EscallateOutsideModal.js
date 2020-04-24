@@ -66,17 +66,17 @@ const EscallateOutsideModal = (props) => {
 
     return (
         <div>
-            <DialogTitle id="form-dialog-title">Assign </DialogTitle>
+            <DialogTitle id="form-dialog-title">Assign</DialogTitle>
 
-            <DialogContent>
+            <DialogContent >
                 <DialogContentText>
-                Select organization to assign record to.
+                Select an organization to proceed
                 </DialogContentText>
 
                 <TextField
                     autoFocus
                     id="entity"
-                    style={{width:'60%'}}
+                    style={{width:'100%'}}
                     select
                     label="Organization"
                     // className={classes.textField}
@@ -89,6 +89,7 @@ const EscallateOutsideModal = (props) => {
                     onChange = {(e)=>{handleValueChange(escallationInfo, 'entity_type', e.target.value, setEscallationInfo)}}
                     // onChange = {(e) => handleEntityTypeChange(e.target.value)}
                     margin="dense"
+                    InputLabelProps={{ shrink: true }}
                     >
                     {organizations.allIds.map(id => (
                         <MenuItem key={id} value={id}>
@@ -116,21 +117,22 @@ const EscallateOutsideModal = (props) => {
 
                 { escallationInfo.entity_type !== "other" && escallationInfo.entity_type !== null && (
                     <>
-                    <DialogContentText>
+                    {/* <DialogContentText>
                         Select Division.
-                    </DialogContentText>
+                    </DialogContentText> */}
                     <TextField
                         autoFocus
                         id="division"
                         select
                         label="Division"
                         value={division}
-                        style={{width:'60%'}}
+                        style={{width:'100%'}}
                         SelectProps={{
                             MenuProps: {
                             // className: classes.menu,
                             },
                         }}
+                        InputLabelProps={{ shrink: true }}
                         onChange = {(e)=>{setDivision(e.target.value)}}
                         // onChange = {(e) => handleEntityTypeChange(e.target.value)}
                         margin="dense"
@@ -144,21 +146,22 @@ const EscallateOutsideModal = (props) => {
 
                     { division !== null && (
                         <>
-                        <DialogContentText>
+                        {/* <DialogContentText>
                             Select Entity User.
-                        </DialogContentText>
+                        </DialogContentText> */}
                         <TextField
                             autoFocus
                             id="entity"
-                            style={{width:'60%'}}
+                            style={{width:'100%'}}
                             select
-                            label="Entity User"
+                            label="User"
                             value={escallationInfo.entity_user}
                             SelectProps={{
                                 MenuProps: {
                                 // className: classes.menu,
                                 },
                             }}
+                            InputLabelProps={{ shrink: true }}
                             onChange = {(e)=>{handleValueChange(escallationInfo, 'entity_user', e.target.value, setEscallationInfo)}}
                             // onChange = {(e) => handleEntityTypeChange(e.target.value)}
                             margin="dense"
