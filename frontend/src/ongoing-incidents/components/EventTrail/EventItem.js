@@ -164,8 +164,8 @@ function getSecondaryItem(event){
         }else if(workflowType === "Escalate External"){
             return (
                 <div>
-                    <div><b>Entity:</b><br/> {workflowData.entity.type}</div><br/>
-                    <div><b>Name:</b><br/> {workflowData.entity.name}</div><br/>
+                    <div><b>Organization:</b><br/>{ (workflowData.entity.type) ? workflowData.entity.type : 'Other'}</div><br/>
+                    <div><b>User:</b><br/> {workflowData.entity.name}</div><br/>
                     <div><b>Comment:</b><br/> {workflowData.comment}</div>
                 </div>
             )

@@ -62,8 +62,8 @@ import {useLoadingStatus} from '../../loading-spinners/loadingHook'
 
 const styles = theme => ({
     root: {
-        width: '90%',
-        marginTop: theme.spacing.unit * 4,
+        // width: '90%',
+        marginTop: theme.spacing.unit * 2,
         marginLeft: theme.spacing.unit * 2,
     },
     button: {
@@ -126,13 +126,13 @@ const VerticalLinearStepper = (props) => {
 
 
 
-    let webInfoChannelId = "Web";
-    // for(var channel of channels){
-    //     if(channel.name === "Web"){
-    //         webInfoChannelId = channel.id;
-    //         break;
-    //     }
-    // }
+    let webInfoChannelId = "";
+    for(var channel of channels){
+        if(channel.name === "Online"){
+            webInfoChannelId = channel.id;
+            break;
+        }
+    }
 
     const { activeIncident, activeIncidentReporter } = useSelector((state) => (state.incident));
 
@@ -305,7 +305,7 @@ const VerticalLinearStepper = (props) => {
         setFormErrors({ ...errorMsg });
         return valid;
     }
-    
+
 
     const validLocationInputs = () => {
         setFormErrors({ ...formErrors, incidentAddressErrorMsg: null, incidentDistrictErrorMsg: null })
@@ -349,7 +349,7 @@ const VerticalLinearStepper = (props) => {
         const initData = {
             description: "Incomplete submission",
             title: "Guest user submit",
-            infoChannel: "Web",
+            infoChannel: "5",
             occured_date: "2020-01-01T01:00:00+05:30",
             receivedDate: "2020-01-01",
             letterDate: "2020-01-01",

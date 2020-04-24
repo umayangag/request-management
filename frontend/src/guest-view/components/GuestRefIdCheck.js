@@ -34,8 +34,8 @@ import { useLoadingStatus } from "../../loading-spinners/loadingHook";
 
 const styles = (theme) => ({
   root: {
-    width: "90%",
-    marginTop: theme.spacing.unit * 4,
+    // width: "90%",
+    marginTop: theme.spacing.unit * 2,
     marginLeft: theme.spacing.unit * 2,
   },
   button: {
