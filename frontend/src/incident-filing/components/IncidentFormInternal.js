@@ -211,6 +211,19 @@ function IncidentFormInternal(props) {
     accusedName: "",
     accusedAffiliation: "",
 
+    // recipient
+    recipientName: "",
+    recipientType: "",
+    recipientAddress: "",
+    recipientMobile: "",
+    recipientTelephone: "",
+    recipientEmail: "",
+    recipientCity: "",
+    recipientDistrict: "",
+    recipientGramaNiladhari: "",
+    recipientLocation: "",
+
+
     files: [],
     politicalParty: "",
     injuredParties: [],
@@ -232,6 +245,7 @@ function IncidentFormInternal(props) {
 
     showConfirmationModal: false,
     handleConfirmSubmit: false,
+    showRecipient: ""
   });
 
   const [complaintCategories, setComplaintCategories] = useState();
@@ -343,6 +357,8 @@ function IncidentFormInternal(props) {
     // TODO: move hooks out of this function.
     const incident = incidentUtils.getIncident(paramIncidentId);
     const reporters = useSelector(state => state.incident.reporters)
+    // TODO: yujith, uncomment this after completed get recipient info
+    // const recipients = useSelector(state => state.incident.recipients)
 
     if (!paramIncidentId) {
       // new incident form
@@ -353,6 +369,11 @@ function IncidentFormInternal(props) {
     const reporter = incident
       ? reporters.byIds[incident.reporter]
       : "";
+    
+    // TODO: yujith, uncomment this after completed get recipient info
+    // const recipient = incident
+    // ? recipients.byIds[incident.recipient]
+    // : "";
 
     if (reporter) {
       Object.assign(initData, {
@@ -367,6 +388,19 @@ function IncidentFormInternal(props) {
         accusedAffiliation: reporter.accusedPoliticalAffiliation,
       });
     }
+
+    // TODO: yujith, uncomment this after completed get recipient info
+    // if (recipient) {
+    //     Object.assign(initData, {
+    //       recipientName: reporter.name,
+    //       recipientType: reporter.reporter_type,
+    //       recipientEmail: reporter.email,
+    //       recipientMobile: reporter.mobile,
+    //       recipientTelephone: reporter.telephone,
+    //       recipientAddress: reporter.address,
+    //     });
+    //   }
+
     //TODO: Need to split the date values to date and time
     if (initData.occured_date) {
       initData.occured_date = moment(initData.occured_date).format(
@@ -485,9 +519,43 @@ function IncidentFormInternal(props) {
   // );
   //validation schema
   const IncidentSchema = Yup.object().shape({
+    showRecipient: Yup.mixed().required("Required"),
     incidentType: Yup.mixed().required("Required"),
     infoChannel: Yup.mixed().required("Required"),
     city: Yup.string().required("Required"),
+
+    recipientName: Yup.mixed().when("showRecipient", (showRecipient, IncidentSchema) =>
+    showRecipient == "Yes"
+        ? IncidentSchema.required("Required")
+        : IncidentSchema
+    ),
+    recipientType: Yup.mixed().when("showRecipient", (showRecipient, IncidentSchema) =>
+    showRecipient == "Yes"
+        ? IncidentSchema.required("Required")
+        : IncidentSchema
+    ),
+    recipientAddress: Yup.mixed().when("showRecipient", (showRecipient, IncidentSchema) =>
+    showRecipient == "Yes"
+        ? IncidentSchema.required("Required")
+        : IncidentSchema
+    ),
+    recipientCity: Yup.mixed().when("showRecipient", (showRecipient, IncidentSchema) =>
+    showRecipient == "Yes"
+        ? IncidentSchema.required("Required")
+        : IncidentSchema
+    ),
+
+    recipientMobile: Yup.mixed().when("showRecipient", (showRecipient, IncidentSchema) =>
+    showRecipient == "Yes"
+        ? IncidentSchema.required("Required")
+        : IncidentSchema
+    ),
+    recipientDistrict: Yup.mixed().when("showRecipient", (showRecipient, IncidentSchema) =>
+    showRecipient == "Yes"
+        ? IncidentSchema.required("Required")
+        : IncidentSchema
+    ),
+
     reporterAddress: Yup.string().required("Required"),
     reporterType: Yup.string().required("Required"),
     reporterName: Yup.string().required("Required"),
@@ -851,7 +919,7 @@ function IncidentFormInternal(props) {
                         />
                         <TextField
                           id="occured_date_time"
-                          label="Request time"
+                          label={f({ id: "request.management.incident.create.time" })}
                           type="time"
                           value={values.occured_date_time}
                           InputLabelProps={{ shrink: true }}
@@ -1269,6 +1337,16 @@ function IncidentFormInternal(props) {
                       }
                     />
                   </Grid>
+                  <Grid item xs={12}>
+                        <TextField
+                          id="location"
+                          label={f({ id: "request.management.incident.create.location.description" })}
+                          className={classes.textField}
+                          value={values.location}
+                          onChange={handleChange}
+                          multiline
+                        />
+                      </Grid>
                   <Grid item xs={12} sm={6}>
                     <TelephoneInput
                       className={classes.textField}
@@ -1359,6 +1437,39 @@ function IncidentFormInternal(props) {
                           />
                         </FormControl>
                       </Grid>
+                      <Grid item xs={12}>
+                        <FormControl error={touched.showRecipient ? true : false} component="fieldset">
+                            <FormLabel component="legend">{f({ id: "request.management.report.incidents.onbehalf.error.message", defaultMessage: "On behalf of someone else" })}</FormLabel>
+                            <RadioGroup
+                                aria-label="Gender"
+                                name="showRecipient"
+                                id="showRecipient"
+                                // ref= {this.props.securityDepositeRpp}
+                                className={classes.group}
+                                value={values.showRecipient}
+                                onChange={handleChange}
+                                // onClick={this.showAmountRpp.bind(this)}
+                                row
+                            >
+                                <FormControlLabel
+                                    control={
+                                        <Radio />
+                                    }
+                                    value="Yes"
+                                    label="Yes"
+                                />
+                                <FormControlLabel
+                                    control={
+                                        <Radio />
+                                    }
+                                    label="No"
+                                    value="No"
+                                />
+                            </RadioGroup>
+                            <FormHelperText>{touched.showRecipient ? errors.showRecipient : null}</FormHelperText>
+                        </FormControl>
+                    </Grid>
+                    
                   {values.incidentType === "COMPLAINT" ? (
                     <>
                       {/* <Grid item xs={12} sm={6}>
@@ -1417,11 +1528,208 @@ function IncidentFormInternal(props) {
                   ) : null}
                 </Grid>
               </Paper>
+              {
+                        values.showRecipient==='Yes' ?
+                        <Paper className={classes.paper}>
+                        <Typography variant="h5" gutterBottom>
+                        {f({ id: "request.management.incident.create.recipient_information", defaultMessage: "Recipient Information" })}
+                        </Typography>
+                        <ul className={props.classes.list}>
+                        <li>{f({ id: "request.management.report.incidents.section.location.info", defaultMessage: "If the location where help is required differs from your address, please fill in this section w/ the location details." })}</li>
+                    </ul>
+                        <Grid container spacing={24}>
+                        <Grid item xs={12} sm={6}>
+                          <TextField
+                            id="recipientName"
+                            name="recipientName"
+                            label={f({ id: "request.management.incident.create.recipient.name" })}
+                            className={classes.textField}
+                            value={values.recipientName}
+                            onChange={handleChange}
+                            error={touched.recipientName && errors.recipientName}
+                            helperText={
+                              touched.recipientName ? errors.recipientName : null
+                            }
+                          />
+                        </Grid>
+                        <Grid item xs={12} sm={3}>
+                          <FormControl  error={touched.recipientType && errors.recipientType} className={classes.formControl}>
+                            <InputLabel htmlFor="reporterType">
+                              Individual/Organization*
+                            </InputLabel>
+                            <Select
+                              value={values.recipientType}
+                              onChange={handleChange}
+                              inputProps={{
+                                name: "recipientType",
+                                id: "recipientType",
+                              }}
+                            >
+                              <MenuItem value="">
+                                {" "}
+                                <em>None</em>{" "}
+                              </MenuItem>
+                              <MenuItem value={"Individual"}>Individual</MenuItem>
+                              <MenuItem value={"Organization"}>Organization</MenuItem>
+                            </Select>
+                            <FormHelperText>
+                                  {touched.recipientType && errors.recipientType
+                                    ? errors.recipientType
+                                    : ""}
+                                </FormHelperText>
+                          </FormControl>
+                        </Grid>
+                        {/* {values.incidentType === "COMPLAINT" && (
+                                              <Grid item xs={12} sm={3}>
+                                                  <FormControl className={classes.formControl}>
+                                                      <InputLabel htmlFor="reporterAffiliation">Political Affiliation</InputLabel>
+                                                      <Select
+                                                          value={values.reporterAffiliation}
+                                                          onChange={handleChange}
+                                                          inputProps={{
+                                                              name: "reporterAffiliation",
+                                                              id: "reporterAffiliation"
+                                                          }}>
+                                                          <MenuItem value="">
+                                                              {" "}
+                                                              <em>None</em>{" "}
+                                                          </MenuItem>
+                                                          {Object.entries(politicalPartyLookup).map(([key, value]) => {
+                                                              return (
+                                                                  <MenuItem key={key} value={key}>
+                                                                      {value}
+                                                                  </MenuItem>
+                                                              );
+                                                          })}
+                                                      </Select>
+                                                  </FormControl>
+                                              </Grid>
+                                          )} */}
+                        <Grid item xs={12}>
+                          <TextField
+                            id="recipientAddress"
+                            name="recipientAddress"
+                            label={f({ id: "request.management.incident.create.reporter.address" })}
+                            variant="outlined"
+                            multiline
+                            className={classes.textField}
+                            value={values.recipientAddress}
+                            onChange={handleChange}
+                            error={touched.recipientAddress && errors.recipientAddress}
+                            helperText={
+                              touched.recipientAddress ? errors.recipientAddress : null
+                            }
+                          />
+                        </Grid>
+                        <Grid item xs={12}>
+                        <TextField
+                          id="recipientLocation"
+                          label={f({ id: "request.management.incident.create.location.description" })}
+                          className={classes.textField}
+                          value={values.recipientLocation}
+                          onChange={handleChange}
+                          multiline
+                        />
+                      </Grid>
+                        <Grid item xs={12} sm={6}>
+                          <TelephoneInput
+                            className={classes.textField}
+                            name="recipientMobile"
+                            label={f({ id: "request.management.incident.create.reporter.mobile" })}
+                          />
+                        </Grid>
+                        <Grid item xs={12} sm={6}>
+                          <TelephoneInput
+                            className={classes.textField}
+                            name="recipientTelephone"
+                            label={f({ id: "request.management.incident.create.reporter.telephone", defaultMessage: "Landline" })}
+                          />
+                        </Grid>
+                        <Grid item xs={12} sm={6}>
+                          <TextField
+                            id="recipientEmail"
+                            name="recipientEmail"
+                            label={f({ id: "request.management.incident.create.reporter.email" })}
+                            className={classes.textField}
+                            value={values.recipientEmail}
+                            onChange={handleChange}
+                            error={touched.recipientEmail && errors.recipientEmail}
+                            helperText={
+                              touched.recipientEmail ? errors.recipientEmail : null
+                            }
+                          />
+                        </Grid>
+                        <Grid item xs={12} sm={4}>
+                              <TextField
+                                error={touched.recipientCity && errors.recipientCity}
+                                id="recipientCity"
+                                label={f({ id: "request.management.incident.create.location.city" })}
+                                className={classes.textField}
+                                value={values.recipientCity}
+                                onChange={handleChange}
+                                helperText={
+                                  touched.recipientCity ? errors.recipientCity : null
+                                }
+                              />
+                            </Grid>
+                            <Grid item xs={12} sm={4}>
+                              <FormControl
+                                error={touched.recipientDistrict && errors.recipientDistrict}
+                                className={classes.formControl}
+                              >
+                                <InputLabel htmlFor="recipientDistrict">{f({ id: "request.management.incident.create.location.district" })}*</InputLabel>
+                                <Select
+                                  value={values.recipientDistrict}
+                                  onChange={handleChange}
+                                  inputProps={{
+                                    name: "recipientDistrict",
+                                    id: "recipientDistrict",
+                                  }}
+                                >
+                                  <MenuItem value="">
+                                    {" "}
+                                    <em>None</em>{" "}
+                                  </MenuItem>
+                                  {districts.allCodes.map((c, k) => {
+                                    let currDistrict = districts.byCode[c];
+                                    return (
+                                      currDistrict.name !== "NONE" && (
+                                        <MenuItem value={currDistrict.code} key={k}>
+                                          {currDistrict.name}
+                                        </MenuItem>
+                                      )
+                                    );
+                                  })}
+                                </Select>
+                                <FormHelperText>
+                                  {touched.district && errors.recipientDistrict
+                                    ? errors.recipientDistrict
+                                    : ""}
+                                </FormHelperText>
+                              </FormControl>
+                            </Grid>
+                            <Grid item xs={12} sm={4}>
+                              <FormControl className={classes.formControl}>
+                                <InputLabel htmlFor="recipientGramaNiladhari">
+                                  {f({ id: "request.management.incident.create.location.gn_division" })}
+                                </InputLabel>
+                                <IntlSelect
+                                  value={values.recipientGramaNiladhari}
+                                  handleChange={handleChange}
+                                  name="recipientGramaNiladhari"
+                                  dataObj={getGramaNilidariDivisions(values.recipientDistrict)}
+                                />
+                              </FormControl>
+                            </Grid>
+                            </Grid>
+                            </Paper>
+                         : ''
+                    }
 
               {values.incidentType === "COMPLAINT" && (
                 <>
                   {/* Incident location information */}
-                  <Paper className={classes.paper}>
+                  {/* <Paper className={classes.paper}>
                     <Typography variant="h5" gutterBottom>
                       {f({ id: "request.management.incident.create.location_information" })}
                     </Typography>
@@ -1443,17 +1751,8 @@ function IncidentFormInternal(props) {
                         touched.address ? errors.address : null
                       }
                         />
-                      </Grid>
-                      <Grid item xs={12}>
-                        <TextField
-                          id="location"
-                          label={f({ id: "request.management.incident.create.location.description" })}
-                          className={classes.textField}
-                          value={values.location}
-                          onChange={handleChange}
-                          multiline
-                        />
-                      </Grid>
+                      </Grid> */}
+                      
                       {/* <Grid item xs={12} sm={4}>
                                         <FormControl className={classes.formControl}>
                                             <InputLabel htmlFor="province">Province</InputLabel>
@@ -1582,8 +1881,8 @@ function IncidentFormInternal(props) {
                                             </Select> */}
                       {/* </FormControl>
                                     </Grid> */}
-                    </Grid>
-                  </Paper>
+                    {/* </Grid>
+                  </Paper> */}
                   {/* police details */}
                   <div>
                     {/* <ExpansionPanel>

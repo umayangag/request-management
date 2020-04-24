@@ -135,6 +135,7 @@ const VerticalLinearStepper = (props) => {
     // }
 
     const { activeIncident, activeIncidentReporter } = useSelector((state) => (state.incident));
+
     const { activeStep, isLoadingIncident } = useSelector((state) => (state.guestView));
 
     const incidentId = activeIncident && activeIncident.data ? activeIncident.data.id : null
@@ -166,14 +167,24 @@ const VerticalLinearStepper = (props) => {
     const [incidentLocation, setIncidentLocation] = useState(incidentId ? incidentData.location : '');
     const [incidentAddress, setIncidentAddress] = useState(incidentId ? incidentData.address : '');
     const [incidentCity, setIncidentCity] = useState(incidentId ? incidentData.city : '');
+    const [recipientLocation, setRecipientLocation] = useState(incidentId ? incidentData.recipientLocation : '');
+    const [recipientAddress, setRecipientAddress] = useState(incidentId ? incidentData.recipientAddress : '');
+    const [recipientCity, setRecipientCity] = useState(incidentId ? incidentData.recipientCity : '');
+    const [showRecipient, setShowRecipient] = useState(incidentId ? incidentData.showRecipient : '');
     const [incidentDistrict, setIncidentDistrict] = useState(incidentId ? incidentData.district : '');
+    const [recipientDistrict, setRecipientDistrict] = useState(incidentId ? incidentData.recipientDistrict : '');
 
     const [incidentContact, setIncidentContact] = useState({
         name: incidentReporterData ? incidentReporterData.name : '',
         phone: incidentReporterData ? incidentReporterData.telephone : '',
         mobile: incidentReporterData ? incidentReporterData.mobile : '',
-        email: incidentReporterData ? incidentReporterData.email : ''
+        email: incidentReporterData ? incidentReporterData.email : '',
+        recipientName: incidentReporterData ? incidentReporterData.recipientName : '',
+        recipientPhone: incidentReporterData ? incidentReporterData.recipientPhone : '',
+        recipientMobile: incidentReporterData ? incidentReporterData.recipientMobile : '',
+        recipientEmail: incidentReporterData ? incidentReporterData.recipientEmail : ''
     });
+    
     const [formErrors, setFormErrors] = useState({})
     const isLoadingMetaData = useLoadingStatus([
         requestIncidentCatogories(),
@@ -213,7 +224,21 @@ const VerticalLinearStepper = (props) => {
     }
 
     const validContactInputs = () => {
-        setFormErrors({ ...formErrors, incidentDescriptionErrorMsg: null, incidentElectionErrorMsg: null, incidentDatetimeErrorMsg: null, incidentContactErrorMsg: null,incidentNameErrorMsg: null })
+        setFormErrors({ ...formErrors, 
+                        incidentDescriptionErrorMsg: null, 
+                        incidentElectionErrorMsg: null, 
+                        incidentDatetimeErrorMsg: null, 
+                        incidentContactErrorMsg: null,
+                        incidentNameErrorMsg: null , 
+                        incidentAddressErrorMsg: null, 
+                        incidentDistrictErrorMsg: null, 
+                        incidentCityErrorMsg: null, 
+                        showRecipientErrorMsg: null,
+                        recipientNameErrorMsg: null , 
+                        recipientAddressErrorMsg: null, 
+                        recipientDistrictErrorMsg: null, 
+                        recipientCityErrorMsg: null, 
+                    })
         let errorMsg = { ...formErrors };
         let valid = true;
 
@@ -223,6 +248,44 @@ const VerticalLinearStepper = (props) => {
         }
         if(!incidentContact.name){
             errorMsg = { ...errorMsg, incidentNameErrorMsg: f({ id: "request.management.report.incidents.name.error.message", defaultMessage: "Name is required" }) };
+            valid = false;
+        }
+        if(!incidentAddress){
+            errorMsg = { ...errorMsg, incidentAddressErrorMsg: f({ id: "request.management.report.incidents.address.error.message", defaultMessage: "Address is required" }) };
+            valid = false;
+        }
+        if(!incidentDistrict){
+            errorMsg = { ...errorMsg, incidentDistrictErrorMsg: f({ id: "request.management.report.incidents.district.error.message", defaultMessage: "District is required" }) };
+            valid = false;
+        }
+        if(!incidentCity){
+            errorMsg = { ...errorMsg, incidentCityErrorMsg: f({ id: "request.management.report.incidents.city.error.message", defaultMessage: "City is required" }) };
+            valid = false;
+        }
+        if(showRecipient==="Yes"){
+        if(!incidentContact.recipientMobile){
+            errorMsg = { ...errorMsg, recipientContactErrorMsg: f({ id: "request.management.report.incidents.phone.error.message", defaultMessage: "Contact number is required" }) };
+            valid = false;
+        }
+        if(!incidentContact.recipientName){
+            errorMsg = { ...errorMsg, recipientNameErrorMsg: f({ id: "request.management.report.incidents.name.error.message", defaultMessage: "Name is required" }) };
+            valid = false;
+        }
+        if(!recipientAddress){
+            errorMsg = { ...errorMsg, recipientAddressErrorMsg: f({ id: "request.management.report.incidents.address.error.message", defaultMessage: "Address is required" }) };
+            valid = false;
+        }
+        if(!recipientDistrict){
+            errorMsg = { ...errorMsg, recipientDistrictErrorMsg: f({ id: "request.management.report.incidents.district.error.message", defaultMessage: "District is required" }) };
+            valid = false;
+        }
+        if(!recipientCity){
+            errorMsg = { ...errorMsg, recipientCityErrorMsg: f({ id: "request.management.report.incidents.city.error.message", defaultMessage: "City is required" }) };
+            valid = false;
+        }
+        }
+        if(!showRecipient){
+            errorMsg = { ...errorMsg, showRecipientErrorMsg: f({ id: "request.management.report.incidents.recipient.error.message", defaultMessage: "This is required" }) };
             valid = false;
         }
 
@@ -297,7 +360,7 @@ const VerticalLinearStepper = (props) => {
 
     const stepDefinitions = {
 
-        3: {
+        2: {
             title: f({ id: "request.management.report.incidents.section.describe", defaultMessage: "Enter details here" }),
             content: <>
                     <ul className={props.classes.list}>
@@ -328,37 +391,40 @@ const VerticalLinearStepper = (props) => {
                     }
             }
         },
+        
 
-        1: {
-            title: f({ id: "request.management.report.incidents.section.location", defaultMessage: "Describe the location" }),
-            content: < LocationSection
-                location={incidentLocation}
-                handledLocationChange={setIncidentLocation}
-                address={incidentAddress}
-                handleAddressChange={setIncidentAddress}
-                city={incidentCity}
-                district={incidentDistrict}
-                handleDistrictChange={setIncidentDistrict}
-                handleCityChange={setIncidentCity}
-                districts={districts}
-                formErrors={formErrors}
-            />,
-            handler: () => {
-                if (validLocationInputs()) {
-                // if (incidentLocation) {
-                //     incidentData.location = incidentLocation;
-                //     incidentData.address = incidentAddress;
-                //     incidentData.city = incidentCity;
-                //     dispatch(updateGuestIncident(incidentId, incidentData))
-                // } else {
-                //     dispatch(moveStepper({ step: activeStep + 1 }));
-                // }
-                dispatch(moveStepper({ step: activeStep + 1 }));
-                }
-            }
-        },
+        // 1: {
+        //     title: f({ id: "request.management.report.incidents.section.location", defaultMessage: "Describe the location" }),
+        //     content: < LocationSection
+        //         location={incidentLocation}
+        //         handledLocationChange={setIncidentLocation}
+        //         address={incidentAddress}
+        //         handleAddressChange={setIncidentAddress}
+        //         city={incidentCity}
+        //         district={incidentDistrict}
+        //         handleDistrictChange={setIncidentDistrict}
+        //         handleCityChange={setIncidentCity}
+        //         districts={districts}
+        //         formErrors={formErrors}
+        //     />,
+        //     handler: () => {
+        //         if (validLocationInputs()) {
+        //         // if (incidentLocation) {
+        //         //     incidentData.location = incidentLocation;
+        //         //     incidentData.address = incidentAddress;
+        //         //     incidentData.city = incidentCity;
+        //         //     dispatch(updateGuestIncident(incidentId, incidentData))
+        //         // } else {
+        //         //     dispatch(moveStepper({ step: activeStep + 1 }));
+        //         // }
+        //         dispatch(moveStepper({ step: activeStep + 1 }));
+        //         }
+        //     }
+        // },
 
-        4: {
+        
+
+        3: {
             title: f({ id: "request.management.report.incidents.section.attachment", defaultMessage: "Attach files related to incident" }),
             content: <><FileUploader
                 files={incidentFiles}
@@ -394,7 +460,11 @@ const VerticalLinearStepper = (props) => {
                             city: incidentCity,
                             category: incidentCatogory,
                             mainCategory:incidentMainCatogory,
-                            district:incidentDistrict
+                            district:incidentDistrict,
+                            recipientLocation: recipientLocation,
+                            recipientAddress: recipientAddress,
+                            recipientCity: recipientCity,
+                            recipientDistrict:recipientDistrict,
                         }
                         const dateTime = getFormattedDateTime()
                         if (dateTime) {
@@ -408,7 +478,10 @@ const VerticalLinearStepper = (props) => {
                         reporterData.telephone = incidentContact.phone;
                         reporterData.mobile = incidentContact.mobile;
                         reporterData.email = incidentContact.email;
-
+                        reporterData.recipientName = incidentContact.recipientName;
+                        reporterData.recipientPhone = incidentContact.recipientPhone;
+                        reporterData.recipientMobile = incidentContact.recipientMobile;
+                        reporterData.recipientEmail = incidentContact.recipientEmail;
                         dispatch(createGuestIncidentWithReporter( incidentData, reporterData, fileData))
                         dispatch(moveStepper({ step: activeStep + 1 }));
                     }
@@ -426,7 +499,11 @@ const VerticalLinearStepper = (props) => {
                             city: incidentCity,
                             category: incidentCatogory,
                             mainCategory:incidentMainCatogory,
-                            district:incidentDistrict
+                            district:incidentDistrict,
+                            recipientLocation: recipientLocation,
+                            recipientAddress: recipientAddress,
+                            recipientCity: recipientCity,
+                            recipientDistrict:recipientDistrict,
                         }
                         const dateTime = getFormattedDateTime()
                         if (dateTime) {
@@ -440,7 +517,10 @@ const VerticalLinearStepper = (props) => {
                         reporterData.telephone = incidentContact.phone;
                         reporterData.mobile = incidentContact.mobile;
                         reporterData.email = incidentContact.email;
-
+                        reporterData.recipientName = incidentContact.recipientName;
+                        reporterData.recipientPhone = incidentContact.recipientPhone;
+                        reporterData.recipientMobile = incidentContact.recipientMobile;
+                        reporterData.recipientEmail = incidentContact.recipientEmail;
                         dispatch(createGuestIncidentWithReporter( incidentData, reporterData, fileData))
                         dispatch(moveStepper({ step: activeStep + 1 }));
                     }
@@ -463,6 +543,10 @@ const VerticalLinearStepper = (props) => {
                         incidentData["category"] = incidentCatogory;
                         incidentData["mainCategory"] = incidentMainCatogory;
                         incidentData["district"] = incidentDistrict;
+                        incidentUpdate["recipientLocation"] = recipientLocation;
+                        incidentUpdate["recipientAddress"] = recipientAddress;
+                        incidentUpdate["recipientCity"] = recipientCity;
+                        incidentData["recipientDistrict"] = recipientDistrict;
 
                         const dateTime = getFormattedDateTime()
                         if (dateTime) {
@@ -484,6 +568,10 @@ const VerticalLinearStepper = (props) => {
                         incidentData["category"] = incidentCatogory;
                         incidentData["mainCategory"] = incidentMainCatogory;
                         incidentData["district"] = incidentDistrict;
+                        incidentUpdate["recipientLocation"] = recipientLocation;
+                        incidentUpdate["recipientAddress"] = recipientAddress;
+                        incidentUpdate["recipientCity"] = recipientCity;
+                        incidentData["recipientDistrict"] = recipientDistrict;
 
                         const dateTime = getFormattedDateTime()
                         if (dateTime) {
@@ -503,6 +591,25 @@ const VerticalLinearStepper = (props) => {
             content:
             <>
             < ContactSection
+                location={incidentLocation}
+                handledLocationChange={setIncidentLocation}
+                address={incidentAddress}
+                handleAddressChange={setIncidentAddress}
+                city={incidentCity}
+                district={incidentDistrict}
+                recipientCity={recipientCity}
+                recipientDistrict={recipientDistrict}
+                recipientAddress={recipientAddress}
+                handleDistrictChange={setIncidentDistrict}
+                handleCityChange={setIncidentCity}
+                handleRecipientLocationChange={setRecipientLocation}
+                handleRecipientDistrictChange={setRecipientDistrict}
+                handleRecipientCityChange={setRecipientCity}
+                handleRecipientAddressChange={setRecipientAddress}
+                handleShowRecipientChange={setShowRecipient}
+                districts={districts}
+                recipientLocation={recipientLocation}
+                showRecipient={showRecipient}
                 contactDetials={incidentContact}
                 handleContactDetailsChange={setIncidentContact} formErrors={formErrors} />
             </>,
@@ -529,7 +636,7 @@ const VerticalLinearStepper = (props) => {
             }
         },
 
-        2:{
+        1:{
             title:f({ id: "request.management.report.incidents.section.category", defaultMessage: "Select the most suitable category" }),
             content: <CategorySection
                         mainCategories={mainCategories}
@@ -657,7 +764,7 @@ const VerticalLinearStepper = (props) => {
                     const props = {};
                     const labelProps = {};
                     if (isStepOptional(index)) {
-                        if (index === 3) {
+                        if (index === 2) {
                             // expected here to gives more information on 'contact info'
                             labelProps.optional = <Typography variant="caption">{f({ id: "request.management.report.incidents.forms.label.optional", defaultMessage: "Optional" })}</Typography>;
                         } else {
@@ -698,7 +805,7 @@ const VerticalLinearStepper = (props) => {
                                             color="primary"
                                             onClick={handleNext}
                                             className={classes.button}
-                                            disabled={index==4 ? isLoading || !incidentRecaptcha : isLoading}
+                                            disabled={index==3 ? isLoading || !incidentRecaptcha : isLoading}
                                         >
                                             {activeStep === steps.length - 1 ?
                                                 f({ id: "request.management.report.incidents.forms.button.finish", defaultMessage: "Submit" }) :
