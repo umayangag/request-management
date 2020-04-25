@@ -105,14 +105,14 @@ function IncidentList({
 
   return (
     <Table className={classes.table}>
-      <colgroup>
+      {/* <colgroup>
         <col style={{ width: "5%" }} />
         <col style={{ width: "5%" }} />
         <col style={{ width: "5%" }} />
         <col style={{ width: "5%" }} />
         <col style={{ width: "30%" }} />
         <col style={{ width: "40%" }} />
-      </colgroup>
+      </colgroup> */}
       <TableHead>
         <TableRow>
           <CustomTableCell align="center">{f({id: "request.management.home.incidents.list.refid"})}</CustomTableCell>
@@ -135,10 +135,10 @@ function IncidentList({
               className={classes.row}
               key={row.id}
             >
-              <CustomTableCell scope="center">
+              <CustomTableCell align="left">
                 <p>{row.refId}</p>
               </CustomTableCell>
-              <CustomTableCell align="center">
+              <CustomTableCell align="left">
                 <p>{moment(row.createdDate).format("YYYY-MM-DD  h:mm a")}</p>
               </CustomTableCell>
               <CustomTableCell align="center">
@@ -147,7 +147,7 @@ function IncidentList({
               <CustomTableCell align="center">
                 <p>{row.currentStatus}</p>
               </CustomTableCell>
-              <CustomTableCell scope="center">
+              <CustomTableCell align="left">
                 <p>
                   {categories.map((value, index) =>
                     value.id == row.category ? value.sub_category : null

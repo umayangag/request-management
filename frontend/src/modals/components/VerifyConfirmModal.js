@@ -24,7 +24,7 @@ const VerifyConfirmModal = (props) => {
 
     return (
         <div>
-            <DialogTitle id="form-dialog-title">Verify this Incident?  </DialogTitle>
+            <DialogTitle id="form-dialog-title">Verify this record </DialogTitle>
             <DialogContent style={{width:400}}>
             <DialogContentText>
                 Comment(optional)
@@ -44,7 +44,7 @@ const VerifyConfirmModal = (props) => {
               onChange={(e)=>{
                   proof = !proof
               }}
-            /> verified with proof
+            /> Verified with suppport documents
           </DialogContent>
             <DialogActions>
                 <Button onClick={()=>{dispatch(hideModal())}} color="primary">

@@ -9,7 +9,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 
 // react-redux hooks
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 
 import { hideModal  } from '../state/modal.actions'
 import { fetchUpdateWorkflow } from '../../ongoing-incidents/state/OngoingIncidents.actions'
@@ -30,7 +30,7 @@ const onSubmitClick = (dispatch, incidentId, comment, assignee) => {
 }
 
 const RequestAdviceModal = (props) => {
-    const defaultOrg = "eclk";
+    const defaultOrg = "pslk";
     const { users, divisions } = props;
     const dispatch = useDispatch();
 

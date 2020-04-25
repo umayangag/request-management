@@ -9,9 +9,9 @@ import { useDispatch } from "react-redux";
 import { FormattedMessage } from "react-intl";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
-import CardActions from "@material-ui/core/CardActions";
+// import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
-import CardMedia from "@material-ui/core/CardMedia";
+// import CardMedia from "@material-ui/core/CardMedia";
 import NoteAddIcon from "@material-ui/icons/NoteAdd";
 import CheckStatusIcon from "@material-ui/icons/Announcement";
 import { Link } from "react-router-dom";
@@ -116,7 +116,7 @@ function HomePage(props) {
                     className={classes.cardText}
                     color="primary"
                   >
-                    <NoteAddIcon className={classes.icon} />
+                    <NoteAddIcon style={{marginTop:63}} className={classes.icon} />
                   </Typography>
                 </CardContent>
               </CardActionArea>
@@ -164,16 +164,16 @@ function HomePage(props) {
         justify="center"
         // style={{ minHeight: "80vh" }}
       >
-        <Grid xs={12}>
+        <Grid item xs={12}>
           <Typography
             variant="h5"
             component="h5"
             className={classes.cardText}
             color="primary"
           >
-             Registered user ?
+             Registered user  -
             <Button color="primary" className={classes.button} href="/sign-in">
-              Sign In
+            Sign In
             </Button>
           </Typography>
         </Grid>

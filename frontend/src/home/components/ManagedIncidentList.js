@@ -7,7 +7,7 @@ export function ManagedIncidentList({ filters, history }){
     const [incidents, setIncidents] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [count, setCount] = useState(0);
-    const [pages, setPages] = useState(0);
+    // const [pages, setPages] = useState(0);
 
     async function callAPI(page=currentPage){
         const response = await getIncidents(filters, page);
@@ -18,14 +18,14 @@ export function ManagedIncidentList({ filters, history }){
     useEffect(() => {
         callAPI();
     }, []);
-    
+
     return (
-        <IncidentList 
+        <IncidentList
             incidents={incidents}
             pageNumber={currentPage-1}
             count={count}
             handleRowClick={incidentId => history.push(`/app/review/${incidentId}`)}
-            handlePageChange={(evt, newPage) =>  { 
+            handlePageChange={(evt, newPage) =>  {
                 setCurrentPage(newPage+1)
                 callAPI(newPage+1)
             }

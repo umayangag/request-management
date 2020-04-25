@@ -22,7 +22,7 @@ const breadcrumbNameMap = {
   "/app/create": "Create",
   "/app/report": "Report",
   "/app/review": "Review",
-  "/app/review-complaints": "Review Complaints",
+  "/app/review-complaints": "Review",
   "/app/review-inquiries": "Review Inquiries",
   "/app/review/incident": "Incident",
   "/app/review/incident/edit": "Edit",

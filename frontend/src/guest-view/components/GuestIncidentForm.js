@@ -29,6 +29,10 @@ import FileUploadSection from './GuestFormFileUploadSection';
 import DateTimeSection from './GuestFormDateTimeSection';
 import LocationSection from './GuestFromLocationSection';
 import ContactSection from './GuestFormContactSection';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
 import _ from 'lodash';
 
 
@@ -37,9 +41,7 @@ import {
     fetchCategories,
     fetchChannels,
     fetchDistricts,
-
     requestIncidentCatogories,
-
 } from '../../shared/state/sharedActions';
 
 import {
@@ -60,8 +62,8 @@ import {useLoadingStatus} from '../../loading-spinners/loadingHook'
 
 const styles = theme => ({
     root: {
-        width: '90%',
-        marginTop: theme.spacing.unit * 4,
+        // width: '90%',
+        marginTop: theme.spacing.unit * 2,
         marginLeft: theme.spacing.unit * 2,
     },
     button: {
@@ -84,7 +86,10 @@ const styles = theme => ({
     wrapper: {
         margin: theme.spacing.unit,
         position: 'relative',
-    }
+    },
+    list: {
+        marginLeft:-20
+      },
 });
 
 
@@ -105,29 +110,29 @@ const VerticalLinearStepper = (props) => {
     function removeDuplicates(originalArray, prop) {
         var newArray = [];
         var lookupObject  = {};
-   
+
         for(var i in originalArray) {
            lookupObject[originalArray[i][prop]] = originalArray[i];
         }
-   
+
         for(i in lookupObject) {
             newArray.push(lookupObject[i]);
         }
          return newArray;
     }
-   
+
    var mainCategories = removeDuplicates(categories, "top_category");
 
-   
 
-    
-    let webInfoChannelId = "Web";
-    // for(var channel of channels){
-    //     if(channel.name === "Web"){
-    //         webInfoChannelId = channel.id;
-    //         break;
-    //     }
-    // }
+
+
+    let webInfoChannelId = "";
+    for(var channel of channels){
+        if(channel.name === "Online"){
+            webInfoChannelId = channel.id;
+            break;
+        }
+    }
 
     const { activeIncident, activeIncidentReporter } = useSelector((state) => (state.incident));
     const { activeStep, isLoadingIncident } = useSelector((state) => (state.guestView));
@@ -139,7 +144,7 @@ const VerticalLinearStepper = (props) => {
     const [skippedSteps, setSkippedSets] = useState(new Set());
     const [incidentDescription, setIncidentDescription] = useState(incidentId ? incidentData.description : null);
     const [incidentElection, setIncidentElection] = useState(incidentId ? incidentData.election : "");
-    
+
     const recaptchaRef = React.createRef();
     const [incidentRecaptcha, setIncidentRecaptcha] = useState(null);
 
@@ -189,27 +194,44 @@ const VerticalLinearStepper = (props) => {
         setFormErrors({ ...formErrors, incidentDescriptionErrorMsg: null, incidentElectionErrorMsg: null, incidentDatetimeErrorMsg: null, incidentContactErrorMsg: null,incidentNameErrorMsg: null })
         let errorMsg = { ...formErrors };
         let valid = true;
-
         if (!incidentDescription) {
             errorMsg = { ...errorMsg, incidentDescriptionErrorMsg: f({ id: "request.management.report.incidents.description.error.message", defaultMessage: "Description is required" }) };
             valid = false;
         }
-        if (!incidentElection) {
-            errorMsg = { ...errorMsg, incidentElectionErrorMsg: f({ id: "request.management.report.incidents.election.error.message", defaultMessage: "Election is required" }) };
-            valid = false;
-        }
-        if (getFormattedDateTime() == null) {
-            errorMsg = { ...errorMsg, incidentDatetimeErrorMsg: f({ id: "request.management.report.incidents.datetime.error.message", defaultMessage: "Date and time are required" }) };
-            valid = false;
-        }
-       
-        
+        // if (!incidentElection) {
+        //     errorMsg = { ...errorMsg, incidentElectionErrorMsg: f({ id: "request.management.report.incidents.election.error.message", defaultMessage: "Election is required" }) };
+        //     valid = false;
+        // }
+        // if (getFormattedDateTime() == null) {
+        //     errorMsg = { ...errorMsg, incidentDatetimeErrorMsg: f({ id: "request.management.report.incidents.datetime.error.message", defaultMessage: "Date and time are required" }) };
+        //     valid = false;
+        // }
+
+
         setFormErrors({ ...errorMsg });
         return valid;
     }
 
-    const validCentactInputs = () => {
+    const validContactInputs = () => {
         setFormErrors({ ...formErrors, incidentDescriptionErrorMsg: null, incidentElectionErrorMsg: null, incidentDatetimeErrorMsg: null, incidentContactErrorMsg: null,incidentNameErrorMsg: null })
+        let errorMsg = { ...formErrors };
+        let valid = true;
+
+        if(!incidentContact.mobile){
+            errorMsg = { ...errorMsg, incidentContactErrorMsg: f({ id: "request.management.report.incidents.phone.error.message", defaultMessage: "Contact number is required" }) };
+            valid = false;
+        }
+        if(!incidentContact.name){
+            errorMsg = { ...errorMsg, incidentNameErrorMsg: f({ id: "request.management.report.incidents.name.error.message", defaultMessage: "Name is required" }) };
+            valid = false;
+        }
+
+        setFormErrors({ ...errorMsg });
+        return valid;
+    }
+
+    const validRecaptchaInputs = () => {
+        setFormErrors({ ...formErrors, incidentRecaptchaErrorMsg: null })
         let errorMsg = { ...formErrors };
         let valid = true;
         if(!incidentRecaptcha){
@@ -217,18 +239,10 @@ const VerticalLinearStepper = (props) => {
             valid = false;
         }
 
-        if(!incidentContact.phone){
-            errorMsg = { ...errorMsg, incidentContactErrorMsg: f({ id: "eclk.incident.management.report.incidents.phone.error.message", defaultMessage: "Contact number is required" }) };
-            valid = false;
-        }
-        if(!incidentContact.name){
-            errorMsg = { ...errorMsg, incidentNameErrorMsg: f({ id: "eclk.incident.management.report.incidents.phone.error.message", defaultMessage: "Name is required" }) };
-            valid = false;
-        }
-        
         setFormErrors({ ...errorMsg });
         return valid;
     }
+
 
     const validLocationInputs = () => {
         setFormErrors({ ...formErrors, incidentAddressErrorMsg: null, incidentDistrictErrorMsg: null })
@@ -236,14 +250,14 @@ const VerticalLinearStepper = (props) => {
         let valid = true;
 
         if(!incidentAddress){
-            errorMsg = { ...errorMsg, incidentAddressErrorMsg: f({ id: "eclk.incident.management.report.incidents.phone.error.message", defaultMessage: "Address is required" }) };
+            errorMsg = { ...errorMsg, incidentAddressErrorMsg: f({ id: "request.management.report.incidents.address.error.message", defaultMessage: "Address is required" }) };
             valid = false;
         }
         if(!incidentDistrict){
-            errorMsg = { ...errorMsg, incidentDistrictErrorMsg: f({ id: "eclk.incident.management.report.incidents.phone.error.message", defaultMessage: "District is required" }) };
+            errorMsg = { ...errorMsg, incidentDistrictErrorMsg: f({ id: "request.management.report.incidents.district.error.message", defaultMessage: "District is required" }) };
             valid = false;
         }
-        
+
         setFormErrors({ ...errorMsg });
         return valid;
     }
@@ -254,25 +268,25 @@ const VerticalLinearStepper = (props) => {
         let valid = true;
 
         if(!incidentCatogory){
-            errorMsg = { ...errorMsg, incidentSubCategoryErrorMsg: f({ id: "eclk.incident.management.report.incidents.phone.error.message", defaultMessage: "Sub category is required" }) };
+            errorMsg = { ...errorMsg, incidentSubCategoryErrorMsg: f({ id: "request.management.report.incidents.subcategory.error.message", defaultMessage: "Sub category is required" }) };
             valid = false;
         }
         if(!incidentMainCatogory){
-            errorMsg = { ...errorMsg, incidentMainCategoryErrorMsg: f({ id: "eclk.incident.management.report.incidents.phone.error.message", defaultMessage: "Category is required" }) };
+            errorMsg = { ...errorMsg, incidentMainCategoryErrorMsg: f({ id: "request.management.report.incidents.topcategory.error.message", defaultMessage: "Category is required" }) };
             valid = false;
         }
-        
+
         setFormErrors({ ...errorMsg });
         return valid;
     }
-    
-    
+
+
 
     const createIncidentWithReporter = (reporterData) => {
         const initData = {
             description: "Incomplete submission",
             title: "Guest user submit",
-            infoChannel: "Web",
+            infoChannel: "5",
             occured_date: "2020-01-01T01:00:00+05:30",
             receivedDate: "2020-01-01",
             letterDate: "2020-01-01",
@@ -284,8 +298,13 @@ const VerticalLinearStepper = (props) => {
     const stepDefinitions = {
 
         3: {
-            title: f({ id: "request.management.report.incidents.section.describe", defaultMessage: "Describe the incident" }),
+            title: f({ id: "request.management.report.incidents.section.describe", defaultMessage: "Enter details here" }),
             content: <>
+                    <ul className={props.classes.list}>
+                        <li>{f({ id: "request.management.report.incidents.section.listitem1", defaultMessage: "Explain your matter clearly" })}</li>
+                        <li>{f({ id: "request.management.report.incidents.section.listitem2", defaultMessage: "Include facts and specific details" })}</li>
+                        <li>{f({ id: "request.management.report.incidents.section.listitem3", defaultMessage: "State any urgent circumstances" })}</li>
+                    </ul>
                 <DescriptionSection
                     handledDescriptionChange={setIncidentDescription}
                     handleElectionChange={setIncidentElection}
@@ -296,70 +315,22 @@ const VerticalLinearStepper = (props) => {
                     formErrors={formErrors}
                 />
                 <div style={{ height: 20 }}></div>
-                < DateTimeSection
+                {/* < DateTimeSection
                     dateTime={incidentDateTime}
                     setDateTime={setIncidentDateTime}
                     formErrors={formErrors}
-                />
+                /> */}
                 <p style={{ color:'red', marginTop:0}}>{formErrors.incidentRecaptchaErrorMsg}</p>
             </>,
             handler: () => {
-                if (!incidentId) {
-                    //creating new incident
                     if (validInputs()) {
-
-                        let incidentData = {
-                            description: incidentDescription,
-                            title: 'Guest user submit',
-                            infoChannel: webInfoChannelId, //info channel is web by default.
-                            recaptcha: incidentRecaptcha,
-                            location: incidentLocation,
-                            address: incidentAddress,
-                            city: incidentCity,
-                            category: incidentCatogory,
-                            mainCategory:incidentMainCatogory,
-                            district:incidentDistrict
-                        }
-                        const dateTime = getFormattedDateTime()
-                        if (dateTime) {
-                            incidentData['occured_date'] = dateTime;
-                        }
-                        incidentData['receivedDate'] = '2020-01-01';
-                        incidentData['letterDate'] = '2020-01-01';
-
-                        let reporterData = {}
-                        reporterData.name = incidentContact.name;
-                        reporterData.telephone = incidentContact.phone;
-                        reporterData.mobile = incidentContact.mobile;
-                        reporterData.email = incidentContact.email;
-
-                        dispatch(createGuestIncidentWithReporter( incidentData, reporterData))
+                        dispatch(moveStepper({ step: activeStep + 1 }));
                     }
-                } else {
-                    //updating an existing incident.
-                    if (validInputs()) {
-                        let incidentUpdate = incidentData
-                        incidentUpdate["election"] = incidentElection;
-                        incidentUpdate["description"] = incidentDescription;
-                        incidentUpdate["location"] = incidentLocation;
-                        incidentUpdate["address"] = incidentAddress;
-                        incidentUpdate["city"] = incidentCity;
-                        incidentData["category"] = incidentCatogory;
-                        incidentData["mainCategory"] = incidentMainCatogory;
-                        incidentData["district"] = incidentDistrict;
-
-                        const dateTime = getFormattedDateTime()
-                        if (dateTime) {
-                            incidentUpdate['occured_date'] = dateTime
-                        }
-                        dispatch(updateGuestIncident(incidentId, incidentUpdate))
-                    }
-                }
             }
         },
 
         1: {
-            title: f({ id: "request.management.report.incidents.section.location", defaultMessage: "Describe the incident location" }),
+            title: f({ id: "request.management.report.incidents.section.location", defaultMessage: "Describe the location" }),
             content: < LocationSection
                 location={incidentLocation}
                 handledLocationChange={setIncidentLocation}
@@ -389,41 +360,155 @@ const VerticalLinearStepper = (props) => {
 
         4: {
             title: f({ id: "request.management.report.incidents.section.attachment", defaultMessage: "Attach files related to incident" }),
-            content: <FileUploader
+            content: <><FileUploader
                 files={incidentFiles}
                 setFiles={setIncidentFiles}
-            />,
+            />
+            <ReCAPTCHA
+            ref={recaptchaRef}
+            sitekey={process.env.REACT_APP_RECAPTCHA_SITEKEY}
+            onChange={ (e) => {
+                formErrors.incidentRecaptchaErrorMsg = null;
+                setIncidentRecaptcha(recaptchaRef.current.getValue());
+            }}
+            />
+            </>,
             handler: () => {
-                if (incidentFiles) {
-                    const fileData = new FormData();
+
+                if (!incidentId) {
+                    if (incidentFiles) {
+                        const fileData = new FormData();
                     for (var file of incidentFiles) {
                         fileData.append("files[]", file);
                     }
-                    dispatch(uploadFileGuest(incidentId, fileData))
-                    // dispatch(moveStepper({ step: activeStep + 1 }));
+                    //creating new incident
+                    if (validRecaptchaInputs()) {
+
+                        let incidentData = {
+                            description: incidentDescription,
+                            title: 'Guest user submit',
+                            infoChannel: webInfoChannelId, //info channel is web by default.
+                            recaptcha: incidentRecaptcha,
+                            location: incidentLocation,
+                            address: incidentAddress,
+                            city: incidentCity,
+                            category: incidentCatogory,
+                            mainCategory:incidentMainCatogory,
+                            district:incidentDistrict
+                        }
+                        const dateTime = getFormattedDateTime()
+                        if (dateTime) {
+                            incidentData['occured_date'] = dateTime;
+                        }
+                        incidentData['receivedDate'] = '2020-01-01';
+                        incidentData['letterDate'] = '2020-01-01';
+
+                        let reporterData = {}
+                        reporterData.name = incidentContact.name;
+                        reporterData.telephone = incidentContact.phone;
+                        reporterData.mobile = incidentContact.mobile;
+                        reporterData.email = incidentContact.email;
+
+                        dispatch(createGuestIncidentWithReporter( incidentData, reporterData, fileData))
+                        dispatch(moveStepper({ step: activeStep + 1 }));
+                    }
+                }else{
+                    //creating new incident
+                    if (validRecaptchaInputs()) {
+                        const fileData = "";
+                        let incidentData = {
+                            description: incidentDescription,
+                            title: 'Guest user submit',
+                            infoChannel: webInfoChannelId, //info channel is web by default.
+                            recaptcha: incidentRecaptcha,
+                            location: incidentLocation,
+                            address: incidentAddress,
+                            city: incidentCity,
+                            category: incidentCatogory,
+                            mainCategory:incidentMainCatogory,
+                            district:incidentDistrict
+                        }
+                        const dateTime = getFormattedDateTime()
+                        if (dateTime) {
+                            incidentData['occured_date'] = dateTime;
+                        }
+                        incidentData['receivedDate'] = '2020-01-01';
+                        incidentData['letterDate'] = '2020-01-01';
+
+                        let reporterData = {}
+                        reporterData.name = incidentContact.name;
+                        reporterData.telephone = incidentContact.phone;
+                        reporterData.mobile = incidentContact.mobile;
+                        reporterData.email = incidentContact.email;
+
+                        dispatch(createGuestIncidentWithReporter( incidentData, reporterData, fileData))
+                        dispatch(moveStepper({ step: activeStep + 1 }));
+                    }
+
                 }
-            }
+                } else {
+                    if (incidentFiles) {
+                        const fileData = new FormData();
+                    for (var file of incidentFiles) {
+                        fileData.append("files[]", file);
+                    }
+                    //updating an existing incident.
+                    if (validRecaptchaInputs()) {
+                        let incidentUpdate = incidentData
+                        incidentUpdate["election"] = incidentElection;
+                        incidentUpdate["description"] = incidentDescription;
+                        incidentUpdate["location"] = incidentLocation;
+                        incidentUpdate["address"] = incidentAddress;
+                        incidentUpdate["city"] = incidentCity;
+                        incidentData["category"] = incidentCatogory;
+                        incidentData["mainCategory"] = incidentMainCatogory;
+                        incidentData["district"] = incidentDistrict;
+
+                        const dateTime = getFormattedDateTime()
+                        if (dateTime) {
+                            incidentUpdate['occured_date'] = dateTime
+                        }
+                        dispatch(updateGuestIncident(incidentId, incidentUpdate, fileData))
+                        dispatch(moveStepper({ step: activeStep + 1 }));
+                    }
+                }else{
+                    //updating an existing incident.
+                    if (validRecaptchaInputs()) {
+                        const fileData = "";
+                        let incidentUpdate = incidentData
+                        incidentUpdate["election"] = incidentElection;
+                        incidentUpdate["description"] = incidentDescription;
+                        incidentUpdate["location"] = incidentLocation;
+                        incidentUpdate["address"] = incidentAddress;
+                        incidentUpdate["city"] = incidentCity;
+                        incidentData["category"] = incidentCatogory;
+                        incidentData["mainCategory"] = incidentMainCatogory;
+                        incidentData["district"] = incidentDistrict;
+
+                        const dateTime = getFormattedDateTime()
+                        if (dateTime) {
+                            incidentUpdate['occured_date'] = dateTime
+                        }
+                        dispatch(updateGuestIncident(incidentId, incidentUpdate, fileData))
+                        dispatch(moveStepper({ step: activeStep + 1 }));
+                    }
+
+                }
+                }
+        }
         },
 
         0: {
             title: f({ id: "request.management.report.incidents.section.contact", defaultMessage: "Your contact details" }),
-            content: 
+            content:
             <>
             < ContactSection
                 contactDetials={incidentContact}
                 handleContactDetailsChange={setIncidentContact} formErrors={formErrors} />
-            <ReCAPTCHA
-                ref={recaptchaRef}
-                sitekey={process.env.REACT_APP_RECAPTCHA_SITEKEY}
-                onChange={ (e) => {
-                    formErrors.incidentRecaptchaErrorMsg = null;
-                    setIncidentRecaptcha(recaptchaRef.current.getValue()); 
-                }}
-            />
             </>,
             handler: () => {
                 if (!incidentId) {
-                    if (validCentactInputs()) {
+                    if (validContactInputs()) {
                         // const reporterData = {}
                         // reporterData.name = incidentContact.name;
                         // reporterData.telephone = incidentContact.phone;
@@ -433,7 +518,7 @@ const VerticalLinearStepper = (props) => {
                         dispatch(moveStepper({ step: activeStep + 1 }));
                     }
                 }else{
-                    if (validCentactInputs()) {
+                    if (validContactInputs()) {
                     incidentReporterData.name = incidentContact.name;
                     incidentReporterData.telephone = incidentContact.phone;
                     incidentReporterData.mobile = incidentContact.mobile;
@@ -445,7 +530,7 @@ const VerticalLinearStepper = (props) => {
         },
 
         2:{
-            title:'Select the most suitable category for the incident',
+            title:f({ id: "request.management.report.incidents.section.category", defaultMessage: "Select the most suitable category" }),
             content: <CategorySection
                         mainCategories={mainCategories}
                         subCategories={subCategories}
@@ -597,7 +682,7 @@ const VerticalLinearStepper = (props) => {
                                         >
                                             {f({ id: "request.management.report.incidents.forms.button.back", defaultMessage: "Back" })}
                                         </Button>
-                                        {isStepOptional(activeStep) && (
+                                        {/* {isStepOptional(activeStep) && (
                                             <Button
                                                 variant="contained"
                                                 color="primary"
@@ -607,13 +692,13 @@ const VerticalLinearStepper = (props) => {
                                             >
                                                 {f({ id: "request.management.report.incidents.forms.button.skip", defaultMessage: "Skip" })}
                                             </Button>
-                                        )}
+                                        )} */}
                                         <Button
                                             variant="contained"
                                             color="primary"
                                             onClick={handleNext}
                                             className={classes.button}
-                                            disabled={isLoading || !incidentRecaptcha}
+                                            disabled={index==4 ? isLoading || !incidentRecaptcha : isLoading}
                                         >
                                             {activeStep === steps.length - 1 ?
                                                 f({ id: "request.management.report.incidents.forms.button.finish", defaultMessage: "Finish" }) :

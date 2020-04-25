@@ -25,7 +25,7 @@ const ResponseTimeEditModal = (props) => {
 
     const dispatch = useDispatch();
     const {activeIncident} = props
-    
+
     //maintains selected value in local state until change is confirmed
     const [allocatedTime, setAlocatedTime] = useState(activeIncident.response_time);
 
@@ -34,7 +34,7 @@ const ResponseTimeEditModal = (props) => {
             <DialogTitle id="form-dialog-title">Change Resopse Time</DialogTitle>
             <DialogContent>
                 <DialogContentText>
-                    Incident should be addressed and closed within: 
+                    This should be addressed and closed within:
                 </DialogContentText>
                 <Select
                     value={allocatedTime}
@@ -54,14 +54,14 @@ const ResponseTimeEditModal = (props) => {
                 <Button onClick={()=>{dispatch(hideModal())}} color="primary">
                     Close
                 </Button>
-                <Button 
+                <Button
                     onClick={()=>{
                         var activeIncidentUpdate = {...activeIncident}
                         activeIncidentUpdate.response_time = allocatedTime
                         dispatch(updateInternalIncident(activeIncident.id, activeIncidentUpdate))
                         dispatch(hideModal())
                     }
-                    } 
+                    }
                     color="primary">
                     Change Respose Time
                 </Button>

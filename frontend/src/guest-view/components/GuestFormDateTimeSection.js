@@ -34,7 +34,7 @@ function DatePickers(props) {
             <TextField
                 autoFocus
                 id="date"
-                label={f({ id: "request.management.report.incidents.date", defaultMessage:"Date" })+"*"}
+                label={f({ id: "request.management.report.incidents.date", defaultMessage:"Date" })}
                 type="date"
                 value={dateTime.date}
                 className={classes.textField}
@@ -51,7 +51,7 @@ function DatePickers(props) {
 
             <TextField
                 id="date"
-                label={f({ id: "request.management.report.incidents.time", defaultMessage:"Time" })+"*"}
+                label={f({ id: "request.management.report.incidents.time", defaultMessage:"Time" })}
                 type="time"
                 value={dateTime.time}
                 className={classes.textField}

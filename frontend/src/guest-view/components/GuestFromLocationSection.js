@@ -59,7 +59,7 @@ const IncidentLocation = (props) => {
                 <Grid item xs={12} sm={8}>
                     <TextField
                         id="incidentAddress"
-                        label={f({ id: "request.management.report.incidents.address", defaultMessage: "Address" })}
+                        label={f({ id: "request.management.report.incidents.address", defaultMessage: "Address*" })}
                         multiline
                         fullWidth
                         rowsMax="5"
@@ -92,7 +92,7 @@ const IncidentLocation = (props) => {
                         select
                         label={f({
                             id: "request.management.report.incidents.district",
-                            defaultMessage: "District"
+                            defaultMessage: f({ id: "request.management.incident.create.location.district", defaultMessage: "District" })
                         }) + "*"}
                         className={classes.textField}
                         value={district}
