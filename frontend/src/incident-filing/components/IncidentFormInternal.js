@@ -179,7 +179,7 @@ function IncidentFormInternal(props) {
     otherCat: "",
     category: "",
     election: "",
-    severity: 0,
+    severity: "",
     reporterConsent: false,
 
     // inquiry
@@ -1347,21 +1347,21 @@ function IncidentFormInternal(props) {
                           multiline
                         />
                       </Grid>
-                  <Grid item xs={12} sm={6}>
+                  <Grid item xs={12} md={4} sm={6}>
                     <TelephoneInput
                       className={classes.textField}
                       name="reporterMobile"
                       label={f({ id: "request.management.incident.create.reporter.mobile" })}
                     />
                   </Grid>
-                  <Grid item xs={12} sm={6}>
+                  <Grid item xs={12} md={4} sm={6}>
                     <TelephoneInput
                       className={classes.textField}
                       name="reporterTelephone"
                       label={f({ id: "request.management.incident.create.reporter.telephone", defaultMessage: "Landline" })}
                     />
                   </Grid>
-                  <Grid item xs={12} sm={6}>
+                  <Grid item xs={12} md={4} sm={6}>
                     <TextField
                       id="reporterEmail"
                       name="reporterEmail"
@@ -1375,7 +1375,7 @@ function IncidentFormInternal(props) {
                       }
                     />
                   </Grid>
-                  <Grid item xs={12} sm={4}>
+                  <Grid item xs={12} md={4} sm={6}>
                         <TextField
                           error={touched.city && errors.city}
                           id="city"
@@ -1388,7 +1388,7 @@ function IncidentFormInternal(props) {
                           }
                         />
                       </Grid>
-                      <Grid item xs={12} sm={4}>
+                      <Grid item xs={12} md={4} sm={6}>
                         <FormControl
                           error={touched.district && errors.district}
                           className={classes.formControl}
@@ -1424,7 +1424,7 @@ function IncidentFormInternal(props) {
                           </FormHelperText>
                         </FormControl>
                       </Grid>
-                      <Grid item xs={12} sm={4}>
+                      <Grid item xs={12} md={4} sm={6}>
                         <FormControl className={classes.formControl}>
                           <InputLabel htmlFor="gramaNiladhari">
                             {f({ id: "request.management.incident.create.location.gn_division" })}
@@ -1455,14 +1455,14 @@ function IncidentFormInternal(props) {
                                     control={
                                         <Radio />
                                     }
-                                    value="Yes"
+                                    value="YES"
                                     label="Yes"
                                 />
                                 <FormControlLabel
                                     control={
                                         <Radio />
                                     }
-                                    label="No"
+                                    label="NO"
                                     value="No"
                                 />
                             </RadioGroup>
@@ -1529,7 +1529,7 @@ function IncidentFormInternal(props) {
                 </Grid>
               </Paper>
               {
-                        values.showRecipient==='Yes' ?
+                        values.showRecipient==='YES' ?
                         <Paper className={classes.paper}>
                         <Typography variant="h5" gutterBottom>
                         {f({ id: "request.management.incident.create.recipient_information", defaultMessage: "Recipient Information" })}
@@ -1569,8 +1569,8 @@ function IncidentFormInternal(props) {
                                 {" "}
                                 <em>None</em>{" "}
                               </MenuItem>
-                              <MenuItem value={"Individual"}>Individual</MenuItem>
-                              <MenuItem value={"Organization"}>Organization</MenuItem>
+                              <MenuItem value={"INDIVIDUAL"}>Individual</MenuItem>
+                              <MenuItem value={"ORGANIZATION"}>Organization</MenuItem>
                             </Select>
                             <FormHelperText>
                                   {touched.recipientType && errors.recipientType
@@ -1631,21 +1631,21 @@ function IncidentFormInternal(props) {
                           multiline
                         />
                       </Grid>
-                        <Grid item xs={12} sm={6}>
+                        <Grid item xs={12} md={4} sm={6}>
                           <TelephoneInput
                             className={classes.textField}
                             name="recipientMobile"
                             label={f({ id: "request.management.incident.create.reporter.mobile" })}
                           />
                         </Grid>
-                        <Grid item xs={12} sm={6}>
+                        <Grid item xs={12} md={4} sm={6}>
                           <TelephoneInput
                             className={classes.textField}
                             name="recipientTelephone"
                             label={f({ id: "request.management.incident.create.reporter.telephone", defaultMessage: "Landline" })}
                           />
                         </Grid>
-                        <Grid item xs={12} sm={6}>
+                        <Grid item xs={12} md={4} sm={6}>
                           <TextField
                             id="recipientEmail"
                             name="recipientEmail"

@@ -98,10 +98,12 @@ class Recipient(models.Model):
     email = models.CharField(max_length=200, null=True, blank=True)
     telephone = models.CharField(max_length=200, null=True, blank=True)
     mobile = models.CharField(max_length=200, null=True, blank=True)
+    location = models.CharField(max_length=200, null=True, blank=True)
     address = models.CharField(max_length=200, null=True, blank=True)
+    city = models.CharField(max_length=200, null=True, blank=True)
     district = models.CharField(max_length=50, null=True, blank=True)
     gn_division = models.CharField(max_length=50, null=True, blank=True)
-    contact_type = models.CharField(
+    recipient_type = models.CharField(
         max_length=50,
         choices=[(tag.name, tag.value) for tag in ContactType],
         default=ContactType.INDIVIDUAL,

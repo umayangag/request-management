@@ -192,9 +192,30 @@ class IncidentList(APIView, IncidentResultsSetPagination):
         return self.get_paginated_response(serializer.data)
 
     def post(self, request, format=None):
-        serializer = IncidentSerializer(data=request.data)
-        # if serializer.is_valid() == False:
-        #     print("errors: ", serializer.errors)
+        incident_data = request.data
+        if request.data["showRecipient"] == "YES":
+            # collect recipient information
+            recipient_data = {}
+            recipient_data["name"] = incident_data["recipientName"]
+            recipient_data["recipientType"] = incident_data["recipientType"]
+            recipient_data["address"] = incident_data["recipientAddress"]
+            recipient_data["mobile"] = incident_data["recipientMobile"]
+            recipient_data["telephone"] = incident_data["recipientTelephone"]
+            recipient_data["email"] = incident_data["recipientEmail"]
+            recipient_data["city"] = incident_data["recipientCity"]
+            recipient_data["district"] = incident_data["recipientDistrict"]
+            recipient_data["gnDivision"] = incident_data["recipientGramaNiladhari"]
+            recipient_data["location"] = incident_data["recipientLocation"]
+            # create recipient
+            recipient_serializer = RecipientSerializer(data=recipient_data)
+            if recipient_serializer.is_valid():
+                recipient = recipient_serializer.save()
+                incident_data["recipient"] = recipient.id
+
+        serializer = IncidentSerializer(data=incident_data)
+
+        if serializer.is_valid() == False:
+            print("errors: ", serializer.errors)
 
         if serializer.is_valid():
             incident = serializer.save()
@@ -247,7 +268,7 @@ class SMSIncident(APIView):
 
 class IncidentDetail(APIView):
     """
-    Incident Resoruce
+    Retrieve, update or delete a Incident instance
     """
     serializer_class = IncidentSerializer
 
@@ -274,7 +295,6 @@ class IncidentDetail(APIView):
                 if key != "id" and key != "incident":
                     incident_data[key] = police_report_data[key]
 
-        print(incident_data)
         return Response(incident_data)
 
     def put(self, request, incident_id, format=None):

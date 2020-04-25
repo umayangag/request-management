@@ -8,6 +8,7 @@
 
 from rest_framework import serializers
 from .models import (
+    ContactType,
     Incident,
     IncidentStatus,
     Reporter,
@@ -47,6 +48,9 @@ class RecipientSerializer(serializers.ModelSerializer):
 
     gnDivision = serializers.CharField(
         source="gn_division", required=False, allow_null=True, allow_blank=True)
+    recipientType = serializers.ChoiceField(
+        source="recipient_type", required=False, allow_blank=True, choices=[(tag.name, tag.value) for tag in ContactType]
+    )
 
     class Meta:
         model = Recipient
