@@ -16,6 +16,7 @@ from django.contrib.auth.models import User, Group, Permission
 from .serializers import (
     IncidentSerializer,
     ReporterSerializer,
+    RecipientSerializer,
     IncidentCommentSerializer,
     IncidentPoliceReportSerializer,
 )
@@ -192,9 +193,8 @@ class IncidentList(APIView, IncidentResultsSetPagination):
 
     def post(self, request, format=None):
         serializer = IncidentSerializer(data=request.data)
-
-        if serializer.is_valid() == False:
-            print("errors: ", serializer.errors)
+        # if serializer.is_valid() == False:
+        #     print("errors: ", serializer.errors)
 
         if serializer.is_valid():
             incident = serializer.save()
@@ -330,6 +330,40 @@ class ReporterDetail(APIView):
             serializer.save()
             # send the incident created email once the reporter details are saved
             send_incident_created_mail(reporter_id)
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class RecipientList(APIView):
+    serializer_class = RecipientSerializer
+
+    def post(self, request, format=None):
+        serializer = RecipientSerializer(data=request.data)
+
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUESET)
+
+class RecipientDetail(APIView):
+    serializer_class = RecipientSerializer
+
+    def get(self, request, recipient_id, format=None):
+        recipient = get_recipient_by_id(recipient_id)
+
+        if recipient is None:
+            return Response("Invalid recipient id", status=status.HTTP_404_NOT_FOUND)
+
+        serializer = RecipientSerializer(recipient)
+        return Response(serializer.data)
+
+    def put(self, request, recipient_id, format=None):
+        snippet = get_recipient_by_id(recipient_id)
+        serializer = RecipientSerializer(snippet, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            # send the incident created email once the recipient details are saved
+            send_incident_created_mail(recipient_id)
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
