@@ -665,6 +665,12 @@ function IncidentFormInternal(props) {
               {/* <div style={{ display: "none" }}>{incident?incident.id:null}</div> */}
               {/* basic incident detail information */}
               <Paper className={classes.paper}>
+              <Typography style={{ width: '100%' }} align="left" variant="" marginTop="20">
+                {f({ id: "request.management.report.incidents.helper.text", defaultMessage: "*fields are mandatory" })}
+            </Typography>
+            <Typography style={{ width: '100%' }} align="left" variant="" marginTop="20">
+                {f({ id: "request.management.report.incidents.helper.text2", defaultMessage: "Select your language of preference and fill in the form below." })}
+            </Typography><br/>
                 <Typography variant="h5" gutterBottom>
                   {f({ id: "request.management.incident.create.basic_information" })}
                 </Typography>
