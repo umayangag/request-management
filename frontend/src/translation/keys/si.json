@@ -12,7 +12,8 @@
 
 
   "request.management.report.incidents": "ඉල්ලීමක් කරන්න",
-  "request.management.report.incidents.helper.text": "*අනිවාර්ය වේ",
+  "request.management.report.incidents.helper.text": "* අනිවාර්ය වේ.",
+  "request.management.report.incidents.helper.text2": "ඔබේ මනාප භාෂාව තෝරා පහත පෝරමය පුරවන්න.",
 
   "request.management.report.incidents.section.describe": "විස්තර මෙහි ඇතුළත් කරන්න",
   "request.management.report.incidents.section.listitem1": "ඔබේ කාරණය පැහැදිලි කරන්න",

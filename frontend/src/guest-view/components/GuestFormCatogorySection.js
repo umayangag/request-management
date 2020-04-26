@@ -9,6 +9,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
 import FormHelperText from '@material-ui/core/FormHelperText';
 import { useIntl } from "react-intl";
+import { useSelector, useDispatch } from 'react-redux';
 
 
 const styles = theme => ({
@@ -52,6 +53,7 @@ const styles = theme => ({
 const CatogorySection = (props) => {
 
   const { formatMessage: f } = useIntl();
+  const { selectedLanguage } = useSelector((state) => (state.shared));
 
     const { 
         classes, 
@@ -137,19 +139,48 @@ const CatogorySection = (props) => {
                           id: "subCategory",
                         }}
                       >
-                        {SubCategories.map((value,k) => (
+                        {
+                          selectedLanguage==="en" ? 
+                          SubCategories.map((value,k) => (
                             <MenuItem value={value.id} key={k}>
                               <div className={classes.langCats}>
-                                <div>{value.code}</div>
+                                {/* <div>{value.code}</div>
+                                <div>|</div> */}
+                                <div>{value.sub_category}</div>
+                                {/* <div>|</div>
+                                <div> {value.sn_sub_category}</div>
+                                <div>|</div>
+                                <div> {value.tm_sub_category}</div> */}
+                              </div>
+                            </MenuItem>
+                          )) : selectedLanguage==="si" ?
+                          SubCategories.map((value,k) => (
+                            <MenuItem value={value.id} key={k}>
+                              <div className={classes.langCats}>
+                                {/* <div>{value.code}</div>
+                                <div>|</div>
+                                <div>{value.sub_category}</div>
+                                <div>|</div> */}
+                                <div> {value.sn_sub_category}</div>
+                                {/* <div>|</div>
+                                <div> {value.tm_sub_category}</div> */}
+                              </div>
+                            </MenuItem>
+                          )) : selectedLanguage==="ta" ?
+                          SubCategories.map((value,k) => (
+                            <MenuItem value={value.id} key={k}>
+                              <div className={classes.langCats}>
+                                {/* <div>{value.code}</div>
                                 <div>|</div>
                                 <div>{value.sub_category}</div>
                                 <div>|</div>
                                 <div> {value.sn_sub_category}</div>
-                                <div>|</div>
+                                <div>|</div> */}
                                 <div> {value.tm_sub_category}</div>
                               </div>
                             </MenuItem>
-                          ))}
+                          )) : ''
+                        }
                         
                       </Select>
                       <FormHelperText>{formErrors.incidentSubCategoryErrorMsg || ""}</FormHelperText>

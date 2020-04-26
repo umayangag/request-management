@@ -36,7 +36,7 @@ const Home = ({classes, ...props}) =>{
                     </Card>
                 </Grid>
 
-                <Grid xs={12} item style={{paddingTop:"10px"}}>
+                {/* <Grid xs={12} item style={{paddingTop:"10px"}}>
                     <Card xs={6}>
                         <CardHeader
                             title={f({id: "request.management.home.incident_linked"})}
@@ -47,13 +47,13 @@ const Home = ({classes, ...props}) =>{
                             />
                         </CardContent>
                     </Card>
-                </Grid>
+                </Grid> */}
                 </>
             )}
 
             {!userCan(user, null, USER_ACTIONS.CAN_REVIEW_ALL_INCIDENTS) && (
                 <>
-                <Grid xs={12} item style={{paddingTop:"10px"}}>
+                {/* <Grid xs={12} item style={{paddingTop:"10px"}}>
                     <Card xs={6}>
                         <CardHeader
                             title="Your Incidents"
@@ -64,7 +64,7 @@ const Home = ({classes, ...props}) =>{
                             />
                         </CardContent>
                     </Card>
-                </Grid>
+                </Grid> */}
                 </>
             )}
         </Grid>
