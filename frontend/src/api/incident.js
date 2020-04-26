@@ -122,3 +122,7 @@ export const attachMedia = async (incidentId, mediaData) => {
   return (await handler.post(`/incidents/${incidentId}/attach_media`, mediaData)).data;
 }
 
+export const getCannedResponses = async () => {
+  return (await handler.get('/canned_response')).data;
+}
+
