@@ -192,6 +192,7 @@ class IncidentList(APIView, IncidentResultsSetPagination):
         return self.get_paginated_response(serializer.data)
 
     def post(self, request, format=None):
+        print(request.data)
         incident_data = request.data
         if request.data["showRecipient"] == "YES":
             # collect recipient information
@@ -210,6 +211,7 @@ class IncidentList(APIView, IncidentResultsSetPagination):
             recipient_serializer = RecipientSerializer(data=recipient_data)
             if recipient_serializer.is_valid():
                 recipient = recipient_serializer.save()
+                # linking recipient with the incident to be created
                 incident_data["recipient"] = recipient.id
 
         serializer = IncidentSerializer(data=incident_data)

@@ -54,7 +54,7 @@ class RecipientSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Recipient
-        exclude = ["gn_division"]
+        exclude = ["gn_division", "recipient_type", "created_date", "updated_date"]
 
 
 class IncidentSerializer(serializers.ModelSerializer):
