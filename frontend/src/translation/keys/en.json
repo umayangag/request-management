@@ -12,7 +12,8 @@
 
 
   "request.management.report.incidents": "Submit a request",
-  "request.management.report.incidents.helper.text": "*fields are mandatory",
+  "request.management.report.incidents.helper.text": "* fields are mandatory.",
+  "request.management.report.incidents.helper.text2": "Select your language of preference and fill in the form below.",
 
   "request.management.report.incidents.section.describe": "Enter details here",
   "request.management.report.incidents.section.listitem1": "Explain your matter clearly",

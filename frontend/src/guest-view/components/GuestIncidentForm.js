@@ -761,6 +761,9 @@ const VerticalLinearStepper = (props) => {
             <Typography style={{ width: '100%' }} align="left" variant="" marginTop="20">
                 {f({ id: "request.management.report.incidents.helper.text", defaultMessage: "*fields are mandatory" })}
             </Typography>
+            <Typography style={{ width: '100%' }} align="left" variant="" marginTop="20">
+                {f({ id: "request.management.report.incidents.helper.text2", defaultMessage: "Select your language of preference and fill in the form below." })}
+            </Typography>
             <Stepper activeStep={activeStep} orientation="vertical">
                 {steps.map((label, index) => {
 
