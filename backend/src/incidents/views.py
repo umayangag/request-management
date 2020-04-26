@@ -16,6 +16,7 @@ from django.contrib.auth.models import User, Group, Permission
 from .serializers import (
     IncidentSerializer,
     ReporterSerializer,
+    RecipientSerializer,
     IncidentCommentSerializer,
     IncidentPoliceReportSerializer,
 )
@@ -191,7 +192,29 @@ class IncidentList(APIView, IncidentResultsSetPagination):
         return self.get_paginated_response(serializer.data)
 
     def post(self, request, format=None):
-        serializer = IncidentSerializer(data=request.data)
+        print(request.data)
+        incident_data = request.data
+        if request.data["showRecipient"] == "YES":
+            # collect recipient information
+            recipient_data = {}
+            recipient_data["name"] = incident_data["recipientName"]
+            recipient_data["recipientType"] = incident_data["recipientType"]
+            recipient_data["address"] = incident_data["recipientAddress"]
+            recipient_data["mobile"] = incident_data["recipientMobile"]
+            recipient_data["telephone"] = incident_data["recipientTelephone"]
+            recipient_data["email"] = incident_data["recipientEmail"]
+            recipient_data["city"] = incident_data["recipientCity"]
+            recipient_data["district"] = incident_data["recipientDistrict"]
+            recipient_data["gnDivision"] = incident_data["recipientGramaNiladhari"]
+            recipient_data["location"] = incident_data["recipientLocation"]
+            # create recipient
+            recipient_serializer = RecipientSerializer(data=recipient_data)
+            if recipient_serializer.is_valid():
+                recipient = recipient_serializer.save()
+                # linking recipient with the incident to be created
+                incident_data["recipient"] = recipient.id
+
+        serializer = IncidentSerializer(data=incident_data)
 
         if serializer.is_valid() == False:
             print("errors: ", serializer.errors)
@@ -247,7 +270,7 @@ class SMSIncident(APIView):
 
 class IncidentDetail(APIView):
     """
-    Incident Resoruce
+    Retrieve, update or delete a Incident instance
     """
     serializer_class = IncidentSerializer
 
@@ -274,7 +297,6 @@ class IncidentDetail(APIView):
                 if key != "id" and key != "incident":
                     incident_data[key] = police_report_data[key]
 
-        print(incident_data)
         return Response(incident_data)
 
     def put(self, request, incident_id, format=None):
@@ -330,6 +352,40 @@ class ReporterDetail(APIView):
             serializer.save()
             # send the incident created email once the reporter details are saved
             send_incident_created_mail(reporter_id)
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class RecipientList(APIView):
+    serializer_class = RecipientSerializer
+
+    def post(self, request, format=None):
+        serializer = RecipientSerializer(data=request.data)
+
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUESET)
+
+class RecipientDetail(APIView):
+    serializer_class = RecipientSerializer
+
+    def get(self, request, recipient_id, format=None):
+        recipient = get_recipient_by_id(recipient_id)
+
+        if recipient is None:
+            return Response("Invalid recipient id", status=status.HTTP_404_NOT_FOUND)
+
+        serializer = RecipientSerializer(recipient)
+        return Response(serializer.data)
+
+    def put(self, request, recipient_id, format=None):
+        snippet = get_recipient_by_id(recipient_id)
+        serializer = RecipientSerializer(snippet, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            # send the incident created email once the recipient details are saved
+            send_incident_created_mail(recipient_id)
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 

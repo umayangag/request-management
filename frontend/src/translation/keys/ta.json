@@ -11,7 +11,8 @@
   "request.management.report.incidents.forms.button.finish": "நிறைவு செய்க ",
 
   "request.management.report.incidents": "ஒரு கோரிக்கை வைக்கவும்",
-  "request.management.report.incidents.helper.text": "*நிரப்புதல் கட்டாயமானது",
+  "request.management.report.incidents.helper.text": "* நிரப்புதல் கட்டாயமானது.",
+  "request.management.report.incidents.helper.text2": "உங்கள் விருப்பமான மொழியைத் தேர்ந்தெடுத்து கீழே உள்ள படிவத்தை நிரப்பவும்.",
 
   "request.management.report.incidents.section.describe": "விவரங்களை இங்கே உள்ளிடவும்",
   "request.management.report.incidents.section.listitem1": "உங்கள் விஷயத்தை தெளிவாக விளக்குங்கள்",
@@ -29,6 +30,11 @@
   "request.management.report.incidents.phone.error.message": "தொடர்பு எண் தேவை",
   "request.management.report.incidents.address.error.message": "முகவரி தேவை",
   "request.management.report.incidents.district.error.message": "மாவட்டம் தேவை",
+  "request.management.report.incidents.city.error.message": "நகரம் தேவை",
+  "request.management.report.incidents.recipient.error.message": "இது தேவை",
+  "request.management.incident.create.location.onbehalf": "வேறொருவரின் சார்பாக*",
+  "request.management.incident.create.location.onbehalf.yes": "ஆம்",
+  "request.management.incident.create.location.onbehalf.no": "இல்லை",
   "request.management.report.incidents.subcategory.error.message": "துணை வகை தேவை",
   "request.management.report.incidents.topcategory.error.message": "வகை தேவை",
 
@@ -36,7 +42,7 @@
   "request.management.report.incidents.section.location": "உங்கள் இருப்பிட விவரங்கள்",
   "request.management.report.incidents.location": "இடத்தின் பெயர் அல்லது விபரம்",
   "request.management.report.incidents.address": "முகவரி*",
-  "request.management.report.incidents.city": "நகரம்",
+  "request.management.report.incidents.city": "நகரம்*",
 
   "request.management.report.incidents.section.attachment": "தொடர்புடைய கோப்புகளை இணைக்கவும் (ஆவணங்கள், படங்கள், ஆடியோ / வீடியோ)",
   "request.management.report.incidents.seleted.file": "தெரிவு செய்யப்பட்ட கோப்பு / ஆவணம்",
@@ -76,12 +82,12 @@
   "request.management.incident.create.mode_of_receipt": "ரசீது முறை*",
   "request.management.incident.create.title": "Title",
   "request.management.incident.create.description": "வெளியீடு / கோரிக்கை விவரங்கள்*",
-  "request.management.incident.create.category": "Category",
+  "request.management.incident.create.category": "வகை",
 
-  "request.management.incident.create.date": "Request Date",
-  "request.management.incident.create.time": "Request Time",
-  "request.management.incident.create.severity": "Severity",
-  "request.management.incident.create.upload_file": "Upload File (You can upload multiple files)",
+  "request.management.incident.create.date": "கோரிக்கை தேதி",
+  "request.management.incident.create.time": "கோரிக்கை நேரம்",
+  "request.management.incident.create.severity": "முன்னுரிமை*",
+  "request.management.incident.create.upload_file": "கோப்பை பதிவேற்றவும் (நீங்கள் பல கோப்புகளை பதிவேற்றலாம்)",
 
   "request.management.incident.create.reporter_information": "Reporter / Compiler Information",
   "request.management.incident.create.reporter": "Reporter",
@@ -92,9 +98,11 @@
   "request.management.incident.create.accused.name": "Accused name",
   "request.management.incident.create.accused.type": "Type",
   "request.management.incident.create.accused.political_affliation": "Political Affiliation",
+  "request.management.incident.create.recipient.name": "பெறுநரின் பெயர்*",
 
   "request.management.incident.create.location_information": "இருப்பிட தகவல்",
-  "request.management.incident.create.location.description": "இடம் / விளக்கம்",
+  "request.management.incident.create.recipient_information": "பெறுநரின் தகவல்",
+  "request.management.incident.create.location.description": "விளக்கம் / அடையாளங்கள்",
   "request.management.incident.create.location.address": "முகவரி",
   "request.management.incident.create.location.city": "நகரம்*",
   "request.management.incident.create.location.district": "ஒரு மாவட்டம்",

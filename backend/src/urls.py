@@ -49,12 +49,12 @@ urlpatterns = [
     path("districts/", common_views.DistrictList.as_view()),
     path("provinces/", common_views.ProvinceList.as_view()),
     path("gndivisions/", common_views.GNDivisionList.as_view()),
-    
+
     path("wards/", common_views.WardList.as_view()),
 
     path("pollingstations/", common_views.PollingStationList.as_view()),
     path("pollingdivisions/", common_views.PollingDivisionList.as_view()),
-    
+
     path("policestations/", common_views.PoliceStationList.as_view()),
     path("policedivisions/", common_views.PoliceDivisionList.as_view()),
 
@@ -67,7 +67,7 @@ urlpatterns = [
     path("incidents/sms", incident_views.SMSIncident.as_view()),
     path("incidents/<uuid:incident_id>", incident_views.IncidentDetail.as_view()),
     path("incidents/<uuid:incident_id>/events", event_views.get_event_trail),
-  
+
     path(
         "incidents/<uuid:incident_id>/comment",
         incident_views.IncidentCommentView.as_view(),
@@ -77,8 +77,16 @@ urlpatterns = [
         incident_views.IncidentMediaView.as_view(),
     ),
     path(
-        "reporters/<int:reporter_id>", 
+        "reporters/<int:reporter_id>",
         incident_views.ReporterDetail.as_view(),
+    ),
+    path(
+        "recipients/",
+        incident_views.RecipientList.as_view(),
+    ),
+    path(
+        "recipients/<uuid:recipient_id>",
+        incident_views.RecipientDetail.as_view(),
     ),
     path(
         "incidents/<uuid:incident_id>/files",
@@ -131,19 +139,19 @@ urlpatterns = [
         incident_views.IncidentPublicUserView.as_view()
     ),
     path(
-        "public/incidents/<uuid:incident_id>", 
+        "public/incidents/<uuid:incident_id>",
         incident_views.IncidentPublicUserView.as_view()
     ),
     path(
-        "public/reporters/<int:reporter_id>", 
+        "public/reporters/<int:reporter_id>",
         incident_views.ReporterPublicUserView.as_view()
     ),
     path(
-        "public/incidents/<uuid:incident_id>/attach_media", 
+        "public/incidents/<uuid:incident_id>/attach_media",
         incident_views.IncidentMediaPublicUserView.as_view()
     ),
     path(
-        "public/reporter/get_incident", 
+        "public/reporter/get_incident",
         incident_views.IncidentViewPublicUserView.as_view()
     ),
 

@@ -8,6 +8,7 @@ from .models import (
     StatusType,
     SeverityType,
     Reporter,
+    Recipient,
     IncidentComment,
     IncidentPoliceReport,
     VerifyWorkflow,
@@ -154,6 +155,11 @@ def get_reporter_by_id(reporter_id: str) -> Incident:
     except Exception as e:
         return None
 
+def get_recipient_by_id(recipient_id: str) -> Incident:
+    try:
+        return Recipient.objects.get(id=recipient_id)
+    except Exception as e:
+        return None
 
 def get_comments_by_incident(incident: Incident) -> IncidentComment:
     try:

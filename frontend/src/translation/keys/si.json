@@ -12,7 +12,8 @@
 
 
   "request.management.report.incidents": "ඉල්ලීමක් කරන්න",
-  "request.management.report.incidents.helper.text": "*අනිවාර්ය වේ",
+  "request.management.report.incidents.helper.text": "* අනිවාර්ය වේ.",
+  "request.management.report.incidents.helper.text2": "ඔබේ මනාප භාෂාව තෝරා පහත පෝරමය පුරවන්න.",
 
   "request.management.report.incidents.section.describe": "විස්තර මෙහි ඇතුළත් කරන්න",
   "request.management.report.incidents.section.listitem1": "ඔබේ කාරණය පැහැදිලි කරන්න",
@@ -26,10 +27,15 @@
   "request.management.report.incidents.time": "වේලාව",
   "request.management.report.incidents.datetime.error.message": "දිනය සහ වේලාව අවශ්‍ය වේ",
   "request.management.report.incidents.recaptcha.error.message": "මෙම සත්‍යාපනය අවශ්‍ය වේ",
-  "request.management.report.incidents.name.error.message": "නම අවශ්‍යයි",
+  "request.management.report.incidents.name.error.message": "නම අවශ්‍ය වේ",
   "request.management.report.incidents.phone.error.message": "සම්බන්ධතා අංකය අවශ්‍ය වේ",
   "request.management.report.incidents.address.error.message": "ලිපිනය අවශ්‍යයි",
-  "request.management.report.incidents.district.error.message": "දිස්ත්‍රික්කය අවශ්‍යයි",
+  "request.management.report.incidents.district.error.message": "දිස්ත්‍රික්කය අවශ්‍ය වේ",
+  "request.management.report.incidents.city.error.message": "නගරය අවශ්‍ය වේ",
+  "request.management.report.incidents.recipient.error.message": "මෙය අවශ්‍ය වේ",
+  "request.management.incident.create.location.onbehalf": "වෙනත් කෙනෙකු වෙනුවෙන්*",
+  "request.management.incident.create.location.onbehalf.yes": "ඔව්",
+  "request.management.incident.create.location.onbehalf.no": "නැත",
   "request.management.report.incidents.subcategory.error.message": "උප කාණ්ඩය අවශ්‍ය වේ",
   "request.management.report.incidents.topcategory.error.message": "කාණ්ඩය අවශ්‍ය වේ",
 
@@ -38,7 +44,7 @@
   "request.management.report.incidents.section.location": "ඔබගේ ස්ථානය පිළිබඳ තොරතුරු",
   "request.management.report.incidents.location": "ස්ථානයේ නාමය හෝ විස්තරය",
   "request.management.report.incidents.address": "ලිපිනය*",
-  "request.management.report.incidents.city": "නගරය",
+  "request.management.report.incidents.city": "නගරය*",
 
   "request.management.report.incidents.section.attachment": "අදාළ ලිපිගොනු අමුණන්න (ලේඛන, රූප, ශ්‍රව්‍ය / දෘශ්‍ය)",
   "request.management.report.incidents.seleted.file": "තෝරාගත් ඇමුණුම",
@@ -78,12 +84,12 @@
   "request.management.incident.create.mode_of_receipt": "ලැබීමේ ආකාරය*",
   "request.management.incident.create.title": "Title",
   "request.management.incident.create.description": "ප්‍රශ්නය / ඉල්ලීම පිළිබද විස්තර*",
-  "request.management.incident.create.category": "Category",
+  "request.management.incident.create.category": "වර්ගය",
 
-  "request.management.incident.create.date": "Request Date",
-  "request.management.incident.create.time": "Request Time",
-  "request.management.incident.create.severity": "Priority*",
-  "request.management.incident.create.upload_file": "Upload File (You can upload multiple files)",
+  "request.management.incident.create.date": "ඉල්ලුම් දිනය",
+  "request.management.incident.create.time": "ඉල්ලුම් කාලය",
+  "request.management.incident.create.severity": "ප්‍රමුඛතාවය*",
+  "request.management.incident.create.upload_file": "ගොනුව උඩුගත කරන්න (ඔබට ගොනු කිහිපයක් උඩුගත කළ හැකිය)",
 
   "request.management.incident.create.reporter_information": "Reporter / Compiler Information",
   "request.management.incident.create.reporter": "Reporter",
@@ -94,9 +100,11 @@
   "request.management.incident.create.accused.name": "Accused name",
   "request.management.incident.create.accused.type": "Type",
   "request.management.incident.create.accused.political_affliation": "Political Affiliation",
+  "request.management.incident.create.recipient.name": "ලබන්නාගේ නම*",
 
   "request.management.incident.create.location_information": "ස්ථානය පිළිබද තොරතුරු",
-  "request.management.incident.create.location.description": "ස්ථානය / විස්තරය",
+  "request.management.incident.create.recipient_information": "ලබන්නාගේ තොරතුරු",
+  "request.management.incident.create.location.description": "විස්තරය / බිම් සලකුණු",
   "request.management.incident.create.location.address": "ලිපිනය",
   "request.management.incident.create.location.city": "නගරය*",
   "request.management.incident.create.location.district": "දිස්ත්‍රික්කය",

@@ -65,6 +65,13 @@ class ReportedThrough(enum.Enum):
     def __str__(self):
         return self.name
 
+class ContactType(enum.Enum):
+    INDIVIDUAL = "Individual"
+    ORGANIZATION = "Organization"
+
+    def __str__(self):
+        return self.name
+
 class Reporter(models.Model):
     name = models.CharField(max_length=200, null=True, blank=True)
     sn_name = models.CharField(max_length=200, null=True, blank=True)
@@ -75,14 +82,39 @@ class Reporter(models.Model):
     mobile = models.CharField(max_length=200, null=True, blank=True)
     address = models.CharField(max_length=200, null=True, blank=True)
     unique_id = models.UUIDField(default=uuid.uuid4, editable=False)
-    created_date = models.DateTimeField(auto_now_add=True)
     political_affiliation = models.CharField(max_length=50, null=True, blank=True)
     accused_name = models.CharField(max_length=200, null=True, blank=True)
     accused_political_affiliation = models.CharField(max_length=50, null=True, blank=True)
+    created_date = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         ordering = ("id",)
 
+class Recipient(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    name = models.CharField(max_length=200, null=True, blank=True)
+    sn_name = models.CharField(max_length=200, null=True, blank=True)
+    tm_name = models.CharField(max_length=200, null=True, blank=True)
+    email = models.CharField(max_length=200, null=True, blank=True)
+    telephone = models.CharField(max_length=200, null=True, blank=True)
+    mobile = models.CharField(max_length=200, null=True, blank=True)
+    location = models.CharField(max_length=200, null=True, blank=True)
+    address = models.CharField(max_length=200, null=True, blank=True)
+    city = models.CharField(max_length=200, null=True, blank=True)
+    district = models.CharField(max_length=50, null=True, blank=True)
+    gn_division = models.CharField(max_length=50, null=True, blank=True)
+    recipient_type = models.CharField(
+        max_length=50,
+        choices=[(tag.name, tag.value) for tag in ContactType],
+        default=ContactType.INDIVIDUAL,
+        blank=True,
+        null=True,
+    )
+    created_date = models.DateTimeField(auto_now_add=True)
+    updated_date = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ("id",)
 
 class IncidentStatus(models.Model):
     previous_status = models.CharField(
@@ -176,6 +208,9 @@ class Incident(models.Model):
     # that entered it to the system
     reporter = models.ForeignKey(
         "Reporter", on_delete=models.DO_NOTHING, null=True, blank=True
+    )
+    recipient = models.ForeignKey(
+        "Recipient", on_delete=models.DO_NOTHING, null=True, blank=True
     )
 
     # assignee is the current responsible personnel for the current incident from the EC

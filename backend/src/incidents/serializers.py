@@ -7,7 +7,17 @@
 # ===============================================================================
 
 from rest_framework import serializers
-from .models import Incident, IncidentStatus, Reporter, IncidentComment, IncidentPoliceReport, IncidentPerson, IncidentVehicle, EscalateExternalWorkflow
+from .models import (
+    ContactType,
+    Incident,
+    IncidentStatus,
+    Reporter,
+    Recipient,
+    IncidentComment,
+    IncidentPoliceReport,
+    IncidentPerson,
+    IncidentVehicle,
+    EscalateExternalWorkflow)
 from ..common.serializers import DistrictSerializer, PoliceStationSerializer
 from ..common.models import PoliceStation
 from ..custom_auth.serializers import UserSerializer
@@ -31,11 +41,26 @@ class ReporterSerializer(serializers.ModelSerializer):
         model = Reporter
         exclude = ["political_affiliation", "accused_name", "accused_political_affiliation"]
 
+class RecipientSerializer(serializers.ModelSerializer):
+
+    createdDate = serializers.ReadOnlyField(source="created_date")
+    updatedDate = serializers.ReadOnlyField(source="updated_date")
+
+    gnDivision = serializers.CharField(
+        source="gn_division", required=False, allow_null=True, allow_blank=True)
+    recipientType = serializers.ChoiceField(
+        source="recipient_type", required=False, allow_blank=True, choices=[(tag.name, tag.value) for tag in ContactType]
+    )
+
+    class Meta:
+        model = Recipient
+        exclude = ["gn_division", "recipient_type", "created_date", "updated_date"]
+
 
 class IncidentSerializer(serializers.ModelSerializer):
 
     currentStatus = serializers.ReadOnlyField(source="current_status")
-    
+
     # currentSeverity = serializers.ReadOnlyField(source="current_severity")
     severity = serializers.CharField(source="current_severity", required=False, allow_null=True, allow_blank=True)
 

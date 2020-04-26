@@ -56,7 +56,7 @@ class MainRouter extends Component {
             </PrivateRoute>
 
           <Route exact path="/" component={LandingPage} />
-          <Route path="/sign-in" component={SignInPage} />
+          <Route path="/signin" component={SignInPage} />
           <Route exact path="/report" component={GuestIncidentForm} />
           <Route exact path="/report/success" component={GuestIncidentFormSuccessPage} />
           <Route exact path="/report/status" component={GuestRefIdCheck} />
