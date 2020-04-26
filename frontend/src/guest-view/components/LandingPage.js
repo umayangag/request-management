@@ -282,7 +282,7 @@ function HomePage(props) {
           color="primary"
         >
            Registered user  -
-          <Button color="primary" className={classes.button} href="/sign-in">
+          <Button color="primary" className={classes.button} href="/signin">
           Sign In
           </Button>
         </Typography>

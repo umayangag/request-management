@@ -184,7 +184,7 @@ const VerticalLinearStepper = (props) => {
         recipientMobile: incidentReporterData ? incidentReporterData.recipientMobile : '',
         recipientEmail: incidentReporterData ? incidentReporterData.recipientEmail : ''
     });
-    
+
     const [formErrors, setFormErrors] = useState({})
     const isLoadingMetaData = useLoadingStatus([
         requestIncidentCatogories(),
@@ -224,20 +224,20 @@ const VerticalLinearStepper = (props) => {
     }
 
     const validContactInputs = () => {
-        setFormErrors({ ...formErrors, 
-                        incidentDescriptionErrorMsg: null, 
-                        incidentElectionErrorMsg: null, 
-                        incidentDatetimeErrorMsg: null, 
+        setFormErrors({ ...formErrors,
+                        incidentDescriptionErrorMsg: null,
+                        incidentElectionErrorMsg: null,
+                        incidentDatetimeErrorMsg: null,
                         incidentContactErrorMsg: null,
-                        incidentNameErrorMsg: null , 
-                        incidentAddressErrorMsg: null, 
-                        incidentDistrictErrorMsg: null, 
-                        incidentCityErrorMsg: null, 
+                        incidentNameErrorMsg: null ,
+                        incidentAddressErrorMsg: null,
+                        incidentDistrictErrorMsg: null,
+                        incidentCityErrorMsg: null,
                         showRecipientErrorMsg: null,
-                        recipientNameErrorMsg: null , 
-                        recipientAddressErrorMsg: null, 
-                        recipientDistrictErrorMsg: null, 
-                        recipientCityErrorMsg: null, 
+                        recipientNameErrorMsg: null ,
+                        recipientAddressErrorMsg: null,
+                        recipientDistrictErrorMsg: null,
+                        recipientCityErrorMsg: null,
                     })
         let errorMsg = { ...formErrors };
         let valid = true;
@@ -391,7 +391,7 @@ const VerticalLinearStepper = (props) => {
                     }
             }
         },
-        
+
 
         // 1: {
         //     title: f({ id: "request.management.report.incidents.section.location", defaultMessage: "Describe the location" }),
@@ -422,7 +422,7 @@ const VerticalLinearStepper = (props) => {
         //     }
         // },
 
-        
+
 
         3: {
             title: f({ id: "request.management.report.incidents.section.attachment", defaultMessage: "Attach files related to incident" }),
@@ -440,6 +440,7 @@ const VerticalLinearStepper = (props) => {
             />
             </>,
             handler: () => {
+                let refId = ""
 
                 if (!incidentId) {
                     if (incidentFiles) {
@@ -702,6 +703,8 @@ const VerticalLinearStepper = (props) => {
 
     const { classes } = props;
     const GoBackLink = props => <Link to="/" {...props} />
+
+    // final submission
     if (activeStep === Object.keys(stepDefinitions).length) {
         return <Redirect to='/report/success' />
     }
