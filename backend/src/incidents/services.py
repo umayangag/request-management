@@ -15,7 +15,7 @@ from .models import (
     EscalateExternalWorkflow,
     CompleteActionWorkflow,
     RequestInformationWorkflow,
-    ProvideAdviceWorkflow,
+    ProvideInformationWorkflow,
     AssignUserWorkflow,
     EscalateWorkflow,
     CloseWorkflow,
@@ -681,7 +681,7 @@ def incident_request_information(user: User, incident: Incident, comment: str):
     event_services.update_workflow_event(user, incident, workflow)
 
 
-def incident_provide_advice(user: User, incident: Incident, advice: str, start_event: Event):
+def incident_provide_information(user: User, incident: Incident, comment: str, start_event: Event):
     # if not Incident.objects.filter(linked_individuals__id=user.id).exists():
     #     raise WorkflowException("User not linked to the given incident")
 
@@ -691,20 +691,20 @@ def incident_provide_advice(user: User, incident: Incident, advice: str, start_e
     initiated_workflow = start_event.refered_model
 
     # workflow
-    workflow = ProvideAdviceWorkflow(
+    workflow = ProvideInformationWorkflow(
         incident=incident,
         actioned_user=user,
-        comment=advice,
+        comment=comment,
         initiated_workflow=initiated_workflow
     )
     workflow.save()
 
     # complete previous workflow
-    initiated_workflow.is_advice_provided = True
+    initiated_workflow.is_information_provided = True
     initiated_workflow.save()
 
     status = IncidentStatus(
-        current_status=StatusType.ADVICE_PROVIDED,
+        current_status=StatusType.INFORMATION_PROVIDED,
         previous_status=incident.current_status,
         incident=incident,
         approved=True

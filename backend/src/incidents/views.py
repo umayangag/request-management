@@ -35,7 +35,7 @@ from .services import (
     incident_escalate_external_action,
     incident_complete_external_action,
     incident_request_information,
-    incident_provide_advice,
+    incident_provide_information,
     incident_verify,
     incident_invalidate,
     incident_reopen,
@@ -450,11 +450,11 @@ class IncidentWorkflowView(APIView):
             # assignee = get_user_by_id(assignee_id)
             incident_request_information(request.user, incident, comment)
 
-        elif workflow == "provide-advice":
+        elif workflow == "provide-information":
             comment = request.data['comment']
             start_event_id = request.data['start_event']
             start_event = event_service.get_event_by_id(start_event_id)
-            incident_provide_advice(request.user, incident, comment, start_event)
+            incident_provide_information(request.user, incident, comment, start_event)
 
         elif workflow == "verify":
             if not user_can(request.user, CAN_VERIFY_INCIDENT):

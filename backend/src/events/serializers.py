@@ -10,7 +10,7 @@ from ..incidents.models import (
     EscalateExternalWorkflow,
     CompleteActionWorkflow,
     RequestInformationWorkflow,
-    ProvideAdviceWorkflow,
+    ProvideInformationWorkflow,
     AssignUserWorkflow,
     EscalateWorkflow,
     CloseWorkflow,
@@ -105,15 +105,15 @@ class GenericDataRelatedField(serializers.RelatedField):
                     "type": "Request Information",
                     "data": {
                         "comment": value.comment,
-                        "isCompleted": value.is_advice_provided,
+                        "isCompleted": value.is_information_provided,
                         # "assignee": value.assigned_user.get_full_name()
                     }
                 }
             }
-        elif isinstance(value, ProvideAdviceWorkflow):
+        elif isinstance(value, ProvideInformationWorkflow):
             return {
                 "workflow": {
-                    "type": "Provide Advice",
+                    "type": "Provide Information",
                     "data": {
                         "comment": value.comment
                     }

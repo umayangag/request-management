@@ -21,7 +21,7 @@ const onSubmitClick = (dispatch, incidentId, comment, startEvent) => {
         // show error because mandatory
         return;
     }  
-    dispatch(fetchUpdateWorkflow(incidentId, "provide-advice", {
+    dispatch(fetchUpdateWorkflow(incidentId, "provide-information", {
         start_event: startEvent,
         comment: comment
     } ));

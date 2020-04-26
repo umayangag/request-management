@@ -29,7 +29,7 @@ const statusMap = {
     "ACTION_TAKEN": "Action Taken",
     "ACTION_PENDING": "Action Pending",
     "INFORMATION_REQESTED": "Information Requested",
-    "ADVICE_PROVIDED": "Advice Provided",
+    "INFORMATION_PROVIDED": "Information Provided",
     "CLOSED": "Closed"
 }
 

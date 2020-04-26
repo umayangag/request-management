@@ -92,7 +92,7 @@ function getActionText(event){
                     case "Request Information":
                             return "requested for information";
 
-                    case "Provide Advice":
+                    case "Provide Information":
                             return "provided information";
 
                     case "Assign":
@@ -181,7 +181,7 @@ function getSecondaryItem(event){
                     {workflowData.comment}
                 </div>
             )
-        }else if(workflowType === "Provide Advice"){
+        }else if(workflowType === "Provide Information"){
             return (
                 <div>
                     {workflowData.comment}

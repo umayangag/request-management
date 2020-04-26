@@ -24,7 +24,7 @@ class StatusType(enum.Enum):
     CLOSED = "Closed"
     ACTION_TAKEN = "Action Taken"
     ACTION_PENDING = "Action Pending"
-    ADVICE_PROVIDED = "Advice Provided"
+    INFORMATION_PROVIDED = "Information Provided"
     INFORMATION_REQESTED = "Information Requested"
     VERIFIED = "Verified"
     INVALIDATED = "Invalidated"
@@ -383,9 +383,9 @@ class CompleteActionWorkflow(IncidentWorkflow):
 
 class RequestInformationWorkflow(IncidentWorkflow):
     comment = models.TextField()
-    is_advice_provided = models.BooleanField(default=False)
+    is_information_provided = models.BooleanField(default=False)
 
-class ProvideAdviceWorkflow(IncidentWorkflow):
+class ProvideInformationWorkflow(IncidentWorkflow):
     initiated_workflow = models.ForeignKey(RequestInformationWorkflow, on_delete=models.DO_NOTHING)
     comment = models.TextField()
 
