@@ -34,7 +34,7 @@ from .services import (
     incident_close,
     incident_escalate_external_action,
     incident_complete_external_action,
-    incident_request_advice,
+    incident_request_information,
     incident_provide_advice,
     incident_verify,
     incident_invalidate,
@@ -444,11 +444,11 @@ class IncidentWorkflowView(APIView):
             incident_complete_external_action(
                 request.user, incident, comment, start_event)
 
-        elif workflow == "request-advice":
+        elif workflow == "request-information":
             comment = request.data['comment']
             # assignee_id = request.data['assignee']
             # assignee = get_user_by_id(assignee_id)
-            incident_request_advice(request.user, incident, comment)
+            incident_request_information(request.user, incident, comment)
 
         elif workflow == "provide-advice":
             comment = request.data['comment']

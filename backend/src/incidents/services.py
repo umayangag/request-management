@@ -654,7 +654,7 @@ def incident_complete_external_action(user: User, incident: Incident, comment: s
     event_services.update_linked_workflow_event(user, incident, workflow, start_event)
 
 
-def incident_request_advice(user: User, incident: Incident, comment: str):
+def incident_request_information(user: User, incident: Incident, comment: str):
     if incident.current_status == StatusType.INFORMATION_REQESTED.name:
         raise WorkflowException("Incident already has a pending advice request")
 

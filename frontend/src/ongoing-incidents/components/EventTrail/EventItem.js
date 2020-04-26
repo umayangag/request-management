@@ -93,7 +93,7 @@ function getActionText(event){
                             return "requested for information";
 
                     case "Provide Advice":
-                            return "provided advice";
+                            return "provided information";
 
                     case "Assign":
                             return `assigned ${event.data.workflow.data.assignee} to the record`;
@@ -306,7 +306,7 @@ const EventItemView = ({ event, classes }) => {
                                             'PROVIDE_ADVICE_MODAL',
                                             {  event }))}
                         >
-                            Provide Advice
+                            Provide Information
                         </Button>
                     </div>
                 )}

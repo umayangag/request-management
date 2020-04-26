@@ -36,7 +36,7 @@ const ProvideAdviceModal = ({ event }) => {
 
     return (
         <div>
-            <DialogTitle id="form-dialog-title">Provide Advice</DialogTitle>
+            <DialogTitle id="form-dialog-title">Provide Information</DialogTitle>
             <DialogContent>
                 <DialogContentText>
                     Comment
@@ -59,7 +59,7 @@ const ProvideAdviceModal = ({ event }) => {
                 <Button 
                     onClick={() => onSubmitClick(dispatch, event.incident.id, comment, event.id)} 
                     color="primary">
-                    Send Advice
+                    Send Information
                 </Button>
             </DialogActions>
         </div>

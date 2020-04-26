@@ -22,7 +22,7 @@ const onSubmitClick = (dispatch, incidentId, comment, assignee) => {
     //     return;
     // }
 
-    dispatch(fetchUpdateWorkflow(incidentId, "request-advice", {
+    dispatch(fetchUpdateWorkflow(incidentId, "request-information", {
         // assignee: assignee,
         comment: comment
     } ));
@@ -96,7 +96,7 @@ const RequestAdviceModal = (props) => {
                 <Button 
                     onClick={() => onSubmitClick(dispatch, props.activeIncident.id, comment)} 
                     color="primary">
-                    Send Request For Info
+                    Request For Information
                 </Button>
             </DialogActions>
         </div>
