@@ -89,8 +89,8 @@ function getActionText(event){
                     case "Complete Action":
                             return "provided action";
 
-                    case "Request Advice":
-                            return "requested advice";
+                    case "Request Information":
+                            return "requested for information";
 
                     case "Provide Advice":
                             return "provided advice";
@@ -175,7 +175,7 @@ function getSecondaryItem(event){
                     {workflowData.comment}
                 </div>
             )
-        }else if(workflowType === "Request Advice"){
+        }else if(workflowType === "Request Information"){
             return (
                 <div>
                     {workflowData.comment}
@@ -235,7 +235,7 @@ function hasPendingAction(event){
 
 function hasPendingAdvice(event){
     return event.action === "WORKFLOW_ACTIONED" &&
-            event.data.workflow.type === "Request Advice" &&
+            event.data.workflow.type === "Request Information" &&
             !event.data.workflow.data.isCompleted;
 }
 

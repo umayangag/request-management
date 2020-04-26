@@ -446,9 +446,9 @@ class IncidentWorkflowView(APIView):
 
         elif workflow == "request-advice":
             comment = request.data['comment']
-            assignee_id = request.data['assignee']
-            assignee = get_user_by_id(assignee_id)
-            incident_request_advice(request.user, incident, assignee, comment)
+            # assignee_id = request.data['assignee']
+            # assignee = get_user_by_id(assignee_id)
+            incident_request_advice(request.user, incident, comment)
 
         elif workflow == "provide-advice":
             comment = request.data['comment']

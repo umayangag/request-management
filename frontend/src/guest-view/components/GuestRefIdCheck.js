@@ -178,7 +178,7 @@ const GuestRefIdCheck = (props) => {
               >
                 <FormattedMessage
                   id="request.management.report.check.status.submit"
-                  defaultMessage="Submit Reference ID"
+                  defaultMessage="Submit Reference Number"
                 />
               </Button>
             </form>
@@ -186,23 +186,6 @@ const GuestRefIdCheck = (props) => {
         </main>
 
       <Grid container spacing={24} align="center">
-        <Grid item xs={12}>
-          {/* <Button variant="outlined" onClick={() => { window.history.back(); }}> Back </Button> */}
-          {/* <Typography
-            style={{ width: "100%" }}
-            align="center"
-            variant="h5"
-            marginTop="20"
-          >
-            {f({
-              id: "request.management.report.check.status",
-              defaultMessage: "Report Check Status",
-            })}
-          </Typography> */}
-          {/* <Typography style={{ width: '100%' }} align="left" variant="" marginTop="20">
-                {f({ id: "request.management.report.incidents.helper.text", defaultMessage: "*fields are mandatory" })}
-            </Typography> */}
-        </Grid>
         <Grid item xs={12}>
           <Typography component="h1" variant="h5" className={classes.status}>
               {status}

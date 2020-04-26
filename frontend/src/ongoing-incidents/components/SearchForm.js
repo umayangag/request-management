@@ -196,7 +196,7 @@ function SearchForm(props) {
                         {/* <MenuItem value={"ACTION_TAKEN"}>Action Taken</MenuItem> */}
                         <MenuItem value={"ACTION_PENDING"}>Action Pending</MenuItem>
                         {/* <MenuItem value={"ADVICE_PROVIDED"}>Advice Provided</MenuItem>
-                        <MenuItem value={"ADVICE_REQESTED"}>Advice Requested</MenuItem> */}
+                        <MenuItem value={"INFORMATION_REQESTED"}>Advice Requested</MenuItem> */}
                       </Select>
                     </FormControl>
                     <FormControl className={classes.formControl}>

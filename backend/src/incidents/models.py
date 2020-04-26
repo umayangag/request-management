@@ -25,7 +25,7 @@ class StatusType(enum.Enum):
     ACTION_TAKEN = "Action Taken"
     ACTION_PENDING = "Action Pending"
     ADVICE_PROVIDED = "Advice Provided"
-    ADVICE_REQESTED = "Advice Requested"
+    INFORMATION_REQESTED = "Information Requested"
     VERIFIED = "Verified"
     INVALIDATED = "Invalidated"
     REOPENED = "Reopened"
@@ -381,16 +381,12 @@ class CompleteActionWorkflow(IncidentWorkflow):
     initiated_workflow = models.ForeignKey(EscalateExternalWorkflow, on_delete=models.DO_NOTHING)
     comment = models.TextField()
 
-class RequestAdviceWorkflow(IncidentWorkflow):
-    assigned_user = models.ForeignKey(User,
-                    on_delete=models.DO_NOTHING,
-                    related_name="advice_request_related",
-                    related_query_name="advice_requested_users")
+class RequestInformationWorkflow(IncidentWorkflow):
     comment = models.TextField()
     is_advice_provided = models.BooleanField(default=False)
 
 class ProvideAdviceWorkflow(IncidentWorkflow):
-    initiated_workflow = models.ForeignKey(RequestAdviceWorkflow, on_delete=models.DO_NOTHING)
+    initiated_workflow = models.ForeignKey(RequestInformationWorkflow, on_delete=models.DO_NOTHING)
     comment = models.TextField()
 
 class AssignUserWorkflow(IncidentWorkflow):

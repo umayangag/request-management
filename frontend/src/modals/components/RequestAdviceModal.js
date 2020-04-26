@@ -17,13 +17,13 @@ import { TextField } from '@material-ui/core';
 
 
 const onSubmitClick = (dispatch, incidentId, comment, assignee) => {
-    if(comment === "" || assignee === ""){
-        // show error because mandatory
-        return;
-    }
+    // if(comment === "" || assignee === ""){
+    //     // show error because mandatory
+    //     return;
+    // }
 
     dispatch(fetchUpdateWorkflow(incidentId, "request-advice", {
-        assignee: assignee,
+        // assignee: assignee,
         comment: comment
     } ));
     dispatch(hideModal());
@@ -35,15 +35,15 @@ const RequestAdviceModal = (props) => {
     const dispatch = useDispatch();
 
     //maintains selected value in local state until change is confirmed
-    const [assignee, setAssignee] = useState(null);
+    // const [assignee, setAssignee] = useState(null);
     const [comment, setComment] = useState("");
-    const [division, setDivision] = useState(null);
+    // const [division, setDivision] = useState(null);
 
     return (
         <div>
-            <DialogTitle id="form-dialog-title">Request for advice</DialogTitle>
+            <DialogTitle id="form-dialog-title">Request for information</DialogTitle>
             <DialogContent>
-            <DialogContentText>
+            {/* <DialogContentText>
                     Select EC Division of the assignee
                 </DialogContentText>
                 <Select
@@ -73,7 +73,7 @@ const RequestAdviceModal = (props) => {
                         })}
                     </Select>
                     </>
-                )}
+                )} */}
 
                 <DialogContentText>
                     Comment
@@ -82,7 +82,7 @@ const RequestAdviceModal = (props) => {
                     autoFocus
                     margin="dense"
                     id="name"
-                    type="email"
+                    type="text"
                     value={comment}
                     onChange={(e)=>{setComment(e.target.value)}}
                     fullWidth
@@ -94,9 +94,9 @@ const RequestAdviceModal = (props) => {
                     Close
                 </Button>
                 <Button 
-                    onClick={() => onSubmitClick(dispatch, props.activeIncident.id, comment, assignee)} 
+                    onClick={() => onSubmitClick(dispatch, props.activeIncident.id, comment)} 
                     color="primary">
-                    Send Request For Advice
+                    Send Request For Info
                 </Button>
             </DialogActions>
         </div>

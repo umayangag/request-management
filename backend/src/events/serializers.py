@@ -9,7 +9,7 @@ from ..incidents.models import (
     VerifyWorkflow,
     EscalateExternalWorkflow,
     CompleteActionWorkflow,
-    RequestAdviceWorkflow,
+    RequestInformationWorkflow,
     ProvideAdviceWorkflow,
     AssignUserWorkflow,
     EscalateWorkflow,
@@ -99,14 +99,14 @@ class GenericDataRelatedField(serializers.RelatedField):
                     }
                 }
             }
-        elif isinstance(value, RequestAdviceWorkflow):
+        elif isinstance(value, RequestInformationWorkflow):
             return {
                 "workflow": {
-                    "type": "Request Advice",
+                    "type": "Request Information",
                     "data": {
                         "comment": value.comment,
                         "isCompleted": value.is_advice_provided,
-                        "assignee": value.assigned_user.get_full_name()
+                        # "assignee": value.assigned_user.get_full_name()
                     }
                 }
             }
