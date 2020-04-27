@@ -89,11 +89,11 @@ function getActionText(event){
                     case "Complete Action":
                             return "provided action";
 
-                    case "Request Advice":
-                            return "requested advice";
+                    case "Request Information":
+                            return "requested for information";
 
-                    case "Provide Advice":
-                            return "provided advice";
+                    case "Provide Information":
+                            return "provided information";
 
                     case "Assign":
                             return `assigned ${event.data.workflow.data.assignee} to the record`;
@@ -175,13 +175,13 @@ function getSecondaryItem(event){
                     {workflowData.comment}
                 </div>
             )
-        }else if(workflowType === "Request Advice"){
+        }else if(workflowType === "Request Information"){
             return (
                 <div>
                     {workflowData.comment}
                 </div>
             )
-        }else if(workflowType === "Provide Advice"){
+        }else if(workflowType === "Provide Information"){
             return (
                 <div>
                     {workflowData.comment}
@@ -235,7 +235,7 @@ function hasPendingAction(event){
 
 function hasPendingAdvice(event){
     return event.action === "WORKFLOW_ACTIONED" &&
-            event.data.workflow.type === "Request Advice" &&
+            event.data.workflow.type === "Request Information" &&
             !event.data.workflow.data.isCompleted;
 }
 
@@ -306,7 +306,7 @@ const EventItemView = ({ event, classes }) => {
                                             'PROVIDE_ADVICE_MODAL',
                                             {  event }))}
                         >
-                            Provide Advice
+                            Provide Information
                         </Button>
                     </div>
                 )}
