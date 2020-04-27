@@ -27,6 +27,7 @@ from .services import (
     update_incident_postscript,
     update_incident_status,
     get_reporter_by_id,
+    get_recipient_by_id,
     get_comments_by_incident,
     create_incident_comment_postscript,
     # incident_auto_assign,
@@ -35,8 +36,8 @@ from .services import (
     incident_close,
     incident_escalate_external_action,
     incident_complete_external_action,
-    incident_request_advice,
-    incident_provide_advice,
+    incident_request_information,
+    incident_provide_information,
     incident_verify,
     incident_invalidate,
     incident_reopen,
@@ -194,7 +195,6 @@ class IncidentList(APIView, IncidentResultsSetPagination):
         return self.get_paginated_response(serializer.data)
 
     def post(self, request, format=None):
-        print(request.data)
         incident_data = request.data
         if request.data["showRecipient"] == "YES":
             # collect recipient information
@@ -446,17 +446,17 @@ class IncidentWorkflowView(APIView):
             incident_complete_external_action(
                 request.user, incident, comment, start_event)
 
-        elif workflow == "request-advice":
+        elif workflow == "request-information":
             comment = request.data['comment']
-            assignee_id = request.data['assignee']
-            assignee = get_user_by_id(assignee_id)
-            incident_request_advice(request.user, incident, assignee, comment)
+            # assignee_id = request.data['assignee']
+            # assignee = get_user_by_id(assignee_id)
+            incident_request_information(request.user, incident, comment)
 
-        elif workflow == "provide-advice":
+        elif workflow == "provide-information":
             comment = request.data['comment']
             start_event_id = request.data['start_event']
             start_event = event_service.get_event_by_id(start_event_id)
-            incident_provide_advice(request.user, incident, comment, start_event)
+            incident_provide_information(request.user, incident, comment, start_event)
 
         elif workflow == "verify":
             if not user_can(request.user, CAN_VERIFY_INCIDENT):
@@ -540,11 +540,33 @@ class IncidentPublicUserView(APIView):
 
     def get(self, request, format=None):
         param_refId = self.request.query_params.get('refId', None)
-        return_data = get_incident_status_guest(param_refId)
-        return Response(return_data, status=status.HTTP_200_OK)
+        if (param_refId):
+            return_data = get_incident_status_guest(param_refId)
+            return Response(return_data, status=status.HTTP_200_OK)
 
     def post(self, request, format=None):
-        serializer = IncidentSerializer(data=request.data)
+        incident_data = request.data
+        if request.data["showRecipient"] == "YES":
+            # collect recipient information
+            recipient_data = {}
+            recipient_data["name"] = incident_data["recipientName"]
+            recipient_data["recipientType"] = incident_data["recipientType"]
+            recipient_data["address"] = incident_data["recipientAddress"]
+            recipient_data["mobile"] = incident_data["recipientMobile"]
+            recipient_data["telephone"] = incident_data["recipientTelephone"]
+            recipient_data["email"] = incident_data["recipientEmail"]
+            recipient_data["city"] = incident_data["recipientCity"]
+            recipient_data["district"] = incident_data["recipientDistrict"]
+            # recipient_data["gnDivision"] = incident_data["recipientGramaNiladhari"]
+            recipient_data["location"] = incident_data["recipientLocation"]
+            # create recipient
+            recipient_serializer = RecipientSerializer(data=recipient_data)
+            if recipient_serializer.is_valid():
+                recipient = recipient_serializer.save()
+                # linking recipient with the incident to be created
+                incident_data["recipient"] = recipient.id
+
+        serializer = IncidentSerializer(data=incident_data)
 
         if serializer.is_valid():
             incidentReqValues = serializer.initial_data

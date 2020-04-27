@@ -19,7 +19,7 @@ import RestoreIcon from "@material-ui/icons/Restore";
 import ShowChartIcon from "@material-ui/icons/ShowChart";
 import SubdirectoryArrowLeftIcon from "@material-ui/icons/SubdirectoryArrowLeft";
 // import ArrowUpwardIcon from "@material-ui/icons/ArrowUpward";
-// import HelpIcon from "@material-ui/icons/Help";
+import HelpIcon from "@material-ui/icons/Help";
 import EditIcon from "@material-ui/icons/Edit";
 import AccessTimeIcon from "@material-ui/icons/AccessTime";
 import PermIdentityIcon from "@material-ui/icons/PermIdentity";
@@ -285,10 +285,10 @@ const EventActions = (props) => {
               )}
 
             {/* TODO: add User Action permissions here */}
-            {/* <Button color="primary" size="large" variant='text' className={classes.button} onClick={() => { dispatch(showModal('REQUEST_ADVICE_MODAL', { activeIncident, users, divisions })) }}>
+            <Button color="primary" size="large" variant='text' className={classes.button} onClick={() => { dispatch(showModal('REQUEST_ADVICE_MODAL', { activeIncident, users, divisions })) }}>
                     <HelpIcon className={classes.actionButtonIcon} />
-                    Request for advice
-                </Button> */}
+                    Request for Infomation
+                </Button>
 
             {userCan(
               currentUser,

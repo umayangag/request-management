@@ -268,7 +268,7 @@ const IncidentContact = (props) => {
                                     control={
                                         <Radio />
                                     }
-                                    value="Yes"
+                                    value="YES"
                                     label={f({ id: "request.management.incident.create.location.onbehalf.yes", defaultMessage: "Yes" })}
                                 />
                                 <FormControlLabel
@@ -276,7 +276,7 @@ const IncidentContact = (props) => {
                                         <Radio />
                                     }
                                     label={f({ id: "request.management.incident.create.location.onbehalf.no", defaultMessage: "No" })}
-                                    value="No"
+                                    value="NO"
                                 />
                             </RadioGroup>
                             <FormHelperText>{formErrors.showRecipientErrorMsg ? formErrors.showRecipientErrorMsg : null}</FormHelperText>
@@ -284,7 +284,7 @@ const IncidentContact = (props) => {
                     </Grid>
                     {/* <Grid item xs={4} /> */}
       </Grid>
-      {showRecipient==="Yes" ? 
+      {showRecipient==="YES" ? 
       <Grid container>
       
         <Grid item xs={8}>

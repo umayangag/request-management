@@ -214,7 +214,7 @@ function LocationTab(props) {
                 <Grid item xs={12}>
                     <Paper elevation={1} className={classes.paper}>
 
-                        <Grid container spacing={24}>
+                        {/* <Grid container spacing={24}>
                             <Grid item xs>
                                 <Typography variant="caption" className={classes.label}> {f({id: "request.management.incident.create.location.description"})} </Typography>
                                 <Typography gutterBottom> {incident.location} </Typography>
@@ -226,7 +226,7 @@ function LocationTab(props) {
                                 <Typography variant="caption" className={classes.label}> {f({id: "request.management.incident.create.location.address"})} </Typography>
                                 <Typography gutterBottom> {incident.address}</Typography>
                             </Grid>
-                        </Grid>
+                        </Grid> */}
 
                         {/* <Grid container spacing={24}>
                             <Grid item xs>
@@ -239,62 +239,7 @@ function LocationTab(props) {
                 </Grid>
             </Grid>
 
-            <Grid container spacing={24}>
-                <Grid item xs={12}>
-                    <Paper elevation={1} className={classes.paper}>
-
-                        {/* <Grid container spacing={24}>
-                            <Grid item xs>
-                                <Typography variant="caption" className={classes.label}> Province </Typography>
-                                <Typography variant="" gutterBottom>
-                                    {
-                                        incident.province && provinces.byCode[incident.province] ?
-                                            provinces.byCode[incident.province].name : ""
-                                    }
-                                </Typography>
-                            </Grid>
-                        </Grid> */}
-
-                        <Grid container spacing={24}>
-                            <Grid item xs>
-                                <Typography variant="caption" className={classes.label}> {f({id: "request.management.incident.create.location.district"})} </Typography>
-                                <Typography variant="" gutterBottom>
-                                    {
-                                        incident.district && districts.byCode[incident.district] ?
-                                            districts.byCode[incident.district].name : ""
-                                    }
-                                </Typography>
-                            </Grid>
-                        </Grid>
-
-                        {/* <Grid container spacing={24}>
-                            <Grid item xs>
-                                <Typography variant="caption" className={classes.label}> Polling Division </Typography>
-                                <Typography gutterBottom>
-                                {resolveLocationName(incident.pollingDivision, pollingDivisions)}
-                                </Typography>
-                            </Grid>
-                        </Grid> */}
-                        {/*
-                        <Grid container spacing={24}>
-                            <Grid item xs>
-                                <Typography variant="caption" className={classes.label}> Ward </Typography>
-                                <Typography gutterBottom> {incident.ward} </Typography>
-                            </Grid>
-                        </Grid> */}
-
-                        {/* <Grid container spacing={24}>
-                            <Grid item xs>
-                                <Typography variant="caption" className={classes.label}> Police Station </Typography>
-                                <Typography gutterBottom>
-                                {   resolveLocationName(incident.policeStation, policeStations)}
-                                </Typography>
-                            </Grid>
-                        </Grid> */}
-
-                    </Paper>
-                </Grid>
-            </Grid>
+            
         </div>
     );
 }
@@ -304,9 +249,8 @@ function LocationTab(props) {
  */
 function ContactTab(props) {
 
-    const { classes, reporter } = props;
+    const { classes, reporter, incident,districts,gramaNiladharis } = props;
     const { formatMessage: f } = useIntl();
-
     return (
         <div>
             <Grid container spacing={24}>
@@ -347,6 +291,208 @@ function ContactTab(props) {
                                 <Typography gutterBottom> {reporter.address} </Typography>
                             </Grid>
                         </Grid>
+                        <Grid container spacing={24}>
+                            <Grid item xs>
+                                <Typography variant="caption" className={classes.label}> {f({id: "request.management.incident.create.location.description"})} </Typography>
+                                <Typography gutterBottom> {incident.location} </Typography>
+                            </Grid>
+                        </Grid>
+
+                    </Paper>
+                </Grid>
+            </Grid>
+            <Grid container spacing={24}>
+                <Grid item xs={12}>
+                    <Paper elevation={1} className={classes.paper}>
+
+                        {/* <Grid container spacing={24}>
+                            <Grid item xs>
+                                <Typography variant="caption" className={classes.label}> Province </Typography>
+                                <Typography variant="" gutterBottom>
+                                    {
+                                        incident.province && provinces.byCode[incident.province] ?
+                                            provinces.byCode[incident.province].name : ""
+                                    }
+                                </Typography>
+                            </Grid>
+                        </Grid> */}
+
+                        <Grid container spacing={24}>
+                            <Grid item xs>
+                                <Typography variant="caption" className={classes.label}> {f({id: "request.management.incident.create.location.district"})} </Typography>
+                                <Typography variant="" gutterBottom>
+                                    {
+                                        incident.district && districts.byCode[incident.district] ?
+                                            districts.byCode[incident.district].name : ""
+                                    }
+                                </Typography>
+                            </Grid>
+                        </Grid>
+                        <Grid container spacing={24}>
+                            <Grid item xs>
+                                <Typography variant="caption" className={classes.label}> {f({id: "request.management.incident.create.location.gn_division"})} </Typography>
+                                <Typography variant="" gutterBottom>
+                                    {
+                                        incident.gramaNiladhari && gramaNiladharis.byCode[incident.gramaNiladhari] ?
+                                        gramaNiladharis.byCode[incident.gramaNiladhari].name : ""
+                                    }
+                                </Typography>
+                            </Grid>
+                        </Grid>
+
+                        {/* <Grid container spacing={24}>
+                            <Grid item xs>
+                                <Typography variant="caption" className={classes.label}> Polling Division </Typography>
+                                <Typography gutterBottom>
+                                {resolveLocationName(incident.pollingDivision, pollingDivisions)}
+                                </Typography>
+                            </Grid>
+                        </Grid> */}
+                        {/*
+                        <Grid container spacing={24}>
+                            <Grid item xs>
+                                <Typography variant="caption" className={classes.label}> Ward </Typography>
+                                <Typography gutterBottom> {incident.ward} </Typography>
+                            </Grid>
+                        </Grid> */}
+
+                        {/* <Grid container spacing={24}>
+                            <Grid item xs>
+                                <Typography variant="caption" className={classes.label}> Police Station </Typography>
+                                <Typography gutterBottom>
+                                {   resolveLocationName(incident.policeStation, policeStations)}
+                                </Typography>
+                            </Grid>
+                        </Grid> */}
+
+                    </Paper>
+                </Grid>
+            </Grid>
+        </div>
+    );
+}
+
+/**
+ * Contact Information TabView - (2)
+ */
+function RecipientTab(props) {
+
+    const { classes, recipient,districts,incident,gramaNiladharis } = props;
+    const { formatMessage: f } = useIntl();
+    return (
+        <div>
+            <Grid container spacing={24}>
+                <Grid item xs={12}>
+                    <Paper elevation={1} className={classes.paper}>
+
+                        <Grid container spacing={24}>
+                            <Grid item xs>
+                                <Typography variant="caption" className={classes.label}> {f({id: "request.management.incident.create.reporter.name"})} </Typography>
+                                <Typography gutterBottom> {recipient.name} </Typography>
+                            </Grid>
+                        </Grid>
+
+                        <Grid container spacing={24}>
+                            <Grid item xs>
+                                <Typography variant="caption" className={classes.label}> Landline {f({id: "request.management.incident.create.reporter.mobile"})} </Typography>
+                                <Typography gutterBottom> {recipient.telephone} </Typography>
+                            </Grid>
+                        </Grid>
+
+                        <Grid container spacing={24}>
+                            <Grid item xs>
+                                <Typography variant="caption" className={classes.label}> {f({id: "request.management.incident.create.reporter.mobile"})} </Typography>
+                                <Typography gutterBottom> {recipient.mobile} </Typography>
+                            </Grid>
+                        </Grid>
+
+                        <Grid container spacing={24}>
+                            <Grid item xs>
+                                <Typography variant="caption" className={classes.label}> {f({id: "request.management.incident.create.reporter.email"})} </Typography>
+                                <Typography gutterBottom> {recipient.email} </Typography>
+                            </Grid>
+                        </Grid>
+
+                        <Grid container spacing={24}>
+                            <Grid item xs>
+                                <Typography variant="caption" className={classes.label}> {f({id: "request.management.incident.create.reporter.address"})} </Typography>
+                                <Typography gutterBottom> {recipient.address} </Typography>
+                            </Grid>
+                        </Grid>
+                        <Grid container spacing={24}>
+                            <Grid item xs>
+                                <Typography variant="caption" className={classes.label}> {f({id: "request.management.incident.create.location.description"})} </Typography>
+                                <Typography gutterBottom> {recipient.location} </Typography>
+                            </Grid>
+                        </Grid>
+
+                        
+
+                    </Paper>
+                </Grid>
+            </Grid>
+            <Grid container spacing={24}>
+                <Grid item xs={12}>
+                    <Paper elevation={1} className={classes.paper}>
+
+                        {/* <Grid container spacing={24}>
+                            <Grid item xs>
+                                <Typography variant="caption" className={classes.label}> Province </Typography>
+                                <Typography variant="" gutterBottom>
+                                    {
+                                        incident.province && provinces.byCode[incident.province] ?
+                                            provinces.byCode[incident.province].name : ""
+                                    }
+                                </Typography>
+                            </Grid>
+                        </Grid> */}
+
+                        <Grid container spacing={24}>
+                            <Grid item xs>
+                                <Typography variant="caption" className={classes.label}> {f({id: "request.management.incident.create.location.district"})} </Typography>
+                                <Typography variant="" gutterBottom>
+                                    {
+                                        recipient.district && districts.byCode[recipient.district] ?
+                                            districts.byCode[recipient.district].name : ""
+                                    }
+                                </Typography>
+                            </Grid>
+                        </Grid>
+                        <Grid container spacing={24}>
+                            <Grid item xs>
+                                <Typography variant="caption" className={classes.label}> {f({id: "request.management.incident.create.location.gn_division"})} </Typography>
+                                <Typography variant="" gutterBottom>
+                                    {
+                                        recipient.gnDivision && gramaNiladharis.byCode[recipient.gnDivision] ?
+                                        gramaNiladharis.byCode[recipient.gnDivision].name : ""
+                                    }
+                                </Typography>
+                            </Grid>
+                        </Grid>
+                        {/* <Grid container spacing={24}>
+                            <Grid item xs>
+                                <Typography variant="caption" className={classes.label}> Polling Division </Typography>
+                                <Typography gutterBottom>
+                                {resolveLocationName(incident.pollingDivision, pollingDivisions)}
+                                </Typography>
+                            </Grid>
+                        </Grid> */}
+                        {/*
+                        <Grid container spacing={24}>
+                            <Grid item xs>
+                                <Typography variant="caption" className={classes.label}> Ward </Typography>
+                                <Typography gutterBottom> {incident.ward} </Typography>
+                            </Grid>
+                        </Grid> */}
+
+                        {/* <Grid container spacing={24}>
+                            <Grid item xs>
+                                <Typography variant="caption" className={classes.label}> Police Station </Typography>
+                                <Typography gutterBottom>
+                                {   resolveLocationName(incident.policeStation, policeStations)}
+                                </Typography>
+                            </Grid>
+                        </Grid> */}
 
                     </Paper>
                 </Grid>
@@ -460,7 +606,7 @@ function PoliceTab(props) {
 function SummaryTabView(props) {
 
     const {
-        classes, incident, reporter, elections, category,
+        classes, incident, reporter, recipient, elections, category,
         institutions,
         provinces, districts,
         divisionalSecretariats,
@@ -474,13 +620,13 @@ function SummaryTabView(props) {
     } = props
 
     const [currentTab, setCurrentTab] = useState(0);
-
     return (
         <div className={classes.root}>
             <Tabs variant="fullWidth" value={currentTab} onChange={(e, val) => setCurrentTab(val)} indicatorColor="primary" >
                 <LinkTab label="Basic Information" href="page1" />
                 <LinkTab label="Contact Information" href="page2" />
-                <LinkTab label="Location Information" href="page3" style={{ display: incident.incidentType === 'INQUIRY' ? 'none' : ''}}/>
+                {recipient ? <LinkTab label="Recipient Information" href="page3" /> : ''}
+                {/* <LinkTab label="Location Information" href="page4" style={{ display: incident.incidentType === 'INQUIRY' ? 'none' : ''}}/> */}
                 {/* <LinkTab label="Police Information" href="page4" style={{ display: incident.incidentType === 'INQUIRY' ? 'none' : ''}}/> */}
             </Tabs>
 
@@ -491,8 +637,9 @@ function SummaryTabView(props) {
                     institutions={institutions}
 
                 /> </TabContainer>}
-            {currentTab === 1 && <TabContainer> <ContactTab classes={classes} reporter={reporter} /> </TabContainer>}
-            {currentTab === 2 && <TabContainer>
+            {currentTab === 1 && <TabContainer> <ContactTab classes={classes} reporter={reporter} incident={incident} districts={districts} gramaNiladharis={gramaNiladharis} /> </TabContainer>}
+            {currentTab === 2 && <TabContainer> <RecipientTab classes={classes} recipient={recipient} incident={incident} districts={districts} gramaNiladharis={gramaNiladharis} /> </TabContainer>}
+            {currentTab === 3 && <TabContainer>
                 <LocationTab classes={classes} incident={incident}
                     provinces={provinces}
                     districts={districts}
@@ -503,7 +650,7 @@ function SummaryTabView(props) {
                     policeStations={policeStations}
                     policeDivisions={policeDivisions}
                 /> </TabContainer>}
-            {currentTab === 3 && <TabContainer> <PoliceTab classes={classes} incident={incident} /> </TabContainer>}
+            {currentTab === 4 && <TabContainer> <PoliceTab classes={classes} incident={incident} /> </TabContainer>}
         </div>
     )
 }
