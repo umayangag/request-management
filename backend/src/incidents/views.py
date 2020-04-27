@@ -26,6 +26,7 @@ from .services import (
     update_incident_postscript,
     update_incident_status,
     get_reporter_by_id,
+    get_recipient_by_id,
     get_comments_by_incident,
     create_incident_comment_postscript,
     # incident_auto_assign,
@@ -192,7 +193,6 @@ class IncidentList(APIView, IncidentResultsSetPagination):
         return self.get_paginated_response(serializer.data)
 
     def post(self, request, format=None):
-        print(request.data)
         incident_data = request.data
         if request.data["showRecipient"] == "YES":
             # collect recipient information
@@ -539,7 +539,28 @@ class IncidentPublicUserView(APIView):
         return Response(return_data, status=status.HTTP_200_OK)
 
     def post(self, request, format=None):
-        serializer = IncidentSerializer(data=request.data)
+        incident_data = request.data
+        if request.data["showRecipient"] == "YES":
+            # collect recipient information
+            recipient_data = {}
+            recipient_data["name"] = incident_data["recipientName"]
+            recipient_data["recipientType"] = incident_data["recipientType"]
+            recipient_data["address"] = incident_data["recipientAddress"]
+            recipient_data["mobile"] = incident_data["recipientMobile"]
+            recipient_data["telephone"] = incident_data["recipientTelephone"]
+            recipient_data["email"] = incident_data["recipientEmail"]
+            recipient_data["city"] = incident_data["recipientCity"]
+            recipient_data["district"] = incident_data["recipientDistrict"]
+            # recipient_data["gnDivision"] = incident_data["recipientGramaNiladhari"]
+            recipient_data["location"] = incident_data["recipientLocation"]
+            # create recipient
+            recipient_serializer = RecipientSerializer(data=recipient_data)
+            if recipient_serializer.is_valid():
+                recipient = recipient_serializer.save()
+                # linking recipient with the incident to be created
+                incident_data["recipient"] = recipient.id
+
+        serializer = IncidentSerializer(data=incident_data)
 
         if serializer.is_valid():
             incidentReqValues = serializer.initial_data
