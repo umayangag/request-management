@@ -89,6 +89,10 @@ export const getReporter = async (reporterId) => {
   return (await handler.get(`/reporters/${reporterId}`)).data;
 };
 
+export const getRecipient = async (recipientId) => {
+  return (await handler.get(`/recipients/${recipientId}`)).data;
+};
+
 export const updateReporter = async (reporterId, reporterData) => {
   return (await handler.put(`/reporters/${reporterId}`, reporterData)).data;
 }

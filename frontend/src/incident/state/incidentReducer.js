@@ -61,6 +61,10 @@ const initialState = {
     reporters: {
         byIds: {},
         allIds: []
+    },
+    recipients: {
+        byIds: {},
+        allIds: []
     }
 };
 
@@ -98,7 +102,7 @@ const incidentReducer = createReducer(initialState, {
         }
     },
     [loadIncidentSuccess] : (state, action) => {
-        const { incident, reporter } = action.payload;
+        const { incident, reporter, recipient } = action.payload;
         
         if(!state.incidents.byIds[incident.id]){
             state.incidents.allIds.push(incident.id);
@@ -109,6 +113,11 @@ const incidentReducer = createReducer(initialState, {
             state.reporters.allIds.push(reporter.id);
         }
         state.reporters.byIds[reporter.id] = reporter;
+
+        if(!state.recipients.byIds[recipient.id]){
+            state.recipients.allIds.push(recipient.id);
+        }
+        state.recipients.byIds[recipient.id] = recipient;
     },
     [loadAllIncidentsSuccess] : (state, action) => {
         const { incidents, pageNumber, pages, count } = action.payload;
