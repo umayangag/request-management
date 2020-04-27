@@ -535,8 +535,9 @@ class IncidentPublicUserView(APIView):
 
     def get(self, request, format=None):
         param_refId = self.request.query_params.get('refId', None)
-        return_data = get_incident_status_guest(param_refId)
-        return Response(return_data, status=status.HTTP_200_OK)
+        if (param_refId):
+            return_data = get_incident_status_guest(param_refId)
+            return Response(return_data, status=status.HTTP_200_OK)
 
     def post(self, request, format=None):
         incident_data = request.data

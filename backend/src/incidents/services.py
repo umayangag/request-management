@@ -48,22 +48,35 @@ from .serializers import IncidentCommentSerializer
 
 def get_incident_status_guest(refId):
     """This function is to annouce public on a incident status"""
+    status = {}
+    messages = []
     try:
         incident = Incident.objects.get(refId=refId)
     except Incident.DoesNotExist:
-        return "No records for the given reference number. Please check and submit."
+        status["reply"] = "No records for the given reference number. Please check and submit."
+        return status
 
-    public_status = ""
     if incident.current_status == StatusType.NEW.name:
-        public_status = "Your request has been received. Please check in later."
+        status["reply"] = "Your request has been received. Please check in later."
     elif incident.current_status == StatusType.VERIFIED.name:
-        public_status = "Your request has been acknowledged."
-    elif incident.current_status == StatusType.ACTION_PENDING.name or incident.current_status == StatusType.ACTION_TAKEN.name:
-        public_status = "Your request is currently being attended to."
+        status["reply"] = "Your request has been acknowledged."
+    elif incident.current_status == StatusType.ACTION_PENDING.name or incident.current_status == StatusType.ACTION_TAKEN.name \
+        or incident.current_status == StatusType.INFORMATION_PROVIDED.name:
+        status["reply"] = "Your request is currently being attended to."
+    elif incident.current_status == StatusType.INFORMATION_REQESTED.name:
+        status["reply"] = "Your request requires further information to proceed."
     elif incident.current_status == StatusType.CLOSED.name or incident.current_status == StatusType.INVALIDATED.name:
-        public_status = "Your request has been resolved and closed. Please refer related correspondence for concise infomation."
+        status["reply"] = "Your request has been resolved and closed."
+        # prepare resolution messages
+        close = CloseWorkflow.objects.filter(incident=incident).order_by('-created_date')
+        output = {}
+        output["header"] = "Resolution"
+        # get the last close comment
+        output["content"] = close[0].comment
+        messages.append(output)
+        status["messages"] = messages
 
-    return public_status
+    return status
 
 def send_email(subject, message, receivers):
     try :
@@ -515,7 +528,6 @@ def incident_close(user: User, incident: Incident, details: str):
     # outcomes = IncidentComment.objects.filter(
     #     incident=incident, is_outcome=True).count()
 
-    # TODO: change the validation to check on the specific tables
     if incident.current_status == StatusType.INFORMATION_REQESTED.name:
         raise WorkflowException(
             "All pending advices must be resolved first")
@@ -542,6 +554,7 @@ def incident_close(user: User, incident: Incident, details: str):
     comment.save()
     create_incident_comment_postscript(incident, user, comment)
 
+    # FIXME: set next pending status as the current status
     status = IncidentStatus(
         current_status=StatusType.CLOSED,
         previous_status=incident.current_status,
