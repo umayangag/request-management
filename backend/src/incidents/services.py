@@ -20,7 +20,9 @@ from .models import (
     EscalateWorkflow,
     CloseWorkflow,
     InvalidateWorkflow,
-    ReopenWorkflow
+    ReopenWorkflow,
+    CannedResponse,
+    SendCannedResponseWorkflow
 )
 from django.contrib.auth.models import User, Group, Permission
 
@@ -935,5 +937,26 @@ def get_incident_by_reporter_unique_id(unique_id):
         incident = Incident.objects.get(reporter=reporter)
     except:
         raise IncidentException("Invalid unique id")
+
+    return incident
+
+def send_canned_response(user, incident, canned_response_id):
+    try:
+        selected_response = CannedResponse.objects.get(id=canned_response_id)
+        if selected_response is None:
+            raise WorkflowException("Invalid response id")
+
+        workflow = SendCannedResponseWorkflow(
+            incident=incident,
+            actioned_user=user,
+            canned_response=selected_response
+        )
+        workflow.save()
+
+        event_services.update_workflow_event(user, incident, workflow)
+        
+    except Exception as e:
+        print(e)
+        raise WorkflowException("Unable to send the canned response")
 
     return incident

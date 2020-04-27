@@ -77,7 +77,7 @@ import {
 
 } from './Shared.types'
 
-import { getIncident, getReporter  } from '../../api/incident';
+import { getIncident, getReporter, getCannedResponses as loadCannedResponses } from '../../api/incident';
 import {
     getChannels,
     getElections,
@@ -740,5 +740,21 @@ export function changeLanguage(selectedLanguage) {
 export function resetActiveIncident(){
     return {
         type: RESET_ACTIVE_INCIDENT
+    }
+}
+
+export const getCannedResponsesRequest = createAction('INCIDENT/GET_CANNED_RESPONSE_REQUEST');
+export const getCannedResponsesSuccess = createAction('INCIDENT/GET_CANNED_RESPONSE_SUCCESS');
+export const getCannedResponsesError = createAction('INCIDENT/GET_CANNED_RESPONSE_ERROR');
+
+export function getCannedResponses(){
+    return async function(dispatch) {
+        dispatch(getCannedResponsesRequest());
+        try {
+            const response = await loadCannedResponses();
+            await dispatch(getCannedResponsesSuccess(response.data));
+        } catch (error) {
+            await dispatch(getCannedResponsesError(error));
+        }
     }
 }

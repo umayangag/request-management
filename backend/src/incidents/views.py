@@ -54,7 +54,8 @@ from .services import (
     create_reporter,
     validateRecaptcha,
     send_incident_created_mail,
-    get_incident_status_guest
+    get_incident_status_guest,
+    send_canned_response
 )
 
 from ..events import services as event_service
@@ -496,6 +497,9 @@ class IncidentWorkflowView(APIView):
 
             comment = request.data['comment']
             incident_reopen(request.user, incident, comment)
+        elif workflow == "send_canned_response":
+            response_id = request.data['id']
+            send_canned_response(request.user, incident, response_id)
 
         else:
             return Response("Invalid workflow", status=status.HTTP_400_BAD_REQUEST)

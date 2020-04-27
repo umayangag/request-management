@@ -9,7 +9,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 
 // react-redux hooks
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 import { hideModal } from '../state/modal.actions'
 import { fetchUpdateWorkflow } from '../../ongoing-incidents/state/OngoingIncidents.actions'
@@ -22,22 +22,27 @@ for (var i = 1; i < 24; i++) {
     hourlyResponseTimes.push(i);
 }
 
-const onSubmitClick = (dispatch, incidentId, comment, responseTime) => {
-
+const onSubmitClick = (dispatch, incidentId, responseId) => {
+    dispatch(fetchUpdateWorkflow(incidentId, "send_canned_response", {
+        id: responseId
+    } ));
     dispatch(hideModal());
 }
 
 const CannedResponseModal = (props) => {
-    const [response, setResponse] = useState("");
-    const [responseList, setResponseList] = useState([]);
-
+    const [selectedResponse, setSelectedResponse] = useState("");
+    const [responseData, setResponseData] = useState({
+        byIds:[],
+        allIds:[]
+    });
+    const {cannedResponses} = useSelector(store=>store.shared)
     const dispatch = useDispatch();
     useEffect(()=>{
-        loadData()
+        setResponseData(cannedResponses)
     },[])
 
     const loadData = async () => {
-        setResponseList((await getCannedResponses()).data)
+        setResponseData((await getCannedResponses()).data)
     }
 
     return (
@@ -48,11 +53,11 @@ const CannedResponseModal = (props) => {
                 <InputLabel htmlFor="selector"> Selected response: </InputLabel>
                 <Select
                     style={{width:300}}
-                    value={response}
+                    value={selectedResponse}
                     name="response"
                     fullWidth
                     displayEmpty
-                    onChange={(e) => { setResponse(e.target.value) }}
+                    onChange={(e) => { setSelectedResponse(e.target.value) }}
                     inputProps={{
                         name: 'selector',
                         id: 'selector',
@@ -62,14 +67,19 @@ const CannedResponseModal = (props) => {
                         <em>None</em>
                     </MenuItem>
 
-                    {responseList.map((response, index) => {
-                        return (<MenuItem key={response.id} value={index}>{response.title}</MenuItem>)
+                    {responseData.allIds.map((responseId, index) => {
+                        return (
+                        <MenuItem key={responseId} value={responseId}>
+                            {responseData.byIds[responseId].title}
+                        </MenuItem>)
                     })}
                 </Select>
 
                 <DialogContentText style={{ marginTop: 20 }}>
                     Message:  
-                    {responseList[response]?<i> "{responseList[response].message}"</i>:" No message selected"}
+                    {responseData.byIds[selectedResponse]?
+                    <i> "{responseData.byIds[selectedResponse].message}"</i>:
+                    " No message selected"}
                 </DialogContentText>
 
 
@@ -79,7 +89,7 @@ const CannedResponseModal = (props) => {
                     Close
                 </Button>
                 <Button
-                    onClick={() => onSubmitClick(dispatch, props.incidentId, "", 1)}
+                    onClick={() => onSubmitClick(dispatch, props.activeIncident.id, selectedResponse)}
                     color="primary">
                     Send
                 </Button>

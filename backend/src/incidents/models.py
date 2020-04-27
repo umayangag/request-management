@@ -439,5 +439,9 @@ class CannedResponse(models.Model):
     def __str__(self):
         return self.message
 
+class SendCannedResponseWorkflow(IncidentWorkflow):
+    canned_response = models.ForeignKey(CannedResponse,
+                    on_delete=models.DO_NOTHING)
+
 
 
