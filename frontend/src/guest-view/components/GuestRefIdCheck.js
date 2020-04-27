@@ -24,8 +24,13 @@ import Input from "@material-ui/core/Input";
 import InputLabel from "@material-ui/core/InputLabel";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import SearchIcon from "@material-ui/icons/Search";
+import Card from "@material-ui/core/Card";
+import CardActionArea from "@material-ui/core/CardActionArea";
+import CardActions from "@material-ui/core/CardActions";
+import CardContent from "@material-ui/core/CardContent";
+import CardMedia from "@material-ui/core/CardMedia";
 
-import * as publicApi from "../../api/public"
+import * as publicApi from "../../api/public";
 
 import green from "@material-ui/core/colors/green";
 import red from "@material-ui/core/colors/red";
@@ -76,22 +81,28 @@ const styles = (theme) => ({
   },
   status: {
     marginTop: theme.spacing.unit * 3,
-  }
+  },
+  card: {
+    maxWidth: 400,
+  },
 });
 
 const GuestRefIdCheck = (props) => {
   const { formatMessage: f } = useIntl();
   const dispatch = useDispatch();
   const { classes } = props;
-  const [refId, setRefId] = useState("")
-  const [status, setStatus] = useState("")
+  const [refId, setRefId] = useState("");
+  const [status, setStatus] = useState("");
+  const [messages, setMessages] = useState([]);
 
   const handleSubmit = async () => {
     try {
-      const response = await publicApi.checkIncidentStatus(refId)
-      setStatus(response.data)
+      const response = (await publicApi.checkIncidentStatus(refId)).data;
+      setStatus(response.reply);
+      console.log(response.messages);
+      setMessages(response.messages);
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   };
 
@@ -138,59 +149,80 @@ const GuestRefIdCheck = (props) => {
       </Grid>
 
       <main className={classes.main}>
-          <CssBaseline />
-          <Paper className={classes.paper}>
-            <Avatar className={classes.avatar}>
-              <SearchIcon />
-            </Avatar>
-            <Typography component="h1" variant="h5">
-              <FormattedMessage
-                id="request.management.report.check.status"
-                defaultMessage="Check Status"
+        <CssBaseline />
+        <Paper className={classes.paper}>
+          <Avatar className={classes.avatar}>
+            <SearchIcon />
+          </Avatar>
+          <Typography component="h1" variant="h5">
+            <FormattedMessage
+              id="request.management.report.check.status"
+              defaultMessage="Check Status"
+            />
+          </Typography>
+          <form
+            className={classes.form}
+            onSubmit={(e) => {
+              e.preventDefault();
+              handleSubmit();
+            }}
+          >
+            <FormControl margin="normal" required fullWidth>
+              {/* <InputLabel htmlFor="email"><FormattedMessage id="request.management.login.username" /></InputLabel> */}
+              <Input
+                id="email"
+                name="email"
+                value={refId}
+                onChange={(e) => {
+                  setRefId(e.target.value);
+                }}
+                autoFocus
               />
-            </Typography>
-            <form
-              className={classes.form}
-              onSubmit={(e) => {
-                e.preventDefault();
-                handleSubmit();
-              }}
+            </FormControl>
+            <Button
+              type="button"
+              fullWidth
+              variant="contained"
+              color="primary"
+              className={classes.submit}
+              onClick={handleSubmit}
             >
-              <FormControl margin="normal" required fullWidth>
-                {/* <InputLabel htmlFor="email"><FormattedMessage id="request.management.login.username" /></InputLabel> */}
-                <Input
-                  id="email"
-                  name="email"
-                  value={refId}
-                  onChange={(e) => {
-                    setRefId(e.target.value);
-                  }}
-                  autoFocus
-                />
-              </FormControl>
-              <Button
-                type="button"
-                fullWidth
-                variant="contained"
-                color="primary"
-                className={classes.submit}
-                onClick={handleSubmit}
-              >
-                <FormattedMessage
-                  id="request.management.report.check.status.submit"
-                  defaultMessage="Submit Reference Number"
-                />
-              </Button>
-            </form>
-          </Paper>
-        </main>
+              <FormattedMessage
+                id="request.management.report.check.status.submit"
+                defaultMessage="Submit Reference Number"
+              />
+            </Button>
+          </form>
+        </Paper>
+      </main>
 
       <Grid container spacing={24} align="center">
         <Grid item xs={12}>
           <Typography component="h1" variant="h5" className={classes.status}>
-              {status}
-            </Typography>
+            {status}
+          </Typography>
         </Grid>
+
+        {messages &&
+          messages.map((message, index) => (
+            <Grid item xs={12} key={index}>
+              <Card className={classes.card} align="left">
+                <CardContent>
+                  <Typography gutterBottom variant="h5" component="h2">
+                    {message.header}
+                  </Typography>
+                  <Typography component="p">{message.content}</Typography>
+                </CardContent>
+                {message.actionURL && (
+                  <CardActions>
+                    <Button size="small" color="primary">
+                      Take Action
+                    </Button>
+                  </CardActions>
+                )}
+              </Card>
+            </Grid>
+          ))}
       </Grid>
     </div>
   );
@@ -200,4 +232,4 @@ GuestRefIdCheck.propTypes = {
   classes: PropTypes.object,
 };
 
-export default withStyles(styles)(GuestRefIdCheck)
+export default withStyles(styles)(GuestRefIdCheck);
