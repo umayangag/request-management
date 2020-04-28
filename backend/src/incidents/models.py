@@ -428,6 +428,16 @@ class IncidentFilter(filters.FilterSet):
         print(queryset, name, value)
 
 
+class CannedResponse(models.Model):
+    title = models.CharField(max_length=30)
+    message =  models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.message
+
+class SendCannedResponseWorkflow(IncidentWorkflow):
+    canned_response = models.ForeignKey(CannedResponse,
+                    on_delete=models.DO_NOTHING)
 
 
 

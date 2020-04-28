@@ -109,6 +109,9 @@ function getActionText(event){
 
                     case "Reopen":
                         return `reopened the record`
+
+                    case "Send Canned Response":
+                        return 'sent a canned response'
                 }
         default:
             return "unknown action"
@@ -134,6 +137,9 @@ function hasEventBody(event){
 
 
 function getSecondaryItem(event){
+
+    const {cannedResponses} = useSelector(store=>store.shared)
+
     if(event.action === "COMMENTED" || event.action === "OUTCOME_ADDED"){
         return (
             <div>
@@ -221,6 +227,23 @@ function getSecondaryItem(event){
                 <div>
                     {workflowData.comment}
                 </div>
+            )
+        }else if(workflowType === "Send Canned Response"){
+            return(
+                <>
+                <div>
+                    <b>Message:</b> &nbsp; 
+                    <i>"{cannedResponses.byIds[workflowData.responseId].message}"</i>
+                </div>
+                <div>
+                    <span>Text message sent?</span> &nbsp; 
+                    <span>No</span>
+                </div>
+                <div>
+                    <span>Email message sent?</span> &nbsp; 
+                    <span>No</span>
+                </div>
+                </>
             )
         }
     }

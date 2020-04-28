@@ -11,7 +11,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 from django.db.models import Q
 
-from .models import Incident, StatusType, SeverityType, ReopenWorkflow as Reopened
+from .models import Incident, StatusType, SeverityType, ReopenWorkflow as Reopened, CannedResponse
 from django.contrib.auth.models import User, Group, Permission
 from .serializers import (
     IncidentSerializer,
@@ -19,6 +19,7 @@ from .serializers import (
     RecipientSerializer,
     IncidentCommentSerializer,
     IncidentPoliceReportSerializer,
+    CannedResponseSerializer,
 )
 from .services import (
     get_incident_by_id,
@@ -54,7 +55,8 @@ from .services import (
     create_reporter,
     validateRecaptcha,
     send_incident_created_mail,
-    get_incident_status_guest
+    get_incident_status_guest,
+    send_canned_response
 )
 
 from ..events import services as event_service
@@ -495,6 +497,9 @@ class IncidentWorkflowView(APIView):
 
             comment = request.data['comment']
             incident_reopen(request.user, incident, comment)
+        elif workflow == "send_canned_response":
+            response_id = request.data['id']
+            send_canned_response(request.user, incident, response_id)
 
         else:
             return Response("Invalid workflow", status=status.HTTP_400_BAD_REQUEST)
@@ -625,5 +630,16 @@ class IncidentViewPublicUserView(APIView):
         incident = get_incident_by_reporter_unique_id(unique_id)
         serializer = IncidentSerializer(incident)
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+class CannedResponseList(APIView):
+
+    def get(self, request, format=None):
+        """
+        Return a list of all canned responses.
+        """
+        canned_responses = CannedResponse.objects.all()
+        serializer = CannedResponseSerializer(canned_responses, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK )
 
 
