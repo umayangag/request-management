@@ -88,6 +88,7 @@
   "request.management.incident.create.time": "கோரிக்கை நேரம்",
   "request.management.incident.create.severity": "முன்னுரிமை*",
   "request.management.incident.create.upload_file": "கோப்பை பதிவேற்றவும் (நீங்கள் பல கோப்புகளை பதிவேற்றலாம்)",
+  "request.management.incident.create.contact_info": "தொடர்பு தகவல்",
 
   "request.management.incident.create.reporter_information": "Reporter / Compiler Information",
   "request.management.incident.create.reporter": "Reporter",
