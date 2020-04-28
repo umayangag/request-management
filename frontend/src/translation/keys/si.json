@@ -90,6 +90,8 @@
   "request.management.incident.create.time": "ඉල්ලුම් කාලය",
   "request.management.incident.create.severity": "ප්‍රමුඛතාවය*",
   "request.management.incident.create.upload_file": "ගොනුව උඩුගත කරන්න (ඔබට ගොනු කිහිපයක් උඩුගත කළ හැකිය)",
+  "request.management.incident.create.contact_info": "සබඳතා තොරතුරු",
+
 
   "request.management.incident.create.reporter_information": "Reporter / Compiler Information",
   "request.management.incident.create.reporter": "Reporter",
