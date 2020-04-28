@@ -12,6 +12,8 @@ import FormLabel from "@material-ui/core/FormLabel";
 import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import Typography from '@material-ui/core/Typography';
+import InputLabel from "@material-ui/core/InputLabel";
+import Select from "@material-ui/core/Select";
 
 const styles = (theme) => ({
   container: {
@@ -26,6 +28,7 @@ const styles = (theme) => ({
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
     marginTop: theme.spacing.unit*3,
+    width:"100%"
   },
 });
 
@@ -97,7 +100,40 @@ const IncidentContact = (props) => {
           />
         </Grid>
         <Grid item xs={4} />
-
+        <Grid item xs={8} >
+        <FormControl className={classes.group}  error={formErrors.incidentReporterTypeErrorMsg && formErrors.incidentReporterTypeErrorMsg} >
+                      <InputLabel htmlFor="reporterType">
+                        Individual/Organization*
+                      </InputLabel>
+                      <Select
+                        value={contactDetials.reporterType}
+                        onChange={(e) => {
+                          handleContactDetailsChange({
+                            ...contactDetials,
+                            reporterType: e.target.value,
+                          });
+                          formErrors.incidentReporterTypeErrorMsg = null;
+                        }}
+                        inputProps={{
+                          name: "reporterType",
+                          id: "reporterType",
+                        }}
+                      >
+                        <MenuItem value="">
+                          {" "}
+                          <em>None</em>{" "}
+                        </MenuItem>
+                        <MenuItem value={"INDIVIDUAL"}>Individual</MenuItem>
+                        <MenuItem value={"ORGANIZATION"}>Organization</MenuItem>
+                      </Select>
+                      <FormHelperText>
+                            {formErrors.incidentReporterTypeErrorMsg && formErrors.incidentReporterTypeErrorMsg
+                              ? formErrors.incidentReporterTypeErrorMsg
+                              : ""}
+                          </FormHelperText>
+                    </FormControl>
+                </Grid>
+                <Grid item xs={4} />
         <Grid item xs={8}>
           <TextField
             id="contactMobile"
@@ -323,7 +359,40 @@ const IncidentContact = (props) => {
           />
         </Grid>
         <Grid item xs={4} />
-
+        <Grid item xs={8} >
+        <FormControl className={classes.group}  error={formErrors.incidentRecipientTypeErrorMsg && formErrors.incidentRecipientTypeErrorMsg} >
+                      <InputLabel htmlFor="reporterType">
+                        Individual/Organization*
+                      </InputLabel>
+                      <Select
+                        value={contactDetials.recipientType}
+                        onChange={(e) => {
+                          handleContactDetailsChange({
+                            ...contactDetials,
+                            recipientType: e.target.value,
+                          });
+                          formErrors.incidentRecipientTypeErrorMsg = null;
+                        }}
+                        inputProps={{
+                          name: "recipientType",
+                          id: "recipientType",
+                        }}
+                      >
+                        <MenuItem value="">
+                          {" "}
+                          <em>None</em>{" "}
+                        </MenuItem>
+                        <MenuItem value={"INDIVIDUAL"}>Individual</MenuItem>
+                        <MenuItem value={"ORGANIZATION"}>Organization</MenuItem>
+                      </Select>
+                      <FormHelperText>
+                            {formErrors.incidentRecipientTypeErrorMsg && formErrors.incidentRecipientTypeErrorMsg
+                              ? formErrors.incidentRecipientTypeErrorMsg
+                              : ""}
+                          </FormHelperText>
+                    </FormControl>
+                </Grid>
+                <Grid item xs={4} />
         <Grid item xs={8}>
           <TextField
             id="contactMobile"
