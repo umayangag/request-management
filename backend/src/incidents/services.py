@@ -147,6 +147,30 @@ def send_incident_created_mail(reporter_id):
             print ("Error: unable to start thread")
         print("request created email sent")
 
+def send_incident_created_sms(reporter_id):
+    # request created sms
+    reporter = get_reporter_by_id(reporter_id)
+    if reporter.mobile :
+        incident = Incident.objects.get(reporter=reporter)
+        print("sending request created sms")
+        message = 'We recieved your request. Reference ID' + incident.refId
+        try:
+            _thread.start_new_thread( send_sms, (reporter.mobile, message))
+        except Exception as e:
+            print("sms sending failed with exception:")
+            print(e)
+    
+    # print("sending sms")
+    # try:
+    #     # send_sms()
+    #     send_sms("0752033023", "Test message after cleaning")
+    #     print("sms sent")
+    # except Exception as e:
+    #     print(e)
+    #     print("sms sending failed with above exception")
+    
+    # print("sms sending process end")
+
 def is_valid_incident(incident_id: str) -> bool:
     try:
         incident = Incident.objects.get(id=incident_id)
@@ -369,16 +393,6 @@ def create_reporter():
 
 def create_incident_postscript(incident: Incident, user: User) -> None:
     """Function to take care of event, status and severity creation"""
-    print("sending sms")
-    try:
-        # send_sms()
-        send_sms("0752033023", "Test message after cleaning")
-        print("sms sent")
-    except Exception as e:
-        print(e)
-        print("sms sending failed with above exception")
-    
-    print("sms sending process end")
     if user is None:
         # public user case
         # if no auth token, then we assign the guest user as public user
