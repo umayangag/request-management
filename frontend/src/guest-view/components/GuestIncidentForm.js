@@ -216,6 +216,8 @@ const VerticalLinearStepper = (props) => {
     phone: incidentReporterData ? incidentReporterData.telephone : "",
     mobile: incidentReporterData ? incidentReporterData.mobile : "",
     email: incidentReporterData ? incidentReporterData.email : "",
+    reporterType: incidentReporterData ? incidentReporterData.reporterType : "",
+    recipientType: incidentReporterData ? incidentReporterData.recipientType : "",
     recipientName: incidentReporterData
       ? incidentReporterData.recipientName
       : "",
@@ -252,6 +254,7 @@ const VerticalLinearStepper = (props) => {
       incidentDatetimeErrorMsg: null,
       incidentContactErrorMsg: null,
       incidentNameErrorMsg: null,
+      incidentReporterTypeErrorMsg: null,
     });
     let errorMsg = { ...formErrors };
     let valid = true;
@@ -286,6 +289,7 @@ const VerticalLinearStepper = (props) => {
       incidentDatetimeErrorMsg: null,
       incidentContactErrorMsg: null,
       incidentNameErrorMsg: null,
+      incidentReporterTypeErrorMsg: null,
       incidentAddressErrorMsg: null,
       incidentDistrictErrorMsg: null,
       incidentCityErrorMsg: null,
@@ -314,6 +318,16 @@ const VerticalLinearStepper = (props) => {
         incidentNameErrorMsg: f({
           id: "request.management.report.incidents.name.error.message",
           defaultMessage: "Name is required",
+        }),
+      };
+      valid = false;
+    }
+    if (!incidentContact.reporterType) {
+      errorMsg = {
+        ...errorMsg,
+        incidentReporterTypeErrorMsg: f({
+          id: "request.management.report.incidents.reporterType.error.message",
+          defaultMessage: "Individual/Organization is required",
         }),
       };
       valid = false;
@@ -365,6 +379,16 @@ const VerticalLinearStepper = (props) => {
           recipientNameErrorMsg: f({
             id: "request.management.report.incidents.name.error.message",
             defaultMessage: "Name is required",
+          }),
+        };
+        valid = false;
+      }
+      if (!incidentContact.recipientType) {
+        errorMsg = {
+          ...errorMsg,
+          incidentRecipientTypeErrorMsg: f({
+            id: "request.management.report.incidents.reporterType.error.message",
+            defaultMessage: "Individual/Organization is required",
           }),
         };
         valid = false;
@@ -641,7 +665,7 @@ const VerticalLinearStepper = (props) => {
                 mainCategory: incidentMainCatogory,
                 district: incidentDistrict,
                 showRecipient: showRecipient,
-                recipientType: "INDIVIDUAL",
+                recipientType: incidentContact.recipientType,
                 recipientLocation: recipientLocation,
                 recipientAddress: recipientAddress,
                 recipientCity: recipientCity,
@@ -663,6 +687,9 @@ const VerticalLinearStepper = (props) => {
               reporterData.telephone = incidentContact.phone;
               reporterData.mobile = incidentContact.mobile;
               reporterData.email = incidentContact.email;
+              reporterData.reporter_type = incidentContact.reporterType;
+              reporterData.address = incidentContact.incidentAddress;
+
               dispatch(
                 createGuestIncidentWithReporter(
                   incidentData,
@@ -688,7 +715,7 @@ const VerticalLinearStepper = (props) => {
                 mainCategory: incidentMainCatogory,
                 district: incidentDistrict,
                 showRecipient: showRecipient,
-                recipientType: "INDIVIDUAL",
+                recipientType: incidentContact.recipientType,
                 recipientLocation: recipientLocation,
                 recipientAddress: recipientAddress,
                 recipientCity: recipientCity,
@@ -710,6 +737,9 @@ const VerticalLinearStepper = (props) => {
               reporterData.telephone = incidentContact.phone;
               reporterData.mobile = incidentContact.mobile;
               reporterData.email = incidentContact.email;
+              reporterData.reporter_type = incidentContact.reporterType;
+              reporterData.address = incidentContact.incidentAddress;
+
               dispatch(
                 createGuestIncidentWithReporter(
                   incidentData,
@@ -834,6 +864,9 @@ const VerticalLinearStepper = (props) => {
             incidentReporterData.telephone = incidentContact.phone;
             incidentReporterData.mobile = incidentContact.mobile;
             incidentReporterData.email = incidentContact.email;
+            incidentReporterData.reporter_type = incidentContact.reporterType;
+            incidentReporterData.address = incidentContact.incidentAddress;
+
             dispatch(
               updateGuestIncidentReporter(
                 incidentReporterData.id,
