@@ -22,6 +22,7 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import SearchIcon from "@material-ui/icons/Search";
 
 import { resetIncidentState } from "../../incident/state/incidentActions";
+import { moveStepper } from "../state/guestViewActions";
 
 const styles = (theme) => ({
   root: {
@@ -81,6 +82,7 @@ function GuestFormSuccessPage(props) {
   const handleButtonClick = (action) => {
     switch (action) {
       case "edit":
+        dispatch(moveStepper({step:0}))
         props.history.push("/report");
         break;
       case "status":
@@ -88,6 +90,7 @@ function GuestFormSuccessPage(props) {
         break;
       case "create":
         dispatch(resetIncidentState());
+        dispatch(moveStepper({step:0}))
         props.history.push(`/report`);
         break;
       default:
