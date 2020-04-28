@@ -856,8 +856,19 @@ def attach_media(user:User, incident:Incident, uploaded_file:File):
 
 def get_fitlered_incidents_report(incidents: Incident, output_format: str):
 
-
-    dataframe = pd.DataFrame(list(incidents.values("refId", "title", "description", "current_status", "current_severity", "response_time", "category")))
+    sql = """
+            SELECT i.refId, i.title, i.description, i.current_status, i.current_severity, i.response_time, d.sub_category as category
+                FROM incidents_incident i
+                LEFT JOIN (
+                  SELECT c.id, c.sub_category
+                  FROM common_category c
+                ) d
+                ON d.id = i.category
+        """
+    with connection.cursor() as cursor:
+        cursor.execute(sql)
+        incidents = cursor.fetchall()
+        dataframe = pd.DataFrame(list(incidents))
     dataframe.columns = ["Ref ID", "Title", "Description", "Status", "Severity", "Response Time", "Category"]
 
     if output_format == "csv":
