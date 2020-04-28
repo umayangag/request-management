@@ -153,23 +153,12 @@ def send_incident_created_sms(reporter_id):
     if reporter.mobile :
         incident = Incident.objects.get(reporter=reporter)
         print("sending request created sms")
-        message = 'We recieved your request. Reference ID' + incident.refId
+        message = 'Your request has been received and is being attended to Ref ID: ' + incident.refId
         try:
             _thread.start_new_thread( send_sms, (reporter.mobile, message))
         except Exception as e:
-            print("sms sending failed with exception:")
+            print("request created sms sending failed with exception:")
             print(e)
-    
-    # print("sending sms")
-    # try:
-    #     # send_sms()
-    #     send_sms("0752033023", "Test message after cleaning")
-    #     print("sms sent")
-    # except Exception as e:
-    #     print(e)
-    #     print("sms sending failed with above exception")
-    
-    # print("sms sending process end")
 
 def is_valid_incident(incident_id: str) -> bool:
     try:
@@ -563,7 +552,7 @@ def incident_change_assignee(user: User, incident: Incident, assignee: User):
     incident.assignee = assignee
     incident.save()
 
-    # request created email
+    # request assigned email
     print("sending request assigned email")
     if assignee.email:
         subject = 'Request Assigned'
@@ -644,6 +633,15 @@ def incident_close(user: User, incident: Incident, details: str):
         except:
             print ("Error: unable to start thread")
         print("request closed email sent")
+
+    if (incident.reporter.mobile):
+        print("sending request closed sms")
+        message = 'Your request has been resolved. Ref ID: ' + incident.refId
+        try:
+            _thread.start_new_thread( send_sms, (incident.reporter.mobile, message))
+        except Exception as e:
+            print("request closed sms sending failed with exception:")
+            print(e)
 
     event_services.update_workflow_event(user, incident, workflow)
 
