@@ -215,6 +215,7 @@ function IncidentFormInternal(props) {
     recipientName: "",
     recipientType: "",
     recipientAddress: "",
+    recipientId: "",
     recipientMobile: "",
     recipientTelephone: "",
     recipientEmail: "",
@@ -357,8 +358,7 @@ function IncidentFormInternal(props) {
     // TODO: move hooks out of this function.
     const incident = incidentUtils.getIncident(paramIncidentId);
     const reporters = useSelector(state => state.incident.reporters)
-    // TODO: yujith, uncomment this after completed get recipient info
-    // const recipients = useSelector(state => state.incident.recipients)
+    const recipients = useSelector(state => state.incident.recipients)
 
     if (!paramIncidentId) {
       // new incident form
@@ -370,10 +370,9 @@ function IncidentFormInternal(props) {
       ? reporters.byIds[incident.reporter]
       : "";
     
-    // TODO: yujith, uncomment this after completed get recipient info
-    // const recipient = incident
-    // ? recipients.byIds[incident.recipient]
-    // : "";
+    const recipient = incident
+    ? recipients.byIds[incident.recipient]
+    : "";
 
     if (reporter) {
       Object.assign(initData, {
@@ -388,18 +387,25 @@ function IncidentFormInternal(props) {
         accusedAffiliation: reporter.accusedPoliticalAffiliation,
       });
     }
-
-    // TODO: yujith, uncomment this after completed get recipient info
-    // if (recipient) {
-    //     Object.assign(initData, {
-    //       recipientName: reporter.name,
-    //       recipientType: reporter.reporter_type,
-    //       recipientEmail: reporter.email,
-    //       recipientMobile: reporter.mobile,
-    //       recipientTelephone: reporter.telephone,
-    //       recipientAddress: reporter.address,
-    //     });
-    //   }
+    if (recipient) {
+        Object.assign(initData, {
+          recipientName: recipient.name,
+          recipientType: recipient.recipientType,
+          recipientEmail: recipient.email,
+          recipientMobile: recipient.mobile,
+          recipientTelephone: recipient.telephone,
+          recipientAddress: recipient.address,
+          recipientCity: recipient.city,
+          recipientDistrict: recipient.district,
+          recipientGramaNiladhari: recipient.gnDivision,
+          recipientLocation: recipient.location,
+          showRecipient: "YES",
+        });
+      }else{
+        Object.assign(initData, {
+          showRecipient: "No",
+        });
+      }
 
     //TODO: Need to split the date values to date and time
     if (initData.occured_date) {
@@ -525,33 +531,33 @@ function IncidentFormInternal(props) {
     city: Yup.string().required("Required"),
 
     recipientName: Yup.mixed().when("showRecipient", (showRecipient, IncidentSchema) =>
-    showRecipient == "Yes"
+    showRecipient == "YES"
         ? IncidentSchema.required("Required")
         : IncidentSchema
     ),
     recipientType: Yup.mixed().when("showRecipient", (showRecipient, IncidentSchema) =>
-    showRecipient == "Yes"
+    showRecipient == "YES"
         ? IncidentSchema.required("Required")
         : IncidentSchema
     ),
     recipientAddress: Yup.mixed().when("showRecipient", (showRecipient, IncidentSchema) =>
-    showRecipient == "Yes"
+    showRecipient == "YES"
         ? IncidentSchema.required("Required")
         : IncidentSchema
     ),
     recipientCity: Yup.mixed().when("showRecipient", (showRecipient, IncidentSchema) =>
-    showRecipient == "Yes"
+    showRecipient == "YES"
         ? IncidentSchema.required("Required")
         : IncidentSchema
     ),
 
     recipientMobile: Yup.mixed().when("showRecipient", (showRecipient, IncidentSchema) =>
-    showRecipient == "Yes"
+    showRecipient == "YES"
         ? IncidentSchema.required("Required")
         : IncidentSchema
     ),
     recipientDistrict: Yup.mixed().when("showRecipient", (showRecipient, IncidentSchema) =>
-    showRecipient == "Yes"
+    showRecipient == "YES"
         ? IncidentSchema.required("Required")
         : IncidentSchema
     ),

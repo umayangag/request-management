@@ -108,6 +108,7 @@ function NavTabs({ classes, match }) {
     const [files, setFiles] = useState([]);
     const [activeIncident, setActiveIncident] = useState(null);
     const [activeReporter, setActiveReporter] = useState(null);
+    const [activeRecipient, setActiveRecipient] = useState(null);
 
     const sharedState = useSelector(state => state.shared);
     const {
@@ -126,6 +127,7 @@ function NavTabs({ classes, match }) {
 
     const incidents = useSelector(state => state.incident.incidents);
     const reporters = useSelector(state => state.incident.reporters);
+    const recipients = useSelector(state => state.incident.recipients);
     const events = useSelector(state => state.event.events);
     const users = useSelector(state => state.user.users);
     const organizations = useSelector(state => state.user.organizations);
@@ -177,6 +179,7 @@ function NavTabs({ classes, match }) {
             const incident = incidents.byIds[incidentId];
             setActiveIncident(incident);
             setActiveReporter(reporters.byIds[incident.reporter]);
+            setActiveRecipient(recipients.byIds[incident.recipient]);
         }
         dispatch(getIncidentEvents(incidentId));
     }, [incidents]);
@@ -200,7 +203,6 @@ function NavTabs({ classes, match }) {
     if(!activeIncident){
         return <></>;
     }
-
     return(
         <NoSsr>
             <Grid container spacing={24} >
@@ -211,7 +213,7 @@ function NavTabs({ classes, match }) {
                             category={category}
                             election={election}
                             reporter={activeReporter}
-
+                            recipient={activeRecipient}
                             institutions = {institutions}
                             provinces={provinces}
                             districts={districts}
