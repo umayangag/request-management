@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from 'react';
 import { withRouter } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -97,6 +97,15 @@ function GuestFormSuccessPage(props) {
         break;
     }
   };
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      dispatch(resetIncidentState());
+      dispatch(moveStepper({step:0}))
+        props.history.push(`/`);
+    }, 60000);
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <div className={classes.root}>

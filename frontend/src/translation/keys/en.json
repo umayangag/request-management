@@ -89,6 +89,8 @@
   "request.management.incident.create.time": "Request Time",
   "request.management.incident.create.severity": "Priority*",
   "request.management.incident.create.upload_file": "Upload File (You can upload multiple files)",
+  "request.management.incident.create.contact_info": "Contact Information",
+
 
   "request.management.incident.create.reporter_information": "Reporter / Compiler Information",
   "request.management.incident.create.reporter": "Reporter",
