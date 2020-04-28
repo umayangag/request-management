@@ -1264,11 +1264,7 @@ function IncidentFormInternal(props) {
               {/* contact information of the complianer */}
               <Paper className={classes.paper}>
                 <Typography variant="h5" gutterBottom>
-<<<<<<< HEAD
                 {f({ id: "request.management.incident.create.contact_information", defaultMessage: "Contact Information" })}
-=======
-                {f({ id: "request.management.incident.create.contact_info", defaultMessage: "Contact Information" })}
->>>>>>> cd5f777824cfa771da834e2de9fda10e8414563f
                 </Typography>
                 <Grid container spacing={24}>
                   <Grid item xs={12} sm={6}>

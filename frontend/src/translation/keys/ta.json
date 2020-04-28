@@ -89,7 +89,6 @@
   "request.management.incident.create.time": "கோரிக்கை நேரம்",
   "request.management.incident.create.severity": "முன்னுரிமை*",
   "request.management.incident.create.upload_file": "கோப்பை பதிவேற்றவும் (நீங்கள் பல கோப்புகளை பதிவேற்றலாம்)",
-<<<<<<< HEAD
   "request.management.incident.create.contact_information": "தொடர்பு தகவல்",
 
   "request.management.incident.create.reporter_information": "நிருபர் / தொகுப்பான் தகவல்",
@@ -101,16 +100,6 @@
   "request.management.incident.create.reporter.email": "மின்னஞ்சல்",
   "request.management.incident.create.reporter.telephone": "நிலையான தொலைபேசி",
   "request.management.incident.create.reporter.onbehalf": "வேறொருவரின் சார்பாக",
-=======
-  "request.management.incident.create.contact_info": "தொடர்பு தகவல்",
-
-  "request.management.incident.create.reporter_information": "Reporter / Compiler Information",
-  "request.management.incident.create.reporter": "Reporter",
-  "request.management.incident.create.reporter.name": "Name",
-  "request.management.incident.create.reporter.address": "Address*",
-  "request.management.incident.create.reporter.mobile": "Mobile",
-  "request.management.incident.create.reporter.email": "Email",
->>>>>>> cd5f777824cfa771da834e2de9fda10e8414563f
   "request.management.incident.create.accused.name": "Accused name",
   "request.management.incident.create.accused.type": "Type",
   "request.management.incident.create.accused.political_affliation": "Political Affiliation",
@@ -135,7 +124,7 @@
   "request.management.incident.error.district": "ஒரு மாவட்டம் தேவை",
   "request.management.incident.error.email": "தவறான மின்னஞ்சல் முகவரி",
   "request.management.incident.error.recipient": "பெறுநரின் பெயர் தேவை",
-  "request.management.incident.error.Mobile": "கைபேசி தேவை",
+  "request.management.incident.error.mobile": "கைபேசி தேவை",
 
   "request.management.incident.error.incidenttype": "சம்பவ வகை தேவை",
 

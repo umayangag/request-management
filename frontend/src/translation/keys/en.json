@@ -10,7 +10,6 @@
   "request.management.report.incidents.forms.button.skip": "Skip",
   "request.management.report.incidents.forms.button.finish": "Submit",
 
-
   "request.management.report.incidents": "Submit a request",
   "request.management.report.incidents.helper.text": "* fields are mandatory.",
   "request.management.report.incidents.helper.text2": "Select your language of preference and fill in the form below.",
@@ -41,7 +40,6 @@
   "request.management.report.incidents.topcategory.error.message": "Category is required",
 
 
-  
   "request.management.report.incidents.section.location": "Your location details",
   "request.management.report.incidents.location": "Location name or description",
   "request.management.report.incidents.address": "Address*",
@@ -90,13 +88,8 @@
   "request.management.incident.create.time": "Request Time",
   "request.management.incident.create.severity": "Priority*",
   "request.management.incident.create.upload_file": "Upload File (You can upload multiple files)",
-<<<<<<< HEAD
   "request.management.incident.create.contact_information": "Contact Information",
   
-=======
-  "request.management.incident.create.contact_info": "Contact Information",
-
->>>>>>> cd5f777824cfa771da834e2de9fda10e8414563f
 
   "request.management.incident.create.reporter_information": "Reporter / Compiler Information",
   "request.management.incident.create.reporter": "Reporter",
@@ -131,7 +124,7 @@
   "request.management.incident.error.district": "District is Required",
   "request.management.incident.error.email": "Invalid email",
   "request.management.incident.error.recipient": "Recipient is Required",
-  "request.management.incident.error.Mobile": "Mobile is Required",
+  "request.management.incident.error.mobile": "Mobile is Required",
 
   "request.management.incident.error.incidenttype": "Incident Type is Required",
 
