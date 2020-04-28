@@ -10,7 +10,6 @@
   "request.management.report.incidents.forms.button.skip": "මඟ හරින්න",
   "request.management.report.incidents.forms.button.finish": "අවසන් කරන්න",
 
-
   "request.management.report.incidents": "ඉල්ලීමක් කරන්න",
   "request.management.report.incidents.helper.text": "* අනිවාර්ය වේ.",
   "request.management.report.incidents.helper.text2": "ඔබේ මනාප භාෂාව තෝරා පහත පෝරමය පුරවන්න.",
@@ -39,7 +38,6 @@
   "request.management.incident.create.location.onbehalf.no": "නැත",
   "request.management.report.incidents.subcategory.error.message": "උප කාණ්ඩය අවශ්‍ය වේ",
   "request.management.report.incidents.topcategory.error.message": "කාණ්ඩය අවශ්‍ය වේ",
-
 
 
   "request.management.report.incidents.section.location": "ඔබගේ ස්ථානය පිළිබඳ තොරතුරු",
@@ -80,7 +78,7 @@
   "request.management.home.incidents.list.last_actioned_at": "Last Actioned At",
   "request.management.home.incidents.list.created_date": "Created_date",
 
-  "request.management.incident.create.basic_information": "Basic Information",
+  "request.management.incident.create.basic_information": "මූලික තොරතුරු",
   "request.management.incident.create.type": "Type",
   "request.management.incident.create.mode_of_receipt": "ලැබීමේ ආකාරය*",
   "request.management.incident.create.title": "Title",
@@ -91,15 +89,17 @@
   "request.management.incident.create.time": "ඉල්ලුම් කාලය",
   "request.management.incident.create.severity": "ප්‍රමුඛතාවය*",
   "request.management.incident.create.upload_file": "ගොනුව උඩුගත කරන්න (ඔබට ගොනු කිහිපයක් උඩුගත කළ හැකිය)",
-  "request.management.incident.create.contact_info": "සබඳතා තොරතුරු",
+  "request.management.incident.create.contact_information": "සබඳතා තොරතුරු",
 
-
-  "request.management.incident.create.reporter_information": "Reporter / Compiler Information",
-  "request.management.incident.create.reporter": "Reporter",
-  "request.management.incident.create.reporter.name": "Name",
-  "request.management.incident.create.reporter.address": "Address*",
-  "request.management.incident.create.reporter.mobile": "Mobile",
-  "request.management.incident.create.reporter.email": "Email",
+  "request.management.incident.create.reporter_information": "වාර්තාකරු / සම්පාදක තොරතුරු",
+  "request.management.incident.create.reporter": "වාර්තාකරු",
+  "request.management.incident.create.reporter.name": "වාර්තාකරුගේ නම*",
+  "request.management.incident.create.reporter.type": "තනි පුද්ගල / සංවිධානය*",
+  "request.management.incident.create.reporter.address": "ලිපිනය*",
+  "request.management.incident.create.reporter.mobile": "ජංගම දුරකථනය",
+  "request.management.incident.create.reporter.telephone": "ස්ථාවර දුරකථනය",
+  "request.management.incident.create.reporter.email": "විද්යුත් තැපෑල",
+  "request.management.incident.create.reporter.onbehalf": "වෙනත් කෙනෙකු වෙනුවෙන්",
   "request.management.incident.create.accused.name": "Accused name",
   "request.management.incident.create.accused.type": "Type",
   "request.management.incident.create.accused.political_affliation": "Political Affiliation",
@@ -113,6 +113,24 @@
   "request.management.incident.create.location.district": "දිස්ත්‍රික්කය",
   "request.management.incident.create.location.gn_division": "ග්‍රාම නිලධාරි කොට්ටාශය",
   "request.management.report.incidents.section.location.info": "උදව් අවශ්‍ය ස්ථානය ඔබේ ලිපිනයට වඩා වෙනස් නම්, කරුණාකර ස්ථාන විස්තර සමඟ මෙම කොටස පුරවන්න.",
+
+  "request.management.incident.error.description": "ප්‍රශ්නය / ඉල්ලීම පිළිබද විස්තර අවශ්‍යය වේ",
+  "request.management.incident.error.category": "වර්ගය අවශ්‍යය වේ",
+  "request.management.incident.error.severity": "ප්‍රමුඛතාවය අවශ්‍යය වේ",
+  "request.management.incident.error.name": "නම අවශ්‍යය වේ",
+  "request.management.incident.error.type": "තනි පුද්ගල / සංවිධානය ද යන්න අවශ්‍යය වේ",
+  "request.management.incident.error.address": "ලිපිනය අවශ්‍යය වේ",
+  "request.management.incident.error.city": "නගරය අවශ්‍යය වේ",
+  "request.management.incident.error.district": "දිස්ත්‍රික්කය අවශ්‍යය වේ",
+  "request.management.incident.error.email": "අවලංගු ඊමේල් ලිපිනයකි",
+  "request.management.incident.error.recipient": "ලබන්නාගේ නම අවශ්‍යය වේ",
+  "request.management.incident.error.mobile": "ජංගම දුරකථනය අවශ්‍යය වේ",
+
+  "request.management.incident.error.incidenttype": "සිදුවීම් වර්ගය අවශ්‍යය වේ",
+
+  "request.management.incident.create.success.message": "ඉල්ලීම සාර්ථකව ඉදිරිපත් කරන ලදි!",
+  "request.management.incident.create.alert.title": "ඉල්ලීම් දිනයකින් තොරව ඉදිරිපත් කරන්නේද?",
+  "request.management.incident.create.alert.text": "ඔබ ඉල්ලීම් දිනයකින් තොරව ඉදිරිපත් කිරීමට උත්සාහ කරයි.",
 
   "request.management.incident.review.review_complaints": "Review",
   "request.management.incident.review.text_search": "Text Search",
