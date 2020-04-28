@@ -531,6 +531,17 @@ class Test(APIView):
 
         return Response(data)
 
+class CannedResponseList(APIView):
+
+    def get(self, request, format=None):
+        """
+        Return a list of all canned responses.
+        """
+        canned_responses = CannedResponse.objects.all()
+        serializer = CannedResponseSerializer(canned_responses, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK )
+
+
 # public user views
 # todo
 # check guest user here
@@ -631,15 +642,20 @@ class IncidentViewPublicUserView(APIView):
         serializer = IncidentSerializer(incident)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
+class IncidentWorkflowPublicView(APIView):
+    permission_classes = []
 
-class CannedResponseList(APIView):
+    def post(self, request, incident_id, workflow, format=None):
+        incident = get_incident_by_id(incident_id)
 
-    def get(self, request, format=None):
-        """
-        Return a list of all canned responses.
-        """
-        canned_responses = CannedResponse.objects.all()
-        serializer = CannedResponseSerializer(canned_responses, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK )
+        if workflow == "provide-information":
+            comment = request.data['comment']
+            start_event_id = request.data['start_event']
+            start_event = event_service.get_event_by_id(start_event_id)
+            user = get_guest_user()
+            incident_provide_information(user, incident, comment, start_event)
 
+        else:
+            return Response("Invalid workflow", status=status.HTTP_400_BAD_REQUEST)
 
+        return Response("Incident workflow success", status=status.HTTP_200_OK)

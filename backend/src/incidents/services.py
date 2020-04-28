@@ -51,7 +51,6 @@ from .serializers import IncidentCommentSerializer
 def get_incident_status_guest(refId):
     """This function is to annouce public on a incident status"""
     status = {}
-    messages = []
     try:
         incident = Incident.objects.get(refId=refId)
     except Incident.DoesNotExist:
@@ -66,17 +65,52 @@ def get_incident_status_guest(refId):
         or incident.current_status == StatusType.INFORMATION_PROVIDED.name:
         status["reply"] = "Your request is currently being attended to."
     elif incident.current_status == StatusType.INFORMATION_REQESTED.name:
-        status["reply"] = "Your request requires further information to proceed."
+        status = get_public_status_on_information_request(incident)
     elif incident.current_status == StatusType.CLOSED.name or incident.current_status == StatusType.INVALIDATED.name:
-        status["reply"] = "Your request has been resolved and closed."
-        # prepare resolution messages
-        close = CloseWorkflow.objects.filter(incident=incident).order_by('-created_date')
+        status = get_public_status_on_close(incident)
+
+    return status
+
+def get_public_status_on_information_request(incident):
+    status = {}
+    messages = []
+
+    # get all information requests
+    requests = RequestInformationWorkflow.objects.filter(incident=incident, is_information_provided=False)
+    for request in requests:
         output = {}
-        output["header"] = "Resolution"
-        # get the last close comment
-        output["content"] = close[0].comment
+        output["header"] = "Required information"
+        output["content"] = request.comment
+
+        actions = {}
+        actions["name"] = "Submit reply"
+        actions["incident_id"] = request.incident_id
+        event = Event.objects.get(reference_id=request.id)
+        actions["start_event"] = event.id
+        output["actions"] = actions
+
         messages.append(output)
-        status["messages"] = messages
+
+    status["reply"] = "Your request requires further information to proceed."
+    status["messages"] = messages
+
+    return status
+
+def get_public_status_on_close(incident):
+    status = {}
+    messages = []
+
+    # FIXME: check for status type on StatusType.CLOSED.name
+    # prepare resolution messages
+    close = CloseWorkflow.objects.filter(incident=incident).order_by('-created_date')
+    output = {}
+    output["header"] = "Resolution"
+    # get the last close comment
+    output["content"] = close[0].comment
+    messages.append(output)
+
+    status["reply"] = "Your request has been resolved and closed."
+    status["messages"] = messages
 
     return status
 

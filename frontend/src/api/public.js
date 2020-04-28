@@ -27,3 +27,7 @@ export const loadIncident = async (loadData) => {
 export const checkIncidentStatus = async (refId) => {
     return (await handler.get(`/public/incidents/?refId=`+refId)).data;
 }
+
+export const updateIncidentWorkflow = async (incidentId, workflowType, workflowUpdate) => {
+    return (await handler.post(`/public/incidents/${incidentId}/workflow/${workflowType}`, workflowUpdate)).data;
+};

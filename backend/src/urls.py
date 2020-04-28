@@ -40,34 +40,26 @@ schema_view = get_swagger_view(title='Incident Backend API')
 
 urlpatterns = [
     path('', schema_view),
-
     path("admin/", admin.site.urls),
     path("auth-jwt/", obtain_jwt_token),
-
     path("categories/", common_views.CategoryList.as_view()),
     path("channels/", common_views.ChannelList.as_view()),
     path("districts/", common_views.DistrictList.as_view()),
     path("provinces/", common_views.ProvinceList.as_view()),
     path("gndivisions/", common_views.GNDivisionList.as_view()),
-
     path("wards/", common_views.WardList.as_view()),
-
     path("pollingstations/", common_views.PollingStationList.as_view()),
     path("pollingdivisions/", common_views.PollingDivisionList.as_view()),
-
     path("policestations/", common_views.PoliceStationList.as_view()),
     path("policedivisions/", common_views.PoliceDivisionList.as_view()),
-
     path("dsdivisions/", common_views.DSDivisionList.as_view()),
     path("gndivisions/", common_views.GNDivisionList.as_view()),
-
     path("politicalparties/", common_views.PoliticalPartyList.as_view()),
-
     path("incidents/", incident_views.IncidentList.as_view()),
     path("incidents/sms", incident_views.SMSIncident.as_view()),
-    path("incidents/<uuid:incident_id>", incident_views.IncidentDetail.as_view()),
+    path("incidents/<uuid:incident_id>",
+         incident_views.IncidentDetail.as_view()),
     path("incidents/<uuid:incident_id>/events", event_views.get_event_trail),
-
     path(
         "incidents/<uuid:incident_id>/comment",
         incident_views.IncidentCommentView.as_view(),
@@ -104,56 +96,49 @@ urlpatterns = [
         "entities/",
         user_views.OrganizationList.as_view(),
     ),
-    path(
-        "incidents/<uuid:incident_id>/workflow/<str:workflow>",
-        incident_views.IncidentWorkflowView.as_view()
+    path("incidents/<uuid:incident_id>/workflow/<str:workflow>",
+         incident_views.IncidentWorkflowView.as_view()
     ),
     path(
         "reports/",
         report_views.ReportingView.as_view(),
     ),
-    path('pdfgen/',
+    path(
+        'pdfgen/',
         report_views.ReportingAccessView.as_view(),
     ),
-    path(
-        "incidents/test",
-        incident_views.Test.as_view()
+    path("incidents/test", incident_views.Test.as_view()
     ),
-    path(
-        "incidents/auto-escalate",
-        incident_views.IncidentAutoEscalate.as_view()
+    path("incidents/auto-escalate",
+         incident_views.IncidentAutoEscalate.as_view()
     ),
-    path(
-        "notifications",
+    path("notifications",
         notification_views.NotificationList.as_view()
     ),
-    path(
-        "notifications/<uuid:notification_id>/read",
-        notification_views.NotificationRead.as_view()
+    path("notifications/<uuid:notification_id>/read",
+         notification_views.NotificationRead.as_view()
+    ),
+    path("canned_response/",
+        incident_views.CannedResponseList.as_view()
     ),
 
     # public paths
-
-    path(
-        "public/incidents/",
+    path("public/incidents/",
         incident_views.IncidentPublicUserView.as_view()
     ),
-    path(
-        "public/incidents/<uuid:incident_id>",
-        incident_views.IncidentPublicUserView.as_view()
+    path("public/incidents/<uuid:incident_id>",
+         incident_views.IncidentPublicUserView.as_view()
     ),
-    path(
-        "public/reporters/<int:reporter_id>",
-        incident_views.ReporterPublicUserView.as_view()
+    path("public/reporters/<int:reporter_id>",
+         incident_views.ReporterPublicUserView.as_view()
     ),
-    path(
-        "public/incidents/<uuid:incident_id>/attach_media",
-        incident_views.IncidentMediaPublicUserView.as_view()
+    path("public/incidents/<uuid:incident_id>/attach_media",
+         incident_views.IncidentMediaPublicUserView.as_view()
     ),
-    path(
-        "public/reporter/get_incident",
-        incident_views.IncidentViewPublicUserView.as_view()
+    path("public/reporter/get_incident",
+         incident_views.IncidentViewPublicUserView.as_view()
     ),
-    path("canned_response/", incident_views.CannedResponseList.as_view()),
-
+    path("public/incidents/<uuid:incident_id>/workflow/<str:workflow>",
+         incident_views.IncidentWorkflowPublicView.as_view()
+    ),
 ]

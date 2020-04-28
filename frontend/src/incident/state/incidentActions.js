@@ -282,7 +282,7 @@ export const createGuestIncidentWithReporter = (incidentData, reporterData, file
         try{
             const response = await publicApi.createIncident(incidentData);
             if(fileData){
-            dispatch(uploadFileGuest(response.data.id, fileData));
+                dispatch(uploadFileGuest(response.data.id, fileData));
             }
             const reporterResponse = await publicApi.updateReporter(response.data.reporter, reporterData);
             dispatch(createGuestIncidentWithReporterSuccess({reporter:reporterResponse.data, incident:response.data}));

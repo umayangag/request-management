@@ -647,11 +647,11 @@ const VerticalLinearStepper = (props) => {
         if (!incidentId) {
           // creating a new incident
           if (incidentFiles) {
+            // create issue with files
             const fileData = new FormData();
             for (var file of incidentFiles) {
               fileData.append("files[]", file);
             }
-            //creating new incident
             if (validRecaptchaInputs()) {
               let incidentData = {
                 description: incidentDescription,
@@ -700,7 +700,7 @@ const VerticalLinearStepper = (props) => {
               dispatch(moveStepper({ step: activeStep + 1 }));
             }
           } else {
-            //creating new incident
+            // create issue without files
             if (validRecaptchaInputs()) {
               const fileData = "";
               let incidentData = {

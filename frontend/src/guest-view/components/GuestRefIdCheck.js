@@ -29,6 +29,7 @@ import CardActionArea from "@material-ui/core/CardActionArea";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
+import TextField from '@material-ui/core/TextField';
 
 import * as publicApi from "../../api/public";
 
@@ -85,6 +86,9 @@ const styles = (theme) => ({
   card: {
     maxWidth: 400,
   },
+  textField: {
+    width: "95%",
+  }
 });
 
 const GuestRefIdCheck = (props) => {
@@ -94,16 +98,48 @@ const GuestRefIdCheck = (props) => {
   const [refId, setRefId] = useState("");
   const [status, setStatus] = useState("");
   const [messages, setMessages] = useState([]);
+  const [comment, setComment] = useState("");
+
+
+  useEffect( () => {
+    if (!refId){
+      setRefId(getQueryParamRefId())
+    }
+  })
+
+  // TODO: following is a temp work.
+  // may have to use proper query param plugin.
+  const getQueryParamRefId = () => {
+    const queryParam = window.location.search.split("=");
+    return queryParam[1];
+  }
 
   const handleSubmit = async () => {
     try {
       const response = (await publicApi.checkIncidentStatus(refId)).data;
       setStatus(response.reply);
-      console.log(response.messages);
       setMessages(response.messages);
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const onActionButtonClick = async (actions, workflowType) => {
+    try {
+      const workflowUpdate = {
+        start_event: actions.start_event,
+        comment: comment
+      }
+      const response = await publicApi.updateIncidentWorkflow(
+        actions.incident_id,
+        workflowType,
+        workflowUpdate
+      );
+    } catch (error) {
+      console.log(error)
+    }
+    props.history.push(`/report/status?refId=`+refId);
+    window.location.reload();
   };
 
   return (
@@ -212,11 +248,28 @@ const GuestRefIdCheck = (props) => {
                     {message.header}
                   </Typography>
                   <Typography component="p">{message.content}</Typography>
+                  <form className={classes.root} noValidate autoComplete="off">
+                    <TextField
+                      id="comment"
+                      label="Type in your reply"
+                      className={classes.textField}
+                      value={comment}
+                      onChange={ (e) => {setComment(e.target.value)}}
+                      margin="normal"
+                      variant="outlined"
+                      multiline
+                      rows="4"
+                    />
+                  </form>
                 </CardContent>
-                {message.actionURL && (
+                {message.actions && (
                   <CardActions>
-                    <Button size="small" color="primary">
-                      Take Action
+                    <Button
+                      size="small"
+                      color="primary"
+                      onClick={() => (onActionButtonClick(message.actions, "provide-information"))}
+                    >
+                      {message.actions.name}
                     </Button>
                   </CardActions>
                 )}
