@@ -46,6 +46,11 @@ from django.core.mail import send_mail
 
 from .serializers import IncidentCommentSerializer
 
+from zeep import Client
+from zeep.wsse.username import UsernameToken
+import requests
+from django.conf import settings
+
 def get_incident_status_guest(refId):
     """This function is to annouce public on a incident status"""
     status = {}
@@ -95,6 +100,37 @@ def send_email(subject, message, receivers):
         print(*receivers)
         print(e)
 
+
+def send_sms(number, message):
+    number = "94" + number[-9:]
+    headers = {'content-type': 'text/xml'}
+    
+    body = """<?xml version='1.0' encoding='utf-8'?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:v1="http://schemas.icta.lk/xsd/kannel/handler/v1/" soapenv:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+<soapenv:Header>
+<govsms:authData xmlns:govsms="http://govsms.icta.lk/">
+<govsms:user>{2}</govsms:user>
+<govsms:key>{3}</govsms:key>
+</govsms:authData>
+</soapenv:Header>
+<soapenv:Body>
+<v1:SMSRequest>
+<v1:requestData>
+<v1:outSms>{1}</v1:outSms>
+<v1:recepient>{0}</v1:recepient>
+<v1:depCode>IctaTest</v1:depCode>
+<v1:smscId/>
+<v1:billable/>
+</v1:requestData>
+</v1:SMSRequest>
+</soapenv:Body>
+</soapenv:Envelope>
+""".format(number, message, settings.SMS_GATEWAY_USER, settings.SMS_GATEWAY_PASSWORD)
+
+    response = requests.post("http://lankagate.gov.lk:9080/services/GovSMSMTHandlerProxy?wsdl",data=body,headers=headers)
+    print("response")
+    print(response.status_code)
+    print(response.reason)
 
 def send_incident_created_mail(reporter_id):
     # request created email
@@ -333,7 +369,16 @@ def create_reporter():
 
 def create_incident_postscript(incident: Incident, user: User) -> None:
     """Function to take care of event, status and severity creation"""
-
+    print("sending sms")
+    try:
+        # send_sms()
+        send_sms("0752033023", "Test message after cleaning")
+        print("sms sent")
+    except Exception as e:
+        print(e)
+        print("sms sending failed with above exception")
+    
+    print("sms sending process end")
     if user is None:
         # public user case
         # if no auth token, then we assign the guest user as public user
