@@ -15,7 +15,8 @@ from ..incidents.models import (
     EscalateWorkflow,
     CloseWorkflow,
     InvalidateWorkflow,
-    ReopenWorkflow
+    ReopenWorkflow,
+    SendCannedResponseWorkflow
 )
 from django.contrib.auth.models import User
 
@@ -167,6 +168,15 @@ class GenericDataRelatedField(serializers.RelatedField):
                     "type": "Reopen",
                     "data": {
                         "comment": value.comment
+                    }
+                }
+            }
+        elif isinstance(value, SendCannedResponseWorkflow):
+            return {
+                "workflow": {
+                    "type":"Send Canned Response",
+                    "data": {
+                        "responseId":value.canned_response.id
                     }
                 }
             }

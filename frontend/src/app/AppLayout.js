@@ -39,7 +39,8 @@ import {
     fetchPollingStations,
     fetchPoliceStations,
     fetchPoliceDivisions,
-    fetchWards
+    fetchWards,
+    getCannedResponses
 } from '../shared/state/sharedActions'
 import { changeLanguage } from '../shared/state/sharedActions';
 import { loadUsers } from '../user/state/userActions'
@@ -167,6 +168,7 @@ class DomainContainer extends React.Component {
         this.props.getPoliceDivisions();
         this.props.getWards();
         this.props.loadAllUsers();
+        this.props.loadCannedResponses();
         const signInData = localStorage.read('ECIncidentManagementUser');
         signInData && this.setState({ authToken: signInData.token })
         this.loadNotifications()
@@ -514,6 +516,9 @@ const mapDispatchToProps = (dispatch) => {
         loadAllUsers: () => {
             dispatch(loadUsers());
         },
+        loadCannedResponses: () => {
+            dispatch(getCannedResponses());
+        }
     };
 };
 

@@ -75,6 +75,7 @@ import {
 
 } from './Shared.types';
 
+import {getCannedResponsesSuccess} from './sharedActions'
 
 // transforms arrays from backend to objects.
 // this helps to maintain better state shape.
@@ -87,6 +88,18 @@ const transformArray = (array) => {
     array.reduce((accumulator, currValue) => {
         transformedData.byCode[currValue.code] = currValue;
         transformedData.allCodes.push(currValue.code);
+    },0)
+    return transformedData;
+}
+
+const transformCannedResponseArray = (array) => {
+    let transformedData = {
+        byIds: {},
+        allIds : []
+    };
+    array.reduce((accumulator, currValue) => {
+        transformedData.byIds[currValue.id] = currValue;
+        transformedData.allIds.push(currValue.id);
     },0)
     return transformedData;
 }
@@ -163,6 +176,10 @@ const initialState = {
         rememberMe: true,
     },
     selectedLanguage: 'en',
+    cannedResponses:{
+        byIds:{},
+        allIds:[]
+    }
 }
 
 export default function sharedReducer(state, action) {
@@ -324,6 +341,9 @@ export default function sharedReducer(state, action) {
             case RESET_ACTIVE_INCIDENT:
                 // draft.activeIncident.data = {};
                 // draft.activeIncidentReporter = null;
+                return draft;
+            case 'INCIDENT/GET_CANNED_RESPONSE_SUCCESS':
+                draft.cannedResponses = transformCannedResponseArray(action.payload)
                 return draft;
         }
     });

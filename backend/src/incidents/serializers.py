@@ -17,7 +17,9 @@ from .models import (
     IncidentPoliceReport,
     IncidentPerson,
     IncidentVehicle,
-    EscalateExternalWorkflow)
+    EscalateExternalWorkflow,
+    CannedResponse,
+    SendCannedResponseWorkflow)
 from ..common.serializers import DistrictSerializer, PoliceStationSerializer
 from ..common.models import PoliceStation
 from ..custom_auth.serializers import UserSerializer
@@ -225,3 +227,14 @@ class IncidentCommentSerializer(serializers.ModelSerializer):
     class Meta:
         model = IncidentComment
         fields = ("comment", "isOutcome", "sn_body", "tm_body", "incident")
+
+class CannedResponseSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CannedResponse
+        fields = "__all__"
+        
+
+class SendCannedResponseWorkflowSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SendCannedResponseWorkflow
+        fields = "__all__"

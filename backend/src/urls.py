@@ -154,5 +154,6 @@ urlpatterns = [
         "public/reporter/get_incident",
         incident_views.IncidentViewPublicUserView.as_view()
     ),
+    path("canned_response/", incident_views.CannedResponseList.as_view()),
 
 ]
