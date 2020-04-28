@@ -525,64 +525,31 @@ function IncidentFormInternal(props) {
   // );
   //validation schema
   const IncidentSchema = Yup.object().shape({
-    showRecipient: Yup.mixed().required("Required"),
-    incidentType: Yup.mixed().required("Required"),
-    infoChannel: Yup.mixed().required("Required"),
-    city: Yup.string().required("Required"),
-
-    recipientName: Yup.mixed().when("showRecipient", (showRecipient, IncidentSchema) =>
-    showRecipient == "YES"
-        ? IncidentSchema.required("Required")
-        : IncidentSchema
-    ),
-    recipientType: Yup.mixed().when("showRecipient", (showRecipient, IncidentSchema) =>
-    showRecipient == "YES"
-        ? IncidentSchema.required("Required")
-        : IncidentSchema
-    ),
-    recipientAddress: Yup.mixed().when("showRecipient", (showRecipient, IncidentSchema) =>
-    showRecipient == "YES"
-        ? IncidentSchema.required("Required")
-        : IncidentSchema
-    ),
-    recipientCity: Yup.mixed().when("showRecipient", (showRecipient, IncidentSchema) =>
-    showRecipient == "YES"
-        ? IncidentSchema.required("Required")
-        : IncidentSchema
-    ),
-
-    recipientMobile: Yup.mixed().when("showRecipient", (showRecipient, IncidentSchema) =>
-    showRecipient == "YES"
-        ? IncidentSchema.required("Required")
-        : IncidentSchema
-    ),
-    recipientDistrict: Yup.mixed().when("showRecipient", (showRecipient, IncidentSchema) =>
-    showRecipient == "YES"
-        ? IncidentSchema.required("Required")
-        : IncidentSchema
-    ),
-
-    reporterAddress: Yup.string().required("Required"),
-    reporterType: Yup.string().required("Required"),
-    reporterName: Yup.string().required("Required"),
-    // address: Yup.string().required("Required"),
-    description: Yup.string().required("Required"),
-    // occurrence: Yup.mixed().when('incidentType', (incidentType, IncidentSchema) => (incidentType == 'COMPLAINT' ? IncidentSchema.required("Required") : IncidentSchema)),
-    category: Yup.mixed().required("Required"),
-    // election: Yup.mixed().required("Required"),
+    description: Yup.string().required(f({ id: "request.management.incident.error.description", defaultMessage: "Description is Required" })),
+    category: Yup.mixed().required(f({ id: "request.management.incident.error.category", defaultMessage: "Category is Required" })),
     severity: Yup.mixed().when("incidentType", (incidentType, IncidentSchema) =>
       incidentType == "COMPLAINT"
-        ? IncidentSchema.required("Required")
+        ? IncidentSchema.required(f({ id: "request.management.incident.error.severity", defaultMessage: "Priority is Required" }))
         : IncidentSchema
     ),
+    incidentType: Yup.mixed().required("Required"),
+    infoChannel: Yup.mixed().required("Required"),
+    reporterName: Yup.string().required(f({ id: "request.management.incident.error.name", defaultMessage: "Name is Required" })),
+
+    reporterAddress: Yup.string().required(f({ id: "request.management.incident.error.address", defaultMessage: "Address is Required" })),
+    reporterType: Yup.string().required(f({ id: "request.management.incident.error.type", defaultMessage: "Reporter Type is Required" })),
+    city: Yup.string().required(f({ id: "request.management.incident.error.city", defaultMessage: "City is Required" })),
+    // address: Yup.string().required("Required"),
+    // occurrence: Yup.mixed().when('incidentType', (incidentType, IncidentSchema) => (incidentType == 'COMPLAINT' ? IncidentSchema.required("Required") : IncidentSchema)),
+    // election: Yup.mixed().required("Required"),
     district: Yup.mixed().when("incidentType", (incidentType, IncidentSchema) =>
       incidentType == "COMPLAINT"
-        ? IncidentSchema.required("Required")
+        ? IncidentSchema.required(f({ id: "request.management.incident.error.district", defaultMessage: "District is Required" }))
         : IncidentSchema
     ),
     reporterMobile: Yup.number(),
     reporterTelephone: Yup.number(),
-    reporterEmail: Yup.string().email("Invalid email"),
+    reporterEmail: Yup.string().email(f({ id: "request.management.incident.error.email", defaultMessage: "Invalid email" })),
     institution: Yup.mixed().when(
       "incidentType",
       (incidentType, IncidentSchema) =>
@@ -603,6 +570,39 @@ function IncidentFormInternal(props) {
         incidentType == "INQUIRY"
           ? IncidentSchema.required("Required")
           : IncidentSchema
+    ),
+    showRecipient: Yup.mixed().required(f({ id: "request.management.incident.error.recipient", defaultMessage: "Recipient is Required" })),
+
+    recipientName: Yup.mixed().when("showRecipient", (showRecipient, IncidentSchema) =>
+    showRecipient == "YES"
+        ? IncidentSchema.required(f({ id: "request.management.incident.error.recipient", defaultMessage: "Recipient is Required" }))
+        : IncidentSchema
+    ),
+    recipientType: Yup.mixed().when("showRecipient", (showRecipient, IncidentSchema) =>
+    showRecipient == "YES"
+        ? IncidentSchema.required(f({ id: "request.management.incident.error.type", defaultMessage: "Recipient Type is Required" }))
+        : IncidentSchema
+    ),
+    recipientAddress: Yup.mixed().when("showRecipient", (showRecipient, IncidentSchema) =>
+    showRecipient == "YES"
+        ? IncidentSchema.required(f({ id: "request.management.incident.error.address", defaultMessage: "Address is Required" }))
+        : IncidentSchema
+    ),
+    recipientCity: Yup.mixed().when("showRecipient", (showRecipient, IncidentSchema) =>
+    showRecipient == "YES"
+        ? IncidentSchema.required(f({ id: "request.management.incident.error.city", defaultMessage: "City is Required" }))
+        : IncidentSchema
+    ),
+
+    recipientMobile: Yup.mixed().when("showRecipient", (showRecipient, IncidentSchema) =>
+    showRecipient == "YES"
+        ? IncidentSchema.required(f({ id: "request.management.incident.error.mobile", defaultMessage: "Mobile is Required" }))
+        : IncidentSchema
+    ),
+    recipientDistrict: Yup.mixed().when("showRecipient", (showRecipient, IncidentSchema) =>
+    showRecipient == "YES"
+        ? IncidentSchema.required(f({ id: "request.management.incident.error.district", defaultMessage: "District is Required" }))
+        : IncidentSchema
     ),
   });
 
@@ -717,7 +717,7 @@ function IncidentFormInternal(props) {
                               : null,
                         }}
                       >
-                        {f({ id: "request.management.incident.create.mode_of_receipt" })}
+                        {f({ id: "request.management.incident.create.mode_of_receipt", defaultMessage: "Mode of receipt*" })}
                       </div>
                     </FormLabel>
 
@@ -774,7 +774,7 @@ function IncidentFormInternal(props) {
                       label={
                         values.incidentType === "INQUIRY"
                           ? "Letter reference number*"
-                          : f({ id: "request.management.incident.create.description" })
+                          : f({ id: "request.management.incident.create.description", defaultMessage: "Issue / Request details*" })
                       }
                       placeholder="Press enter for new lines."
                       className={classes.textField}
@@ -826,7 +826,7 @@ function IncidentFormInternal(props) {
                       className={classes.formControl}
                       error={touched.category && errors.category}
                     >
-                      <InputLabel htmlFor="category">{f({ id: "request.management.incident.create.category" })}*</InputLabel>
+                      <InputLabel htmlFor="category">{f({ id: "request.management.incident.create.category", defaultMessage: "Category" })}*</InputLabel>
                       <Select
                         value={values.category}
                         onChange={handleChange}
@@ -912,7 +912,7 @@ function IncidentFormInternal(props) {
                       <Grid item xs={12} sm={3}>
                         <TextField
                           id="occured_date_date"
-                          label={f({ id: "request.management.incident.create.date" })}
+                          label={f({ id: "request.management.incident.create.date", defaultMessage: "Request Date" })}
                           type="date"
                           value={values.occured_date_date}
                           InputLabelProps={{ shrink: true }}
@@ -932,7 +932,7 @@ function IncidentFormInternal(props) {
                         />
                         <TextField
                           id="occured_date_time"
-                          label={f({ id: "request.management.incident.create.time" })}
+                          label={f({ id: "request.management.incident.create.time", defaultMessage: "Request Time" })}
                           type="time"
                           value={values.occured_date_time}
                           InputLabelProps={{ shrink: true }}
@@ -950,7 +950,7 @@ function IncidentFormInternal(props) {
                         component="fieldset"
                         className={classes.formControl}
                       >
-                        <FormLabel component="legend">{f({ id: "request.management.incident.create.severity" })}</FormLabel>
+                        <FormLabel component="legend">{f({ id: "request.management.incident.create.severity", defaultMessage: "Priority*" })}</FormLabel>
                         <RadioGroup
                           name="severity"
                           id="severity"
@@ -1167,7 +1167,7 @@ function IncidentFormInternal(props) {
                     <Grid item xs={12} sm={3}>
                       <TextField
                         id="receivedDate"
-                        label={f({ id: "request.management.incident.create.date" })}
+                        label={f({ id: "request.management.incident.create.date", defaultMessage: "Request Date" })}
                         type="date"
                         value={values.receivedDate}
                         InputLabelProps={{ shrink: true }}
@@ -1251,7 +1251,7 @@ function IncidentFormInternal(props) {
                   {!paramIncidentId && (
                     <Grid item xs={12} sm={12}>
                       <InputLabel htmlFor="election">
-                        {f({ id: "request.management.incident.create.upload_file" })}
+                        {f({ id: "request.management.incident.create.upload_file", defaultMessage: "Upload File (You can upload multiple files)" })}
                       </InputLabel>
                       <FileUploader
                         files={state.files}
@@ -1264,14 +1264,18 @@ function IncidentFormInternal(props) {
               {/* contact information of the complianer */}
               <Paper className={classes.paper}>
                 <Typography variant="h5" gutterBottom>
+<<<<<<< HEAD
+                {f({ id: "request.management.incident.create.contact_information", defaultMessage: "Contact Information" })}
+=======
                 {f({ id: "request.management.incident.create.contact_info", defaultMessage: "Contact Information" })}
+>>>>>>> cd5f777824cfa771da834e2de9fda10e8414563f
                 </Typography>
                 <Grid container spacing={24}>
                   <Grid item xs={12} sm={6}>
                     <TextField
                       id="reporterName"
                       name="reporterName"
-                      label="Reporter Name*"
+                      label={f({ id: "request.management.incident.create.reporter.name", defaultMessage: "reporter Name*" })}
                       className={classes.textField}
                       value={values.reporterName}
                       onChange={handleChange}
@@ -1284,7 +1288,7 @@ function IncidentFormInternal(props) {
                   <Grid item xs={12} sm={3}>
                     <FormControl  error={touched.reporterType && errors.reporterType} className={classes.formControl}>
                       <InputLabel htmlFor="reporterType">
-                        Individual/Organization*
+                      {f({ id: "request.management.incident.create.reporter.type", defaultMessage: "Individual/Organization*" })}
                       </InputLabel>
                       <Select
                         value={values.reporterType}
@@ -1338,7 +1342,7 @@ function IncidentFormInternal(props) {
                     <TextField
                       id="reporterAddress"
                       name="reporterAddress"
-                      label={f({ id: "request.management.incident.create.reporter.address" })}
+                      label={f({ id: "request.management.incident.create.reporter.address", defaultMessage: "Address" })}
                       variant="outlined"
                       multiline
                       className={classes.textField}
@@ -1353,7 +1357,7 @@ function IncidentFormInternal(props) {
                   <Grid item xs={12}>
                         <TextField
                           id="location"
-                          label={f({ id: "request.management.incident.create.location.description" })}
+                          label={f({ id: "request.management.incident.create.location.description", defaultMessage: "Description / Landmarks"  })}
                           className={classes.textField}
                           value={values.location}
                           onChange={handleChange}
@@ -1364,7 +1368,7 @@ function IncidentFormInternal(props) {
                     <TelephoneInput
                       className={classes.textField}
                       name="reporterMobile"
-                      label={f({ id: "request.management.incident.create.reporter.mobile" })}
+                      label={f({ id: "request.management.incident.create.reporter.mobile", defaultMessage: "Mobile" })}
                     />
                   </Grid>
                   <Grid item xs={12} md={4} sm={6}>
@@ -1378,7 +1382,7 @@ function IncidentFormInternal(props) {
                     <TextField
                       id="reporterEmail"
                       name="reporterEmail"
-                      label={f({ id: "request.management.incident.create.reporter.email" })}
+                      label={f({ id: "request.management.incident.create.reporter.email", defaultMessage: "Email" })}
                       className={classes.textField}
                       value={values.reporterEmail}
                       onChange={handleChange}
@@ -1392,7 +1396,7 @@ function IncidentFormInternal(props) {
                         <TextField
                           error={touched.city && errors.city}
                           id="city"
-                          label={f({ id: "request.management.incident.create.location.city" })}
+                          label={f({ id: "request.management.incident.create.location.city", defaultMessage: "City*" })}
                           className={classes.textField}
                           value={values.city}
                           onChange={handleChange}
@@ -1406,7 +1410,7 @@ function IncidentFormInternal(props) {
                           error={touched.district && errors.district}
                           className={classes.formControl}
                         >
-                          <InputLabel htmlFor="district">{f({ id: "request.management.incident.create.location.district" })}*</InputLabel>
+                          <InputLabel htmlFor="district">{f({ id: "request.management.incident.create.location.district", defaultMessage: "District" })}*</InputLabel>
                           <Select
                             value={values.district}
                             onChange={handleChange}
@@ -1440,7 +1444,7 @@ function IncidentFormInternal(props) {
                       <Grid item xs={12} md={4} sm={6}>
                         <FormControl className={classes.formControl}>
                           <InputLabel htmlFor="gramaNiladhari">
-                            {f({ id: "request.management.incident.create.location.gn_division" })}
+                            {f({ id: "request.management.incident.create.location.gn_division", defaultMessage: "Grama Niladhari Division" })}
                           </InputLabel>
                           <IntlSelect
                             value={values.gramaNiladhari}
@@ -1452,7 +1456,7 @@ function IncidentFormInternal(props) {
                       </Grid>
                       <Grid item xs={12}>
                         <FormControl error={touched.showRecipient ? true : false} component="fieldset">
-                            <FormLabel component="legend">{f({ id: "request.management.report.incidents.onbehalf.error.message", defaultMessage: "On behalf of someone else" })}</FormLabel>
+                            <FormLabel component="legend">{f({ id: "request.management.incident.create.reporter.onbehalf", defaultMessage: "On behalf of someone else" })}</FormLabel>
                             <RadioGroup
                                 aria-label="Gender"
                                 name="showRecipient"
@@ -1555,7 +1559,7 @@ function IncidentFormInternal(props) {
                           <TextField
                             id="recipientName"
                             name="recipientName"
-                            label={f({ id: "request.management.incident.create.recipient.name" })}
+                            label={f({ id: "request.management.incident.create.recipient.name", defaultMessage: "Recipient Name*" })}
                             className={classes.textField}
                             value={values.recipientName}
                             onChange={handleChange}
@@ -1568,7 +1572,7 @@ function IncidentFormInternal(props) {
                         <Grid item xs={12} sm={3}>
                           <FormControl  error={touched.recipientType && errors.recipientType} className={classes.formControl}>
                             <InputLabel htmlFor="reporterType">
-                              Individual/Organization*
+                            {f({ id: "request.management.incident.create.reporter.type", defaultMessage: "Individual/Organization*" })}
                             </InputLabel>
                             <Select
                               value={values.recipientType}
@@ -2077,7 +2081,7 @@ function IncidentFormInternal(props) {
         ContentProps={{
           "aria-describedby": "message-id",
         }}
-        message={<span id="message-id">Request submitted successfully!</span>}
+        message={<span id="message-id">{f({ id: "request.management.incident.create.success.message", defaultMessage: "Request submitted successfully!" })}</span>}
       />
 
       {/* confirmation dialog */}
@@ -2088,11 +2092,11 @@ function IncidentFormInternal(props) {
         aria-describedby="alert-dialog-description"
       >
         <DialogTitle id="alert-dialog-title">
-          {"Submit without Request date?"}
+          {f({ id: "request.management.incident.create.alert.title", defaultMessage: "Submit without Request date?" })}
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            You are trying to submit without an request date.
+          {f({ id: "request.management.incident.create.alert.text", defaultMessage: "You are trying to submit without a request date pls." })}
           </DialogContentText>
         </DialogContent>
         <DialogActions>

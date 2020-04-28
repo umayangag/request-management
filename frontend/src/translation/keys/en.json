@@ -90,15 +90,23 @@
   "request.management.incident.create.time": "Request Time",
   "request.management.incident.create.severity": "Priority*",
   "request.management.incident.create.upload_file": "Upload File (You can upload multiple files)",
+<<<<<<< HEAD
+  "request.management.incident.create.contact_information": "Contact Information",
+  
+=======
   "request.management.incident.create.contact_info": "Contact Information",
 
+>>>>>>> cd5f777824cfa771da834e2de9fda10e8414563f
 
   "request.management.incident.create.reporter_information": "Reporter / Compiler Information",
   "request.management.incident.create.reporter": "Reporter",
-  "request.management.incident.create.reporter.name": "Name",
+  "request.management.incident.create.reporter.name": "Reporter Name*",
+  "request.management.incident.create.reporter.type": "Individual/Organization*",
   "request.management.incident.create.reporter.address": "Address*",
   "request.management.incident.create.reporter.mobile": "Mobile",
+  "request.management.incident.create.reporter.telephone": "Landline",
   "request.management.incident.create.reporter.email": "Email",
+  "request.management.incident.create.reporter.onbehalf": "On behalf of someone else",
   "request.management.incident.create.accused.name": "Accused name",
   "request.management.incident.create.accused.type": "Type",
   "request.management.incident.create.accused.political_affliation": "Political Affiliation",
@@ -112,6 +120,24 @@
   "request.management.incident.create.location.district": "District",
   "request.management.incident.create.location.gn_division": "Grama Niladhari Division",
   "request.management.report.incidents.section.location.info": "If the location where help is required differs from your address, please fill in this section with the location details.",
+
+  "request.management.incident.error.description": "Description is Required",
+  "request.management.incident.error.category": "Category is Required",
+  "request.management.incident.error.severity": "Priority is Required",
+  "request.management.incident.error.name": "Name is Required",
+  "request.management.incident.error.type": "Individual/Organization is Required",
+  "request.management.incident.error.address": "Address is Required",
+  "request.management.incident.error.city": "City is Required",
+  "request.management.incident.error.district": "District is Required",
+  "request.management.incident.error.email": "Invalid email",
+  "request.management.incident.error.recipient": "Recipient is Required",
+  "request.management.incident.error.Mobile": "Mobile is Required",
+
+  "request.management.incident.error.incidenttype": "Incident Type is Required",
+
+  "request.management.incident.create.success.message": "Request submitted successfully!",
+  "request.management.incident.create.alert.title": "Submit without Request date?",
+  "request.management.incident.create.alert.text": "You are trying to submit without a request date.",
 
   "request.management.incident.review.review_complaints": "Review",
   "request.management.incident.review.text_search": "Text Search",

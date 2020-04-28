@@ -78,7 +78,7 @@
   "request.management.home.incidents.list.last_actioned_at": "Last Actioned At",
   "request.management.home.incidents.list.created_date": "Created_date",
 
-  "request.management.incident.create.basic_information": "Basic Information",
+  "request.management.incident.create.basic_information": "அடிப்படை தகவல்",
   "request.management.incident.create.type": "Type",
   "request.management.incident.create.mode_of_receipt": "ரசீது முறை*",
   "request.management.incident.create.title": "Title",
@@ -89,6 +89,19 @@
   "request.management.incident.create.time": "கோரிக்கை நேரம்",
   "request.management.incident.create.severity": "முன்னுரிமை*",
   "request.management.incident.create.upload_file": "கோப்பை பதிவேற்றவும் (நீங்கள் பல கோப்புகளை பதிவேற்றலாம்)",
+<<<<<<< HEAD
+  "request.management.incident.create.contact_information": "தொடர்பு தகவல்",
+
+  "request.management.incident.create.reporter_information": "நிருபர் / தொகுப்பான் தகவல்",
+  "request.management.incident.create.reporter": "நிருபர்",
+  "request.management.incident.create.reporter.name": "நிருபர் பெயர்*",
+  "request.management.incident.create.reporter.type": "தனிநபர் / அமைப்பு*",
+  "request.management.incident.create.reporter.address": "முகவரி*",
+  "request.management.incident.create.reporter.mobile": "கைபேசி",
+  "request.management.incident.create.reporter.email": "மின்னஞ்சல்",
+  "request.management.incident.create.reporter.telephone": "நிலையான தொலைபேசி",
+  "request.management.incident.create.reporter.onbehalf": "வேறொருவரின் சார்பாக",
+=======
   "request.management.incident.create.contact_info": "தொடர்பு தகவல்",
 
   "request.management.incident.create.reporter_information": "Reporter / Compiler Information",
@@ -97,6 +110,7 @@
   "request.management.incident.create.reporter.address": "Address*",
   "request.management.incident.create.reporter.mobile": "Mobile",
   "request.management.incident.create.reporter.email": "Email",
+>>>>>>> cd5f777824cfa771da834e2de9fda10e8414563f
   "request.management.incident.create.accused.name": "Accused name",
   "request.management.incident.create.accused.type": "Type",
   "request.management.incident.create.accused.political_affliation": "Political Affiliation",
@@ -110,6 +124,24 @@
   "request.management.incident.create.location.district": "ஒரு மாவட்டம்",
   "request.management.incident.create.location.gn_division": "கிராம நிலாதாரி பிரிவு",
   "request.management.report.incidents.section.location.info": "உதவி தேவைப்படும் இடம் உங்கள் முகவரியிலிருந்து வேறுபட்டால், இருப்பிட விவரங்களுடன் இந்த பகுதியை நிரப்பவும்.",
+
+  "request.management.incident.error.description": "வெளியீடு / கோரிக்கை விவரங்கள் தேவை",
+  "request.management.incident.error.category": "வகை தேவை",
+  "request.management.incident.error.severity": "முன்னுரிமை தேவை",
+  "request.management.incident.error.name": "பெயர் தேவை",
+  "request.management.incident.error.type": "தனிநபர் / அமைப்பு தேவை",
+  "request.management.incident.error.address": "முகவரி தேவை",
+  "request.management.incident.error.city": "நகரம் தேவை",
+  "request.management.incident.error.district": "ஒரு மாவட்டம் தேவை",
+  "request.management.incident.error.email": "தவறான மின்னஞ்சல் முகவரி",
+  "request.management.incident.error.recipient": "பெறுநரின் பெயர் தேவை",
+  "request.management.incident.error.Mobile": "கைபேசி தேவை",
+
+  "request.management.incident.error.incidenttype": "சம்பவ வகை தேவை",
+
+  "request.management.incident.create.success.message": "கோரிக்கை வெற்றிகரமாக சமர்ப்பிக்கப்பட்டது!",
+  "request.management.incident.create.alert.title": "கோரிக்கை தேதி இல்லாமல் சமர்ப்பிக்கவா?",
+  "request.management.incident.create.alert.text": "கோரிக்கை தேதி இல்லாமல் சமர்ப்பிக்க முயற்சிக்கிறீர்கள்.",
 
 
   "request.management.incident.review.review_complaints": "Review",
