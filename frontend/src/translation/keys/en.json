@@ -12,7 +12,8 @@
 
 
   "request.management.report.incidents": "Submit a request",
-  "request.management.report.incidents.helper.text": "*fields are mandatory",
+  "request.management.report.incidents.helper.text": "* fields are mandatory.",
+  "request.management.report.incidents.helper.text2": "Select your language of preference and fill in the form below.",
 
   "request.management.report.incidents.section.describe": "Enter details here",
   "request.management.report.incidents.section.listitem1": "Explain your matter clearly",
@@ -27,9 +28,15 @@
   "request.management.report.incidents.datetime.error.message": "Date and time are required",
   "request.management.report.incidents.recaptcha.error.message": "This verification is required",
   "request.management.report.incidents.name.error.message": "Name is required",
+  "request.management.report.incidents.reporterType.error.message": "Individual/Organization is required",
   "request.management.report.incidents.phone.error.message": "Contact number is required",
   "request.management.report.incidents.address.error.message": "Address is required",
   "request.management.report.incidents.district.error.message": "District is required",
+  "request.management.report.incidents.city.error.message": "City is required",
+  "request.management.report.incidents.recipient.error.message": "This is required",
+  "request.management.incident.create.location.onbehalf": "On behalf of someone else*",
+  "request.management.incident.create.location.onbehalf.yes": "Yes",
+  "request.management.incident.create.location.onbehalf.no": "No",
   "request.management.report.incidents.subcategory.error.message": "Sub category is required",
   "request.management.report.incidents.topcategory.error.message": "Category is required",
 
@@ -38,7 +45,7 @@
   "request.management.report.incidents.section.location": "Your location details",
   "request.management.report.incidents.location": "Location name or description",
   "request.management.report.incidents.address": "Address*",
-  "request.management.report.incidents.city": "City",
+  "request.management.report.incidents.city": "City*",
 
   "request.management.report.incidents.section.attachment": "Attach related files (documents, images, audio/video)",
   "request.management.report.incidents.seleted.file": "Selected File",
@@ -70,7 +77,7 @@
   "request.management.home.incidents.list.category": "Category",
   "request.management.home.incidents.list.subcategory": "Subcategory",
   "request.management.home.incidents.list.last_actioned_at": "Last Actioned At",
-  "request.management.home.incidents.list.created_date": "Created_date",
+  "request.management.home.incidents.list.created_date": "Created Date",
 
   "request.management.incident.create.basic_information": "Basic Information",
   "request.management.incident.create.type": "Type",
@@ -83,6 +90,8 @@
   "request.management.incident.create.time": "Request Time",
   "request.management.incident.create.severity": "Priority*",
   "request.management.incident.create.upload_file": "Upload File (You can upload multiple files)",
+  "request.management.incident.create.contact_info": "Contact Information",
+
 
   "request.management.incident.create.reporter_information": "Reporter / Compiler Information",
   "request.management.incident.create.reporter": "Reporter",
@@ -93,9 +102,11 @@
   "request.management.incident.create.accused.name": "Accused name",
   "request.management.incident.create.accused.type": "Type",
   "request.management.incident.create.accused.political_affliation": "Political Affiliation",
+  "request.management.incident.create.recipient.name": "Recipient Name*",
 
   "request.management.incident.create.location_information": "Location Information",
-  "request.management.incident.create.location.description": "Location / Description",
+  "request.management.incident.create.recipient_information": "Recipient Information",
+  "request.management.incident.create.location.description": "Description / Landmarks",
   "request.management.incident.create.location.address": "Address",
   "request.management.incident.create.location.city": "City*",
   "request.management.incident.create.location.district": "District",

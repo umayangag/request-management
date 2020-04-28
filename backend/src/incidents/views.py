@@ -11,13 +11,15 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 from django.db.models import Q
 
-from .models import Incident, StatusType, SeverityType, ReopenWorkflow as Reopened
+from .models import Incident, StatusType, SeverityType, ReopenWorkflow as Reopened, CannedResponse
 from django.contrib.auth.models import User, Group, Permission
 from .serializers import (
     IncidentSerializer,
     ReporterSerializer,
+    RecipientSerializer,
     IncidentCommentSerializer,
     IncidentPoliceReportSerializer,
+    CannedResponseSerializer,
 )
 from .services import (
     get_incident_by_id,
@@ -25,6 +27,7 @@ from .services import (
     update_incident_postscript,
     update_incident_status,
     get_reporter_by_id,
+    get_recipient_by_id,
     get_comments_by_incident,
     create_incident_comment_postscript,
     # incident_auto_assign,
@@ -33,8 +36,8 @@ from .services import (
     incident_close,
     incident_escalate_external_action,
     incident_complete_external_action,
-    incident_request_advice,
-    incident_provide_advice,
+    incident_request_information,
+    incident_provide_information,
     incident_verify,
     incident_invalidate,
     incident_reopen,
@@ -52,7 +55,8 @@ from .services import (
     create_reporter,
     validateRecaptcha,
     send_incident_created_mail,
-    get_incident_status_guest
+    get_incident_status_guest,
+    send_canned_response
 )
 
 from ..events import services as event_service
@@ -191,7 +195,28 @@ class IncidentList(APIView, IncidentResultsSetPagination):
         return self.get_paginated_response(serializer.data)
 
     def post(self, request, format=None):
-        serializer = IncidentSerializer(data=request.data)
+        incident_data = request.data
+        if request.data["showRecipient"] == "YES":
+            # collect recipient information
+            recipient_data = {}
+            recipient_data["name"] = incident_data["recipientName"]
+            recipient_data["recipientType"] = incident_data["recipientType"]
+            recipient_data["address"] = incident_data["recipientAddress"]
+            recipient_data["mobile"] = incident_data["recipientMobile"]
+            recipient_data["telephone"] = incident_data["recipientTelephone"]
+            recipient_data["email"] = incident_data["recipientEmail"]
+            recipient_data["city"] = incident_data["recipientCity"]
+            recipient_data["district"] = incident_data["recipientDistrict"]
+            recipient_data["gnDivision"] = incident_data["recipientGramaNiladhari"]
+            recipient_data["location"] = incident_data["recipientLocation"]
+            # create recipient
+            recipient_serializer = RecipientSerializer(data=recipient_data)
+            if recipient_serializer.is_valid():
+                recipient = recipient_serializer.save()
+                # linking recipient with the incident to be created
+                incident_data["recipient"] = recipient.id
+
+        serializer = IncidentSerializer(data=incident_data)
 
         if serializer.is_valid() == False:
             print("errors: ", serializer.errors)
@@ -247,7 +272,7 @@ class SMSIncident(APIView):
 
 class IncidentDetail(APIView):
     """
-    Incident Resoruce
+    Retrieve, update or delete a Incident instance
     """
     serializer_class = IncidentSerializer
 
@@ -274,7 +299,6 @@ class IncidentDetail(APIView):
                 if key != "id" and key != "incident":
                     incident_data[key] = police_report_data[key]
 
-        print(incident_data)
         return Response(incident_data)
 
     def put(self, request, incident_id, format=None):
@@ -333,6 +357,40 @@ class ReporterDetail(APIView):
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+class RecipientList(APIView):
+    serializer_class = RecipientSerializer
+
+    def post(self, request, format=None):
+        serializer = RecipientSerializer(data=request.data)
+
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUESET)
+
+class RecipientDetail(APIView):
+    serializer_class = RecipientSerializer
+
+    def get(self, request, recipient_id, format=None):
+        recipient = get_recipient_by_id(recipient_id)
+
+        if recipient is None:
+            return Response("Invalid recipient id", status=status.HTTP_404_NOT_FOUND)
+
+        serializer = RecipientSerializer(recipient)
+        return Response(serializer.data)
+
+    def put(self, request, recipient_id, format=None):
+        snippet = get_recipient_by_id(recipient_id)
+        serializer = RecipientSerializer(snippet, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            # send the incident created email once the recipient details are saved
+            send_incident_created_mail(recipient_id)
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
 class IncidentCommentView(APIView):
     serializer_class = IncidentCommentSerializer
@@ -388,17 +446,17 @@ class IncidentWorkflowView(APIView):
             incident_complete_external_action(
                 request.user, incident, comment, start_event)
 
-        elif workflow == "request-advice":
+        elif workflow == "request-information":
             comment = request.data['comment']
-            assignee_id = request.data['assignee']
-            assignee = get_user_by_id(assignee_id)
-            incident_request_advice(request.user, incident, assignee, comment)
+            # assignee_id = request.data['assignee']
+            # assignee = get_user_by_id(assignee_id)
+            incident_request_information(request.user, incident, comment)
 
-        elif workflow == "provide-advice":
+        elif workflow == "provide-information":
             comment = request.data['comment']
             start_event_id = request.data['start_event']
             start_event = event_service.get_event_by_id(start_event_id)
-            incident_provide_advice(request.user, incident, comment, start_event)
+            incident_provide_information(request.user, incident, comment, start_event)
 
         elif workflow == "verify":
             if not user_can(request.user, CAN_VERIFY_INCIDENT):
@@ -439,6 +497,9 @@ class IncidentWorkflowView(APIView):
 
             comment = request.data['comment']
             incident_reopen(request.user, incident, comment)
+        elif workflow == "send_canned_response":
+            response_id = request.data['id']
+            send_canned_response(request.user, incident, response_id)
 
         else:
             return Response("Invalid workflow", status=status.HTTP_400_BAD_REQUEST)
@@ -479,11 +540,33 @@ class IncidentPublicUserView(APIView):
 
     def get(self, request, format=None):
         param_refId = self.request.query_params.get('refId', None)
-        return_data = get_incident_status_guest(param_refId)
-        return Response(return_data, status=status.HTTP_200_OK)
+        if (param_refId):
+            return_data = get_incident_status_guest(param_refId)
+            return Response(return_data, status=status.HTTP_200_OK)
 
     def post(self, request, format=None):
-        serializer = IncidentSerializer(data=request.data)
+        incident_data = request.data
+        if request.data["showRecipient"] == "YES":
+            # collect recipient information
+            recipient_data = {}
+            recipient_data["name"] = incident_data["recipientName"]
+            recipient_data["recipientType"] = incident_data["recipientType"]
+            recipient_data["address"] = incident_data["recipientAddress"]
+            recipient_data["mobile"] = incident_data["recipientMobile"]
+            recipient_data["telephone"] = incident_data["recipientTelephone"]
+            recipient_data["email"] = incident_data["recipientEmail"]
+            recipient_data["city"] = incident_data["recipientCity"]
+            recipient_data["district"] = incident_data["recipientDistrict"]
+            # recipient_data["gnDivision"] = incident_data["recipientGramaNiladhari"]
+            recipient_data["location"] = incident_data["recipientLocation"]
+            # create recipient
+            recipient_serializer = RecipientSerializer(data=recipient_data)
+            if recipient_serializer.is_valid():
+                recipient = recipient_serializer.save()
+                # linking recipient with the incident to be created
+                incident_data["recipient"] = recipient.id
+
+        serializer = IncidentSerializer(data=incident_data)
 
         if serializer.is_valid():
             incidentReqValues = serializer.initial_data
@@ -547,5 +630,16 @@ class IncidentViewPublicUserView(APIView):
         incident = get_incident_by_reporter_unique_id(unique_id)
         serializer = IncidentSerializer(incident)
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+class CannedResponseList(APIView):
+
+    def get(self, request, format=None):
+        """
+        Return a list of all canned responses.
+        """
+        canned_responses = CannedResponse.objects.all()
+        serializer = CannedResponseSerializer(canned_responses, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK )
 
 

@@ -122,10 +122,21 @@ export function loadIncident(incidentId) {
         try{
             const responseIncident = await incidentsApi.getIncident(incidentId);
             const responseReporter = await incidentsApi.getReporter(responseIncident.data.reporter);
-            dispatch(loadIncidentSuccess({
-                "incident": responseIncident.data,
-                "reporter": responseReporter.data
-            }));
+            if(responseIncident.data.recipient){
+                const responseRecipient = await incidentsApi.getRecipient(responseIncident.data.recipient);
+                 dispatch(loadIncidentSuccess({
+                    "incident": responseIncident.data,
+                    "reporter": responseReporter.data,
+                    "recipient": responseRecipient.data
+                }));
+            }else{
+                dispatch(loadIncidentSuccess({
+                    "incident": responseIncident.data,
+                    "reporter": responseReporter.data,
+                    "recipient": {}
+                })); 
+            }
+            
         }catch(error){
             dispatch(loadIncidentError(error));
         }

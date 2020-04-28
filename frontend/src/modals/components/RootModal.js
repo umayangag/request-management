@@ -17,6 +17,7 @@ import CloseModal from './CloseModal';
 import CompleteOutsideActionModal from './CompleteOutsideActionModal'
 import InvalidateModal from './InvalidateModal';
 import ReopenModal from './ReopenModal';
+import SendCannedResponseModal from './CannedResponseModal'
 
 const MODAL_COMPONENTS = {
     'RESPONSE_TIME_EDIT': ResponseTimeEditModal,
@@ -29,14 +30,17 @@ const MODAL_COMPONENTS = {
     'CLOSE_MODAL': CloseModal,
     'COMPLETE_OUTSIDE_ACTION_MODAL':CompleteOutsideActionModal,
     'INVALIDATE_MODAL': InvalidateModal,
-    'REOPEN_MODAL': ReopenModal
+    'REOPEN_MODAL': ReopenModal,
+    'CANNED_RESPONSE': SendCannedResponseModal,
     /* other modals */
 }
 
 const styles = theme => ({
     root : {
-        minWidth: 800
-    }
+        minWidth: 600,
+        padding:30
+    },
+
 })
 
 const RootModal = (props) => {
@@ -63,8 +67,10 @@ const RootModal = (props) => {
                 open={modalType?true:false}
                 onClose={()=>{dispatch(hideModal())}}
                 aria-labelledby="form-dialog-title"
+                fullWidth={true}
+                maxWidth={"sm"}
             >
-                <ModalContent {...modalProps}  />
+                <ModalContent className={classes.root} {...modalProps}  />
             </Dialog>
         </div>
     );

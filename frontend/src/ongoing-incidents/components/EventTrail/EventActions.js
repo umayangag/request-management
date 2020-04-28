@@ -19,7 +19,7 @@ import RestoreIcon from "@material-ui/icons/Restore";
 import ShowChartIcon from "@material-ui/icons/ShowChart";
 import SubdirectoryArrowLeftIcon from "@material-ui/icons/SubdirectoryArrowLeft";
 // import ArrowUpwardIcon from "@material-ui/icons/ArrowUpward";
-// import HelpIcon from "@material-ui/icons/Help";
+import HelpIcon from "@material-ui/icons/Help";
 import EditIcon from "@material-ui/icons/Edit";
 import AccessTimeIcon from "@material-ui/icons/AccessTime";
 import PermIdentityIcon from "@material-ui/icons/PermIdentity";
@@ -29,6 +29,7 @@ import WhereToVoteIcon from "@material-ui/icons/WhereToVote";
 import PrintIcon from "@material-ui/icons/Print";
 import CancelIcon from "@material-ui/icons/Cancel";
 import ErrorIcon from "@material-ui/icons/Error";
+import QnAIcon from "@material-ui/icons/QuestionAnswer";
 
 import IconButton from "@material-ui/core/IconButton";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
@@ -240,6 +241,21 @@ const EventActions = (props) => {
 
       {activeIncident.currentStatus !== "CLOSED" &&
         activeIncident.currentStatus !== "INVALIDATED" &&
+        <Button
+        color="primary"
+        size="large"
+        variant="text"
+        className={classes.button}
+        onClick={() =>  dispatch(showModal("CANNED_RESPONSE", { activeIncident }))}
+      >
+        <QnAIcon
+          className={classes.actionButtonIcon}
+        />
+        Canned Response
+      </Button>}
+
+      {activeIncident.currentStatus !== "CLOSED" &&
+        activeIncident.currentStatus !== "INVALIDATED" &&
         userCan(currentUser, activeIncident, USER_ACTIONS.CAN_RUN_WORKFLOW) && (
           <>
             {/* {userCan(currentUser, activeIncident, USER_ACTIONS.CAN_ESCALATE_INCIDENT) &&
@@ -254,42 +270,42 @@ const EventActions = (props) => {
               activeIncident,
               USER_ACTIONS.CAN_ESCALATE_EXTERNAL
             ) && (
-              <Button
-                color="primary"
-                size="large"
-                variant="text"
-                className={classes.button}
-                onClick={() => props.modalAction("ESCALLATE_OUTSIDE")}
-              >
-                <SubdirectoryArrowLeftIcon
-                  className={classes.actionButtonIcon}
-                />
+                <Button
+                  color="primary"
+                  size="large"
+                  variant="text"
+                  className={classes.button}
+                  onClick={() => props.modalAction("ESCALLATE_OUTSIDE")}
+                >
+                  <SubdirectoryArrowLeftIcon
+                    className={classes.actionButtonIcon}
+                  />
                 Assign
-              </Button>
-            )}
+                </Button>
+              )}
 
             {/* TODO: add User Action permissions here */}
-            {/* <Button color="primary" size="large" variant='text' className={classes.button} onClick={() => { dispatch(showModal('REQUEST_ADVICE_MODAL', { activeIncident, users, divisions })) }}>
+            <Button color="primary" size="large" variant='text' className={classes.button} onClick={() => { dispatch(showModal('REQUEST_ADVICE_MODAL', { activeIncident, users, divisions })) }}>
                     <HelpIcon className={classes.actionButtonIcon} />
-                    Request for advice
-                </Button> */}
+                    Request for Infomation
+                </Button>
 
             {userCan(
               currentUser,
               activeIncident,
               USER_ACTIONS.CAN_CLOSE_INCIDENT
             ) && (
-              <Button
-                color="primary"
-                size="large"
-                variant="text"
-                className={classes.button}
-                onClick={() => props.modalAction("CLOSE_MODAL")}
-              >
-                <CancelIcon className={classes.actionButtonIcon} />
+                <Button
+                  color="primary"
+                  size="large"
+                  variant="text"
+                  className={classes.button}
+                  onClick={() => props.modalAction("CLOSE_MODAL")}
+                >
+                  <CancelIcon className={classes.actionButtonIcon} />
                 Close
-              </Button>
-            )}
+                </Button>
+              )}
 
             {(activeIncident.currentStatus === "NEW" ||
               activeIncident.currentStatus === "REOPENED") &&

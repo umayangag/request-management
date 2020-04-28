@@ -24,8 +24,8 @@ class StatusType(enum.Enum):
     CLOSED = "Closed"
     ACTION_TAKEN = "Action Taken"
     ACTION_PENDING = "Action Pending"
-    ADVICE_PROVIDED = "Advice Provided"
-    ADVICE_REQESTED = "Advice Requested"
+    INFORMATION_PROVIDED = "Information Provided"
+    INFORMATION_REQESTED = "Information Requested"
     VERIFIED = "Verified"
     INVALIDATED = "Invalidated"
     REOPENED = "Reopened"
@@ -65,6 +65,13 @@ class ReportedThrough(enum.Enum):
     def __str__(self):
         return self.name
 
+class ContactType(enum.Enum):
+    INDIVIDUAL = "Individual"
+    ORGANIZATION = "Organization"
+
+    def __str__(self):
+        return self.name
+
 class Reporter(models.Model):
     name = models.CharField(max_length=200, null=True, blank=True)
     sn_name = models.CharField(max_length=200, null=True, blank=True)
@@ -75,14 +82,39 @@ class Reporter(models.Model):
     mobile = models.CharField(max_length=200, null=True, blank=True)
     address = models.CharField(max_length=200, null=True, blank=True)
     unique_id = models.UUIDField(default=uuid.uuid4, editable=False)
-    created_date = models.DateTimeField(auto_now_add=True)
     political_affiliation = models.CharField(max_length=50, null=True, blank=True)
     accused_name = models.CharField(max_length=200, null=True, blank=True)
     accused_political_affiliation = models.CharField(max_length=50, null=True, blank=True)
+    created_date = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         ordering = ("id",)
 
+class Recipient(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    name = models.CharField(max_length=200, null=True, blank=True)
+    sn_name = models.CharField(max_length=200, null=True, blank=True)
+    tm_name = models.CharField(max_length=200, null=True, blank=True)
+    email = models.CharField(max_length=200, null=True, blank=True)
+    telephone = models.CharField(max_length=200, null=True, blank=True)
+    mobile = models.CharField(max_length=200, null=True, blank=True)
+    location = models.CharField(max_length=200, null=True, blank=True)
+    address = models.CharField(max_length=200, null=True, blank=True)
+    city = models.CharField(max_length=200, null=True, blank=True)
+    district = models.CharField(max_length=50, null=True, blank=True)
+    gn_division = models.CharField(max_length=50, null=True, blank=True)
+    recipient_type = models.CharField(
+        max_length=50,
+        choices=[(tag.name, tag.value) for tag in ContactType],
+        default=ContactType.INDIVIDUAL,
+        blank=True,
+        null=True,
+    )
+    created_date = models.DateTimeField(auto_now_add=True)
+    updated_date = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ("id",)
 
 class IncidentStatus(models.Model):
     previous_status = models.CharField(
@@ -176,6 +208,9 @@ class Incident(models.Model):
     # that entered it to the system
     reporter = models.ForeignKey(
         "Reporter", on_delete=models.DO_NOTHING, null=True, blank=True
+    )
+    recipient = models.ForeignKey(
+        "Recipient", on_delete=models.DO_NOTHING, null=True, blank=True
     )
 
     # assignee is the current responsible personnel for the current incident from the EC
@@ -346,16 +381,12 @@ class CompleteActionWorkflow(IncidentWorkflow):
     initiated_workflow = models.ForeignKey(EscalateExternalWorkflow, on_delete=models.DO_NOTHING)
     comment = models.TextField()
 
-class RequestAdviceWorkflow(IncidentWorkflow):
-    assigned_user = models.ForeignKey(User,
-                    on_delete=models.DO_NOTHING,
-                    related_name="advice_request_related",
-                    related_query_name="advice_requested_users")
+class RequestInformationWorkflow(IncidentWorkflow):
     comment = models.TextField()
-    is_advice_provided = models.BooleanField(default=False)
+    is_information_provided = models.BooleanField(default=False)
 
-class ProvideAdviceWorkflow(IncidentWorkflow):
-    initiated_workflow = models.ForeignKey(RequestAdviceWorkflow, on_delete=models.DO_NOTHING)
+class ProvideInformationWorkflow(IncidentWorkflow):
+    initiated_workflow = models.ForeignKey(RequestInformationWorkflow, on_delete=models.DO_NOTHING)
     comment = models.TextField()
 
 class AssignUserWorkflow(IncidentWorkflow):
@@ -397,6 +428,16 @@ class IncidentFilter(filters.FilterSet):
         print(queryset, name, value)
 
 
+class CannedResponse(models.Model):
+    title = models.CharField(max_length=30)
+    message =  models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.message
+
+class SendCannedResponseWorkflow(IncidentWorkflow):
+    canned_response = models.ForeignKey(CannedResponse,
+                    on_delete=models.DO_NOTHING)
 
 
 

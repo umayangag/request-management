@@ -89,11 +89,11 @@ function getActionText(event){
                     case "Complete Action":
                             return "provided action";
 
-                    case "Request Advice":
-                            return "requested advice";
+                    case "Request Information":
+                            return "requested for information";
 
-                    case "Provide Advice":
-                            return "provided advice";
+                    case "Provide Information":
+                            return "provided information";
 
                     case "Assign":
                             return `assigned ${event.data.workflow.data.assignee} to the record`;
@@ -109,6 +109,9 @@ function getActionText(event){
 
                     case "Reopen":
                         return `reopened the record`
+
+                    case "Send Canned Response":
+                        return 'sent a canned response'
                 }
         default:
             return "unknown action"
@@ -134,6 +137,9 @@ function hasEventBody(event){
 
 
 function getSecondaryItem(event){
+
+    const {cannedResponses} = useSelector(store=>store.shared)
+
     if(event.action === "COMMENTED" || event.action === "OUTCOME_ADDED"){
         return (
             <div>
@@ -164,8 +170,8 @@ function getSecondaryItem(event){
         }else if(workflowType === "Escalate External"){
             return (
                 <div>
-                    <div><b>Entity:</b><br/> {workflowData.entity.type}</div><br/>
-                    <div><b>Name:</b><br/> {workflowData.entity.name}</div><br/>
+                    <div><b>Organization:</b><br/>{ (workflowData.entity.type) ? workflowData.entity.type : 'Other'}</div><br/>
+                    <div><b>User:</b><br/> {workflowData.entity.name}</div><br/>
                     <div><b>Comment:</b><br/> {workflowData.comment}</div>
                 </div>
             )
@@ -175,13 +181,13 @@ function getSecondaryItem(event){
                     {workflowData.comment}
                 </div>
             )
-        }else if(workflowType === "Request Advice"){
+        }else if(workflowType === "Request Information"){
             return (
                 <div>
                     {workflowData.comment}
                 </div>
             )
-        }else if(workflowType === "Provide Advice"){
+        }else if(workflowType === "Provide Information"){
             return (
                 <div>
                     {workflowData.comment}
@@ -222,6 +228,23 @@ function getSecondaryItem(event){
                     {workflowData.comment}
                 </div>
             )
+        }else if(workflowType === "Send Canned Response"){
+            return(
+                <>
+                <div>
+                    <b>Message:</b> &nbsp; 
+                    <i>"{cannedResponses.byIds[workflowData.responseId].message}"</i>
+                </div>
+                <div>
+                    <span>Text message sent?</span> &nbsp; 
+                    <span>No</span>
+                </div>
+                <div>
+                    <span>Email message sent?</span> &nbsp; 
+                    <span>No</span>
+                </div>
+                </>
+            )
         }
     }
     return (<></>);
@@ -235,7 +258,7 @@ function hasPendingAction(event){
 
 function hasPendingAdvice(event){
     return event.action === "WORKFLOW_ACTIONED" &&
-            event.data.workflow.type === "Request Advice" &&
+            event.data.workflow.type === "Request Information" &&
             !event.data.workflow.data.isCompleted;
 }
 
@@ -306,7 +329,7 @@ const EventItemView = ({ event, classes }) => {
                                             'PROVIDE_ADVICE_MODAL',
                                             {  event }))}
                         >
-                            Provide Advice
+                            Provide Information
                         </Button>
                     </div>
                 )}

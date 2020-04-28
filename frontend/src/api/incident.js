@@ -89,6 +89,10 @@ export const getReporter = async (reporterId) => {
   return (await handler.get(`/reporters/${reporterId}`)).data;
 };
 
+export const getRecipient = async (recipientId) => {
+  return (await handler.get(`/recipients/${recipientId}`)).data;
+};
+
 export const updateReporter = async (reporterId, reporterData) => {
   return (await handler.put(`/reporters/${reporterId}`, reporterData)).data;
 }
@@ -120,5 +124,9 @@ export const uploadFile = async (incidentId, formData) => {
 
 export const attachMedia = async (incidentId, mediaData) => {
   return (await handler.post(`/incidents/${incidentId}/attach_media`, mediaData)).data;
+}
+
+export const getCannedResponses = async () => {
+  return (await handler.get('/canned_response')).data;
 }
 
