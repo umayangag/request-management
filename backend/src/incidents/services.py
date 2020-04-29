@@ -177,7 +177,10 @@ def send_incident_created_mail(reporter_id):
     reporter = get_reporter_by_id(reporter_id)
     incident = Incident.objects.get(reporter=reporter)
     subject = 'Your Request Recieved'
-    message = 'We recieved your request. Reference ID' + incident.refId
+    message = """Your request has been received and is being attended to.
+Ref ID: {0}
+To check status: 
+{1}/report/status?refId={0}""".format(incident.refId, settings.APP_BASE_URL)
     recievers = []
 
     if reporter.email :
@@ -198,7 +201,10 @@ def send_incident_created_sms(reporter_id):
     # request created sms
     reporter = get_reporter_by_id(reporter_id)
     incident = Incident.objects.get(reporter=reporter)
-    message = 'Your request has been received and is being attended to Ref ID: ' + incident.refId
+    message = """Your request has been received and is being attended to.
+Ref ID: {0}
+To check status: 
+{1}/report/status?refId={0}""".format(incident.refId, settings.APP_BASE_URL)
     recievers = []
 
     if reporter.mobile :
