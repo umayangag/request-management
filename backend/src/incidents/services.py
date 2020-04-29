@@ -48,10 +48,14 @@ from django.core.mail import send_mail
 
 from .serializers import IncidentCommentSerializer
 
+from zeep import Client
+from zeep.wsse.username import UsernameToken
+import requests
+from django.conf import settings
+
 def get_incident_status_guest(refId):
     """This function is to annouce public on a incident status"""
     status = {}
-    messages = []
     try:
         incident = Incident.objects.get(refId=refId)
     except Incident.DoesNotExist:
@@ -66,17 +70,52 @@ def get_incident_status_guest(refId):
         or incident.current_status == StatusType.INFORMATION_PROVIDED.name:
         status["reply"] = "Your request is currently being attended to."
     elif incident.current_status == StatusType.INFORMATION_REQESTED.name:
-        status["reply"] = "Your request requires further information to proceed."
+        status = get_public_status_on_information_request(incident)
     elif incident.current_status == StatusType.CLOSED.name or incident.current_status == StatusType.INVALIDATED.name:
-        status["reply"] = "Your request has been resolved and closed."
-        # prepare resolution messages
-        close = CloseWorkflow.objects.filter(incident=incident).order_by('-created_date')
+        status = get_public_status_on_close(incident)
+
+    return status
+
+def get_public_status_on_information_request(incident):
+    status = {}
+    messages = []
+
+    # get all information requests
+    requests = RequestInformationWorkflow.objects.filter(incident=incident, is_information_provided=False)
+    for request in requests:
         output = {}
-        output["header"] = "Resolution"
-        # get the last close comment
-        output["content"] = close[0].comment
+        output["header"] = "Required information"
+        output["content"] = request.comment
+
+        actions = {}
+        actions["name"] = "Submit reply"
+        actions["incident_id"] = request.incident_id
+        event = Event.objects.get(reference_id=request.id)
+        actions["start_event"] = event.id
+        output["actions"] = actions
+
         messages.append(output)
-        status["messages"] = messages
+
+    status["reply"] = "Your request requires further information to proceed."
+    status["messages"] = messages
+
+    return status
+
+def get_public_status_on_close(incident):
+    status = {}
+    messages = []
+
+    # FIXME: check for status type on StatusType.CLOSED.name
+    # prepare resolution messages
+    close = CloseWorkflow.objects.filter(incident=incident).order_by('-created_date')
+    output = {}
+    output["header"] = "Resolution"
+    # get the last close comment
+    output["content"] = close[0].comment
+    messages.append(output)
+
+    status["reply"] = "Your request has been resolved and closed."
+    status["messages"] = messages
 
     return status
 
@@ -98,6 +137,37 @@ def send_email(subject, message, receivers):
         print(e)
 
 
+def send_sms(number, message):
+    number = "94" + number[-9:]
+    headers = {'content-type': 'text/xml'}
+    
+    body = """<?xml version='1.0' encoding='utf-8'?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:v1="http://schemas.icta.lk/xsd/kannel/handler/v1/" soapenv:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+<soapenv:Header>
+<govsms:authData xmlns:govsms="http://govsms.icta.lk/">
+<govsms:user>{2}</govsms:user>
+<govsms:key>{3}</govsms:key>
+</govsms:authData>
+</soapenv:Header>
+<soapenv:Body>
+<v1:SMSRequest>
+<v1:requestData>
+<v1:outSms>{1}</v1:outSms>
+<v1:recepient>{0}</v1:recepient>
+<v1:depCode>IctaTest</v1:depCode>
+<v1:smscId/>
+<v1:billable/>
+</v1:requestData>
+</v1:SMSRequest>
+</soapenv:Body>
+</soapenv:Envelope>
+""".format(number, message, settings.SMS_GATEWAY_USER, settings.SMS_GATEWAY_PASSWORD)
+
+    response = requests.post("http://lankagate.gov.lk:9080/services/GovSMSMTHandlerProxy?wsdl",data=body,headers=headers)
+    print("response")
+    print(response.status_code)
+    print(response.reason)
+
 def send_incident_created_mail(reporter_id):
     # request created email
     reporter = get_reporter_by_id(reporter_id)
@@ -112,6 +182,19 @@ def send_incident_created_mail(reporter_id):
         except:
             print ("Error: unable to start thread")
         print("request created email sent")
+
+def send_incident_created_sms(reporter_id):
+    # request created sms
+    reporter = get_reporter_by_id(reporter_id)
+    if reporter.mobile :
+        incident = Incident.objects.get(reporter=reporter)
+        print("sending request created sms")
+        message = 'Your request has been received and is being attended to Ref ID: ' + incident.refId
+        try:
+            _thread.start_new_thread( send_sms, (reporter.mobile, message))
+        except Exception as e:
+            print("request created sms sending failed with exception:")
+            print(e)
 
 def is_valid_incident(incident_id: str) -> bool:
     try:
@@ -335,7 +418,6 @@ def create_reporter():
 
 def create_incident_postscript(incident: Incident, user: User) -> None:
     """Function to take care of event, status and severity creation"""
-
     if user is None:
         # public user case
         # if no auth token, then we assign the guest user as public user
@@ -506,7 +588,7 @@ def incident_change_assignee(user: User, incident: Incident, assignee: User):
     incident.assignee = assignee
     incident.save()
 
-    # request created email
+    # request assigned email
     print("sending request assigned email")
     if assignee.email:
         subject = 'Request Assigned'
@@ -587,6 +669,15 @@ def incident_close(user: User, incident: Incident, details: str):
         except:
             print ("Error: unable to start thread")
         print("request closed email sent")
+
+    if (incident.reporter.mobile):
+        print("sending request closed sms")
+        message = 'Your request has been resolved. Ref ID: ' + incident.refId
+        try:
+            _thread.start_new_thread( send_sms, (incident.reporter.mobile, message))
+        except Exception as e:
+            print("request closed sms sending failed with exception:")
+            print(e)
 
     event_services.update_workflow_event(user, incident, workflow)
 
