@@ -172,7 +172,34 @@ def send_sms_to_list(recievers, message):
     for reciever in recievers:
         send_sms(reciever, message)
 
-def send_incident_created_mail(reporter_id):
+def send_incident_changed_email_sms(incident, subject, message):
+    email_recievers = []
+    sms_recievers = []
+
+    if (incident.reporter.email):
+        email_recievers.append(incident.reporter.email)
+    if (incident.recipient.email) :
+        email_recievers.append(incident.recipient.email)
+    if email_recievers :
+        print("sending email")
+        try:
+            _thread.start_new_thread( send_email, ( subject, message, email_recievers) )
+        except:
+            print ("Error: unable to start information requested email sending thread")
+
+    if (incident.reporter.mobile):
+        sms_recievers.append(incident.reporter.mobile)
+    if (incident.recipient.mobile) :
+        sms_recievers.append(incident.recipient.mobile)
+    if sms_recievers :
+        print("sending sms")
+        try:
+            _thread.start_new_thread( send_sms_to_list, (sms_recievers, message))
+        except Exception as e:
+            print("information requested sms sending failed with exception: ")
+            print(e)
+
+def send_incident_created_mail_sms(reporter_id):
     # request created email
     reporter = get_reporter_by_id(reporter_id)
     incident = Incident.objects.get(reporter=reporter)
@@ -181,44 +208,8 @@ def send_incident_created_mail(reporter_id):
 Ref ID: {0}
 To check status: 
 {1}/report/status?refId={0}""".format(incident.refId, settings.APP_BASE_URL)
-    recievers = []
 
-    if reporter.email :
-        recievers.append(incident.reporter.email)
-
-    if incident.recipient.email :
-        recievers.append(incident.recipient.email)
-
-    if recievers :
-        print("sending request created email")
-        try:
-            _thread.start_new_thread( send_email, ( subject, message, recievers) )
-        except:
-            print ("Error: unable to start request created email thread")
-
-def send_incident_created_sms(reporter_id):
-    # request created sms
-    reporter = get_reporter_by_id(reporter_id)
-    incident = Incident.objects.get(reporter=reporter)
-    message = """Your request has been received and is being attended to.
-Ref ID: {0}
-To check status: 
-{1}/report/status?refId={0}""".format(incident.refId, settings.APP_BASE_URL)
-    recievers = []
-
-    if reporter.mobile :
-        recievers.append(reporter.mobile)
-
-    if incident.recipient.mobile :
-        recievers.append(incident.recipient.mobile)
-
-    if recievers :
-        print("sending request created sms")
-        try:
-            _thread.start_new_thread( send_sms_to_list, (recievers, message))
-        except Exception as e:
-            print("request created sms sending failed with exception:")
-            print(e)
+    send_incident_changed_email_sms(incident, subject, message)
 
 def is_valid_incident(incident_id: str) -> bool:
     try:
@@ -819,27 +810,7 @@ Ref ID: {0}
 To check status: 
 {1}/report/status?refId={0}""".format(incident.refId, settings.APP_BASE_URL)
 
-    if (incident.reporter.email):
-        email_recievers.append(incident.reporter.email)
-    if (incident.recipient.email) :
-        email_recievers.append(incident.recipient.email)
-    if email_recievers :
-        try:
-            _thread.start_new_thread( send_email, ( subject, message, email_recievers) )
-        except:
-            print ("Error: unable to start information requested email sending thread")
-
-    if (incident.reporter.mobile):
-        sms_recievers.append(incident.reporter.mobile)
-    if (incident.recipient.mobile) :
-        sms_recievers.append(incident.recipient.mobile)
-    if sms_recievers :
-        print("sending information requested sms")
-        try:
-            _thread.start_new_thread( send_sms_to_list, (sms_recievers, message))
-        except Exception as e:
-            print("information requested sms sending failed with exception:")
-            print(e)
+    send_incident_changed_email_sms(incident, subject, message)
 
     event_services.update_workflow_event(user, incident, workflow)
 
