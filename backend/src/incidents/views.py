@@ -390,8 +390,6 @@ class RecipientDetail(APIView):
         serializer = RecipientSerializer(snippet, data=request.data)
         if serializer.is_valid():
             serializer.save()
-            # send the incident created email once the recipient details are saved
-            send_incident_created_mail(recipient_id)
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 

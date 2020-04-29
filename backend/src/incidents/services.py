@@ -195,7 +195,6 @@ To check status:
             _thread.start_new_thread( send_email, ( subject, message, recievers) )
         except:
             print ("Error: unable to start request created email thread")
-        print("request created email sent")
 
 def send_incident_created_sms(reporter_id):
     # request created sms
@@ -209,22 +208,17 @@ To check status:
 
     if reporter.mobile :
         recievers.append(reporter.mobile)
-        # print("sending request created reporter sms")
-        # try:
-        #     _thread.start_new_thread( send_sms, (reporter.mobile, message))
-        #     _thread.start_new_thread( send_sms, (incident.recipient.mobile, message))
-        # except Exception as e:
-        #     print("request created reporter sms sending failed with exception:")
-        #     print(e)
 
     if incident.recipient.mobile :
         recievers.append(incident.recipient.mobile)
-    print("sending request created sms")
-    try:
-        _thread.start_new_thread( send_sms_to_list, (recievers, message))
-    except Exception as e:
-        print("request created sms sending failed with exception:")
-        print(e)
+
+    if recievers :
+        print("sending request created sms")
+        try:
+            _thread.start_new_thread( send_sms_to_list, (recievers, message))
+        except Exception as e:
+            print("request created sms sending failed with exception:")
+            print(e)
 
 def is_valid_incident(incident_id: str) -> bool:
     try:
@@ -815,24 +809,34 @@ def incident_request_information(user: User, incident: Incident, comment: str):
     # incident.linked_individuals.add(assignee)
     incident.save()
 
-    # information requested email
+    # information requested email and sms
+    print("sending information requested email")
+    email_recievers = []
+    sms_recievers = []
+    subject = 'Your Request Need Information'
+    message = """Your request requires further information to proceed.
+Ref ID: {0}
+To check status: 
+{1}/report/status?refId={0}""".format(incident.refId, settings.APP_BASE_URL)
+
     if (incident.reporter.email):
-        print("sending information requested email")
-        subject = 'Your Request Need Information'
-        message = 'Your request requires further information to proceed. Ref ID : ' + incident.refId
-        recievers = [incident.reporter.email]
+        email_recievers.append(incident.reporter.email)
+    if (incident.recipient.email) :
+        email_recievers.append(incident.recipient.email)
+    if email_recievers :
         try:
-            _thread.start_new_thread( send_email, ( subject, message, recievers) )
+            _thread.start_new_thread( send_email, ( subject, message, email_recievers) )
         except:
-            print ("Error: unable to start thread")
-        print("information requested email sent")
-    
-    # information requested sms
+            print ("Error: unable to start information requested email sending thread")
+
     if (incident.reporter.mobile):
+        sms_recievers.append(incident.reporter.mobile)
+    if (incident.recipient.mobile) :
+        sms_recievers.append(incident.recipient.mobile)
+    if sms_recievers :
         print("sending information requested sms")
-        message = 'Your request requires further information to proceed. Ref ID : ' + incident.refId
         try:
-            _thread.start_new_thread( send_sms, (incident.reporter.mobile, message))
+            _thread.start_new_thread( send_sms_to_list, (sms_recievers, message))
         except Exception as e:
             print("information requested sms sending failed with exception:")
             print(e)
