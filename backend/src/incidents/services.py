@@ -203,6 +203,7 @@ def send_incident_created_mail_sms(reporter_id):
     # request created email
     reporter = get_reporter_by_id(reporter_id)
     incident = Incident.objects.get(reporter=reporter)
+    print("sending incident created email and sms")
     subject = 'Your Request Recieved'
     message = """Your request has been received and is being attended to.
 Ref ID: {0}
@@ -673,27 +674,15 @@ def incident_close(user: User, incident: Incident, details: str):
     )
     workflow.save()
 
-    # request closed email
-    if (incident.reporter.email):
-        print("sending request closed email")
-        subject = 'Your Request Closed'
-        message = 'We closed your request. Reference ID' + incident.refId
-        recievers = [incident.reporter.email]
-        try:
-            _thread.start_new_thread( send_email, ( subject, message, recievers) )
-        except:
-            print ("Error: unable to start thread")
-        print("request closed email sent")
-    
-    #request closed sms
-    if (incident.reporter.mobile):
-        print("sending request closed sms")
-        message = 'Your request has been resolved. Ref ID: ' + incident.refId
-        try:
-            _thread.start_new_thread( send_sms, (incident.reporter.mobile, message))
-        except Exception as e:
-            print("request closed sms sending failed with exception:")
-            print(e)
+    # request closed email and sms
+    print("sending request closed email and sms")
+    subject = "Your Request Closed"
+    message = """Your request has been resolved.
+Ref ID: {0}
+To check status: 
+{1}/report/status?refId={0}""".format(incident.refId, settings.APP_BASE_URL)
+
+    send_incident_changed_email_sms(incident, subject, message)
 
     event_services.update_workflow_event(user, incident, workflow)
 
@@ -801,10 +790,8 @@ def incident_request_information(user: User, incident: Incident, comment: str):
     incident.save()
 
     # information requested email and sms
-    print("sending information requested email")
-    email_recievers = []
-    sms_recievers = []
-    subject = 'Your Request Need Information'
+    print("sending information requested email and sms")
+    subject = "Your Request Need Information"
     message = """Your request requires further information to proceed.
 Ref ID: {0}
 To check status: 
