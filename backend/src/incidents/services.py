@@ -124,7 +124,7 @@ def send_email(subject, message, receivers):
         send_mail(
             subject,
             message,
-            'tellpresident_noreply@lgc2.gov.lk',
+            settings.EMAIL_FROM_ADDRESS,
             receivers,
             fail_silently=False,
         )
@@ -140,7 +140,7 @@ def send_email(subject, message, receivers):
 def send_sms(number, message):
     number = "94" + number[-9:]
     headers = {'content-type': 'text/xml'}
-    
+
     body = """<?xml version='1.0' encoding='utf-8'?>
 <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:v1="http://schemas.icta.lk/xsd/kannel/handler/v1/" soapenv:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
 <soapenv:Header>
@@ -207,7 +207,7 @@ def send_incident_created_mail_sms(reporter_id):
     subject = 'Your Request Recieved'
     message = """Your request has been received and is being attended to.
 Ref ID: {0}
-To check status: 
+To check status:
 {1}/report/status?refId={0}""".format(incident.refId, settings.APP_BASE_URL)
 
     send_incident_changed_email_sms(incident, subject, message)
@@ -679,7 +679,7 @@ def incident_close(user: User, incident: Incident, details: str):
     subject = "Your Request Closed"
     message = """Your request has been resolved.
 Ref ID: {0}
-To check status: 
+To check status:
 {1}/report/status?refId={0}""".format(incident.refId, settings.APP_BASE_URL)
 
     send_incident_changed_email_sms(incident, subject, message)
@@ -794,7 +794,7 @@ def incident_request_information(user: User, incident: Incident, comment: str):
     subject = "Your Request Need Information"
     message = """Your request requires further information to proceed.
 Ref ID: {0}
-To check status: 
+To check status:
 {1}/report/status?refId={0}""".format(incident.refId, settings.APP_BASE_URL)
 
     send_incident_changed_email_sms(incident, subject, message)
@@ -1085,7 +1085,7 @@ def send_canned_response(user, incident, canned_response_id):
         workflow.save()
 
         event_services.update_workflow_event(user, incident, workflow)
-        
+
     except Exception as e:
         print(e)
         raise WorkflowException("Unable to send the canned response")
