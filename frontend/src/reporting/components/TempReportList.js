@@ -149,13 +149,16 @@ export default function TempReportList(){
                     <Typography variant="h6"> View Reports </Typography>
                     <List>
                         <ListItemLink href={`${API_BASE_URL}/pdfgen/?template_type=daily_category`} target="_blank">
-                            <ListItemText primary="Daily Summary Report by Category" />
+                            <ListItemText primary="Daily Summary Report - Total number of requests received by category" />
                         </ListItemLink>
+                        {/* <ListItemLink href={`${API_BASE_URL}/pdfgen/?template_type=daily_category_closed`} target="_blank">
+                            <ListItemText primary="Daily Summary Report - No. of requests closed by organization" />
+                        </ListItemLink> */}
                         <ListItemLink href={`${API_BASE_URL}/pdfgen/?template_type=weekly_closed_request_category`} target="_blank">
-                            <ListItemText primary="Weekly Summary Report - Closed Requests by Category" />
+                            <ListItemText primary="Weekly Summary Report - No. of requests closed by Category" />
                         </ListItemLink>
                         {/* <ListItemLink href={`${API_BASE_URL}/pdfgen/?template_type=weekly_closed_request_organization`} target="_blank">
-                            <ListItemText primary="Weekly Summary Report - Closed Requests by Organization" />
+                            <ListItemText primary="Weekly Summary Report - No. of requests closed by organization" />
                         </ListItemLink> */}
                     </List>
                     <form

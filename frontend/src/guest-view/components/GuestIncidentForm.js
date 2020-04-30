@@ -688,7 +688,7 @@ const VerticalLinearStepper = (props) => {
               reporterData.mobile = incidentContact.mobile;
               reporterData.email = incidentContact.email;
               reporterData.reporter_type = incidentContact.reporterType;
-              reporterData.address = incidentContact.incidentAddress;
+              reporterData.address = incidentAddress;
 
               dispatch(
                 createGuestIncidentWithReporter(
@@ -738,7 +738,7 @@ const VerticalLinearStepper = (props) => {
               reporterData.mobile = incidentContact.mobile;
               reporterData.email = incidentContact.email;
               reporterData.reporter_type = incidentContact.reporterType;
-              reporterData.address = incidentContact.incidentAddress;
+              reporterData.address = incidentAddress;
 
               dispatch(
                 createGuestIncidentWithReporter(
