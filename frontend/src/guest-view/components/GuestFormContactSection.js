@@ -103,7 +103,10 @@ const IncidentContact = (props) => {
         <Grid item xs={8} >
         <FormControl className={classes.group}  error={formErrors.incidentReporterTypeErrorMsg && formErrors.incidentReporterTypeErrorMsg} >
                       <InputLabel htmlFor="reporterType">
-                        Individual/Organization*
+                      {f({
+                        id: "request.management.incident.create.reporter.type",
+                        defaultMessage: "Individual/Organization*",
+                      })}
                       </InputLabel>
                       <Select
                         value={contactDetials.reporterType}
@@ -362,7 +365,10 @@ const IncidentContact = (props) => {
         <Grid item xs={8} >
         <FormControl className={classes.group}  error={formErrors.incidentRecipientTypeErrorMsg && formErrors.incidentRecipientTypeErrorMsg} >
                       <InputLabel htmlFor="reporterType">
-                        Individual/Organization*
+                      {f({
+                        id: "request.management.incident.create.reporter.type",
+                        defaultMessage: "Individual/Organization*",
+                      })}
                       </InputLabel>
                       <Select
                         value={contactDetials.recipientType}

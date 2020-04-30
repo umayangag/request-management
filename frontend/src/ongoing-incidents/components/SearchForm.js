@@ -168,14 +168,14 @@ function SearchForm(props) {
                 aria-controls="panel1a-content"
                 id="panel1a-header"
               >
-                <Typography>Advanced Search</Typography>
+                <Typography>{f({id: "request.management.incident.review.advanced_search", defaultMessage: "Advanced Search"})}</Typography>
               </ExpansionPanelSummary>
               <ExpansionPanelDetails>
                 <Grid container spacing={8}>
                   <Grid item xs={12}>
                     <FormControl className={classes.formControl}>
                       <InputLabel shrink htmlFor="status-label-placeholder">
-                        Status
+                      {f({ id: "request.management.home.incidents.list.status", defaultMessage: "Status" })}
                       </InputLabel>
                       <Select
                         input={
@@ -201,7 +201,7 @@ function SearchForm(props) {
                     </FormControl>
                     <FormControl className={classes.formControl}>
                       <InputLabel shrink htmlFor="status-label-placeholder">
-                      Priority
+                      {f({id: "request.management.incident.review.priority", defaultMessage: "Priority"})}
                       </InputLabel>
                       <Select
                         input={
@@ -226,7 +226,7 @@ function SearchForm(props) {
                     </FormControl>
                     <FormControl className={classes.formControl}>
                       <InputLabel shrink htmlFor="status-label-placeholder">
-                        Category
+                      {f({id: "request.management.incident.create.category", defaultMessage: "Category"})}
                       </InputLabel>
                       <Select
                         input={
@@ -256,7 +256,7 @@ function SearchForm(props) {
                     <FormControl className={classes.formControl}>
                       <TextField
                         id="start-time"
-                        label="Start Date/Time"
+                        label={f({id: "request.management.incident.review.start_date", defaultMessage: "Start Date/Time"})}
                         name="startTime"
                         type="datetime-local"
                         value={values.startTime}
@@ -270,7 +270,7 @@ function SearchForm(props) {
                     <FormControl className={classes.formControl}>
                       <TextField
                         id="end-time"
-                        label="End Date/Time"
+                        label={f({id: "request.management.incident.review.end_date", defaultMessage: "End Date/Time"})}
                         name="endTime"
                         type="datetime-local"
                         value={values.endTime}
@@ -283,7 +283,7 @@ function SearchForm(props) {
                     </FormControl>
                     <FormControl className={classes.formControl}>
                       <InputLabel shrink htmlFor="status-label-placeholder">
-                        District
+                      {f({id: "request.management.incident.create.location.district", defaultMessage: "District"})}
                       </InputLabel>
                       <Select
                         input={

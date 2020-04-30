@@ -39,6 +39,10 @@
   "request.management.report.incidents.subcategory.error.message": "துணை வகை தேவை",
   "request.management.report.incidents.topcategory.error.message": "வகை தேவை",
 
+  "request.management.report.view_reports": "அறிக்கைகளைக் காண்க",
+  "request.management.report.daily_summary_by_category": "வகைப்படி தினசரி சுருக்க அறிக்கை",
+  "request.management.report.weekly_closed_request_category": "வாராந்திர சுருக்க அறிக்கை - வகை வாரியாக மூடப்பட்ட கோரிக்கைகள்",
+  "request.management.report.summary_by_category_filter": "வகையின் சுருக்க அறிக்கை (நேரப்படி வடிகட்டவும்)",
 
   "request.management.report.incidents.section.location": "உங்கள் இருப்பிட விவரங்கள்",
   "request.management.report.incidents.location": "இடத்தின் பெயர் அல்லது விபரம்",
@@ -58,25 +62,27 @@
 
   "request.management.check.incident.status": "குறிப்பின் நிலை",
   "request.management.historic.reports": "சம்பவ  அறிக்கைகள்",
+  "request.management.home.registered_user": "பதிவுசெய்த பயனர்கள்",
+  "request.management.home.signin": "உள்நுழைக",
 
   "request.management.filing.guest.form.steps.basic.details": "சம்பவ விபரங்கள்",
   "request.management.filing.guest.form.steps.location.details": "சம்பவ இடத்தின் விபரங்கள்",
   "request.management.filing.guest.form.steps.contact.details": "தொடர்பு விபரங்கள்",
   "request.management.filing.guest.form.steps.review.details": "மதிப்பாய்வு விபரங்கள்",
 
-  "request.management.home.incidents_assigned": "Assigned to You",
-  "request.management.home.incident_linked": "Linked to You",
+  "request.management.home.incidents_assigned": "உங்களுக்கு ஒதுக்கப்பட்டுள்ளது",
+  "request.management.home.incident_linked": "உங்களுடன் இணைக்கப்பட்டுள்ளது",
 
   "request.management.home.incidents.list.refid": "குறிப்பு எண்",
-  "request.management.home.incidents.list.title": "Title",
-  "request.management.home.incidents.list.description": "Description",
-  "request.management.home.incidents.list.status": "Status",
-  "request.management.home.incidents.list.severity": "Severity",
-  "request.management.home.incidents.list.response_time": "Response Time",
+  "request.management.home.incidents.list.title": "தலைப்பு",
+  "request.management.home.incidents.list.description": "விளக்கம்",
+  "request.management.home.incidents.list.status": "நிலை",
+  "request.management.home.incidents.list.severity": "தீவிரம்",
+  "request.management.home.incidents.list.response_time": "பதில் நேரம்",
   "request.management.home.incidents.list.category": "வகை",
   "request.management.home.incidents.list.subcategory": "துணைப்பிரிவு",
   "request.management.home.incidents.list.last_actioned_at": "Last Actioned At",
-  "request.management.home.incidents.list.created_date": "Created_date",
+  "request.management.home.incidents.list.created_date": "உருவாக்கிய தேதி",
 
   "request.management.incident.create.basic_information": "அடிப்படை தகவல்",
   "request.management.incident.create.type": "Type",
@@ -133,11 +139,15 @@
   "request.management.incident.create.alert.text": "கோரிக்கை தேதி இல்லாமல் சமர்ப்பிக்க முயற்சிக்கிறீர்கள்.",
 
 
-  "request.management.incident.review.review_complaints": "Review",
-  "request.management.incident.review.text_search": "Text Search",
-  "request.management.incident.review.search_placeholder": "Search text / Reference ID",
+  "request.management.incident.review.review_complaints": "விமர்சனம்",
+  "request.management.incident.review.text_search": "உரை தேடல்",
+  "request.management.incident.review.search_placeholder": "உரை / குறிப்பு ஐடியைத் தேடுங்கள்",
   "request.management.incident.review.export_csv": "Export as CSV",
   "request.management.incident.review.export_pdf": "Export as PDF",
+  "request.management.incident.review.advanced_search": "மேம்பட்ட தேடல்",
+  "request.management.incident.review.priority": "முன்னுரிமை",
+  "request.management.incident.review.start_date": "தொடக்க தேதி / நேரம்",
+  "request.management.incident.review.end_date": "இறுதி தேதி / நேரம்",
 
   "request.management.incident.review.logged_date": "Logged Date",
   "request.management.incident.review.logged_time": "Logged Time",
