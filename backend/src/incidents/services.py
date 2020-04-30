@@ -124,7 +124,7 @@ def send_email(subject, message, receivers):
         send_mail(
             subject,
             message,
-            'tellpresident_noreply@lgc2.gov.lk',
+            settings.EMAIL_FROM_ADDRESS,
             receivers,
             fail_silently=False,
         )
@@ -140,7 +140,7 @@ def send_email(subject, message, receivers):
 def send_sms(number, message):
     number = "94" + number[-9:]
     headers = {'content-type': 'text/xml'}
-    
+
     body = """<?xml version='1.0' encoding='utf-8'?>
 <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:v1="http://schemas.icta.lk/xsd/kannel/handler/v1/" soapenv:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
 <soapenv:Header>
@@ -168,33 +168,49 @@ def send_sms(number, message):
     print(response.status_code)
     print(response.reason)
 
-def send_incident_created_mail(reporter_id):
+def send_sms_to_list(recievers, message):
+    for reciever in recievers:
+        send_sms(reciever, message)
+
+def send_incident_changed_email_sms(incident, subject, message):
+    email_recievers = []
+    sms_recievers = []
+
+    if (incident.reporter.email):
+        email_recievers.append(incident.reporter.email)
+    if (incident.recipient.email) :
+        email_recievers.append(incident.recipient.email)
+    if email_recievers :
+        print("sending email")
+        try:
+            _thread.start_new_thread( send_email, ( subject, message, email_recievers) )
+        except:
+            print ("Error: unable to start information requested email sending thread")
+
+    if (incident.reporter.mobile):
+        sms_recievers.append(incident.reporter.mobile)
+    if (incident.recipient.mobile) :
+        sms_recievers.append(incident.recipient.mobile)
+    if sms_recievers :
+        print("sending sms")
+        try:
+            _thread.start_new_thread( send_sms_to_list, (sms_recievers, message))
+        except Exception as e:
+            print("information requested sms sending failed with exception: ")
+            print(e)
+
+def send_incident_created_mail_sms(reporter_id):
     # request created email
     reporter = get_reporter_by_id(reporter_id)
-    if reporter.email :
-        incident = Incident.objects.get(reporter=reporter)
-        print("sending request created email")
-        subject = 'Your Request Recieved'
-        message = 'We recieved your request. Reference ID' + incident.refId
-        recievers = [incident.reporter.email]
-        try:
-            _thread.start_new_thread( send_email, ( subject, message, recievers) )
-        except:
-            print ("Error: unable to start thread")
-        print("request created email sent")
+    incident = Incident.objects.get(reporter=reporter)
+    print("sending incident created email and sms")
+    subject = 'Your Request Recieved'
+    message = """Your request has been received and is being attended to.
+Ref ID: {0}
+To check status:
+{1}/report/status?refId={0}""".format(incident.refId, settings.APP_BASE_URL)
 
-def send_incident_created_sms(reporter_id):
-    # request created sms
-    reporter = get_reporter_by_id(reporter_id)
-    if reporter.mobile :
-        incident = Incident.objects.get(reporter=reporter)
-        print("sending request created sms")
-        message = 'Your request has been received and is being attended to Ref ID: ' + incident.refId
-        try:
-            _thread.start_new_thread( send_sms, (reporter.mobile, message))
-        except Exception as e:
-            print("request created sms sending failed with exception:")
-            print(e)
+    send_incident_changed_email_sms(incident, subject, message)
 
 def is_valid_incident(incident_id: str) -> bool:
     try:
@@ -658,26 +674,15 @@ def incident_close(user: User, incident: Incident, details: str):
     )
     workflow.save()
 
-    # request closed email
-    if (incident.reporter.email):
-        print("sending request closed email")
-        subject = 'Your Request Closed'
-        message = 'We closed your request. Reference ID' + incident.refId
-        recievers = [incident.reporter.email]
-        try:
-            _thread.start_new_thread( send_email, ( subject, message, recievers) )
-        except:
-            print ("Error: unable to start thread")
-        print("request closed email sent")
+    # request closed email and sms
+    print("sending request closed email and sms")
+    subject = "Your Request Closed"
+    message = """Your request has been resolved.
+Ref ID: {0}
+To check status:
+{1}/report/status?refId={0}""".format(incident.refId, settings.APP_BASE_URL)
 
-    if (incident.reporter.mobile):
-        print("sending request closed sms")
-        message = 'Your request has been resolved. Ref ID: ' + incident.refId
-        try:
-            _thread.start_new_thread( send_sms, (incident.reporter.mobile, message))
-        except Exception as e:
-            print("request closed sms sending failed with exception:")
-            print(e)
+    send_incident_changed_email_sms(incident, subject, message)
 
     event_services.update_workflow_event(user, incident, workflow)
 
@@ -783,6 +788,16 @@ def incident_request_information(user: User, incident: Incident, comment: str):
 
     # incident.linked_individuals.add(assignee)
     incident.save()
+
+    # information requested email and sms
+    print("sending information requested email and sms")
+    subject = "Your Request Need Information"
+    message = """Your request requires further information to proceed.
+Ref ID: {0}
+To check status:
+{1}/report/status?refId={0}""".format(incident.refId, settings.APP_BASE_URL)
+
+    send_incident_changed_email_sms(incident, subject, message)
 
     event_services.update_workflow_event(user, incident, workflow)
 
@@ -1070,7 +1085,7 @@ def send_canned_response(user, incident, canned_response_id):
         workflow.save()
 
         event_services.update_workflow_event(user, incident, workflow)
-        
+
     except Exception as e:
         print(e)
         raise WorkflowException("Unable to send the canned response")

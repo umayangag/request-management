@@ -54,10 +54,9 @@ from .services import (
     find_escalation_candidate,
     create_reporter,
     validateRecaptcha,
-    send_incident_created_mail,
+    send_incident_created_mail_sms,
     get_incident_status_guest,
     send_canned_response,
-    send_incident_created_sms,
     get_incident_status_guest
 )
 
@@ -354,10 +353,8 @@ class ReporterDetail(APIView):
         serializer = ReporterSerializer(snippet, data=request.data)
         if serializer.is_valid():
             serializer.save()
-            # send the incident created email once the reporter details are saved
-            send_incident_created_mail(reporter_id)
-            # send the incident created sms once the reporter details are saved
-            send_incident_created_sms(reporter_id)
+            # send the incident created email and sms once the reporter details are saved
+            send_incident_created_mail_sms(reporter_id)
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -390,8 +387,6 @@ class RecipientDetail(APIView):
         serializer = RecipientSerializer(snippet, data=request.data)
         if serializer.is_valid():
             serializer.save()
-            # send the incident created email once the recipient details are saved
-            send_incident_created_mail(recipient_id)
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
