@@ -42,6 +42,9 @@
   "request.management.report.view_reports": "වාර්තා බලන්න",
   "request.management.report.daily_summary_by_category": "දෛනික සාරාංශ වාර්තාව - කාණ්ඩය අනුව ලැබෙන මුළු ඉල්ලීම් ගණන",
   "request.management.report.weekly_closed_request_category": "සතිපතා සාරාංශ වාර්තාව - කාණ්ඩය මගින් වසා ඇති ඉල්ලීම් ගණන",
+  "request.management.report.weekly_closed_request_organization": "සතිපතා සාරාංශ වාර්තාව - සංවිධානය විසින් වසා ඇති ඉල්ලීම් ගණන",
+  "request.management.report.daily_closed_request_category": "දෛනික සාරාංශ වාර්තාව - කාණ්ඩය අනුව වසා ඇති ඉල්ලීම් ගණන",
+  "request.management.report.daily_closed_request_organization": "දෛනික සාරාංශ වාර්තාව - සංවිධානය විසින් වසා ඇති ඉල්ලීම් ගණන",
   "request.management.report.summary_by_category_filter": "කාණ්ඩය අනුව සාරාංශ වාර්තාව (වේලාව අනුව පෙරහන් කරන්න)",
 
   "request.management.report.incidents.section.location": "ඔබගේ ස්ථානය පිළිබඳ තොරතුරු",

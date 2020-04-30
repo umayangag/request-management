@@ -63,7 +63,7 @@ def get_incident_status_guest(refId):
         return status
 
     if incident.current_status == StatusType.NEW.name:
-        status["reply"] = "Your request has been received. Please check in later."
+        status["reply"] = "Your request has been received. Please check again later for status updates."
     elif incident.current_status == StatusType.VERIFIED.name:
         status["reply"] = "Your request has been acknowledged."
     elif incident.current_status == StatusType.ACTION_PENDING.name or incident.current_status == StatusType.ACTION_TAKEN.name \
@@ -71,8 +71,11 @@ def get_incident_status_guest(refId):
         status["reply"] = "Your request is currently being attended to."
     elif incident.current_status == StatusType.INFORMATION_REQESTED.name:
         status = get_public_status_on_information_request(incident)
-    elif incident.current_status == StatusType.CLOSED.name or incident.current_status == StatusType.INVALIDATED.name:
+    elif incident.current_status == StatusType.CLOSED.name:
         status = get_public_status_on_close(incident)
+    elif incident.current_status == StatusType.INVALIDATED.name:
+        status["reply"] = "We regret, we will not be able to proceed with your request at this time. \
+            Please feel free to access this system for future needs or requests. We look forward to serving you."
 
     return status
 
@@ -96,7 +99,8 @@ def get_public_status_on_information_request(incident):
 
         messages.append(output)
 
-    status["reply"] = "Your request requires further information to proceed."
+    status["reply"] = "Your request requires further information to proceed. Please provide the following \
+        details at your earliest convenience."
     status["messages"] = messages
 
     return status
