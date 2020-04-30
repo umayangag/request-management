@@ -76,7 +76,7 @@
   "request.management.home.incidents.list.title": "Title",
   "request.management.home.incidents.list.description": "Description",
   "request.management.home.incidents.list.status": "Status",
-  "request.management.home.incidents.list.severity": "Severity",
+  "request.management.home.incidents.list.severity": "Priority",
   "request.management.home.incidents.list.response_time": "Response Time",
   "request.management.home.incidents.list.category": "Category",
   "request.management.home.incidents.list.subcategory": "Subcategory",
