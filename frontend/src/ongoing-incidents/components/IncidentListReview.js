@@ -17,7 +17,7 @@ import { useIntl } from "react-intl";
 const CustomTableCell = withRouter(
   withStyles((theme) => ({
     body: {
-      padding: "3px 8px",
+      // padding: "3px 8px",
       fontSize: "14px",
       "& p.description": {
         overflow: "hidden",
