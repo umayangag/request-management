@@ -18,6 +18,9 @@ from ..common.data.Institutions import institutions
 from django.db.models import Count
 import collections, functools, operator
 
+def get_total_opened_incident_count():
+    count = Incident.objects.exclude(current_status=StatusType.CLOSED.name).exclude(current_status=StatusType.INVALIDATED.name).count()
+    return count
 
 def get_daily_incidents():
     """ List dialy incidents to the current date """
@@ -168,8 +171,7 @@ def get_daily_district_data():
     """ Function to get daily district data on complaints for PDF export. """
     file_dict = {}
 
-    file_dict[
-        "template"] = "/incidents/complaints/daily_summary_report_districtwise.js"
+    file_dict["template"] = "/incidents/complaints/daily_summary_report_districtwise.js"
     file_dict["delectionDateate"] = date.today().strftime("%Y/%m/%d")
 
     # preload categories
@@ -306,6 +308,7 @@ def get_daily_category_data():
 
     incidents = get_daily_incidents()
     file_dict["total"] = incidents.count()
+    file_dict["totalOpenedCount"] = get_total_opened_incident_count()
 
     file_dict["categories"] = get_category_dict(incidents)
 
@@ -319,6 +322,7 @@ def get_closed_daily_category_data():
 
     incidents = get_daily_incidents()
     file_dict["total"] = incidents.count()
+    file_dict["totalOpenedCount"] = get_total_opened_incident_count()
 
     file_dict["categories"] = get_category_dict(incidents)
 
@@ -332,6 +336,7 @@ def get_category_data_by_date_range(start_time, end_time):
     file_dict["EndDate"] = end_time
     incidents = Incident.objects.filter(created_date__range=(parse_date_timezone(start_time), parse_date_timezone(end_time)))
     file_dict["total"] = incidents.count()
+    file_dict["totalOpenedCount"] = get_total_opened_incident_count()
 
     file_dict["categories"] = get_category_dict(incidents)
 
@@ -347,6 +352,7 @@ def get_weekly_closed_complain_category_data():
     file_dict["EndDate"] = week_data["end_date"]
     incidents = week_data["incidents"].filter(current_status=StatusType.CLOSED.name)
     file_dict["total"] = incidents.count()
+    file_dict["totalOpenedCount"] = get_total_opened_incident_count()
 
     file_dict["categories"] = get_category_dict(incidents)
 
