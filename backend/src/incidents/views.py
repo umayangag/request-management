@@ -204,7 +204,7 @@ class IncidentList(APIView, IncidentResultsSetPagination):
             ''' Function to generate refId for requests '''
             profile = Profile.objects.get(user=request.user)
 
-            today = datetime.now().replace(hour=0, minute=0, second=0)
+            today = datetime.now().replace(month=1, day=1, hour=0, minute=0, second=0)
             current_count = Incident.objects.filter(
                 incidentType=IncidentType.COMPLAINT,
                 created_date__gte=today
