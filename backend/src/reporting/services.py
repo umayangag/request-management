@@ -346,7 +346,7 @@ def get_category_data_by_date_range(start_time, end_time):
 def get_weekly_closed_complain_category_data():
     file_dict = {}
 
-    file_dict["template"] = "/incidents/complaints/weeekly_closed_request_report_categorywise.js"
+    file_dict["template"] = "/incidents/complaints/weekly_closed_request_report_categorywise.js"
     week_data = get_weekly_incidents()
     file_dict["StartDate"] = week_data["start_date"]
     file_dict["EndDate"] = week_data["end_date"]
@@ -377,7 +377,7 @@ def get_weekly_closed_complain_organization_data():
     file_dict = {}
 
     file_dict[
-        "template"] = "/incidents/complaints/weeekly_closed_request_report_organizationwise.js"
+        "template"] = "/incidents/complaints/weekly_closed_request_report_organizationwise.js"
     file_dict["date"] = date.today().strftime("%Y/%m/%d")
 
     start_datetime = (date.today() - timedelta(days=7)).strftime("%Y-%m-%d")
@@ -389,6 +389,21 @@ def get_weekly_closed_complain_organization_data():
 
     return file_dict
 
+def get_daily_closed_complain_organization_data():
+    file_dict = {}
+
+    file_dict[
+        "template"] = "/incidents/complaints/daily_closed_request_report_organizationwise.js"
+    file_dict["date"] = date.today().strftime("%Y/%m/%d")
+
+    start_datetime = (date.today() - timedelta(days=7)).strftime("%Y-%m-%d")
+    end_datetime = date.today().strftime("%Y-%m-%d")
+    weekly_incidents_closed = CloseWorkflow.objects.filter(created_date__range=(start_datetime, end_datetime)) \
+        .values('departments').annotate(total=Count('departments'))
+
+    file_dict["total"] = list(weekly_incidents_closed)
+
+    return file_dict
 
 def get_total_requests_by_category_for_a_selected_time(start_time, end_time):
     """ This returns the total requests by category during the input time period """

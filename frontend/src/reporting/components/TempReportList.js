@@ -154,13 +154,16 @@ export default function TempReportList(){
                             <ListItemText primary={f({id: "request.management.report.daily_summary_by_category", defaultMessage: "Daily Summary Report - Total number of requests received by category"})} />
                         </ListItemLink>
                         {/* <ListItemLink href={`${API_BASE_URL}/pdfgen/?template_type=daily_category_closed`} target="_blank">
-                            <ListItemText primary="Daily Summary Report - No. of requests closed by organization" />
+                            <ListItemText primary={f({id: "request.management.report.daily_closed_request_category", defaultMessage: "Daily Summary Report - No. of requests closed by category"})} />
                         </ListItemLink> */}
                         <ListItemLink href={`${API_BASE_URL}/pdfgen/?template_type=weekly_closed_request_category`} target="_blank">
                             <ListItemText primary={f({id: "request.management.report.weekly_closed_request_category", defaultMessage: "Weekly Summary Report - No. of requests closed by Category"})} />
                         </ListItemLink>
                         {/* <ListItemLink href={`${API_BASE_URL}/pdfgen/?template_type=weekly_closed_request_organization`} target="_blank">
-                            <ListItemText primary="Weekly Summary Report - No. of requests closed by organization" />
+                            <ListItemText primary={f({id: "request.management.report.weekly_closed_request_organization", defaultMessage: "Weekly Summary Report - No. of requests closed by organization"})} />
+                        </ListItemLink> */}
+                        {/* <ListItemLink href={`${API_BASE_URL}/pdfgen/?template_type=daily_closed_request_organization`} target="_blank">
+                            <ListItemText primary={f({id: "request.management.report.daily_closed_request_organization", defaultMessage: "Daily Summary Report - No. of requests closed by organization"})} />
                         </ListItemLink> */}
                     </List>
                     <form
