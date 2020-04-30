@@ -96,7 +96,7 @@
   "request.management.incident.create.reporter.name": "நிருபர் பெயர்*",
   "request.management.incident.create.reporter.type": "தனிநபர் / அமைப்பு*",
   "request.management.incident.create.reporter.address": "முகவரி*",
-  "request.management.incident.create.reporter.mobile": "கைபேசி",
+  "request.management.incident.create.reporter.mobile": "கைபேசி*",
   "request.management.incident.create.reporter.email": "மின்னஞ்சல்",
   "request.management.incident.create.reporter.telephone": "நிலையான தொலைபேசி",
   "request.management.incident.create.reporter.onbehalf": "வேறொருவரின் சார்பாக",

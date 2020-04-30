@@ -311,6 +311,18 @@ def get_daily_category_data():
 
     return file_dict
 
+def get_closed_daily_category_data():
+    file_dict = {}
+
+    file_dict["template"] = "/incidents/complaints/daily_closed_summery_report_categorywise.js"
+    file_dict["date"] = date.today().strftime("%Y/%m/%d")
+
+    incidents = get_daily_incidents()
+    file_dict["total"] = incidents.count()
+
+    file_dict["categories"] = get_category_dict(incidents)
+
+    return file_dict
 
 def get_category_data_by_date_range(start_time, end_time):
     file_dict = {}

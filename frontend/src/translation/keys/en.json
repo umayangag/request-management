@@ -96,7 +96,7 @@
   "request.management.incident.create.reporter.name": "Reporter Name*",
   "request.management.incident.create.reporter.type": "Individual/Organization*",
   "request.management.incident.create.reporter.address": "Address*",
-  "request.management.incident.create.reporter.mobile": "Mobile",
+  "request.management.incident.create.reporter.mobile": "Mobile*",
   "request.management.incident.create.reporter.telephone": "Landline",
   "request.management.incident.create.reporter.email": "Email",
   "request.management.incident.create.reporter.onbehalf": "On behalf of someone else",

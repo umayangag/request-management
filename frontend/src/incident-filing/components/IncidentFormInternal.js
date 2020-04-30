@@ -403,7 +403,7 @@ function IncidentFormInternal(props) {
         });
       }else{
         Object.assign(initData, {
-          showRecipient: "No",
+          showRecipient: "NO",
         });
       }
 
@@ -547,7 +547,7 @@ function IncidentFormInternal(props) {
         ? IncidentSchema.required(f({ id: "request.management.incident.error.district", defaultMessage: "District is Required" }))
         : IncidentSchema
     ),
-    reporterMobile: Yup.number(),
+    reporterMobile: Yup.number().required(f({ id: "request.management.incident.error.mobile", defaultMessage: "Mobile is Required" })),
     reporterTelephone: Yup.number(),
     reporterEmail: Yup.string().email(f({ id: "request.management.incident.error.email", defaultMessage: "Invalid email" })),
     institution: Yup.mixed().when(
@@ -649,6 +649,7 @@ function IncidentFormInternal(props) {
           setFieldValue,
           isValid,
         }) => {
+          debugger;
           return (
             <form
               className={classes.container}
@@ -721,7 +722,7 @@ function IncidentFormInternal(props) {
                       </div>
                     </FormLabel>
 
-                    {channels.map((c, k) => (
+                    {paramIncidentId ? channels.map((c, k) => (
                       <Button
                         key={k}
                         variant="contained"
@@ -730,11 +731,23 @@ function IncidentFormInternal(props) {
                         onClick={() => {
                           setFieldValue("infoChannel", c.id, true);
                         }}
-                        disabled={(paramIncidentId || c.name == "Online") ? "disabled" : "" }
+                        disabled={(paramIncidentId && values.infoChannel == c.id) ? "" : "disabled" }
                       >
                         {c.name}
                       </Button>
-                    ))}
+                    )) : channels.map((c, k) => (
+                      <Button
+                        key={k}
+                        variant="contained"
+                        color={values.infoChannel == c.id ? "primary" : ""}
+                        className={classes.button}
+                        onClick={() => {
+                          setFieldValue("infoChannel", c.id, true);
+                        }}
+                        disabled={c.name == "Online" ? "disabled" : "" }
+                      >
+                        {c.name}
+                      </Button>))}
 
                     <FormHelperText>
                       {errors.infoChannel && touched.infoChannel ? (
@@ -1298,8 +1311,8 @@ function IncidentFormInternal(props) {
                           {" "}
                           <em>None</em>{" "}
                         </MenuItem>
-                        <MenuItem value={"Individual"}>Individual</MenuItem>
-                        <MenuItem value={"Organization"}>Organization</MenuItem>
+                        <MenuItem value={"INDIVIDUAL"}>Individual</MenuItem>
+                        <MenuItem value={"ORGANIZATION"}>Organization</MenuItem>
                       </Select>
                       <FormHelperText>
                             {touched.reporterType && errors.reporterType
@@ -1364,7 +1377,7 @@ function IncidentFormInternal(props) {
                     <TelephoneInput
                       className={classes.textField}
                       name="reporterMobile"
-                      label={f({ id: "request.management.incident.create.reporter.mobile", defaultMessage: "Mobile" })}
+                      label={f({ id: "request.management.incident.create.reporter.mobile", defaultMessage: "Mobile*" })}
                     />
                   </Grid>
                   <Grid item xs={12} md={4} sm={6}>
@@ -1451,7 +1464,7 @@ function IncidentFormInternal(props) {
                         </FormControl>
                       </Grid>
                       <Grid item xs={12}>
-                        <FormControl error={touched.showRecipient ? true : false} component="fieldset">
+                        <FormControl error={touched.showRecipient ? errors.showRecipient : false} component="fieldset">
                             <FormLabel component="legend">{f({ id: "request.management.incident.create.reporter.onbehalf", defaultMessage: "On behalf of someone else" })}</FormLabel>
                             <RadioGroup
                                 aria-label="Gender"
@@ -1475,8 +1488,8 @@ function IncidentFormInternal(props) {
                                     control={
                                         <Radio />
                                     }
-                                    label="NO"
-                                    value="No"
+                                    label="No"
+                                    value="NO"
                                 />
                             </RadioGroup>
                             <FormHelperText>{touched.showRecipient ? errors.showRecipient : null}</FormHelperText>

@@ -96,7 +96,7 @@
   "request.management.incident.create.reporter.name": "වාර්තාකරුගේ නම*",
   "request.management.incident.create.reporter.type": "තනි පුද්ගල / සංවිධානය*",
   "request.management.incident.create.reporter.address": "ලිපිනය*",
-  "request.management.incident.create.reporter.mobile": "ජංගම දුරකථනය",
+  "request.management.incident.create.reporter.mobile": "ජංගම දුරකථනය*",
   "request.management.incident.create.reporter.telephone": "ස්ථාවර දුරකථනය",
   "request.management.incident.create.reporter.email": "විද්යුත් තැපෑල",
   "request.management.incident.create.reporter.onbehalf": "වෙනත් කෙනෙකු වෙනුවෙන්",
