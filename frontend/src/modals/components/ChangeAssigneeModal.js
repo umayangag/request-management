@@ -15,7 +15,7 @@ import { hideModal  } from '../state/modal.actions'
 import { fetchUpdateWorkflow } from '../../ongoing-incidents/state/OngoingIncidents.actions'
 
 const ChangeAssigneeModal = (props) => {
-    const defaultOrg = "pslk";
+    const defaultOrg = "PS";
     const { users, divisions } = props;
     const dispatch = useDispatch();
 
