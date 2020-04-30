@@ -248,6 +248,7 @@ const GuestRefIdCheck = (props) => {
                     {message.header}
                   </Typography>
                   <Typography component="p">{message.content}</Typography>
+                  {message.actions && (
                   <form className={classes.root} noValidate autoComplete="off">
                     <TextField
                       id="comment"
@@ -261,6 +262,7 @@ const GuestRefIdCheck = (props) => {
                       rows="4"
                     />
                   </form>
+                  )}
                 </CardContent>
                 {message.actions && (
                   <CardActions>
