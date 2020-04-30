@@ -40,8 +40,8 @@
   "request.management.report.incidents.topcategory.error.message": "வகை தேவை",
 
   "request.management.report.view_reports": "அறிக்கைகளைக் காண்க",
-  "request.management.report.daily_summary_by_category": "வகைப்படி தினசரி சுருக்க அறிக்கை",
-  "request.management.report.weekly_closed_request_category": "வாராந்திர சுருக்க அறிக்கை - வகை வாரியாக மூடப்பட்ட கோரிக்கைகள்",
+  "request.management.report.daily_summary_by_category": "தினசரி சுருக்க அறிக்கை - வகை மூலம் பெறப்பட்ட மொத்த கோரிக்கைகளின் எண்ணிக்கை",
+  "request.management.report.weekly_closed_request_category": "வாராந்திர சுருக்க அறிக்கை - வகையால் மூடப்பட்ட கோரிக்கைகளின் எண்ணிக்கை",
   "request.management.report.summary_by_category_filter": "வகையின் சுருக்க அறிக்கை (நேரப்படி வடிகட்டவும்)",
 
   "request.management.report.incidents.section.location": "உங்கள் இருப்பிட விவரங்கள்",
@@ -102,7 +102,7 @@
   "request.management.incident.create.reporter.name": "நிருபர் பெயர்*",
   "request.management.incident.create.reporter.type": "தனிநபர் / அமைப்பு*",
   "request.management.incident.create.reporter.address": "முகவரி*",
-  "request.management.incident.create.reporter.mobile": "கைபேசி",
+  "request.management.incident.create.reporter.mobile": "கைபேசி*",
   "request.management.incident.create.reporter.email": "மின்னஞ்சல்",
   "request.management.incident.create.reporter.telephone": "நிலையான தொலைபேசி",
   "request.management.incident.create.reporter.onbehalf": "வேறொருவரின் சார்பாக",

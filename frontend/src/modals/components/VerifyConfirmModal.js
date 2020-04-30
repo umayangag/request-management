@@ -27,7 +27,7 @@ const VerifyConfirmModal = (props) => {
             <DialogTitle id="form-dialog-title">Verify this record </DialogTitle>
             <DialogContent style={{width:400}}>
             <DialogContentText>
-                Comment(optional)
+                Comment ( optional )
             </DialogContentText>
             <TextField
               autoFocus
@@ -44,7 +44,7 @@ const VerifyConfirmModal = (props) => {
               onChange={(e)=>{
                   proof = !proof
               }}
-            /> Verified with suppport documents
+            /> Verified with supporting documents
           </DialogContent>
             <DialogActions>
                 <Button onClick={()=>{dispatch(hideModal())}} color="primary">
