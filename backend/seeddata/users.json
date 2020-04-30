@@ -76,7 +76,8 @@
                 102,
                 93,
                 94,
-                97
+                97,
+                100
             ]
         }
     },
@@ -264,7 +265,7 @@
         "model": "custom_auth.organization",
         "pk": 1,
         "fields": {
-            "code": "pslk",
+            "code": "PS",
             "displayName": "Presidential Secretariat",
             "created_date": "2019-11-07T11:21:56.468Z"
         }
