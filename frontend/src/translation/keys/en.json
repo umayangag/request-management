@@ -39,6 +39,10 @@
   "request.management.report.incidents.subcategory.error.message": "Sub category is required",
   "request.management.report.incidents.topcategory.error.message": "Category is required",
 
+  "request.management.report.view_reports": "View Reports",
+  "request.management.report.daily_summary_by_category": "Daily Summary Report - Total number of requests received by category",
+  "request.management.report.weekly_closed_request_category": "Weekly Summary Report - No. of requests closed by Category",
+  "request.management.report.summary_by_category_filter": "Summary Report by Category ( Filter by time )",
 
   "request.management.report.incidents.section.location": "Your location details",
   "request.management.report.incidents.location": "Location name or description",
@@ -57,6 +61,8 @@
 
   "request.management.check.incident.status": "Check request status",
   "request.management.historic.reports": "Incident Reports",
+  "request.management.home.registered_user": "Registered user",
+  "request.management.home.signin": "Sign In",
 
   "request.management.filing.guest.form.steps.basic.details": "Incident Details",
   "request.management.filing.guest.form.steps.location.details": "Incident Location Details",
@@ -136,7 +142,11 @@
   "request.management.incident.review.text_search": "Text Search",
   "request.management.incident.review.search_placeholder": "Search text / Reference ID",
   "request.management.incident.review.export_csv": "Export as CSV",
+  "request.management.incident.review.advanced_search": "Advanced Search",
   "request.management.incident.review.export_pdf": "Export as PDF",
+  "request.management.incident.review.priority": "Priority",
+  "request.management.incident.review.start_date": "Start Date/Time",
+  "request.management.incident.review.end_date": "End Date/Time",
 
   "request.management.incident.review.logged_date": "Logged Date",
   "request.management.incident.review.logged_time": "Logged Time",
