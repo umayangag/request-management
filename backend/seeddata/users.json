@@ -274,7 +274,7 @@
         "model": "custom_auth.organization",
         "pk": 2,
         "fields": {
-            "code": "police",
+            "code": "SLP",
             "displayName": "Police",
             "created_date": "2019-11-07T11:22:08.958Z"
         }

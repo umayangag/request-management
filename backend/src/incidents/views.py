@@ -237,7 +237,7 @@ class IncidentList(APIView, IncidentResultsSetPagination):
             ).count()
 
             incident = serializer.save()
-            incident.refId = "GMS/%s/%s/%0.6d" % (profile.organization.code.upper(), str(today.year), current_count + 1)
+            incident.refId = "GMS/%s/%s/%d" % (profile.organization.code.upper(), str(today.year), current_count + 1)
 
             incident_police_report_data = request.data
             incident_police_report_data["incident"] = serializer.data["id"]
