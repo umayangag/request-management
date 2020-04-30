@@ -173,13 +173,22 @@ def send_sms_to_list(recievers, message):
         send_sms(reciever, message)
 
 def send_incident_changed_email_sms(incident, subject, message):
+    """ function to send email and sms to reporters and recipient to the given incident. """
     email_recievers = []
     sms_recievers = []
 
-    if (incident.reporter.email):
-        email_recievers.append(incident.reporter.email)
-    if (incident.recipient.email) :
-        email_recievers.append(incident.recipient.email)
+    if (incident.reporter):
+        if (incident.reporter.email):
+            email_recievers.append(incident.reporter.email)
+        if (incident.reporter.mobile):
+            sms_recievers.append(incident.reporter.mobile)
+
+    if (incident.recipient):
+        if (incident.recipient.email) :
+            email_recievers.append(incident.recipient.email)
+        if (incident.recipient.mobile) :
+            sms_recievers.append(incident.recipient.mobile)
+
     if email_recievers :
         print("sending email")
         try:
@@ -187,10 +196,6 @@ def send_incident_changed_email_sms(incident, subject, message):
         except:
             print ("Error: unable to start information requested email sending thread")
 
-    if (incident.reporter.mobile):
-        sms_recievers.append(incident.reporter.mobile)
-    if (incident.recipient.mobile) :
-        sms_recievers.append(incident.recipient.mobile)
     if sms_recievers :
         print("sending sms")
         try:
@@ -200,9 +205,10 @@ def send_incident_changed_email_sms(incident, subject, message):
             print(e)
 
 def send_incident_created_mail_sms(reporter_id):
-    # request created email
-    reporter = get_reporter_by_id(reporter_id)
-    incident = Incident.objects.get(reporter=reporter)
+    """ request created content for correspondance """
+
+    # reporter = get_reporter_by_id(reporter_id)
+    incident = Incident.objects.get(reporter=reporter_id)
     print("sending incident created email and sms")
     subject = 'Your Request Recieved'
     message = """Your request has been received and is being attended to.
