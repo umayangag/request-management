@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 // import {Link} from 'react-router-dom';
 // import {withRouter} from "react-router";
+import { useIntl } from "react-intl";
 import MuiExpansionPanel from '@material-ui/core/ExpansionPanel';
 import MuiExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import MuiExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
@@ -13,7 +14,7 @@ import moment from "moment";
 import * as Yup from "yup";
 import { showNotification } from "../../notifications/state/notifications.actions";
 import { Button } from '@material-ui/core';
-import { useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux';
 
 const styles = theme => ({
     root: {
@@ -73,6 +74,7 @@ function ListItemLink(props) {
 
 export default function TempReportList(){
     const dispatch = useDispatch();
+    const { formatMessage: f } = useIntl();
 
     const [state, setState] = useState({
         startTime: null,
@@ -146,16 +148,16 @@ export default function TempReportList(){
         <Paper style={{padding: 20}}>
             <Grid container spacing={24}>
                 <Grid item xs>
-                    <Typography variant="h6"> View Reports </Typography>
+                    <Typography variant="h6"> {f({id: "request.management.report.view_reports", defaultMessage: "View Reports"})} </Typography>
                     <List>
                         <ListItemLink href={`${API_BASE_URL}/pdfgen/?template_type=daily_category`} target="_blank">
-                            <ListItemText primary="Daily Summary Report - Total number of requests received by category" />
+                            <ListItemText primary={f({id: "request.management.report.daily_summary_by_category", defaultMessage: "Daily Summary Report - Total number of requests received by category"})} />
                         </ListItemLink>
                         {/* <ListItemLink href={`${API_BASE_URL}/pdfgen/?template_type=daily_category_closed`} target="_blank">
                             <ListItemText primary="Daily Summary Report - No. of requests closed by organization" />
                         </ListItemLink> */}
                         <ListItemLink href={`${API_BASE_URL}/pdfgen/?template_type=weekly_closed_request_category`} target="_blank">
-                            <ListItemText primary="Weekly Summary Report - No. of requests closed by Category" />
+                            <ListItemText primary={f({id: "request.management.report.weekly_closed_request_category", defaultMessage: "Weekly Summary Report - No. of requests closed by Category"})} />
                         </ListItemLink>
                         {/* <ListItemLink href={`${API_BASE_URL}/pdfgen/?template_type=weekly_closed_request_organization`} target="_blank">
                             <ListItemText primary="Weekly Summary Report - No. of requests closed by organization" />
@@ -175,14 +177,14 @@ export default function TempReportList(){
                             }}>
                     <ExpansionPanel square expanded={expanded === 'panel2'} onChange={handleChange2('panel2')}>
                         <ExpansionPanelSummary aria-controls="panel1d-content" id="panel1d-header">
-                        <Typography>Summary Report by Category ( Filter by time )</Typography>
+                        <Typography>{f({id: "request.management.report.summary_by_category_filter", defaultMessage: "Summary Report by Category ( Filter by time )"})}</Typography>
                         </ExpansionPanelSummary>
                         <ExpansionPanelDetails>
                         <Grid container spacing={24}>
                         <Grid item xs={6}>
                         <TextField
                         id="start-time"
-                        label="Start Date/Time"
+                        label={f({id: "request.management.incident.review.start_date", defaultMessage: "Start Date/Time"})}
                         name="startTime"
                         type="datetime-local"
                         value={values.startTime}
@@ -197,7 +199,7 @@ export default function TempReportList(){
                     <Grid item xs={6}>
                     <TextField
                         id="end-time"
-                        label="End Date/Time"
+                        label={f({id: "request.management.incident.review.end_date", defaultMessage: "Endate/Time"})}
                         name="endTime"
                         type="datetime-local"
                         value={values.endTime}

@@ -281,9 +281,15 @@ function HomePage(props) {
           className={classes.bottomText}
           color="primary"
         >
-           Registered user  -
+           <FormattedMessage
+            id="request.management.home.registered_user"
+            defaultMessage={"Registered user"}
+          />  -
           <Button color="primary" className={classes.button} href="/signin">
-          Sign In
+          <FormattedMessage
+            id="request.management.home.signin"
+            defaultMessage={"Sign In"}
+          />
           </Button>
         </Typography>
       </Grid>
