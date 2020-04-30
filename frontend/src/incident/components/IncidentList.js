@@ -16,7 +16,7 @@ import { useIntl } from "react-intl";
 const CustomTableCell = withRouter(
   withStyles((theme) => ({
     body: {
-      padding: "3px 8px",
+      // padding: "3px 8px",
       fontSize: "14px",
       "& p.description": {
         overflow: "hidden",
@@ -105,11 +105,11 @@ function IncidentList({
     <Table className={classes.table}>
       <colgroup>
         <col style={{ width: "5%" }} />
-        <col style={{ width: "25%" }} />
-        <col style={{ width: "45%" }} />
-        <col style={{ width: "5%" }} />
-        <col style={{ width: "5%" }} />
-        <col style={{ width: "5%" }} />
+        <col style={{ width: "35%" }} />
+        <col style={{ width: "35%" }} />
+        <col style={{ width: "10%" }} />
+        <col style={{ width: "10%" }} />
+        <col style={{ width: "10%" }} />
         {/* <col style={{ width: "2%" }} /> */}
       </colgroup>
       <TableHead>
@@ -117,9 +117,9 @@ function IncidentList({
           <CustomTableCell align="center">{f({id: "request.management.home.incidents.list.refid"})}</CustomTableCell>
           <CustomTableCell align="center">{f({id: "request.management.home.incidents.list.category"})}</CustomTableCell>
           <CustomTableCell align="center">{f({id: "request.management.home.incidents.list.description"})}</CustomTableCell>
-          <CustomTableCell align="left">{f({id: "request.management.home.incidents.list.status"})}</CustomTableCell>
-          <CustomTableCell align="left">{f({id: "request.management.home.incidents.list.severity"})}</CustomTableCell>
-          <CustomTableCell align="left">{f({id: "request.management.home.incidents.list.response_time"})}</CustomTableCell>
+          <CustomTableCell align="center">{f({id: "request.management.home.incidents.list.status"})}</CustomTableCell>
+          <CustomTableCell align="center">{f({id: "request.management.home.incidents.list.severity"})}</CustomTableCell>
+          <CustomTableCell align="center">{f({id: "request.management.home.incidents.list.response_time"})}</CustomTableCell>
           {/* <CustomTableCell align="center">Category</CustomTableCell> */}
           {/* <CustomTableCell align="center">Last Action At</CustomTableCell> */}
         </TableRow>
@@ -149,13 +149,13 @@ function IncidentList({
                   : row.description}
               </p>
             </CustomTableCell>
-            <CustomTableCell align="left">
+            <CustomTableCell align="center">
               <p>{row.currentStatus}</p>
             </CustomTableCell>
-            <CustomTableCell align="left">
+            <CustomTableCell align="center">
               <p>{row.severity}</p>
             </CustomTableCell>
-            <CustomTableCell align="left">
+            <CustomTableCell align="center">
               <p>{row.response_time} h</p>
             </CustomTableCell>
             {/* <CustomTableCell align="center">

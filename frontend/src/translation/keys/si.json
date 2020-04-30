@@ -77,7 +77,7 @@
   "request.management.home.incidents.list.title": "ශීර්ෂය",
   "request.management.home.incidents.list.description": "විස්තර",
   "request.management.home.incidents.list.status": "තත්ත්වය",
-  "request.management.home.incidents.list.severity": "බරපතලකම",
+  "request.management.home.incidents.list.severity": "ප්‍රමුඛතාවය",
   "request.management.home.incidents.list.response_time": "ප්රතිචාර කාලය",
   "request.management.home.incidents.list.category": "වර්ගය",
   "request.management.home.incidents.list.subcategory": "උප වර්ගය",
