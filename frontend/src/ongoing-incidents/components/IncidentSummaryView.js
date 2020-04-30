@@ -1,6 +1,6 @@
 import React, { Component, cloneElement, useState } from 'react';
 import { Table, TableBody, TableCell, TableHead, TableRow, Tabs, withStyles } from '@material-ui/core';
-
+import Chip from '@material-ui/core/Chip';
 import Grid from '@material-ui/core/Grid';
 import Moment from 'react-moment';
 import Paper from '@material-ui/core/Paper';
@@ -66,17 +66,24 @@ function BasicDetailTab(props) {
                             </Grid>
                         </Grid>
 
-                        <Grid container spacing={24}>
+                        {/* <Grid container spacing={24}>
                             <Grid item xs>
                                 <Typography variant="caption" className={classes.label}> {f({id: "request.management.incident.create.title"})} </Typography>
                                 <Typography gutterBottom> {incident.title} </Typography>
                             </Grid>
-                        </Grid>
+                        </Grid> */}
 
                         <Grid container spacing={24}>
                             <Grid item xs>
                                 <Typography variant="caption" className={classes.label}> {f({id: "request.management.incident.create.description"})} </Typography>
                                 <Typography gutterBottom> {incident.description} </Typography>
+                            </Grid>
+                        </Grid>
+
+                        <Grid container spacing={24}>
+                            <Grid item xs>
+                                <Typography variant="caption" className={classes.label}> {f({ id: "request.management.incident.create.severity", defaultMessage: "Priority*" })} </Typography>
+                                <Chip label={incident.severity} color={incident.severity==="LOW" ? "default" : incident.severity==="HIGH" ? "secondary" : "primary"} />
                             </Grid>
                         </Grid>
 

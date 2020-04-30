@@ -48,7 +48,7 @@ export function createInternalIncident(incidentData, fileData) {
                   };
                 result = await incidentsApi.attachMedia(incident.id, mediaData);
             }
-
+            
             dispatch(createInternalIncidentSuccess(incident));
             history.push(`/app/review/${incident.id}`);
         }catch(error){
