@@ -22,20 +22,33 @@ def get_total_opened_incident_count():
     count = Incident.objects.exclude(current_status=StatusType.CLOSED.name).exclude(current_status=StatusType.INVALIDATED.name).count()
     return count
 
-def get_daily_incidents():
+def get_daily_incidents(actionType = "OPENED"):
     """ List dialy incidents to the current date """
+
     current_date = datetime.now(tz=get_current_timezone())
     start_date = current_date.replace(hour=0, minute=0, second=0, microsecond=0)
     end_date = start_date + timedelta(1)
-    incidents = Incident.objects.filter(created_date__range=(start_date, end_date))
+
+    if (actionType == "CLOSED"):
+        incidents = CloseWorkflow.objects.filter(created_date__range=(start_date, end_date))
+    else:
+        incidents = Incident.objects.filter(created_date__range=(start_date, end_date))
+
     return incidents
 
-def get_weekly_incidents():
+def get_weekly_incidents(actionType = "OPENED"):
     """ List weekly incident from Sunday through Saturday of the current week. """
+
     current_date = datetime.now(tz=get_current_timezone())
     start_date = current_date - timedelta(current_date.weekday())
     end_date = start_date + timedelta(6)
-    incidents = Incident.objects.filter(created_date__range=(start_date, end_date))
+
+    if (actionType == "CLOSED"):
+        incidents = CloseWorkflow.objects.filter(created_date__range=(start_date, end_date))
+    else:
+        incidents = Incident.objects.filter(created_date__range=(start_date, end_date))
+
+    return incidents
 
     week_data = {}
     week_data["incidents"] = incidents
@@ -45,6 +58,7 @@ def get_weekly_incidents():
 
 def parse_date_timezone(datetimeValue):
     """ parsing string datetime (eg: '2020-04-20 06:00:00') to date with timezone for accurate search """
+
     datetimeValue = get_current_timezone().localize(parse_datetime(datetimeValue))
     return datetimeValue
 
@@ -94,8 +108,8 @@ def map_severity(total_list):
 
 def get_daily_summary_data():
     """ Function to get daily summary data on complaints for PDF export. """
-    file_dict = {}
 
+    file_dict = {}
     file_dict["template"] = "/incidents/complaints/daily_summary_report.js"
     file_dict["date"] = date.today().strftime("%Y/%m/%d")
 
@@ -301,8 +315,8 @@ def get_category_dict(incidents):
 
 
 def get_daily_category_data():
-    file_dict = {}
 
+    file_dict = {}
     file_dict["template"] = "/incidents/complaints/daily_summery_report_categorywise.js"
     file_dict["date"] = date.today().strftime("%Y/%m/%d")
 
@@ -315,12 +329,12 @@ def get_daily_category_data():
     return file_dict
 
 def get_closed_daily_category_data():
-    file_dict = {}
 
+    file_dict = {}
     file_dict["template"] = "/incidents/complaints/daily_closed_summery_report_categorywise.js"
     file_dict["date"] = date.today().strftime("%Y/%m/%d")
 
-    incidents = get_daily_incidents()
+    incidents = get_daily_incidents("CLOSED")
     file_dict["total"] = incidents.count()
     file_dict["totalOpenedCount"] = get_total_opened_incident_count()
 
@@ -329,11 +343,12 @@ def get_closed_daily_category_data():
     return file_dict
 
 def get_category_data_by_date_range(start_time, end_time):
-    file_dict = {}
 
+    file_dict = {}
     file_dict["template"] = "/incidents/complaints/daily_summery_report_categorywise_with_timefilter.js"
     file_dict["StartDate"] = start_time
     file_dict["EndDate"] = end_time
+
     incidents = Incident.objects.filter(created_date__range=(parse_date_timezone(start_time), parse_date_timezone(end_time)))
     file_dict["total"] = incidents.count()
     file_dict["totalOpenedCount"] = get_total_opened_incident_count()
@@ -342,15 +357,16 @@ def get_category_data_by_date_range(start_time, end_time):
 
     return file_dict
 
-
 def get_weekly_closed_complain_category_data():
-    file_dict = {}
 
+    file_dict = {}
     file_dict["template"] = "/incidents/complaints/weekly_closed_request_report_categorywise.js"
-    week_data = get_weekly_incidents()
+
+    week_data = get_weekly_incidents("CLOSED")
     file_dict["StartDate"] = week_data["start_date"]
     file_dict["EndDate"] = week_data["end_date"]
-    incidents = week_data["incidents"].filter(current_status=StatusType.CLOSED.name)
+
+    incidents = week_data["incidents"]
     file_dict["total"] = incidents.count()
     file_dict["totalOpenedCount"] = get_total_opened_incident_count()
 
@@ -358,14 +374,14 @@ def get_weekly_closed_complain_category_data():
 
     return file_dict
 
-
 def get_organizationwise_data_with_timefilter():
-    file_dict = {}
+    # FIXME: revamp needed
 
+    file_dict = {}
     file_dict["template"] = "/incidents/complaints/summery_report_organizationwise_with_timefilter.js"
     file_dict["date"] = date.today().strftime("%Y/%m/%d")
 
-    incidents = get_daily_incidents().filter()
+    incidents = get_daily_incidents()
     file_dict["total"] = incidents.count()
 
     file_dict["categories"] = get_category_dict(incidents)
@@ -374,10 +390,10 @@ def get_organizationwise_data_with_timefilter():
 
 
 def get_weekly_closed_complain_organization_data():
-    file_dict = {}
+    # FIXME: revamp needed
 
-    file_dict[
-        "template"] = "/incidents/complaints/weekly_closed_request_report_organizationwise.js"
+    file_dict = {}
+    file_dict["template"] = "/incidents/complaints/weekly_closed_request_report_organizationwise.js"
     file_dict["date"] = date.today().strftime("%Y/%m/%d")
 
     start_datetime = (date.today() - timedelta(days=7)).strftime("%Y-%m-%d")
@@ -390,10 +406,10 @@ def get_weekly_closed_complain_organization_data():
     return file_dict
 
 def get_daily_closed_complain_organization_data():
-    file_dict = {}
+    # FIXME: revamp needed
 
-    file_dict[
-        "template"] = "/incidents/complaints/daily_closed_request_report_organizationwise.js"
+    file_dict = {}
+    file_dict["template"] = "/incidents/complaints/daily_closed_request_report_organizationwise.js"
     file_dict["date"] = date.today().strftime("%Y/%m/%d")
 
     start_datetime = (date.today() - timedelta(days=7)).strftime("%Y-%m-%d")
@@ -407,9 +423,10 @@ def get_daily_closed_complain_organization_data():
 
 def get_total_requests_by_category_for_a_selected_time(start_time, end_time):
     """ This returns the total requests by category during the input time period """
+
+    # TODO: see if this is used.
     file_dict = {}
-    file_dict[
-        "template"] = "/incidents/complaints/daily_summery_report_categorywise_with_timefilter.js"
+    file_dict["template"] = "/incidents/complaints/daily_summery_report_categorywise_with_timefilter.js"
     file_dict["date"] = date.today().strftime("%Y/%m/%d")
 
     incidents = Incident.objects.filter(created_date__range=(start_time, end_time)).values("category") \
@@ -419,8 +436,7 @@ def get_total_requests_by_category_for_a_selected_time(start_time, end_time):
     return file_dict
 
 
-def get_category_summary(start_date, end_date, detailed_report, complain,
-                         inquiry):
+def get_category_summary(start_date, end_date, detailed_report, complain, inquiry):
     sql3 = incident_type_query(complain, inquiry)
     incident_list = incident_list_query(start_date, end_date, sql3)
     if detailed_report:
