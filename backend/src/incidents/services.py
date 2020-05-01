@@ -167,7 +167,7 @@ def send_sms(number, message):
 </soapenv:Envelope>
 """.format(number, message, settings.SMS_GATEWAY_USER, settings.SMS_GATEWAY_PASSWORD)
 
-    response = requests.post("http://lankagate.gov.lk:9080/services/GovSMSMTHandlerProxy?wsdl",data=body,headers=headers)
+    response = requests.post(settings.SMS_GATEWAY_BASE_URL+"/services/GovSMSMTHandlerProxy?wsdl",data=body,headers=headers)
     print("response")
     print(response.status_code)
     print(response.reason)
