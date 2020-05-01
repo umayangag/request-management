@@ -72,6 +72,10 @@ from ..custom_auth.services import user_can
 from .permissions import *
 from django.conf import settings
 
+from ..custom_auth.models import Profile
+from datetime import datetime
+from ..incidents.models import IncidentType
+
 class IncidentResultsSetPagination(PageNumberPagination):
     page_size = 15
     page_size_query_param = "pageSize"
@@ -223,7 +227,17 @@ class IncidentList(APIView, IncidentResultsSetPagination):
             print("errors: ", serializer.errors)
 
         if serializer.is_valid():
+            ''' Function to generate refId for requests '''
+            profile = Profile.objects.get(user=request.user)
+
+            today = datetime.now().replace(month=1, day=1, hour=0, minute=0, second=0)
+            current_count = Incident.objects.filter(
+                incidentType=IncidentType.COMPLAINT,
+                created_date__gte=today
+            ).count()
+
             incident = serializer.save()
+            incident.refId = "GMS/%s/%s/%d" % (profile.organization.code.upper(), str(today.year), current_count + 1)
 
             incident_police_report_data = request.data
             incident_police_report_data["incident"] = serializer.data["id"]
