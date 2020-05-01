@@ -18,6 +18,7 @@ const CustomTableCell = withRouter(
     body: {
       // padding: "3px 8px",
       fontSize: "14px",
+      textAlign: 'center',
       "& p.description": {
         overflow: "hidden",
         textOverflow: "ellipsis",
