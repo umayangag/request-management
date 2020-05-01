@@ -4,27 +4,16 @@ import { withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import Logo from "../../app/Logo";
-import BgImg from "../../app/Logo/BgImg";
 import Grid from "@material-ui/core/Grid";
 import { useDispatch } from "react-redux";
 import { FormattedMessage } from "react-intl";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
-// import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
-// import CardMedia from "@material-ui/core/CardMedia";
-import NoteAddIcon from "@material-ui/icons/NoteAdd";
-import CheckStatusIcon from "@material-ui/icons/Announcement";
 import { Link } from "react-router-dom";
 import { changeLanguage } from "../../shared/state/sharedActions";
-import CardMedia from '@material-ui/core/CardMedia';
 import "../../app/Logo/BgImg.css";
-import Header from "./Header";
 import Home from "./Home";
-import "aos/dist/aos.css";
-import "../../app/Logo/styles/main.scss";
-import AOS from "aos";
-import $ from "jquery";
 import Think from "../../static/img/think.png";
 import Check from "../../static/img/check.png";
 
@@ -90,59 +79,20 @@ const styles = theme => ({
   media: {
     height: 140,
   },
-  footer: {
-    background:'linear-gradient(45deg, #e3e1e2 30%, #e6e1e5 90%)',
-  backgroundColor:"orange", /*this your primary color*/
-    // backgroundColor: "purple",
-    fontSize: "20px",
-    // color: "white",
-    borderTop: "1px solid #E7E7E7",
-    textAlign: "center",
-    padding: "20px",
-    position: "fixed",
-    left: "0",
-    bottom: "0",
-    height: "60px",
-    width: "100%"
-  }
 });
 
 function HomePage(props) {
   const { classes } = props;
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    AOS.init({ once: true });
-  
-    let navElement = $("nav");
-  
-    $(function() {
-      $(window).scrollTop() > navElement.innerHeight()
-        ? navElement.addClass("sticky")
-        : navElement.removeClass("sticky");
-    });
-    $(window).on("scroll", function() {
-      $(window).scrollTop() > navElement.innerHeight()
-        ? navElement.addClass("sticky")
-        : navElement.removeClass("sticky");
-    });
-  });
-
   return (
-    // <BgImg />
-    // <div className={classes.root}>
-      <Fragment>
-      {/* <Header/> */}
-      
+      <Fragment>      
       <Grid container spacing={2}>
         <Grid item xs={12} sm={6}>
           <Grid item xs={12} sm={8}>
             <Logo />
           </Grid>
         </Grid>
-        {/* <Grid item xs={12} >
-        <BgImg />
-        </Grid> */}
         <Grid item xs={12} sm={6}>
           <div style={{ textAlign: "right" }}>
             <Button
@@ -178,12 +128,10 @@ function HomePage(props) {
       <Home/>
 
       <Grid
-      // className="bg-container"
         container
         spacing={24}
-        // alignItems="center"
         justify="center"
-        style={{ minHeight: "40vh" }}
+        style={{ minHeight: "35vh" }}
       >
         <Grid item xs={12} sm={6} md={3} >
           <Card className={classes.card}>
@@ -274,7 +222,7 @@ function HomePage(props) {
       
       // style={{ minHeight: "80vh" }}
     >
-      <Grid className={classes.footer} item xs={12}>
+      <Grid item xs={12}>
         <Typography
           variant="h5"
           component="h5"
