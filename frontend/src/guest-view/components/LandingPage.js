@@ -86,7 +86,7 @@ function HomePage(props) {
   const dispatch = useDispatch();
 
   return (
-      <Fragment>      
+      <div className={classes.root}>      
       <Grid container spacing={2}>
         <Grid item xs={12} sm={6}>
           <Grid item xs={12} sm={8}>
@@ -131,7 +131,7 @@ function HomePage(props) {
         container
         spacing={24}
         justify="center"
-        style={{ minHeight: "35vh" }}
+        // style={{ minHeight: "35vh" }}
       >
         <Grid item xs={12} sm={6} md={3} >
           <Card className={classes.card}>
@@ -220,7 +220,7 @@ function HomePage(props) {
       alignItems="center"
       justify="center"
       
-      // style={{ minHeight: "80vh" }}
+      style={{ minHeight: "45vh" }}
     >
       <Grid item xs={12}>
         <Typography
@@ -243,7 +243,7 @@ function HomePage(props) {
       </Grid>
     </Grid>
      
-      </Fragment>
+      </div>
   );
 }
 

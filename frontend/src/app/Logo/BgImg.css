@@ -2,7 +2,7 @@
 .bg-container{
     background: linear-gradient(33deg, #8400ff, #413bff);
 opacity: 0.9;
-position: absolute;
+position: relative;
 height: 70%;
 width: 70%;
 right: 0;
@@ -28,7 +28,7 @@ top: 0;
       padding-left: 110px;
       padding-right: 110px;
       padding-top: 279px;
-      padding-bottom: 111px;
+      /* padding-bottom: 111px; */
     }
 }
 

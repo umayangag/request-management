@@ -17,7 +17,7 @@ const Home = () => {
                     alt="logo"
                     style={{
                       float: 'right',
-                      marginTop: '20px',
+                      marginBottom: '20px',
                       width: '72%',
                       zIndex:50
                     }}
