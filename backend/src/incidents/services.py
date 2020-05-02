@@ -29,9 +29,10 @@ from django.contrib.auth.models import User, Group, Permission
 from ..events import services as event_services
 from ..events.models import Event
 from ..file_upload.models import File
-from ..custom_auth.models import Division, UserLevel
+from ..custom_auth.models import Division, UserLevel, Profile
 from django.db import connection
 
+from datetime import datetime
 from .exceptions import WorkflowException, IncidentException
 import pandas as pd
 from django.http import HttpResponse
@@ -52,6 +53,21 @@ from zeep import Client
 from zeep.wsse.username import UsernameToken
 import requests
 from django.conf import settings
+
+def generate_refId(user):
+    """ Function to generate refId for requests on creation """
+
+    today = datetime.now().replace(month=1, day=1, hour=0, minute=0, second=0)
+    current_count = Incident.objects.filter(created_date__gte=today).count()
+
+    if user == "GUEST" :
+        default_division = Division.objects.get(is_default_division=True)
+        refId = "GMS/%s/%s/%d" % (default_division.organization.code.upper(), str(today.year), current_count + 1)
+    else:
+        profile = Profile.objects.get(user=user)
+        refId = "GMS/%s/%s/%d" % (profile.organization.code.upper(), str(today.year), current_count + 1)
+
+    return refId
 
 def get_incident_status_guest(refId):
     """This function is to annouce public on a incident status"""
@@ -167,7 +183,7 @@ def send_sms(number, message):
 </soapenv:Envelope>
 """.format(number, message, settings.SMS_GATEWAY_USER, settings.SMS_GATEWAY_PASSWORD)
 
-    response = requests.post("http://lankagate.gov.lk:9080/services/GovSMSMTHandlerProxy?wsdl",data=body,headers=headers)
+    response = requests.post(settings.SMS_GATEWAY_BASE_URL+"/services/GovSMSMTHandlerProxy?wsdl",data=body,headers=headers)
     print("response")
     print(response.status_code)
     print(response.reason)

@@ -11,7 +11,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 from django.db.models import Q
 
-from .models import Incident, StatusType, SeverityType, ReopenWorkflow as Reopened, CannedResponse
+from .models import Incident, StatusType, SeverityType, ReopenWorkflow as Reopened, CannedResponse, IncidentType
 from django.contrib.auth.models import User, Group, Permission
 from .serializers import (
     IncidentSerializer,
@@ -22,6 +22,7 @@ from .serializers import (
     CannedResponseSerializer,
 )
 from .services import (
+    generate_refId,
     get_incident_by_id,
     create_incident_postscript,
     update_incident_postscript,
@@ -71,10 +72,6 @@ from ..custom_auth.models import UserLevel
 from ..custom_auth.services import user_can
 from .permissions import *
 from django.conf import settings
-
-from ..custom_auth.models import Profile
-from datetime import datetime
-from ..incidents.models import IncidentType
 
 class IncidentResultsSetPagination(PageNumberPagination):
     page_size = 15
@@ -221,23 +218,14 @@ class IncidentList(APIView, IncidentResultsSetPagination):
                 # linking recipient with the incident to be created
                 incident_data["recipient"] = recipient.id
 
+        incident_data["refId"] = generate_refId(request.user)
         serializer = IncidentSerializer(data=incident_data)
 
         if serializer.is_valid() == False:
             print("errors: ", serializer.errors)
 
         if serializer.is_valid():
-            ''' Function to generate refId for requests '''
-            profile = Profile.objects.get(user=request.user)
-
-            today = datetime.now().replace(month=1, day=1, hour=0, minute=0, second=0)
-            current_count = Incident.objects.filter(
-                incidentType=IncidentType.COMPLAINT,
-                created_date__gte=today
-            ).count()
-
             incident = serializer.save()
-            incident.refId = "GMS/%s/%s/%d" % (profile.organization.code.upper(), str(today.year), current_count + 1)
 
             incident_police_report_data = request.data
             incident_police_report_data["incident"] = serializer.data["id"]
@@ -590,6 +578,7 @@ class IncidentPublicUserView(APIView):
                 # linking recipient with the incident to be created
                 incident_data["recipient"] = recipient.id
 
+        incident_data["refId"] = generate_refId("GUEST")
         serializer = IncidentSerializer(data=incident_data)
 
         if serializer.is_valid():
