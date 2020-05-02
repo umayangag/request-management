@@ -8,6 +8,7 @@
 
 from rest_framework import serializers
 from .models import (
+    LanguageType,
     ContactType,
     Incident,
     IncidentStatus,
@@ -32,16 +33,17 @@ class IncidentStatusSerializer(serializers.ModelSerializer):
 
 class ReporterSerializer(serializers.ModelSerializer):
 
-    politicalAffiliation = serializers.CharField(
-        source="political_affiliation", required=False, allow_null=True, allow_blank=True)
-    accusedName = serializers.CharField(
-        source="accused_name", required=False, allow_null=True, allow_blank=True)
-    accusedPoliticalAffiliation = serializers.CharField(
-        source="accused_political_affiliation", required=False, allow_null=True, allow_blank=True)
+    createdDate = serializers.ReadOnlyField(source="created_date")
+    updatedDate = serializers.ReadOnlyField(source="updated_date")
+
+    gnDivision = serializers.CharField(
+        source="gn_division", required=False, allow_null=True, allow_blank=True)
+    reporterType = serializers.ChoiceField(
+        source="reporter_type", required=False, allow_blank=True, choices=[(tag.name, tag.value) for tag in ContactType])
 
     class Meta:
         model = Reporter
-        exclude = ["political_affiliation", "accused_name", "accused_political_affiliation"]
+        exclude = ["gn_division", "reporter_type", "created_date", "updated_date"]
 
 class RecipientSerializer(serializers.ModelSerializer):
 
@@ -51,8 +53,7 @@ class RecipientSerializer(serializers.ModelSerializer):
     gnDivision = serializers.CharField(
         source="gn_division", required=False, allow_null=True, allow_blank=True)
     recipientType = serializers.ChoiceField(
-        source="recipient_type", required=False, allow_blank=True, choices=[(tag.name, tag.value) for tag in ContactType]
-    )
+        source="recipient_type", required=False, allow_blank=True, choices=[(tag.name, tag.value) for tag in ContactType])
 
     class Meta:
         model = Recipient
@@ -62,52 +63,27 @@ class RecipientSerializer(serializers.ModelSerializer):
 class IncidentSerializer(serializers.ModelSerializer):
 
     currentStatus = serializers.ReadOnlyField(source="current_status")
-
-    # currentSeverity = serializers.ReadOnlyField(source="current_severity")
-    severity = serializers.CharField(source="current_severity", required=False, allow_null=True, allow_blank=True)
-
-    divisionalSecretariat = serializers.CharField(
-        source="ds_division", required=False, allow_null=True, allow_blank=True)
-
-    gramaNiladhari = serializers.CharField(
-        source="grama_niladhari", required=False, allow_null=True, allow_blank=True)
-
-    pollingDivision = serializers.CharField(
-        source="polling_division", required=False, allow_null=True, allow_blank=True)
-
-    pollingStation = serializers.CharField(
-        source="polling_station", required=False, allow_null=True, allow_blank=True)
-
-    policeDivision = serializers.CharField(
-        source="police_division", required=False, allow_null=True, allow_blank=True)
-
-    policeStation = serializers.CharField(
-        source="police_station", required=False, allow_null=True, allow_blank=True
-    )
-
-    reporterConsent = serializers.BooleanField(
-        source="complainer_consent", required=False, allow_null=True
-    )
-
-    politicalParty = serializers.CharField(
-        source="polictical_party", required=False, allow_null=True, allow_blank=True
-    )
-
     createdDate = serializers.ReadOnlyField(source="created_date")
+    updatedDate = serializers.ReadOnlyField(source="updated_date")
+    currentDecision = serializers.ReadOnlyField(source="current_decision")
 
     assignee = UserSerializer(read_only=True)
 
+    severity = serializers.CharField(source="current_severity", required=False, allow_null=True, allow_blank=True)
+    divisionalSecretariat = serializers.CharField(
+        source="ds_division", required=False, allow_null=True, allow_blank=True)
+    gramaNiladhari = serializers.CharField(
+        source="grama_niladhari", required=False, allow_null=True, allow_blank=True)
+    reporterConsent = serializers.BooleanField(
+        source="complainer_consent", required=False, allow_null=True)
     lastAssignment = serializers.SerializerMethodField(method_name="get_last_assignment")
-
-    # inquiry specifics
-    receivedDate = serializers.DateField(source="received_date", allow_null=True)
-    letterDate = serializers.DateField(source="letter_date", allow_null=True)
-    currentDecision = serializers.ReadOnlyField(source="current_decision")
+    language = serializers.ChoiceField(
+        required=False, allow_blank=True, choices=[(tag.name, tag.value) for tag in LanguageType])
 
     class Meta:
         model = Incident
-        exclude = ["created_date", "ds_division", "grama_niladhari",
-                   "polling_division", "polling_station", "police_division", "police_station"]
+        exclude = ["created_date", "updated_date", "ds_division", "grama_niladhari",
+                   "current_severity", "complainer_consent"]
         read_only_fields = ['recaptcha']
 
     def get_extra_kwargs(self):

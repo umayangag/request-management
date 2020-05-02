@@ -69,7 +69,7 @@ urlpatterns = [
         incident_views.IncidentMediaView.as_view(),
     ),
     path(
-        "reporters/<int:reporter_id>",
+        "reporters/<uuid:reporter_id>",
         incident_views.ReporterDetail.as_view(),
     ),
     path(
@@ -129,7 +129,7 @@ urlpatterns = [
     path("public/incidents/<uuid:incident_id>",
          incident_views.IncidentPublicUserView.as_view()
     ),
-    path("public/reporters/<int:reporter_id>",
+    path("public/reporters/<uuid:reporter_id>",
          incident_views.ReporterPublicUserView.as_view()
     ),
     path("public/incidents/<uuid:incident_id>/attach_media",

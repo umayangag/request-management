@@ -10,6 +10,14 @@ from datetime import datetime
 from .permissions import *
 from ..common.models import Category
 
+class LanguageType(enum.Enum):
+    SINHALA = "Sinhala"
+    TAMIL = "Tamil"
+    ENGLISH = "English"
+
+    def __str__(self):
+        return self.name
+
 class Occurrence(enum.Enum):
     OCCURRED = "Occurred"
     OCCURRING = "Occurring"
@@ -35,13 +43,6 @@ class StatusType(enum.Enum):
 
 
 class SeverityType(enum.Enum):
-    # CRITICAL = "CRITICAL"
-    # MAJOR = "MAJOR"
-    # MODERATE = "MODERATE"
-    # MINOR = "MINOR"
-    # INSIGNIFICANT = "INSIGNIFICANT"
-    # DEFAULT = "DEFAULT"
-
     HIGH = "High"
     MEDIUM = "Medium"
     LOW = "Low"
@@ -72,37 +73,64 @@ class ContactType(enum.Enum):
     def __str__(self):
         return self.name
 
+class ContactTitle(enum.Enum):
+    MR = "Mr"
+    MRS = "Mrs"
+    MS = "Ms"
+    MISS = "Miss"
+    DR = "Dr"
+    PROFESSOR = "Professor"
+
+    def __str__(self):
+        return self.name
+
 class Reporter(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    title = models.CharField(
+        max_length=10,
+        choices=[(tag.name, tag.value) for tag in ContactTitle],
+        blank=True,
+        null=True
+    )
+    nic = models.CharField(max_length=20, null=True, blank=True)
     name = models.CharField(max_length=200, null=True, blank=True)
     sn_name = models.CharField(max_length=200, null=True, blank=True)
     tm_name = models.CharField(max_length=200, null=True, blank=True)
-    reporter_type = models.CharField(max_length=200, null=True, blank=True)
+    reporter_type = models.CharField(
+        max_length=50,
+        choices=[(tag.name, tag.value) for tag in ContactType],
+        default=ContactType.INDIVIDUAL,
+        blank=True,
+        null=True,
+    )
     email = models.CharField(max_length=200, null=True, blank=True)
     telephone = models.CharField(max_length=200, null=True, blank=True)
     mobile = models.CharField(max_length=200, null=True, blank=True)
+
+    location = models.CharField(max_length=200, null=True, blank=True)
     address = models.CharField(max_length=200, null=True, blank=True)
-    unique_id = models.UUIDField(default=uuid.uuid4, editable=False)
-    political_affiliation = models.CharField(max_length=50, null=True, blank=True)
-    accused_name = models.CharField(max_length=200, null=True, blank=True)
-    accused_political_affiliation = models.CharField(max_length=50, null=True, blank=True)
+    city = models.CharField(max_length=200, null=True, blank=True)
+    district = models.CharField(max_length=50, null=True, blank=True)
+    gn_division = models.CharField(max_length=50, null=True, blank=True)
+
     created_date = models.DateTimeField(auto_now_add=True)
+    updated_date = models.DateTimeField(auto_now=True)
 
     class Meta:
         ordering = ("id",)
 
 class Recipient(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    title = models.CharField(
+        max_length=10,
+        choices=[(tag.name, tag.value) for tag in ContactTitle],
+        blank=True,
+        null=True
+    )
+    nic = models.CharField(max_length=20, null=True, blank=True)
     name = models.CharField(max_length=200, null=True, blank=True)
     sn_name = models.CharField(max_length=200, null=True, blank=True)
     tm_name = models.CharField(max_length=200, null=True, blank=True)
-    email = models.CharField(max_length=200, null=True, blank=True)
-    telephone = models.CharField(max_length=200, null=True, blank=True)
-    mobile = models.CharField(max_length=200, null=True, blank=True)
-    location = models.CharField(max_length=200, null=True, blank=True)
-    address = models.CharField(max_length=200, null=True, blank=True)
-    city = models.CharField(max_length=200, null=True, blank=True)
-    district = models.CharField(max_length=50, null=True, blank=True)
-    gn_division = models.CharField(max_length=50, null=True, blank=True)
     recipient_type = models.CharField(
         max_length=50,
         choices=[(tag.name, tag.value) for tag in ContactType],
@@ -110,6 +138,16 @@ class Recipient(models.Model):
         blank=True,
         null=True,
     )
+    email = models.CharField(max_length=200, null=True, blank=True)
+    telephone = models.CharField(max_length=200, null=True, blank=True)
+    mobile = models.CharField(max_length=200, null=True, blank=True)
+
+    location = models.CharField(max_length=200, null=True, blank=True)
+    address = models.CharField(max_length=200, null=True, blank=True)
+    city = models.CharField(max_length=200, null=True, blank=True)
+    district = models.CharField(max_length=50, null=True, blank=True)
+    gn_division = models.CharField(max_length=50, null=True, blank=True)
+
     created_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)
 
@@ -155,6 +193,11 @@ class Incident(models.Model):
     title = models.CharField(max_length=200)
     description = models.TextField()
     category = models.CharField(max_length=200, blank=True, null=True)
+    language = models.CharField(
+        max_length=10,
+        choices=[(tag.name, tag.value) for tag in LanguageType],
+        default=LanguageType.ENGLISH
+    )
 
     # the occurrence flag of the incident - check enums for more details
     occurrence = models.CharField(
@@ -172,9 +215,6 @@ class Incident(models.Model):
     created_by = models.ForeignKey(
         User, on_delete=models.DO_NOTHING, null=True, blank=True
     )
-
-    # getting the elections from a separate service
-    election = models.CharField(max_length=200, blank=True)
 
     # the medium through which the incident was reported
     infoChannel = models.CharField(max_length=200, null=True, blank=True)
@@ -205,24 +245,10 @@ class Incident(models.Model):
     ds_division = models.CharField(max_length=200, blank=True, null=True)
     grama_niladhari = models.CharField(max_length=200, blank=True, null=True)
 
-    polling_division = models.CharField(max_length=200, blank=True, null=True)
-    polling_station = models.CharField(max_length=200, blank=True, null=True)
-
-    police_division = models.CharField(max_length=200, blank=True, null=True)
-    police_station = models.CharField(max_length=200, blank=True, null=True)
-
-    ward = models.CharField(max_length=200, blank=True, null=True)
-    di_division = models.CharField(max_length=200, blank=True, null=True)
-
-    polictical_party = models.CharField(max_length=300, blank=True, null=True)
-
     complainer_consent = models.BooleanField(default=False, null=True, blank=True)
     proof = models.BooleanField(default=False, null=True)
 
     response_time = models.IntegerField(default=12)
-
-    occured_date = models.DateTimeField(null=True, blank=True)
-    created_date = models.DateTimeField(auto_now_add=True)
 
     current_status = models.CharField(max_length=50, default=None, null=True, blank=True)
     current_severity = models.CharField(
@@ -231,15 +257,13 @@ class Incident(models.Model):
         default=SeverityType.LOW,
     )
 
-    # not in use
-    severity = models.IntegerField(default=None, null=True, blank=True, validators=[MinValueValidator(1), MaxValueValidator(10)])
-
-    # inquiry related fields
-    received_date = models.DateField(null=True, blank=True)
-    letter_date = models.DateField(null=True, blank=True)
     institution = models.CharField(max_length=200, blank=True, null=True) # this will save `code` of institute pulled from location-service API endpoint
 
     current_decision = models.CharField(max_length=50, default=None, null=True, blank=True)
+    occured_date = models.DateTimeField(null=True, blank=True)
+
+    created_date = models.DateTimeField(auto_now_add=True)
+    updated_date = models.DateTimeField(auto_now=True)
 
     class Meta:
         ordering = ("created_date",)
