@@ -10,7 +10,7 @@
   "request.management.report.incidents.forms.button.skip": "Skip",
   "request.management.report.incidents.forms.button.finish": "Submit",
 
-  "request.management.report.incidents": "Submit a request",
+  "request.management.report.incidents": "Submit a Request or Grievance",
   "request.management.report.incidents.helper.text": "* fields are mandatory.",
   "request.management.report.incidents.helper.text2": "Select your language of preference and fill in the form below.",
 
@@ -62,7 +62,7 @@
   "request.management.report.incidents.contact.telephone": "Secondary Contact / Landline",
   "request.management.report.incidents.contact.email": "Email",
 
-  "request.management.check.incident.status": "Check request status",
+  "request.management.check.incident.status": "Check Current Status of a Request or Grievance",
   "request.management.historic.reports": "Incident Reports",
   "request.management.home.registered_user": "Registered user",
   "request.management.home.signin": "Sign In",
