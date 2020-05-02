@@ -267,6 +267,8 @@
         "fields": {
             "code": "PS",
             "displayName": "Presidential Secretariat",
+            "displayName_sn": "Presidential Secretariat",
+            "displayName_tm": "Presidential Secretariat",
             "created_date": "2019-11-07T11:21:56.468Z"
         }
     },
@@ -276,6 +278,8 @@
         "fields": {
             "code": "SLP",
             "displayName": "Police",
+            "displayName_sn": "Police",
+            "displayName_tm": "Police",
             "created_date": "2019-11-07T11:22:08.958Z"
         }
     },

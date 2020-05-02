@@ -7,6 +7,7 @@ from datetime import date, timedelta, datetime, time
 from django.utils.timezone import get_current_timezone
 from django.utils.dateparse import parse_datetime
 
+from ..custom_auth.models import Profile, Organization
 from ..common.models import Category, Channel, District
 from ..incidents.models import Incident, IncidentType, CloseWorkflow, StatusType
 from django.contrib.auth.models import User
@@ -30,7 +31,10 @@ def get_daily_incidents(actionType = "OPENED"):
     end_date = start_date + timedelta(1)
 
     if (actionType == "CLOSED"):
-        incidents = CloseWorkflow.objects.filter(created_date__range=(start_date, end_date))
+        incidents = []
+        closeIncidents = CloseWorkflow.objects.filter(created_date__range=(start_date, end_date))
+        for incident in closeIncidents:
+            incidents.append(incident.incident)
     else:
         incidents = Incident.objects.filter(created_date__range=(start_date, end_date))
 
@@ -44,11 +48,12 @@ def get_weekly_incidents(actionType = "OPENED"):
     end_date = start_date + timedelta(6)
 
     if (actionType == "CLOSED"):
-        incidents = CloseWorkflow.objects.filter(created_date__range=(start_date, end_date))
+        incidents = []
+        closeIncidents = CloseWorkflow.objects.filter(created_date__range=(start_date, end_date))
+        for incident in closeIncidents:
+            incidents.append(incident.incident)
     else:
         incidents = Incident.objects.filter(created_date__range=(start_date, end_date))
-
-    return incidents
 
     week_data = {}
     week_data["incidents"] = incidents
@@ -61,208 +66,6 @@ def parse_date_timezone(datetimeValue):
 
     datetimeValue = get_current_timezone().localize(parse_datetime(datetimeValue))
     return datetimeValue
-
-
-def map_category(cat_voilence, cat_law, cat_other, total_list):
-    totals = {"disputes": 0, "violationOfLaws": 0, "others": 0, "amount": 0}
-
-    for total in total_list:
-        key = total["category"]
-        val = total["category__count"]
-
-        if key == cat_voilence:
-            totals["disputes"] = val
-
-        if key == cat_law:
-            totals["violationOfLaws"] = val
-
-        if key == cat_other:
-            totals["others"] = val
-
-        totals["amount"] += val
-
-    return totals
-
-
-def map_severity(total_list):
-    totals = {"minor": 0, "general": 0, "major": 0, "total": 0}
-
-    for total in total_list:
-        key = total["severity"]
-        val = total["severity__count"]
-
-        # severity = 0 is unset
-        if key >= 0 and key <= 3:
-            totals["minor"] += val
-
-        elif key > 3 and key <= 7:
-            totals["general"] += val
-
-        elif key > 7:
-            totals["major"] += val
-
-        totals["total"] += val
-
-    return totals
-
-
-def get_daily_summary_data():
-    """ Function to get daily summary data on complaints for PDF export. """
-
-    file_dict = {}
-    file_dict["template"] = "/incidents/complaints/daily_summary_report.js"
-    file_dict["date"] = date.today().strftime("%Y/%m/%d")
-
-    # get incident list
-    incidents = get_daily_incidents()
-
-    # preload categories
-    cat_voilence = Category.objects.all().filter(top_category='Violence')
-    cat_law = Category.objects.all().filter(
-        top_category='Violation of election law')
-    cat_other = Category.objects.all().filter(top_category='Other')
-
-    # find eclk complaints
-    eclk_users = User.objects.all().filter(profile__organization__code="PS")
-    eclk_hq_users = eclk_users.filter(profile__division__is_hq=True)
-    eclk_district_users = eclk_users.filter(profile__division__is_hq=False)
-
-    # filter incidents by created
-    eclk_incidents = incidents.filter(created_by__in=eclk_users)
-    eclk_hq_incidents = incidents.filter(created_by__in=eclk_hq_users)
-    eclk_district_incidents = incidents.filter(
-        created_by__in=eclk_district_users)
-
-    # for total summary
-    file_dict["complaintsSummary"] = {
-        "national":
-        map_category(
-            cat_voilence, cat_law, cat_other,
-            eclk_hq_incidents.values('category').annotate(
-                Count("category")).order_by()),
-        "district":
-        map_category(
-            cat_voilence, cat_law, cat_other,
-            eclk_district_incidents.values('category').annotate(
-                Count("category")).order_by()),
-        "totals":
-        map_category(
-            cat_voilence, cat_law, cat_other,
-            eclk_incidents.values('category').annotate(
-                Count("category")).order_by())
-    }
-
-    # past 24 hours
-    eclk_incidents = eclk_incidents.filter(created_date__range=(start_datetime,
-                                                                end_datetime))
-    eclk_hq_incidents = eclk_hq_incidents.filter(
-        created_date__range=(start_datetime, end_datetime))
-    eclk_district_incidents = eclk_district_incidents.filter(
-        created_date__range=(start_datetime, end_datetime))
-
-    file_dict["complaintsPast24hours"] = {
-        "national":
-        map_category(
-            cat_voilence, cat_law, cat_other,
-            eclk_hq_incidents.values('category').annotate(
-                Count("category")).order_by()),
-        "district":
-        map_category(
-            cat_voilence, cat_law, cat_other,
-            eclk_district_incidents.values('category').annotate(
-                Count("category")).order_by()),
-        "totals":
-        map_category(
-            cat_voilence, cat_law, cat_other,
-            eclk_incidents.values('category').annotate(
-                Count("category")).order_by())
-    }
-
-    return file_dict
-
-
-def get_daily_district_data():
-    """ Function to get daily district data on complaints for PDF export. """
-    file_dict = {}
-
-    file_dict["template"] = "/incidents/complaints/daily_summary_report_districtwise.js"
-    file_dict["delectionDateate"] = date.today().strftime("%Y/%m/%d")
-
-    # preload categories
-    cat_voilence = str(Category.objects.get(top_category='Violence').id)
-    cat_law = str(
-        Category.objects.get(top_category='Violation of election law').id)
-    cat_other = str(Category.objects.get(top_category='Other').id)
-
-    # for time / date ranges
-    start_datetime = (date.today() -
-                      timedelta(days=100)).strftime("%Y-%m-%d 16:00:00")
-    end_datetime = date.today().strftime("%Y-%m-%d 15:59:00")
-
-    incidents = Incident.objects.all().filter(
-        incidentType=IncidentType.COMPLAINT.name,
-        created_date__range=(start_datetime, end_datetime))
-
-    file_dict["complaintByDistrict"] = []
-
-    districts = District.objects.all()
-    for district in districts:
-        district_incidents = incidents.filter(district=district.code)
-
-        category_counts = map_category(
-            cat_voilence, cat_law, cat_other,
-            district_incidents.values('category').annotate(
-                Count("category")).order_by())
-        severity_counts = map_severity(
-            district_incidents.values('severity').annotate(
-                Count("severity")).order_by())
-
-        file_dict["complaintByDistrict"].append({
-            "violence":
-            category_counts["disputes"],
-            "breachOfElectionLaws":
-            category_counts["violationOfLaws"],
-            "other":
-            category_counts["others"],
-            "minor":
-            severity_counts["minor"],
-            "general":
-            severity_counts["general"],
-            "major":
-            severity_counts["major"],
-            "total":
-            severity_counts["total"]
-        })
-
-    file_dict["complaintTotalsByType"] = dict(
-        functools.reduce(
-            operator.add,
-            map(collections.Counter, file_dict["complaintByDistrict"])))
-
-    # just fixing the case of not having a specific total
-    for key in file_dict["complaintByDistrict"][0]:
-        if key not in file_dict["complaintTotalsByType"]:
-            file_dict["complaintTotalsByType"][key] = 0
-
-    return file_dict
-
-
-def get_slip_data(incident_id):
-    """ Function to return inquiry slip data for PDF export. """
-    incident = get_incident_by_id(incident_id)
-    category = Category.objects.get(id=incident.category)
-
-    template_dict = {}
-    template_dict["template"] = "incidents/inquiry/inquiry_slip.js"
-    template_dict["referenceNumber"] = incident.refId
-    template_dict["date"] = "2020/03/05"
-    template_dict["categoryCode"] = incident.category
-    template_dict["categoryNameEn"] = category.sub_category
-    template_dict["categoryNameSn"] = category.sn_sub_category
-    template_dict["categoryNameTm"] = category.tm_sub_category
-    template_dict["institutionName"] = institutions[
-        incident.institution]["name"]
-    return template_dict
 
 
 def get_category_dict(incidents):
@@ -313,6 +116,34 @@ def get_category_dict(incidents):
 
     return category_dict
 
+def get_organization_dict(incidents, actionType = "OPENED"):
+    """ return organizations dict with count of incidents """
+
+    # get organizations with incident count
+    org_count = {}
+    for incident in incidents:
+        if actionType == "CLOSED" :
+            user = CloseWorkflow.objects.get(incident_id=incident).actioned_user
+        else:
+            user = incident.created_by
+        profile = Profile.objects.get(user=user)
+        if profile.organization_id in org_count:
+            org_count[profile.organization_id] += 1
+        else:
+            org_count[profile.organization_id] = 1
+
+    organizations = []
+    for org_id, count in org_count.items():
+        orgData = {}
+        org = Organization.objects.get(id=org_id)
+        orgData["organizationNameSinhala"] = org.displayName_sn
+        orgData["organizationNameTamil"] = org.displayName_tm
+        orgData["count"] = count
+
+        organizations.append(orgData)
+
+    print(organizations)
+    return organizations
 
 def get_daily_category_data():
 
@@ -321,7 +152,7 @@ def get_daily_category_data():
     file_dict["date"] = date.today().strftime("%Y/%m/%d")
 
     incidents = get_daily_incidents()
-    file_dict["total"] = incidents.count()
+    file_dict["total"] = len(incidents)
     file_dict["totalOpenedCount"] = get_total_opened_incident_count()
 
     file_dict["categories"] = get_category_dict(incidents)
@@ -335,7 +166,7 @@ def get_closed_daily_category_data():
     file_dict["date"] = date.today().strftime("%Y/%m/%d")
 
     incidents = get_daily_incidents("CLOSED")
-    file_dict["total"] = incidents.count()
+    file_dict["total"] = len(incidents)
     file_dict["totalOpenedCount"] = get_total_opened_incident_count()
 
     file_dict["categories"] = get_category_dict(incidents)
@@ -350,7 +181,7 @@ def get_category_data_by_date_range(start_time, end_time):
     file_dict["EndDate"] = end_time
 
     incidents = Incident.objects.filter(created_date__range=(parse_date_timezone(start_time), parse_date_timezone(end_time)))
-    file_dict["total"] = incidents.count()
+    file_dict["total"] = len(incidents)
     file_dict["totalOpenedCount"] = get_total_opened_incident_count()
 
     file_dict["categories"] = get_category_dict(incidents)
@@ -367,46 +198,47 @@ def get_weekly_closed_complain_category_data():
     file_dict["EndDate"] = week_data["end_date"]
 
     incidents = week_data["incidents"]
-    file_dict["total"] = incidents.count()
+    file_dict["total"] = len(incidents)
     file_dict["totalOpenedCount"] = get_total_opened_incident_count()
 
     file_dict["categories"] = get_category_dict(incidents)
 
     return file_dict
 
-def get_organizationwise_data_with_timefilter():
-    # FIXME: revamp needed
+def get_organizationwise_data_with_timefilter(start_time, end_time):
 
     file_dict = {}
     file_dict["template"] = "/incidents/complaints/summery_report_organizationwise_with_timefilter.js"
-    file_dict["date"] = date.today().strftime("%Y/%m/%d")
+    file_dict["StartDate"] = start_time
+    file_dict["EndDate"] = end_time
 
-    incidents = get_daily_incidents()
+    incidents = Incident.objects.filter(created_date__range=(parse_date_timezone(start_time), parse_date_timezone(end_time)))
     file_dict["total"] = incidents.count()
+    file_dict["totalOpenedCount"] = get_total_opened_incident_count()
 
-    file_dict["categories"] = get_category_dict(incidents)
+    file_dict["organizations"] = get_organization_dict(incidents, "OPENED")
 
     return file_dict
 
 
 def get_weekly_closed_complain_organization_data():
-    # FIXME: revamp needed
 
     file_dict = {}
     file_dict["template"] = "/incidents/complaints/weekly_closed_request_report_organizationwise.js"
     file_dict["date"] = date.today().strftime("%Y/%m/%d")
 
-    start_datetime = (date.today() - timedelta(days=7)).strftime("%Y-%m-%d")
-    end_datetime = date.today().strftime("%Y-%m-%d")
-    weekly_incidents_closed = CloseWorkflow.objects.filter(created_date__range=(start_datetime, end_datetime)) \
-        .values('departments').annotate(total=Count('departments'))
+    week_data = get_weekly_incidents("CLOSED")
+    file_dict["StartDate"] = week_data["start_date"]
+    file_dict["EndDate"] = week_data["end_date"]
 
-    file_dict["total"] = list(weekly_incidents_closed)
+    incidents = week_data["incidents"]
+    file_dict["organizations"] = get_organization_dict(incidents, "CLOSED")
+
+    file_dict["total"] = len(incidents)
 
     return file_dict
 
 def get_daily_closed_complain_organization_data():
-    # FIXME: revamp needed
 
     file_dict = {}
     file_dict["template"] = "/incidents/complaints/daily_closed_request_report_organizationwise.js"
@@ -414,10 +246,11 @@ def get_daily_closed_complain_organization_data():
 
     start_datetime = (date.today() - timedelta(days=7)).strftime("%Y-%m-%d")
     end_datetime = date.today().strftime("%Y-%m-%d")
-    weekly_incidents_closed = CloseWorkflow.objects.filter(created_date__range=(start_datetime, end_datetime)) \
-        .values('departments').annotate(total=Count('departments'))
 
-    file_dict["total"] = list(weekly_incidents_closed)
+    incidents = get_daily_incidents("CLOSED")
+    file_dict["organizations"] = get_organization_dict(incidents, "CLOSED")
+
+    file_dict["total"] = len(incidents)
 
     return file_dict
 

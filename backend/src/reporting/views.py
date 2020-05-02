@@ -14,7 +14,7 @@ import os
 
 from .services import get_police_division_summary, get_category_summary, \
     get_mode_summary, get_severity_summary, get_status_summary, get_subcategory_summary, get_district_summary, \
-    get_incident_date_summary, get_slip_data, get_daily_category_data,get_closed_daily_category_data, get_daily_summary_data, get_daily_district_data, \
+    get_incident_date_summary, get_daily_category_data,get_closed_daily_category_data, \
     get_weekly_closed_complain_category_data, get_weekly_closed_complain_organization_data, get_daily_closed_complain_organization_data, \
     get_organizationwise_data_with_timefilter, \
     get_total_requests_by_category_for_a_selected_time, get_category_data_by_date_range
@@ -49,21 +49,13 @@ class ReportingAccessView(APIView):
             # prepare all data to be on json object 'file'
             json_dict['file'] = file_dict
 
-        elif (template_type == "slip"):
-            '''
-            Inquiry Slip
-            GET parameters => /?template_type=slip&id=<incident_id>
-            '''
-            incident_id = request.query_params.get('id')
-            json_dict["file"] = get_slip_data(incident_id)
-
         elif (template_type == "daily_category"):
             """
             daily_summery_report_categorywise
             GET parameters => /?template_type=daily_category
             """
             json_dict["file"] = get_daily_category_data()
-        
+
         elif (template_type == "daily_category_closed"):
             """
             daily_closed_summery_report_categorywise
@@ -119,21 +111,7 @@ class ReportingAccessView(APIView):
             """
             json_dict["file"] = get_total_requests_by_category_for_a_selected_time()
 
-        elif (template_type == "daily_summary"):
-            """
-            daily_summary_report_main
-            GET parameters => /?template_type=daily_district
-            """
-            json_dict["file"] = get_daily_summary_data()
-
-        elif (template_type == "daily_district"):
-            """
-            daily_summary_report_districtwise
-            GET parameters => /?template_type=daily_district
-            """
-            json_dict["file"] = get_daily_district_data()
-
-        print(json_dict)
+        # print(json_dict)
         request_data = json.dumps(json_dict)
         res = requests.post(url=endpoint_uri, data=request_data, headers={'content-type': 'application/json'})
 

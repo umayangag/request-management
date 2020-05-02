@@ -20,7 +20,9 @@ from django.dispatch import receiver
 
 class Organization(models.Model):
     code = models.CharField(max_length=10)
-    displayName = models.CharField(max_length=100)
+    displayName = models.CharField(max_length=200)
+    displayName_sn = models.CharField(max_length=200, null=True, blank=True)
+    displayName_tm = models.CharField(max_length=200, null=True, blank=True)
     created_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
