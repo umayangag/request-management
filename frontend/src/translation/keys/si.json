@@ -10,7 +10,7 @@
   "request.management.report.incidents.forms.button.skip": "මඟ හරින්න",
   "request.management.report.incidents.forms.button.finish": "අවසන් කරන්න",
 
-  "request.management.report.incidents": "ඉල්ලීමක් කරන්න",
+  "request.management.report.incidents": "ඉල්ලීමක් / දුක්ගැනවිල්ලක් ඉදිරිපත් කරන්න",
   "request.management.report.incidents.helper.text": "* අනිවාර්ය වේ.",
   "request.management.report.incidents.helper.text2": "ඔබේ මනාප භාෂාව තෝරා පහත පෝරමය පුරවන්න.",
 
@@ -63,7 +63,7 @@
   "request.management.report.incidents.contact.landline": "ස්ථාවර දුරකථන",
   "request.management.report.incidents.contact.email": "ඊමේල්",
 
-  "request.management.check.incident.status": "යොමුවෙහි තත්වය",
+  "request.management.check.incident.status": "ඉල්ලීමක / දුක්ගැනවිල්ලක වත්මන් තත්වය පරීක්ෂා කරන්න",
   "request.management.historic.reports": "වාර්තා",
   "request.management.home.registered_user": "ලියාපදිංචි පරිශීලකයින්",
   "request.management.home.signin": "පුරනය වන්න",
