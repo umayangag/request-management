@@ -649,7 +649,6 @@ function IncidentFormInternal(props) {
           setFieldValue,
           isValid,
         }) => {
-          debugger;
           return (
             <form
               className={classes.container}
