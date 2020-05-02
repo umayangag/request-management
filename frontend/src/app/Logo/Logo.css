@@ -4,5 +4,12 @@
 }
 
 .logo-container img{
-    width: 80%;
+    width: 120%;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+.house-container img{
+    width: 60%;
+    margin-left: 40%;
 }
