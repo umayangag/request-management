@@ -30,6 +30,13 @@ const styles = (theme) => ({
     marginTop: theme.spacing.unit*3,
     width:"100%"
   },
+  title: {
+    marginLeft: theme.spacing.unit,
+    marginRight: theme.spacing.unit,
+    marginTop: theme.spacing.unit*3,
+    marginBottom: -40,
+    width:"100%"
+  },
 });
 
 const IncidentContact = (props) => {
@@ -38,29 +45,29 @@ const IncidentContact = (props) => {
   const {
     classes,
     handleContactDetailsChange,
-    handledLocationChange,
     handleAddressChange,
     handleDistrictChange,
     handleCityChange,
 
     //recipient change fn
-    handleRecipientLocationChange,
     handleRecipientDistrictChange,
     handleRecipientCityChange,
     handleRecipientAddressChange,
     handleShowRecipientChange,
+    handleTitleChange,
+    handleRecipientTitleChange,
     contactDetials,
     formErrors,
-    location,
     address,
     district,
     districts,
     city,
     showRecipient,
+    title,
+    recipientTitle,
     recipientAddress,
     recipientDistrict,
     recipientCity,
-    recipientLocation
   } = props;
 
   const handlePhoneNumberInput = (update, newValue) => {
@@ -73,7 +80,53 @@ const IncidentContact = (props) => {
     <form className={classes.container} noValidate autoComplete="off">
         <Grid container>
       <Grid container>
-        <Grid item xs={8}>
+      <Grid item xs={12} md={12} lg={12}>
+                        <FormControl className={classes.title} error={formErrors.titleErrorMsg ? true : false} component="fieldset">
+                        <FormLabel component="legend">{f({ id: "request.management.incident.create.location.title", defaultMessage: "Title" })}</FormLabel>
+                            <RadioGroup
+                                aria-label="Gender"
+                                name="title"
+                                id="title"
+                                // ref= {this.props.securityDepositeRpp}
+                                // className={classes.group}
+                                value={title}
+                                onChange={(e) => { handleTitleChange(e.target.value);formErrors.titleErrorMsg = null; }}
+                                // onClick={this.showAmountRpp.bind(this)}
+                                row
+                            >
+                                <FormControlLabel
+                                    control={
+                                        <Radio />
+                                    }
+                                    value="Rev"
+                                    label={f({ id: "request.management.incident.create.location.title.rev", defaultMessage: "Rev." })}
+                                />
+                                <FormControlLabel
+                                    control={
+                                        <Radio />
+                                    }
+                                    label={f({ id: "request.management.incident.create.location.title.mr", defaultMessage: "Mr." })}
+                                    value="Mr"
+                                />
+                                <FormControlLabel
+                                    control={
+                                        <Radio />
+                                    }
+                                    value="Mrs"
+                                    label={f({ id: "request.management.incident.create.location.title.mrs", defaultMessage: "Mrs." })}
+                                />
+                                <FormControlLabel
+                                    control={
+                                        <Radio />
+                                    }
+                                    label={f({ id: "request.management.incident.create.location.title.ms", defaultMessage: "Ms." })}
+                                    value="Ms"
+                                />
+                            </RadioGroup>
+                            <FormHelperText>{formErrors.titleErrorMsg ? formErrors.titleErrorMsg : null}</FormHelperText>
+                        </FormControl>
+                    </Grid>
+        <Grid item xs={10} sm={6} lg={8}>
           <TextField
             id="contactName"
             label={f({
@@ -99,45 +152,35 @@ const IncidentContact = (props) => {
             error={formErrors.incidentNameErrorMsg ? true : false}
           />
         </Grid>
-        <Grid item xs={4} />
-        <Grid item xs={8} >
-        <FormControl className={classes.group}  error={formErrors.incidentReporterTypeErrorMsg && formErrors.incidentReporterTypeErrorMsg} >
-                      <InputLabel htmlFor="reporterType">
-                      {f({
-                        id: "request.management.incident.create.reporter.type",
-                        defaultMessage: "Individual/Organization*",
-                      })}
-                      </InputLabel>
-                      <Select
-                        value={contactDetials.reporterType}
-                        onChange={(e) => {
-                          handleContactDetailsChange({
-                            ...contactDetials,
-                            reporterType: e.target.value,
-                          });
-                          formErrors.incidentReporterTypeErrorMsg = null;
-                        }}
-                        inputProps={{
-                          name: "reporterType",
-                          id: "reporterType",
-                        }}
-                      >
-                        <MenuItem value="">
-                          {" "}
-                          <em>None</em>{" "}
-                        </MenuItem>
-                        <MenuItem value={"INDIVIDUAL"}>Individual</MenuItem>
-                        <MenuItem value={"ORGANIZATION"}>Organization</MenuItem>
-                      </Select>
-                      <FormHelperText>
-                            {formErrors.incidentReporterTypeErrorMsg && formErrors.incidentReporterTypeErrorMsg
-                              ? formErrors.incidentReporterTypeErrorMsg
-                              : ""}
-                          </FormHelperText>
-                    </FormControl>
-                </Grid>
-                <Grid item xs={4} />
-        <Grid item xs={8}>
+        <Grid item xs={2} sm={6} lg={4} />
+        <Grid item xs={10} sm={6} lg={8}>
+          <TextField
+            id="nic"
+            label={f({
+              id: "request.management.report.incidents.contact.nic",
+              defaultMessage: "NIC",
+            })}
+            autoFocus
+            multiline
+            fullWidth
+            rowsMax="4"
+            value={contactDetials.nic}
+            // onChange={(e) => { handleContactDetailsChange({...contactDetials, name:e.target.value}) }}
+            onChange={(e) => {
+              handleContactDetailsChange({
+                ...contactDetials,
+                nic: e.target.value,
+              });
+              formErrors.incidentNicErrorMsg = null;
+            }}
+            className={classes.textField}
+            margin="normal"
+            helperText={formErrors.incidentNicErrorMsg || ""}
+            error={formErrors.incidentNicErrorMsg ? true : false}
+          />
+        </Grid>
+        <Grid item xs={2} sm={6} lg={4} />
+        <Grid item xs={10} sm={6} lg={8}>
           <TextField
             id="contactMobile"
             label={f({
@@ -163,9 +206,9 @@ const IncidentContact = (props) => {
             error={formErrors.incidentContactErrorMsg ? true : false}
           />
         </Grid>
-        <Grid item xs={4} />
+        <Grid item xs={2} sm={6} lg={4} />
 
-        <Grid item xs={8}>
+        <Grid item xs={10} sm={6} lg={8}>
           <TextField
             id="contactLandline"
             label={f({
@@ -188,9 +231,9 @@ const IncidentContact = (props) => {
             type="number"
           />
         </Grid>
-        <Grid item xs={4} />
+        <Grid item xs={2} sm={6} lg={4} />
 
-        <Grid item xs={8}>
+        <Grid item xs={10} sm={6} lg={8}>
           <TextField
             id="contactEmail"
             label={f({
@@ -212,23 +255,8 @@ const IncidentContact = (props) => {
             margin="normal"
           />
         </Grid>
-        <Grid item xs={4} />
-        <Grid item xs={8}>
-                    <TextField
-                        autoFocus
-                        id="incidentLocation"
-                        label={f({ id: "request.management.incident.create.location.description", defaultMessage: "Location name or description" })}
-                        multiline
-                        fullWidth
-                        rowsMax="5"
-                        value={location}
-                        onChange={(e) => { handledLocationChange(e.target.value) }}
-                        className={classes.textField}
-                        margin="normal"
-                    />
-                </Grid>
-                <Grid item xs={4} />
-                <Grid item xs={8}>
+        <Grid item xs={2} sm={6} lg={4}  />
+                <Grid item xs={10} sm={6} lg={8}>
                     <TextField
                         id="incidentAddress"
                         label={f({ id: "request.management.report.incidents.address", defaultMessage: "Address*" })}
@@ -247,8 +275,8 @@ const IncidentContact = (props) => {
                         error={formErrors.incidentAddressErrorMsg ? true : false}
                     />
                 </Grid>
-                <Grid item xs={4} />
-                <Grid item xs={8}>
+                <Grid item xs={2} sm={6} lg={4} />
+                <Grid item xs={10} sm={6} lg={8}>
                     <TextField
                         id="incidentCity"
                         label={f({ id: "request.management.report.incidents.city", defaultMessage: "City" })}
@@ -261,8 +289,8 @@ const IncidentContact = (props) => {
                         error={formErrors.incidentCityErrorMsg ? true : false}
                     />
                 </Grid>
-                <Grid item xs={4} />
-                <Grid item xs={8} >
+                <Grid item xs={2} sm={6} lg={4} />
+                <Grid item xs={10} sm={6} lg={8} >
                     <TextField
                         id="district"
                         select
@@ -288,7 +316,7 @@ const IncidentContact = (props) => {
                         ))}
                     </TextField>
                 </Grid>
-                <Grid item xs={4} />
+                <Grid item xs={2} sm={6} lg={4} />
                 <Grid item xs={12}>
                         <FormControl className={classes.group} error={formErrors.showRecipientErrorMsg ? true : false} component="fieldset">
                         <FormLabel component="legend">{f({ id: "request.management.incident.create.location.onbehalf", defaultMessage: "On behalf of someone else" })}</FormLabel>
@@ -326,7 +354,7 @@ const IncidentContact = (props) => {
       {showRecipient==="YES" ? 
       <Grid container>
       
-        <Grid item xs={8}>
+        <Grid item xs={10} sm={6} lg={8}>
         <Typography variant="h5" gutterBottom>
         {f({ id: "request.management.incident.create.recipient_information", defaultMessage: "Recipient Information" })}
         </Typography>
@@ -334,8 +362,54 @@ const IncidentContact = (props) => {
         <li>{f({ id: "request.management.report.incidents.section.location.info", defaultMessage: "If the location where help is required differs from your address, please fill in this section w/ the location details." })}</li>
         </ul>
         </Grid>
-        <Grid item xs={4} />
-      <Grid item xs={8}>
+        <Grid item xs={2} sm={6} lg={4} />
+        <Grid item xs={12} md={12} lg={12}>
+                        <FormControl className={classes.title} error={formErrors.recipientTitleErrorMsg ? true : false} component="fieldset">
+                        <FormLabel component="legend">{f({ id: "request.management.incident.create.location.title", defaultMessage: "Title" })}</FormLabel>
+                            <RadioGroup
+                                aria-label="Gender"
+                                name="recipientTitle"
+                                id="recipientTitle"
+                                // ref= {this.props.securityDepositeRpp}
+                                // className={classes.group}
+                                value={recipientTitle}
+                                onChange={(e) => { handleRecipientTitleChange(e.target.value);formErrors.recipientTitleErrorMsg = null; }}
+                                // onClick={this.showAmountRpp.bind(this)}
+                                row
+                            >
+                                <FormControlLabel
+                                    control={
+                                        <Radio />
+                                    }
+                                    value="Rev"
+                                    label={f({ id: "request.management.incident.create.location.title.rev", defaultMessage: "Rev." })}
+                                />
+                                <FormControlLabel
+                                    control={
+                                        <Radio />
+                                    }
+                                    label={f({ id: "request.management.incident.create.location.title.mr", defaultMessage: "Mr." })}
+                                    value="Mr"
+                                />
+                                <FormControlLabel
+                                    control={
+                                        <Radio />
+                                    }
+                                    value="Mrs"
+                                    label={f({ id: "request.management.incident.create.location.title.mrs", defaultMessage: "Mrs." })}
+                                />
+                                <FormControlLabel
+                                    control={
+                                        <Radio />
+                                    }
+                                    label={f({ id: "request.management.incident.create.location.title.ms", defaultMessage: "Ms." })}
+                                    value="Ms"
+                                />
+                            </RadioGroup>
+                            <FormHelperText>{formErrors.recipientTitleErrorMsg ? formErrors.recipientTitleErrorMsg : null}</FormHelperText>
+                        </FormControl>
+                    </Grid>
+      <Grid item xs={10} sm={6} lg={8}>
           <TextField
             id="contactName"
             label={f({
@@ -361,45 +435,35 @@ const IncidentContact = (props) => {
             error={formErrors.recipientNameErrorMsg ? true : false}
           />
         </Grid>
-        <Grid item xs={4} />
-        <Grid item xs={8} >
-        <FormControl className={classes.group}  error={formErrors.incidentRecipientTypeErrorMsg && formErrors.incidentRecipientTypeErrorMsg} >
-                      <InputLabel htmlFor="reporterType">
-                      {f({
-                        id: "request.management.incident.create.reporter.type",
-                        defaultMessage: "Individual/Organization*",
-                      })}
-                      </InputLabel>
-                      <Select
-                        value={contactDetials.recipientType}
-                        onChange={(e) => {
-                          handleContactDetailsChange({
-                            ...contactDetials,
-                            recipientType: e.target.value,
-                          });
-                          formErrors.incidentRecipientTypeErrorMsg = null;
-                        }}
-                        inputProps={{
-                          name: "recipientType",
-                          id: "recipientType",
-                        }}
-                      >
-                        <MenuItem value="">
-                          {" "}
-                          <em>None</em>{" "}
-                        </MenuItem>
-                        <MenuItem value={"INDIVIDUAL"}>Individual</MenuItem>
-                        <MenuItem value={"ORGANIZATION"}>Organization</MenuItem>
-                      </Select>
-                      <FormHelperText>
-                            {formErrors.incidentRecipientTypeErrorMsg && formErrors.incidentRecipientTypeErrorMsg
-                              ? formErrors.incidentRecipientTypeErrorMsg
-                              : ""}
-                          </FormHelperText>
-                    </FormControl>
-                </Grid>
-                <Grid item xs={4} />
-        <Grid item xs={8}>
+        <Grid item xs={2} sm={6} lg={4} />
+        <Grid item xs={10} sm={6} lg={8}>
+          <TextField
+            id="recipientNic"
+            label={f({
+              id: "request.management.report.incidents.contact.nic",
+              defaultMessage: "NIC",
+            })}
+            autoFocus
+            multiline
+            fullWidth
+            rowsMax="4"
+            value={contactDetials.recipientNic}
+            // onChange={(e) => { handleContactDetailsChange({...contactDetials, name:e.target.value}) }}
+            onChange={(e) => {
+              handleContactDetailsChange({
+                ...contactDetials,
+                recipientNic: e.target.value,
+              });
+              formErrors.recipientNicErrorMsg = null;
+            }}
+            className={classes.textField}
+            margin="normal"
+            helperText={formErrors.recipientNicErrorMsg || ""}
+            error={formErrors.recipientNicErrorMsg ? true : false}
+          />
+        </Grid>
+        <Grid item xs={2} sm={6} lg={4} />
+        <Grid item xs={10} sm={6} lg={8}>
           <TextField
             id="contactMobile"
             label={f({
@@ -425,9 +489,9 @@ const IncidentContact = (props) => {
             error={formErrors.recipientContactErrorMsg ? true : false}
           />
         </Grid>
-        <Grid item xs={4} />
+        <Grid item xs={2} sm={6} lg={4} />
 
-        <Grid item xs={8}>
+        <Grid item xs={10} sm={6} lg={8}>
           <TextField
             id="contactLandline"
             label={f({
@@ -450,9 +514,9 @@ const IncidentContact = (props) => {
             type="number"
           />
         </Grid>
-        <Grid item xs={4} />
+        <Grid item xs={2} sm={6} lg={4} />
 
-        <Grid item xs={8}>
+        <Grid item xs={10} sm={6} lg={8}>
           <TextField
             id="contactEmail"
             label={f({
@@ -474,23 +538,8 @@ const IncidentContact = (props) => {
             margin="normal"
           />
         </Grid>
-        <Grid item xs={4} />
-        <Grid item xs={8}>
-                    <TextField
-                        autoFocus
-                        id="incidentLocation"
-                        label={f({ id: "request.management.incident.create.location.description", defaultMessage: "Location name or description" })}
-                        multiline
-                        fullWidth
-                        rowsMax="5"
-                        value={recipientLocation}
-                        onChange={(e) => { handleRecipientLocationChange(e.target.value) }}
-                        className={classes.textField}
-                        margin="normal"
-                    />
-                </Grid>
-                <Grid item xs={4} />
-                <Grid item xs={8}>
+        <Grid item xs={2} sm={6} lg={4} />
+                <Grid item xs={10} sm={6} lg={8}>
                     <TextField
                         id="incidentAddress"
                         label={f({ id: "request.management.report.incidents.address", defaultMessage: "Address*" })}
@@ -509,8 +558,8 @@ const IncidentContact = (props) => {
                         error={formErrors.recipientAddressErrorMsg ? true : false}
                     />
                 </Grid>
-                <Grid item xs={4} />
-                <Grid item xs={8}>
+                <Grid item xs={2} sm={6} lg={4}/>
+                <Grid item xs={10} sm={6} lg={8}>
                     <TextField
                         id="incidentCity"
                         label={f({ id: "request.management.report.incidents.city", defaultMessage: "City" })}
@@ -523,8 +572,8 @@ const IncidentContact = (props) => {
                         error={formErrors.recipientCityErrorMsg ? true : false}
                     />
                 </Grid>
-                <Grid item xs={4} />
-                <Grid item xs={8} >
+                <Grid item xs={2} sm={6} lg={4} />
+                <Grid item xs={10} sm={6} lg={8} >
                     <TextField
                         id="district"
                         select
@@ -550,7 +599,7 @@ const IncidentContact = (props) => {
                         ))}
                     </TextField>
                 </Grid>
-                <Grid item xs={4} />
+                <Grid item xs={2} sm={6} lg={4} />
       </Grid> : ''}
       </Grid>
     </form>
