@@ -201,8 +201,9 @@ class IncidentList(APIView, IncidentResultsSetPagination):
         if request.data["showRecipient"] == "YES":
             # collect recipient information
             recipient_data = {}
+            recipient_data["title"] = incident_data["recipientTitle"]
+            recipient_data["nic"] = incident_data["recipientNic"]
             recipient_data["name"] = incident_data["recipientName"]
-            recipient_data["recipientType"] = incident_data["recipientType"]
             recipient_data["address"] = incident_data["recipientAddress"]
             recipient_data["mobile"] = incident_data["recipientMobile"]
             recipient_data["telephone"] = incident_data["recipientTelephone"]
@@ -561,8 +562,9 @@ class IncidentPublicUserView(APIView):
         if request.data["showRecipient"] == "YES":
             # collect recipient information
             recipient_data = {}
+            recipient_data["title"] = incident_data["recipientTitle"]
+            recipient_data["nic"] = incident_data["recipientNic"]
             recipient_data["name"] = incident_data["recipientName"]
-            recipient_data["recipientType"] = incident_data["recipientType"]
             recipient_data["address"] = incident_data["recipientAddress"]
             recipient_data["mobile"] = incident_data["recipientMobile"]
             recipient_data["telephone"] = incident_data["recipientTelephone"]
