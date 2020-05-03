@@ -1,197 +1,1443 @@
 [
   {
     "model": "common.category",
-    "pk": 1,
+    "pk": "1",
     "fields": {
-      "code": "CVD19-1",
-      "top_category": "COVID-19",
-      "sub_category": "Report a matter / incident",
-      "sn_top_category": "COVID-19",
-      "sn_sub_category": "කාරණයක් / සිද්ධියක් වාර්තා කරන්න",
-      "tm_top_category": "COVID-19",
-      "tm_sub_category": "ஒரு விஷயம் / சம்பவத்தைப் புகாரளிக்கவும்",
+      "code": "EDU-1",
+      "top_category": "Issues in the field of education, higher education, religious and cultural",
+      "sub_category": "Admission of children to grade one",
+      "sn_top_category": "අධ්‍යාපන, උසස් අධ්‍යාපන, ආගමික හා සංස්කෘතික ක්ෂේත්‍රය සම්බන්ධ ගැටලු",
+      "sn_sub_category": "පළමු ශ්‍රේණියට දරුවන් ඇතුළත් කර ගැනීම්",
+      "tm_top_category": "கல்வி, உயர் கல்வி, மத மற்றும் கலாச்சாரத் துறையில் பிரச்சினைகள்",
+      "tm_sub_category": "முதல் தர மீது அனுமதிக்கப்பட்டார் குழந்தைகள்",
       "created_date": "2020-01-01T00:00:00Z"
     }
   },
   {
     "model": "common.category",
-    "pk": 2,
+    "pk": "2",
     "fields": {
-      "code": "CVD19-2",
-      "top_category": "COVID-19",
-      "sub_category": "Report a suspected case of COVID-19",
-      "sn_top_category": "COVID-19",
-      "sn_sub_category": "COVID-19 හි සැක සහිත නඩුවක් වාර්තා කරන්න",
-      "tm_top_category": "COVID-19",
-      "tm_sub_category": "COVID-19 இன் சந்தேகத்திற்குரிய வழக்கைப் புகாரளிக்கவும்",
+      "code": "EDU-2",
+      "top_category": "Issues in the field of education, higher education, religious and cultural",
+      "sub_category": "Grade 5 scholarship results",
+      "sn_top_category": "අධ්‍යාපන, උසස් අධ්‍යාපන, ආගමික හා සංස්කෘතික ක්ෂේත්‍රය සම්බන්ධ ගැටලු",
+      "sn_sub_category": "පහ ශිෂ්‍යත්වය ප්‍රතිඵල මත දරුවන් ඇතුළත් කර ගැනීම්",
+      "tm_top_category": "கல்வி, உயர் கல்வி, மத மற்றும் கலாச்சாரத் துறையில் பிரச்சினைகள்",
+      "tm_sub_category": "முடிவுகளை தன் குழந்தையை பெற ஐந்து உதவித்தொகை",
       "created_date": "2020-01-01T00:00:00Z"
     }
   },
   {
     "model": "common.category",
-    "pk": 3,
+    "pk": "3",
     "fields": {
-      "code": "CVD19-3",
-      "top_category": "COVID-19",
-      "sub_category": "Essential grocery supplies or medicines",
-      "sn_top_category": "COVID-19",
-      "sn_sub_category": "අත්‍යවශ්‍ය සිල්ලර සැපයුම් හෝ ඖෂධ",
-      "tm_top_category": "COVID-19",
-      "tm_sub_category": "அத்தியாவசிய மளிகை பொருட்கள் அல்லது மருந்துகள்",
+      "code": "EDU-3",
+      "top_category": "Issues in the field of education, higher education, religious and cultural",
+      "sub_category": "Admission to A/L classes",
+      "sn_top_category": "අධ්‍යාපන, උසස් අධ්‍යාපන, ආගමික හා සංස්කෘතික ක්ෂේත්‍රය සම්බන්ධ ගැටලු",
+      "sn_sub_category": "උසස් පෙළ පන්ති සඳහා ඇතුළත් කර ගැනීම්",
+      "tm_top_category": "கல்வி, உயர் கல்வி, மத மற்றும் கலாச்சாரத் துறையில் பிரச்சினைகள்",
+      "tm_sub_category": "முதலாம் வகுப்பில் குழந்தைகளின் சேர்க்கை",
       "created_date": "2020-01-01T00:00:00Z"
     }
   },
   {
     "model": "common.category",
-    "pk": 4,
+    "pk": "4",
     "fields": {
-      "code": "CVD19-4",
-      "top_category": "COVID-19",
-      "sub_category": "Allowances",
-      "sn_top_category": "COVID-19",
-      "sn_sub_category": "දීමනා",
-      "tm_top_category": "COVID-19",
-      "tm_sub_category": "கொடுப்பனவுகள்",
+      "code": "EDU-4",
+      "top_category": "Issues in the field of education, higher education, religious and cultural",
+      "sub_category": "Development of school infrastructure",
+      "sn_top_category": "අධ්‍යාපන, උසස් අධ්‍යාපන, ආගමික හා සංස්කෘතික ක්ෂේත්‍රය සම්බන්ධ ගැටලු",
+      "sn_sub_category": "පාසල්වල යටිතල පහසුකම් සංවර්ධනය සම්බන්ධ ගැටලු හෝ ඉල්ලීම්",
+      "tm_top_category": "கல்வி, உயர் கல்வி, மத மற்றும் கலாச்சாரத் துறையில் பிரச்சினைகள்",
+      "tm_sub_category": "கோரிக்கைகள் அல்லது பள்ளிகளில் உள்கட்டமைப்பு வளர்ச்சி தொடர்பான பிரச்சினைகள்",
       "created_date": "2020-01-01T00:00:00Z"
     }
   },
   {
     "model": "common.category",
-    "pk": 5,
+    "pk": "5",
     "fields": {
-      "code": "CVD19-5",
-      "top_category": "COVID-19",
-      "sub_category": "Pensioners",
-      "sn_top_category": "COVID-19",
-      "sn_sub_category": "විශ්‍රාමිකයන්",
-      "tm_top_category": "COVID-19",
-      "tm_sub_category": "ஓய்வூதியம் பெறுவோர்",
+      "code": "EDU-5",
+      "top_category": "Issues in the field of education, higher education, religious and cultural",
+      "sub_category": "Principals or teachers ",
+      "sn_top_category": "අධ්‍යාපන, උසස් අධ්‍යාපන, ආගමික හා සංස්කෘතික ක්ෂේත්‍රය සම්බන්ධ ගැටලු",
+      "sn_sub_category": "විදුහල්පති හෝ ගුරුවරු සම්බන්ධ ගැටලු හෝ ඉල්ලීම්",
+      "tm_top_category": "கல்வி, உயர் கல்வி, மத மற்றும் கலாச்சாரத் துறையில் பிரச்சினைகள்",
+      "tm_sub_category": "பிரச்சினைகள் அல்லது கோரிக்கைகளை முதல்வர்கள் அல்லது ஆசிரியர்கள்",
       "created_date": "2020-01-01T00:00:00Z"
     }
   },
   {
     "model": "common.category",
-    "pk": 6,
+    "pk": "6",
     "fields": {
-      "code": "CVD19-6",
-      "top_category": "COVID-19",
-      "sub_category": "Sri Lankan citizen living overseas",
-      "sn_top_category": "COVID-19",
-      "sn_sub_category": "විදේශයක ජීවත්වන ශ්‍රී ලාංකික පුරවැසියන්",
-      "tm_top_category": "COVID-19",
-      "tm_sub_category": "வெளிநாட்டில் வாழும் இலங்கை குடிமகன்",
+      "code": "EDU-6",
+      "top_category": "Issues in the field of education, higher education, religious and cultural",
+      "sub_category": "Academic or non-academic personnel",
+      "sn_top_category": "අධ්‍යාපන, උසස් අධ්‍යාපන, ආගමික හා සංස්කෘතික ක්ෂේත්‍රය සම්බන්ධ ගැටලු",
+      "sn_sub_category": "විශ්වවිද්‍යාල අධ්‍යයන හා අනධ්‍යයන පිරිස් සම්බන්ධ ගැටලු හෝ ඉල්ලීම්",
+      "tm_top_category": "கல்வி, உயர் கல்வி, மத மற்றும் கலாச்சாரத் துறையில் பிரச்சினைகள்",
+      "tm_sub_category": "கல்வி மற்றும் கல்விசாரா பணியாளர்கள் கோரிக்கைகள் அல்லது பிரச்சினைகள்",
       "created_date": "2020-01-01T00:00:00Z"
     }
   },
   {
     "model": "common.category",
-    "pk": 7,
+    "pk": "7",
     "fields": {
-      "code": "CVD19-7",
-      "top_category": "COVID-19",
-      "sub_category": "Public utilities, repairs and waste disposal",
-      "sn_top_category": "COVID-19",
-      "sn_sub_category": "මහජන උපයෝගිතා, අළුත්වැඩියා සහ අපද්‍රව්‍ය බැහැර කිරීම",
-      "tm_top_category": "COVID-19",
-      "tm_sub_category": "பொது பயன்பாடுகள், பழுது மற்றும் கழிவுகளை அகற்றுவது",
+      "code": "EDU-7",
+      "top_category": "Issues in the field of education, higher education, religious and cultural",
+      "sub_category": "Mahapola scholarships",
+      "sn_top_category": "අධ්‍යාපන, උසස් අධ්‍යාපන, ආගමික හා සංස්කෘතික ක්ෂේත්‍රය සම්බන්ධ ගැටලු",
+      "sn_sub_category": "ශිෂ්‍යත්ව හෝ මහපොළ දීමනා සම්බන්ධ ගැටලු හෝ ඉල්ලීම්",
+      "tm_top_category": "கல்வி, உயர் கல்வி, மத மற்றும் கலாச்சாரத் துறையில் பிரச்சினைகள்",
+      "tm_sub_category": "கோரிக்கைகள் அல்லது கேள்விகள் உதவித்தொகை அல்லது மானியம் மகாபொல தொடர்பாக",
       "created_date": "2020-01-01T00:00:00Z"
     }
   },
   {
     "model": "common.category",
-    "pk": 8,
+    "pk": "8",
     "fields": {
-      "code": "SAMURDHI-1",
-      "top_category": "Samurdhi",
-      "sub_category": "Samurdhi allowances",
-      "sn_top_category": "සමෘද්ධි",
-      "sn_sub_category": "සමෘද්ධි දීමනා",
-      "tm_top_category": "சமுர்த்தி",
-      "tm_sub_category": "உதவி கோருங்கள் - சமுர்தி கொடுப்பனவுகள்",
+      "code": "EDU-8",
+      "top_category": "Issues in the field of education, higher education, religious and cultural",
+      "sub_category": "University Admissions ",
+      "sn_top_category": "අධ්‍යාපන, උසස් අධ්‍යාපන, ආගමික හා සංස්කෘතික ක්ෂේත්‍රය සම්බන්ධ ගැටලු",
+      "sn_sub_category": "විශ්වවිද්‍යාල ප්‍රවේශ සම්බන්ධ ගැටලු හෝ ඉල්ලීම්",
+      "tm_top_category": "கல்வி, உயர் கல்வி, மத மற்றும் கலாச்சாரத் துறையில் பிரச்சினைகள்",
+      "tm_sub_category": "பல்கலைக்கழக அனுமதிகள் தொடர்பான பிரச்சினைகள் அல்லது கோரிக்கைகளை",
       "created_date": "2020-01-01T00:00:00Z"
     }
   },
   {
     "model": "common.category",
-    "pk": 9,
+    "pk": "9",
     "fields": {
-      "code": "DIPLO-1",
-      "top_category": "Diplomats / Embassies / NGOs / Tourists",
-      "sub_category": "Residents of Sri Lanka with foreign citizenship",
-      "sn_top_category": "තානාපතියන් / තානාපති කාර්යාල / රාජ්‍ය නොවන සංවිධාන",
-      "sn_sub_category": "විදේශීය පුරවැසිභාවය සහිත ශ්‍රී ලංකාවේ පදිංචිකරුවන්",
-      "tm_top_category": "தூதர்கள் / தூதரகங்கள் / தன்னார்வ தொண்டு நிறுவனம்",
-      "tm_sub_category": "வெளிநாட்டு குடியுரிமையுடன் இலங்கையில் வசிப்பவர்கள்",
+      "code": "EDU-9",
+      "top_category": "Issues in the field of education, higher education, religious and cultural",
+      "sub_category": "Vocational training and skills development institutions ",
+      "sn_top_category": "අධ්‍යාපන, උසස් අධ්‍යාපන, ආගමික හා සංස්කෘතික ක්ෂේත්‍රය සම්බන්ධ ගැටලු",
+      "sn_sub_category": "වෘත්තීය පුහුණු හා නිපුණතා සංවර්ධන කටයුතු හා ආයතන සම්බන්ධ ගැටලු ",
+      "tm_top_category": "கல்வி, உயர் கல்வி, மத மற்றும் கலாச்சாரத் துறையில் பிரச்சினைகள்",
+      "tm_sub_category": "தொழில் பயிற்சி மற்றும் திறன்கள் வளர்ச்சி நிறுவனங்கள் தொடர்பான சிக்கல்கள்",
       "created_date": "2020-01-01T00:00:00Z"
     }
   },
   {
     "model": "common.category",
-    "pk": 10,
+    "pk": "10",
     "fields": {
-      "code": "DIPLO-2",
-      "top_category": "Diplomats / Embassies / NGOs / Tourists",
-      "sub_category": "Tourist",
-      "sn_top_category": "තානාපතියන් / තානාපති කාර්යාල / රාජ්‍ය නොවන සංවිධාන",
-      "sn_sub_category": "සංචාරකයන්",
-      "tm_top_category": "தூதர்கள் / தூதரகங்கள் / தன்னார்வ தொண்டு நிறுவனம்",
-      "tm_sub_category": "சுற்றுலா",
+      "code": "EDU-10",
+      "top_category": "Issues in the field of education, higher education, religious and cultural",
+      "sub_category": "Mahapola scholarships",
+      "sn_top_category": "අධ්‍යාපන, උසස් අධ්‍යාපන, ආගමික හා සංස්කෘතික ක්ෂේත්‍රය සම්බන්ධ ගැටලු",
+      "sn_sub_category": "බෞද්ධ, හින්දු, ක්‍රිස්තියානි, ඉස්ලාම් ඇතුලු සර්ව ආගම් සම්බන්ධ ගැටලු හෝ ඉල්ලීම්",
+      "tm_top_category": "கல்வி, உயர் கல்வி, மத மற்றும் கலாச்சாரத் துறையில் பிரச்சினைகள்",
+      "tm_sub_category": "புத்த, இந்து மதம், கிரிஸ்துவர், அனைத்து மதங்களில் இஸ்லாமியம் கோரிக்கைகளை அல்லது பிரச்சினைகள் உட்பட",
       "created_date": "2020-01-01T00:00:00Z"
     }
   },
   {
     "model": "common.category",
-    "pk": 11,
+    "pk": "11",
     "fields": {
-      "code": "DIPLO-3",
-      "top_category": "Diplomats / Embassies / NGOs / Tourists",
-      "sub_category": "Diplomat / Embassies / UN / NGOs",
-      "sn_top_category": "තානාපතියන් / තානාපති කාර්යාල / රාජ්‍ය නොවන සංවිධාන",
-      "sn_sub_category": "තානාපතියන් / තානාපති කාර්යාල / UN / රාජ්‍ය නොවන සංවිධාන",
-      "tm_top_category": "தூதர்கள் / தூதரகங்கள் / தன்னார்வ தொண்டு நிறுவனம்",
-      "tm_sub_category": "தூதர்கள் / தூதரகங்கள் / UN / தன்னார்வ தொண்டு நிறுவனம்",
+      "code": "EDU-11",
+      "top_category": "Issues in the field of education, higher education, religious and cultural",
+      "sub_category": "Language, culture or archaeology ",
+      "sn_top_category": "අධ්‍යාපන, උසස් අධ්‍යාපන, ආගමික හා සංස්කෘතික ක්ෂේත්‍රය සම්බන්ධ ගැටලු",
+      "sn_sub_category": "රාජ්‍ය භාෂා, සංස්කෘතික හා පුරාවිද්‍යා කටයුතු සම්බන්ධ ගැටලු ",
+      "tm_top_category": "கல்வி, உயர் கல்வி, மத மற்றும் கலாச்சாரத் துறையில் பிரச்சினைகள்",
+      "tm_sub_category": "மொழி உடன் கலாச்சார மற்றும் தொல்பொருள் பிரச்சினைகள்",
       "created_date": "2020-01-01T00:00:00Z"
     }
   },
   {
     "model": "common.category",
-    "pk": 12,
+    "pk": "12",
     "fields": {
-      "code": "GOV-1",
-      "top_category": "Government Organization",
-      "sub_category": "Request authorization / approval",
-      "sn_top_category": "රාජ්‍ය සංවිධානය",
-      "sn_sub_category": "අවසරය / අනුමැතිය ඉල්ලා සිටින්න",
-      "tm_top_category": "அரசு நிறுவனங்கள்",
-      "tm_sub_category": "அங்கீகாரம் / ஒப்புதல் கோருங்கள்",
+      "code": "EDU-12",
+      "top_category": "Issues in the field of education, higher education, religious and cultural",
+      "sub_category": "Sports",
+      "sn_top_category": "අධ්‍යාපන, උසස් අධ්‍යාපන, ආගමික හා සංස්කෘතික ක්ෂේත්‍රය සම්බන්ධ ගැටලු",
+      "sn_sub_category": "ක්‍රීඩා ක්ෂේත්‍රය සම්බන්ධව ගැටලු ",
+      "tm_top_category": "கல்வி, உயர் கல்வி, மத மற்றும் கலாச்சாரத் துறையில் பிரச்சினைகள்",
+      "tm_sub_category": "விளையாட்டு பற்றி கேட்கவும்",
       "created_date": "2020-01-01T00:00:00Z"
     }
   },
   {
     "model": "common.category",
-    "pk": 13,
+    "pk": "13",
     "fields": {
-      "code": "GOV-2",
-      "top_category": "Government Organization",
-      "sub_category": "Request travel authorization",
-      "sn_top_category": "රාජ්‍ය සංවිධානය",
-      "sn_sub_category": "සංචාරක අවසරය ඉල්ලීම",
-      "tm_top_category": "அரசு நிறுவனங்கள்",
-      "tm_sub_category": "பயண அங்கீகாரத்தைக் கோருங்கள்",
+      "code": "LABOUR-1",
+      "top_category": "Issues related to Labor, Professional Relations, Graduate Employment, Foreign Employment and Foreign Affairs",
+      "sub_category": "Graduate employment",
+      "sn_top_category": "කම්කරු, වෘත්තීය සබඳතා, උපාධිධාරි රැකියා, විදේශ රැකියා සහ විදේශ කටයුතු ක්ෂේත්‍රය සම්බන්ධ ගැටලු",
+      "sn_sub_category": "උපාධිධාරී රැකියා ඉල්ලීම් ",
+      "tm_top_category": "தொழிலாளர், தொழில் உறவுகள், பட்டதாரி வேலைவாய்ப்பு, வெளிநாட்டு வேலைவாய்ப்பு மற்றும் வெளிநாட்டு விவகாரங்கள் தொடர்பான பிரச்சினைகள்",
+      "tm_sub_category": "பட்டதாரி வேலைவாய்ப்பு கோரிக்கைகள்",
       "created_date": "2020-01-01T00:00:00Z"
     }
   },
   {
     "model": "common.category",
-    "pk": 14,
+    "pk": "14",
     "fields": {
-      "code": "GOV-3",
-      "top_category": "Government Organization",
-      "sub_category": "Request financial assistance",
-      "sn_top_category": "රාජ්‍ය සංවිධානය",
-      "sn_sub_category": "මූල්‍ය ආධාර ඉල්ලීම",
-      "tm_top_category": "அரசு நிறுவனங்கள்",
-      "tm_sub_category": "நிதி உதவி கோருங்கள்",
+      "code": "LABOUR-2",
+      "top_category": "Issues related to Labor, Professional Relations, Graduate Employment, Foreign Employment and Foreign Affairs",
+      "sub_category": "Other job-related requests",
+      "sn_top_category": "කම්කරු, වෘත්තීය සබඳතා, උපාධිධාරි රැකියා, විදේශ රැකියා සහ විදේශ කටයුතු ක්ෂේත්‍රය සම්බන්ධ ගැටලු",
+      "sn_sub_category": "වෙනත් රැකියා ඉල්ලීම් ",
+      "tm_top_category": "தொழிலாளர், தொழில் உறவுகள், பட்டதாரி வேலைவாய்ப்பு, வெளிநாட்டு வேலைவாய்ப்பு மற்றும் வெளிநாட்டு விவகாரங்கள் தொடர்பான பிரச்சினைகள்",
+      "tm_sub_category": "மற்ற வேலை கோரிக்கைகளை",
+      "created_date": "2020-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "common.category",
+    "pk": "15",
+    "fields": {
+      "code": "LABOUR-3",
+      "top_category": "Issues related to Labor, Professional Relations, Graduate Employment, Foreign Employment and Foreign Affairs",
+      "sub_category": "ETF/EPF ",
+      "sn_top_category": "කම්කරු, වෘත්තීය සබඳතා, උපාධිධාරි රැකියා, විදේශ රැකියා සහ විදේශ කටයුතු ක්ෂේත්‍රය සම්බන්ධ ගැටලු",
+      "sn_sub_category": "ETF/ EPF සම්බන්ධ ගැටලු",
+      "tm_top_category": "தொழிலாளர், தொழில் உறவுகள், பட்டதாரி வேலைவாய்ப்பு, வெளிநாட்டு வேலைவாய்ப்பு மற்றும் வெளிநாட்டு விவகாரங்கள் தொடர்பான பிரச்சினைகள்",
+      "tm_sub_category": "ப.ப.வ.நிதி / பணியாளர் வருங்கால வைப்பு நிதி தொடர்பான பிரச்சினைகள்",
+      "created_date": "2020-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "common.category",
+    "pk": "16",
+    "fields": {
+      "code": "LABOUR-4",
+      "top_category": "Issues related to Labor, Professional Relations, Graduate Employment, Foreign Employment and Foreign Affairs",
+      "sub_category": "Other issues - private sector",
+      "sn_top_category": "කම්කරු, වෘත්තීය සබඳතා, උපාධිධාරි රැකියා, විදේශ රැකියා සහ විදේශ කටයුතු ක්ෂේත්‍රය සම්බන්ධ ගැටලු",
+      "sn_sub_category": "පෞද්ගලික ආයතන සම්බන්ධ වෙනත් ගැටලු",
+      "tm_top_category": "தொழிலாளர், தொழில் உறவுகள், பட்டதாரி வேலைவாய்ப்பு, வெளிநாட்டு வேலைவாய்ப்பு மற்றும் வெளிநாட்டு விவகாரங்கள் தொடர்பான பிரச்சினைகள்",
+      "tm_sub_category": "தனியார் துறை தொடர்பான மற்ற பிரச்சினைகள்",
+      "created_date": "2020-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "common.category",
+    "pk": "17",
+    "fields": {
+      "code": "LABOUR-5",
+      "top_category": "Issues related to Labor, Professional Relations, Graduate Employment, Foreign Employment and Foreign Affairs",
+      "sub_category": "Repatriation of migrant workers",
+      "sn_top_category": "කම්කරු, වෘත්තීය සබඳතා, උපාධිධාරි රැකියා, විදේශ රැකියා සහ විදේශ කටයුතු ක්ෂේත්‍රය සම්බන්ධ ගැටලු",
+      "sn_sub_category": "විදේශගත ශ්‍රමිකයින් මෙරටට ගෙන්වා ගැනීම ",
+      "tm_top_category": "தொழிலாளர், தொழில் உறவுகள், பட்டதாரி வேலைவாய்ப்பு, வெளிநாட்டு வேலைவாய்ப்பு மற்றும் வெளிநாட்டு விவகாரங்கள் தொடர்பான பிரச்சினைகள்",
+      "tm_sub_category": "நாடு கடத்தும் புலம் பெயர்ந்த தொழிலாளர்கள்",
+      "created_date": "2020-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "common.category",
+    "pk": "18",
+    "fields": {
+      "code": "LABOUR-6",
+      "top_category": "Issues related to Labor, Professional Relations, Graduate Employment, Foreign Employment and Foreign Affairs",
+      "sub_category": "Unfairness or fraud committed by foreign employment agencies",
+      "sn_top_category": "කම්කරු, වෘත්තීය සබඳතා, උපාධිධාරි රැකියා, විදේශ රැකියා සහ විදේශ කටයුතු ක්ෂේත්‍රය සම්බන්ධ ගැටලු",
+      "sn_sub_category": "විදේශ රැකියා ආයතන විසින් සිදු කරන වංචා හෝ අසාධාරණ",
+      "tm_top_category": "தொழிலாளர், தொழில் உறவுகள், பட்டதாரி வேலைவாய்ப்பு, வெளிநாட்டு வேலைவாய்ப்பு மற்றும் வெளிநாட்டு விவகாரங்கள் தொடர்பான பிரச்சினைகள்",
+      "tm_sub_category": "முறையற்ற அல்லது வெளிநாட்டு வேலைவாய்ப்பு முகவர் இழைக்கப்பட்ட மோசடி",
+      "created_date": "2020-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "common.category",
+    "pk": "19",
+    "fields": {
+      "code": "LABOUR-7",
+      "top_category": "Issues related to Labor, Professional Relations, Graduate Employment, Foreign Employment and Foreign Affairs",
+      "sub_category": "Missing migrant workers",
+      "sn_top_category": "කම්කරු, වෘත්තීය සබඳතා, උපාධිධාරි රැකියා, විදේශ රැකියා සහ විදේශ කටයුතු ක්ෂේත්‍රය සම්බන්ධ ගැටලු",
+      "sn_sub_category": "අතුරුදහන් විදේශගත ශ්‍රමිකයින්",
+      "tm_top_category": "தொழிலாளர், தொழில் உறவுகள், பட்டதாரி வேலைவாய்ப்பு, வெளிநாட்டு வேலைவாய்ப்பு மற்றும் வெளிநாட்டு விவகாரங்கள் தொடர்பான பிரச்சினைகள்",
+      "tm_sub_category": "காணாமல் குடிபெயர்ந்த தொழிலாளர்கள்",
+      "created_date": "2020-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "common.category",
+    "pk": "20",
+    "fields": {
+      "code": "LAND-1",
+      "top_category": "Land demands and land related issues",
+      "sub_category": "Land requests",
+      "sn_top_category": "ඉඩම් ඉල්ලීම් හා ඉඩම් ආශ්‍රිත ගැටලු ",
+      "sn_sub_category": "ඉඩම් ඉල්ලීම්",
+      "tm_top_category": "நில கோரிக்கைகள் மற்றும் நிலம் தொடர்பான பிரச்சினைகள்",
+      "tm_sub_category": "மனை வேண்டுகோள்",
+      "created_date": "2020-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "common.category",
+    "pk": "21",
+    "fields": {
+      "code": "LAND-2",
+      "top_category": "Land demands and land related issues",
+      "sub_category": "Land disputes",
+      "sn_top_category": "ඉඩම් ඉල්ලීම් හා ඉඩම් ආශ්‍රිත ගැටලු ",
+      "sn_sub_category": "ඉඩම් ආරවුල් සම්බන්ධ ගැටලු",
+      "tm_top_category": "நில கோரிக்கைகள் மற்றும் நிலம் தொடர்பான பிரச்சினைகள்",
+      "tm_sub_category": "காணி பிணக்குகள் சிக்கல்கள்",
+      "created_date": "2020-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "common.category",
+    "pk": "22",
+    "fields": {
+      "code": "LAND-3",
+      "top_category": "Land demands and land related issues",
+      "sub_category": "Settled land deeds / license request",
+      "sn_top_category": "ඉඩම් ඉල්ලීම් හා ඉඩම් ආශ්‍රිත ගැටලු ",
+      "sn_sub_category": "පදිංචි ඉඩමට ඔප්පු/ බලපත්‍ර ඉල්ලීම් ",
+      "tm_top_category": "நில கோரிக்கைகள் மற்றும் நிலம் தொடர்பான பிரச்சினைகள்",
+      "tm_sub_category": "நிலைபெற்ற காணி உறுதிகள் / உரிமம் கோரிக்கை",
+      "created_date": "2020-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "common.category",
+    "pk": "23",
+    "fields": {
+      "code": "LAND-4",
+      "top_category": "Land demands and land related issues",
+      "sub_category": "Problems with lands",
+      "sn_top_category": "ඉඩම් ඉල්ලීම් හා ඉඩම් ආශ්‍රිත ගැටලු ",
+      "sn_sub_category": "මහවැලි ඉඩම් සම්බන්ධ ගැටලු",
+      "tm_top_category": "நில கோரிக்கைகள் மற்றும் நிலம் தொடர்பான பிரச்சினைகள்",
+      "tm_sub_category": "நிலங்களை சிக்கல்கள்",
+      "created_date": "2020-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "common.category",
+    "pk": "24",
+    "fields": {
+      "code": "LAND-5",
+      "top_category": "Land demands and land related issues",
+      "sub_category": "Land acquisitions",
+      "sn_top_category": "ඉඩම් ඉල්ලීම් හා ඉඩම් ආශ්‍රිත ගැටලු ",
+      "sn_sub_category": "ඉඩම් අත්පත් කරගැනීම්",
+      "tm_top_category": "நில கோரிக்கைகள் மற்றும் நிலம் தொடர்பான பிரச்சினைகள்",
+      "tm_sub_category": "மனை கையகப்படுத்துதல்",
+      "created_date": "2020-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "common.category",
+    "pk": "25",
+    "fields": {
+      "code": "LAND-6",
+      "top_category": "Land demands and land related issues",
+      "sub_category": "Internally displaced persons and resettlement",
+      "sn_top_category": "ඉඩම් ඉල්ලීම් හා ඉඩම් ආශ්‍රිත ගැටලු ",
+      "sn_sub_category": "අවතැන් වූ පුද්ගලයින් සහ නැවත පදිංචි කිරීම් සම්බන්ධ කටයුතු",
+      "tm_top_category": "நில கோரிக்கைகள் மற்றும் நிலம் தொடர்பான பிரச்சினைகள்",
+      "tm_sub_category": "உள்நாட்டில் இடம்பெயர்ந்த நபர்கள் தொடர்பான நடவடிக்கைகள், மற்றும் மீள்குடியேற்றம்",
+      "created_date": "2020-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "common.category",
+    "pk": "26",
+    "fields": {
+      "code": "ENV-1",
+      "top_category": "Issues pertaining to the Environment",
+      "sub_category": "Garbage and waste disposal",
+      "sn_top_category": "පරිසර ක්ෂේත්‍රයට අදාළ ගැටලු",
+      "sn_sub_category": "කැළි කසල හා අපජලය බැහැර කිරීම්",
+      "tm_top_category": "சுற்றுச்சூழல் தொடர்பான பிரச்சினைகள்",
+      "tm_sub_category": "குப்பை மற்றும் கழிவு Disposals",
+      "created_date": "2020-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "common.category",
+    "pk": "27",
+    "fields": {
+      "code": "ENV-2",
+      "top_category": "Issues pertaining to the Environment",
+      "sub_category": "Illegal smuggling of sand and soil/earth",
+      "sn_top_category": "පරිසර ක්ෂේත්‍රයට අදාළ ගැටලු",
+      "sn_sub_category": "වැලි හා පස් ජාවාරම් සිදු කිරීම්",
+      "tm_top_category": "சுற்றுச்சூழல் தொடர்பான பிரச்சினைகள்",
+      "tm_sub_category": "மற்றும் மணல் நடக்கும் மோசடிகள் செய்ய",
+      "created_date": "2020-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "common.category",
+    "pk": "28",
+    "fields": {
+      "code": "ENV-3",
+      "top_category": "Issues pertaining to the Environment",
+      "sub_category": "Illegal logging and mining quarries",
+      "sn_top_category": "පරිසර ක්ෂේත්‍රයට අදාළ ගැටලු",
+      "sn_sub_category": "අනවසර පතල් කැපීම් හා ගල් කොරි පවත්වාගෙන යාම",
+      "tm_top_category": "சுற்றுச்சூழல் தொடர்பான பிரச்சினைகள்",
+      "tm_sub_category": "சட்டவிரோத லாக்கிங் மற்றும் சுரங்க குவாரி பராமரிப்பு",
+      "created_date": "2020-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "common.category",
+    "pk": "29",
+    "fields": {
+      "code": "ENV-4",
+      "top_category": "Issues pertaining to the Environment",
+      "sub_category": "Unauthorized housing or building construction",
+      "sn_top_category": "පරිසර ක්ෂේත්‍රයට අදාළ ගැටලු",
+      "sn_sub_category": "අනවසර නිවාස හෝ ගොඩනැගිලි ඉදිකිරීම්",
+      "tm_top_category": "சுற்றுச்சூழல் தொடர்பான பிரச்சினைகள்",
+      "tm_sub_category": "அல்லது அங்கீகரிக்கப்படாத வீடுகள் கட்டுமான",
+      "created_date": "2020-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "common.category",
+    "pk": "30",
+    "fields": {
+      "code": "ENV-5",
+      "top_category": "Issues pertaining to the Environment",
+      "sub_category": "Unauthorized filling of lowland paddy areas and land reclamation",
+      "sn_top_category": "පරිසර ක්ෂේත්‍රයට අදාළ ගැටලු",
+      "sn_sub_category": "අනවසරයෙන් පහත්බිම් ගොඩකිරීම් හා කුඹුරු ඉඩම් ගොඩ කිරීම්",
+      "tm_top_category": "சுற்றுச்சூழல் தொடர்பான பிரச்சினைகள்",
+      "tm_sub_category": "அங்கீகரிக்கப்படாத தாழ்நில நிரப்புதல் நெல் காணி சீர்திருத்த",
+      "created_date": "2020-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "common.category",
+    "pk": "31",
+    "fields": {
+      "code": "ENV-6",
+      "top_category": "Issues pertaining to the Environment",
+      "sub_category": "Conservation activities (clearing of forests, illegal trafficking, etc.)",
+      "sn_top_category": "පරිසර ක්ෂේත්‍රයට අදාළ ගැටලු",
+      "sn_sub_category": "වන සංරක්ෂණ කටයුතු (කැලෑ එළිපෙහෙළි කිරීම, අනවසර දැව ජාවාරම් ආදිය)",
+      "tm_top_category": "சுற்றுச்சூழல் தொடர்பான பிரச்சினைகள்",
+      "tm_sub_category": "பாதுகாப்பு நடவடிக்கைகள் (காடுகளை அழிப்பதன், சட்டவிரோத கடத்தல், முதலியன)",
+      "created_date": "2020-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "common.category",
+    "pk": "32",
+    "fields": {
+      "code": "ENV-7",
+      "top_category": "Issues pertaining to the Environment",
+      "sub_category": "Wildlife Conservation (animal trafficking, animal killing, illegal disposal etc.)",
+      "sn_top_category": "පරිසර ක්ෂේත්‍රයට අදාළ ගැටලු",
+      "sn_sub_category": "වන සත්ත්ව සංරක්ෂණය (සත්ත්ව ජාවාරම්, සත්ත්ව ඝාතන සහ නීති විරෝධි බැහැර කිරීම් ආදිය)",
+      "tm_top_category": "சுற்றுச்சூழல் தொடர்பான பிரச்சினைகள்",
+      "tm_sub_category": "வனவிலங்கு பாதுகாப்புச் (விலங்கு கடத்தல், விலங்கு கொலைகள் மற்றும் சட்டவிரோத வசம் முதலியன)",
+      "created_date": "2020-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "common.category",
+    "pk": "33",
+    "fields": {
+      "code": "LAW-1",
+      "top_category": "Issues pertaining to defense, law and order, the judiciary and the prison industry",
+      "sub_category": "Problems w/ state and public security",
+      "sn_top_category": "ආරක්ෂක, නීතිය හා සාමය,අධිකරණ හා බන්ධනාගාර ක්ෂේත්‍රයට අදාළ ගැටලු",
+      "sn_sub_category": "රාජ්‍ය හා මහජන ආරක්ෂාව සම්බන්ධ ගැටලු",
+      "tm_top_category": "பாதுகாப்பு, சட்டம் ஒழுங்கு, நீதித்துறை மற்றும் சிறைத் தொழில் தொடர்பான பிரச்சினைகள்",
+      "tm_sub_category": "மாநில மற்றும் பொது பாதுகாப்பு சிக்கல்கள்",
+      "created_date": "2020-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "common.category",
+    "pk": "34",
+    "fields": {
+      "code": "LAW-2",
+      "top_category": "Issues pertaining to defense, law and order, the judiciary and the prison industry",
+      "sub_category": "Army, Navy and Airforce",
+      "sn_top_category": "ආරක්ෂක, නීතිය හා සාමය,අධිකරණ හා බන්ධනාගාර ක්ෂේත්‍රයට අදාළ ගැටලු",
+      "sn_sub_category": "යුධ, ගුවන් හා නාවික හමුදා පිළිබඳ ගැටලු",
+      "tm_top_category": "பாதுகாப்பு, சட்டம் ஒழுங்கு, நீதித்துறை மற்றும் சிறைத் தொழில் தொடர்பான பிரச்சினைகள்",
+      "tm_sub_category": "ராணுவம், கடற்படை, விமானப்படை மற்றும் பிரச்சினைகள்",
+      "created_date": "2020-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "common.category",
+    "pk": "35",
+    "fields": {
+      "code": "LAW-3",
+      "top_category": "Issues pertaining to defense, law and order, the judiciary and the prison industry",
+      "sub_category": "Police and Civil Defence",
+      "sn_top_category": "ආරක්ෂක, නීතිය හා සාමය,අධිකරණ හා බන්ධනාගාර ක්ෂේත්‍රයට අදාළ ගැටලු",
+      "sn_sub_category": "පොලීසිය හා සිවිල් ආරක්ෂක සේවය සම්බන්ධ ගැටලු ",
+      "tm_top_category": "பாதுகாப்பு, சட்டம் ஒழுங்கு, நீதித்துறை மற்றும் சிறைத் தொழில் தொடர்பான பிரச்சினைகள்",
+      "tm_sub_category": "போலீஸ் மற்றும் சிவில் பாதுகாப்பு சேவை சிக்கல்கள்",
+      "created_date": "2020-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "common.category",
+    "pk": "36",
+    "fields": {
+      "code": "LAW-4",
+      "top_category": "Issues pertaining to defense, law and order, the judiciary and the prison industry",
+      "sub_category": "Weaknesses and shortcomings in the police investigation of complaints",
+      "sn_top_category": "ආරක්ෂක, නීතිය හා සාමය,අධිකරණ හා බන්ධනාගාර ක්ෂේත්‍රයට අදාළ ගැටලු",
+      "sn_sub_category": "පොලිස් පැමිණිලි විමර්ශනය කිරීමේ පවතින දුර්වලතා හා අඩුපාඩු",
+      "tm_top_category": "பாதுகாப்பு, சட்டம் ஒழுங்கு, நீதித்துறை மற்றும் சிறைத் தொழில் தொடர்பான பிரச்சினைகள்",
+      "tm_sub_category": "புகார்கள் போலீஸ் விசாரணையில் பலவீனங்களும் குறைபாடுகளும்",
+      "created_date": "2020-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "common.category",
+    "pk": "37",
+    "fields": {
+      "code": "LAW-5",
+      "top_category": "Issues pertaining to defense, law and order, the judiciary and the prison industry",
+      "sub_category": "Drug prevention activities",
+      "sn_top_category": "ආරක්ෂක, නීතිය හා සාමය,අධිකරණ හා බන්ධනාගාර ක්ෂේත්‍රයට අදාළ ගැටලු",
+      "sn_sub_category": "මත්ද්‍රව්‍ය නිවාරණ කටයුතු",
+      "tm_top_category": "பாதுகாப்பு, சட்டம் ஒழுங்கு, நீதித்துறை மற்றும் சிறைத் தொழில் தொடர்பான பிரச்சினைகள்",
+      "tm_sub_category": "மருந்து தடுப்பு நடவடிக்கைகள்",
+      "created_date": "2020-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "common.category",
+    "pk": "38",
+    "fields": {
+      "code": "LAW-6",
+      "top_category": "Issues pertaining to defense, law and order, the judiciary and the prison industry",
+      "sub_category": "Issues related to trial court",
+      "sn_top_category": "ආරක්ෂක, නීතිය හා සාමය,අධිකරණ හා බන්ධනාගාර ක්ෂේත්‍රයට අදාළ ගැටලු",
+      "sn_sub_category": "අධිකරණයේ පවත්නා නඩු කටයුතු සම්බන්ධ ගැටලු ",
+      "tm_top_category": "பாதுகாப்பு, சட்டம் ஒழுங்கு, நீதித்துறை மற்றும் சிறைத் தொழில் தொடர்பான பிரச்சினைகள்",
+      "tm_sub_category": "விசாரணை நீதிமன்றம் தொடர்பான சிக்கல்கள்",
+      "created_date": "2020-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "common.category",
+    "pk": "39",
+    "fields": {
+      "code": "LAW-7",
+      "top_category": "Issues pertaining to defense, law and order, the judiciary and the prison industry",
+      "sub_category": "Prison inmates",
+      "sn_top_category": "ආරක්ෂක, නීතිය හා සාමය,අධිකරණ හා බන්ධනාගාර ක්ෂේත්‍රයට අදාළ ගැටලු",
+      "sn_sub_category": "බන්ධනාගාර රැඳවියන් සම්බන්ධ ගැටලු",
+      "tm_top_category": "பாதுகாப்பு, சட்டம் ஒழுங்கு, நீதித்துறை மற்றும் சிறைத் தொழில் தொடர்பான பிரச்சினைகள்",
+      "tm_sub_category": "சிறையில் கைதிகள் சிக்கல்கள்",
+      "created_date": "2020-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "common.category",
+    "pk": "40",
+    "fields": {
+      "code": "LAW-8",
+      "top_category": "Issues pertaining to defense, law and order, the judiciary and the prison industry",
+      "sub_category": "Justice of Peace, Coronoer, Quazi courts",
+      "sn_top_category": "ආරක්ෂක, නීතිය හා සාමය,අධිකරණ හා බන්ධනාගාර ක්ෂේත්‍රයට අදාළ ගැටලු",
+      "sn_sub_category": "සාමදාන විනිශ්චයකාර, මරණ පරීක්ෂක හා කාති උසාවි සම්බන්ධ ගැටලු",
+      "tm_top_category": "பாதுகாப்பு, சட்டம் ஒழுங்கு, நீதித்துறை மற்றும் சிறைத் தொழில் தொடர்பான பிரச்சினைகள்",
+      "tm_sub_category": "சமாதான, கொரனர் மற்றும் Quazi நீதிமன்றங்களின் வெளியிடுகிறது",
+      "created_date": "2020-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "common.category",
+    "pk": "41",
+    "fields": {
+      "code": "LAW-9",
+      "top_category": "Issues pertaining to defense, law and order, the judiciary and the prison industry",
+      "sub_category": "Individual rehabilitation",
+      "sn_top_category": "ආරක්ෂක, නීතිය හා සාමය,අධිකරණ හා බන්ධනාගාර ක්ෂේත්‍රයට අදාළ ගැටලු",
+      "sn_sub_category": "පුද්ගල පුනරුත්ථාපන කටයුතු",
+      "tm_top_category": "பாதுகாப்பு, சட்டம் ஒழுங்கு, நீதித்துறை மற்றும் சிறைத் தொழில் தொடர்பான பிரச்சினைகள்",
+      "tm_sub_category": "தனிப்பட்ட புனர்வாழ்வு",
+      "created_date": "2020-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "common.category",
+    "pk": "42",
+    "fields": {
+      "code": "LAW-10",
+      "top_category": "Issues pertaining to defense, law and order, the judiciary and the prison industry",
+      "sub_category": "Request for Presidential Pardon of offenders",
+      "sn_top_category": "ආරක්ෂක, නීතිය හා සාමය,අධිකරණ හා බන්ධනාගාර ක්ෂේත්‍රයට අදාළ ගැටලු",
+      "sn_sub_category": "වරදකරුවන් වෙනුවෙන් ජනාධිපති සමාව ඉල්ලා සිටීම",
+      "tm_top_category": "பாதுகாப்பு, சட்டம் ஒழுங்கு, நீதித்துறை மற்றும் சிறைத் தொழில் தொடர்பான பிரச்சினைகள்",
+      "tm_sub_category": "ஜனாதிபதி மன்னிப்பு குற்றவாளிகள் கோரிக்கை",
+      "created_date": "2020-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "common.category",
+    "pk": "43",
+    "fields": {
+      "code": "AGRI-1",
+      "top_category": "Issues related to Agriculture, Irrigation, Livestock Development, Fisheries and Aquatic Resources and Plantation Industries",
+      "sub_category": "Payment of compensation for crop loss",
+      "sn_top_category": "කෘෂිකර්ම, වාරිමාර්ග, පශු සම්පත් සංවර්ධන, ධීවර හා ජලජ සම්පත් හා වැවිලි කර්මාන්ත ක්ෂේත්‍රය සම්බන්ධ ගැටලු",
+      "sn_sub_category": "වගා හානි සඳහා වූ වන්දි ගෙවීම් කටයුතු",
+      "tm_top_category": "வேளாண்மை, நீர்ப்பாசனம், கால்நடை மேம்பாடு, மீன்வளம் மற்றும் நீர்வளங்கள் மற்றும் தோட்டத் தொழில்கள் தொடர்பான பிரச்சினைகள்",
+      "tm_sub_category": "பயிர்களுக்கான இழப்பீட்டுத் தொகை இழப்பீடு வழங்குதல்",
+      "created_date": "2020-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "common.category",
+    "pk": "44",
+    "fields": {
+      "code": "AGRI-2",
+      "top_category": "Issues related to Agriculture, Irrigation, Livestock Development, Fisheries and Aquatic Resources and Plantation Industries",
+      "sub_category": "Agricultural equipment, fertilizer, or wells",
+      "sn_top_category": "කෘෂිකර්ම, වාරිමාර්ග, පශු සම්පත් සංවර්ධන, ධීවර හා ජලජ සම්පත් හා වැවිලි කර්මාන්ත ක්ෂේත්‍රය සම්බන්ධ ගැටලු",
+      "sn_sub_category": "කෘෂි උපකරණ, පොහොර හෝ වගා ළිං සම්බන්ධ ඉල්ලීම්",
+      "tm_top_category": "வேளாண்மை, நீர்ப்பாசனம், கால்நடை மேம்பாடு, மீன்வளம் மற்றும் நீர்வளங்கள் மற்றும் தோட்டத் தொழில்கள் தொடர்பான பிரச்சினைகள்",
+      "tm_sub_category": "விவசாயப் பொருட்கள், உரம் அல்லது கோரிக்கைகளை கிணறுகள்",
+      "created_date": "2020-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "common.category",
+    "pk": "45",
+    "fields": {
+      "code": "AGRI-3",
+      "top_category": "Issues related to Agriculture, Irrigation, Livestock Development, Fisheries and Aquatic Resources and Plantation Industries",
+      "sub_category": "Irrigation related (maintenance related to lakes and streams etc. ) ",
+      "sn_top_category": "කෘෂිකර්ම, වාරිමාර්ග, පශු සම්පත් සංවර්ධන, ධීවර හා ජලජ සම්පත් හා වැවිලි කර්මාන්ත ක්ෂේත්‍රය සම්බන්ධ ගැටලු",
+      "sn_sub_category": "වාරිමාර්ග සම්බන්ධ ඉල්ලීම් හෝ ගැටලු (වැව් සහ ඇළ මාර්ග ප්‍රතිසංස්කරණ කටයුතු ආදිය)",
+      "tm_top_category": "வேளாண்மை, நீர்ப்பாசனம், கால்நடை மேம்பாடு, மீன்வளம் மற்றும் நீர்வளங்கள் மற்றும் தோட்டத் தொழில்கள் தொடர்பான பிரச்சினைகள்",
+      "tm_sub_category": "அல்லது பாசன கோரிக்கைகளை தொடர்பான பிரச்சினைகள் (மற்றும் ஏரிகள் முதலியன மறுசீரமைப்பு ஓடைகள்,)",
+      "created_date": "2020-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "common.category",
+    "pk": "46",
+    "fields": {
+      "code": "AGRI-4",
+      "top_category": "Issues related to Agriculture, Irrigation, Livestock Development, Fisheries and Aquatic Resources and Plantation Industries",
+      "sub_category": "Livestock sector",
+      "sn_top_category": "කෘෂිකර්ම, වාරිමාර්ග, පශු සම්පත් සංවර්ධන, ධීවර හා ජලජ සම්පත් හා වැවිලි කර්මාන්ත ක්ෂේත්‍රය සම්බන්ධ ගැටලු",
+      "sn_sub_category": "පශු සම්පත් ක්ෂේත්‍රය",
+      "tm_top_category": "வேளாண்மை, நீர்ப்பாசனம், கால்நடை மேம்பாடு, மீன்வளம் மற்றும் நீர்வளங்கள் மற்றும் தோட்டத் தொழில்கள் தொடர்பான பிரச்சினைகள்",
+      "tm_sub_category": "கால்நடை துறை",
+      "created_date": "2020-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "common.category",
+    "pk": "47",
+    "fields": {
+      "code": "AGRI-5",
+      "top_category": "Issues related to Agriculture, Irrigation, Livestock Development, Fisheries and Aquatic Resources and Plantation Industries",
+      "sub_category": "Fisheries and Aquatic resources",
+      "sn_top_category": "කෘෂිකර්ම, වාරිමාර්ග, පශු සම්පත් සංවර්ධන, ධීවර හා ජලජ සම්පත් හා වැවිලි කර්මාන්ත ක්ෂේත්‍රය සම්බන්ධ ගැටලු",
+      "sn_sub_category": "ධීවර හා ජලජ සම්පත් කර්මාන්ත ක්ෂේත්‍ර",
+      "tm_top_category": "வேளாண்மை, நீர்ப்பாசனம், கால்நடை மேம்பாடு, மீன்வளம் மற்றும் நீர்வளங்கள் மற்றும் தோட்டத் தொழில்கள் தொடர்பான பிரச்சினைகள்",
+      "tm_sub_category": "கடற்றொழில் நீரியல்வள களம்",
+      "created_date": "2020-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "common.category",
+    "pk": "48",
+    "fields": {
+      "code": "AGRI-6",
+      "top_category": "Issues related to Agriculture, Irrigation, Livestock Development, Fisheries and Aquatic Resources and Plantation Industries",
+      "sub_category": "Crops",
+      "sn_top_category": "කෘෂිකර්ම, වාරිමාර්ග, පශු සම්පත් සංවර්ධන, ධීවර හා ජලජ සම්පත් හා වැවිලි කර්මාන්ත ක්ෂේත්‍රය සම්බන්ධ ගැටලු",
+      "sn_sub_category": "අපනයන බෝග සම්බන්ධ ඉල්ලීම් හෝ ගැටලු",
+      "tm_top_category": "வேளாண்மை, நீர்ப்பாசனம், கால்நடை மேம்பாடு, மீன்வளம் மற்றும் நீர்வளங்கள் மற்றும் தோட்டத் தொழில்கள் தொடர்பான பிரச்சினைகள்",
+      "tm_sub_category": "கோரிக்கைகள் அல்லது பயிர்கள் தொடர்பான பிரச்சினைகள்",
+      "created_date": "2020-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "common.category",
+    "pk": "49",
+    "fields": {
+      "code": "FINANCE-1",
+      "top_category": "Problems with Financial and Financial Institutions",
+      "sub_category": "Loan request",
+      "sn_top_category": "මූල්‍ය හා මූල්‍ය ආයතන සම්බන්ධ ගැටලු",
+      "sn_sub_category": "ණය ඉල්ලීම් ",
+      "tm_top_category": "நிதி மற்றும் நிதி நிறுவனங்களில் சிக்கல்கள்",
+      "tm_sub_category": "கடன் வேண்டுகோள்",
+      "created_date": "2020-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "common.category",
+    "pk": "50",
+    "fields": {
+      "code": "FINANCE-2",
+      "top_category": "Problems with Financial and Financial Institutions",
+      "sub_category": "Debt relief and loan restructuring/writeoffs",
+      "sn_top_category": "මූල්‍ය හා මූල්‍ය ආයතන සම්බන්ධ ගැටලු",
+      "sn_sub_category": "ණය සහන හා ණය මුදල් කපා හැරීම් ",
+      "tm_top_category": "நிதி மற்றும் நிதி நிறுவனங்களில் சிக்கல்கள்",
+      "tm_sub_category": "கடன் நிவாரணம் மற்றும் கடன் வெட்டுக்கள்",
+      "created_date": "2020-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "common.category",
+    "pk": "51",
+    "fields": {
+      "code": "FINANCE-3",
+      "top_category": "Problems with Financial and Financial Institutions",
+      "sub_category": "Irregularities committed by financial institutions or unfair",
+      "sn_top_category": "මූල්‍ය හා මූල්‍ය ආයතන සම්බන්ධ ගැටලු",
+      "sn_sub_category": "මූල්‍ය ආයතන විසින් සිදු කරන අක්‍රමිකතා හෝ අසාධාරණ",
+      "tm_top_category": "நிதி மற்றும் நிதி நிறுவனங்களில் சிக்கல்கள்",
+      "tm_sub_category": "நிதி நிறுவனங்கள் அல்லது நியாயமற்ற இழைக்கப்பட்ட முறைகேடுகள்",
+      "created_date": "2020-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "common.category",
+    "pk": "52",
+    "fields": {
+      "code": "PUBLIC-1",
+      "top_category": "Administrative issues related to the public sector",
+      "sub_category": "Recruitment, promotions, transfers, removals",
+      "sn_top_category": "රාජ්‍ය අංශය සම්බන්ධ පරිපාලනමය ගැටලු",
+      "sn_sub_category": "බඳවා ගැනීම්, උසස් කිරීම්, ස්ථාන මාරු කිරීම්, ඉවත් කිරීම් ",
+      "tm_top_category": "பொதுத்துறை தொடர்பான நிர்வாக சிக்கல்கள்",
+      "tm_sub_category": "தேர்வாணையம், பதவி உயர்வுகள், இடமாற்றங்கள், நீக்குதல்",
+      "created_date": "2020-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "common.category",
+    "pk": "53",
+    "fields": {
+      "code": "PUBLIC-2",
+      "top_category": "Administrative issues related to the public sector",
+      "sub_category": "Payment of salaries and allowances",
+      "sn_top_category": "රාජ්‍ය අංශය සම්බන්ධ පරිපාලනමය ගැටලු",
+      "sn_sub_category": "වැටුප් හා දීමනා ගෙවීම්",
+      "tm_top_category": "பொதுத்துறை தொடர்பான நிர்வாக சிக்கல்கள்",
+      "tm_sub_category": "சம்பளம் மற்றும் படிகள் வழங்குதல்",
+      "created_date": "2020-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "common.category",
+    "pk": "54",
+    "fields": {
+      "code": "PUBLIC-3",
+      "top_category": "Administrative issues related to the public sector",
+      "sub_category": "Reinstatement of jobs/employment ",
+      "sn_top_category": "රාජ්‍ය අංශය සම්බන්ධ පරිපාලනමය ගැටලු",
+      "sn_sub_category": "නැවත සේවයට බඳවා ගැනීම්",
+      "tm_top_category": "பொதுத்துறை தொடர்பான நிர்வாக சிக்கல்கள்",
+      "tm_sub_category": "வேலை தேர்வாணையம் மீண்டும்",
+      "created_date": "2020-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "common.category",
+    "pk": "55",
+    "fields": {
+      "code": "PUBLIC-4",
+      "top_category": "Administrative issues related to the public sector",
+      "sub_category": "Problems or competitive examinations effectively cut",
+      "sn_top_category": "රාජ්‍ය අංශය සම්බන්ධ පරිපාලනමය ගැටලු",
+      "sn_sub_category": "තරඟ විභාග හෝ කාර්යක්ෂම කඩඉම් සම්බන්ධ ගැටලු",
+      "tm_top_category": "பொதுத்துறை தொடர்பான நிர்வாக சிக்கல்கள்",
+      "tm_sub_category": "சிக்கல்கள் அல்லது போட்டி தேர்வுகளில் திறம்பட வெட்டி",
+      "created_date": "2020-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "common.category",
+    "pk": "56",
+    "fields": {
+      "code": "PUBLIC-5",
+      "top_category": "Administrative issues related to the public sector",
+      "sub_category": "Unfairness, bribery, fraud or misconduct committed by public officials",
+      "sn_top_category": "රාජ්‍ය අංශය සම්බන්ධ පරිපාලනමය ගැටලු",
+      "sn_sub_category": "රාජ්‍ය නිලධාරීන් විසින් සිදු කරන අල්ලස් ගැනීම්, වංචනික ක්‍රියා, විෂමාචාර හා අසාධාරණ",
+      "tm_top_category": "பொதுத்துறை தொடர்பான நிர்வாக சிக்கல்கள்",
+      "tm_sub_category": "லஞ்சம் பொது அதிகாரிகள், மோசடி, தவறான நடத்தையை நியாயமற்ற இழைக்கப்பட்ட",
+      "created_date": "2020-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "common.category",
+    "pk": "57",
+    "fields": {
+      "code": "PUBLIC-6",
+      "top_category": "Administrative issues related to the public sector",
+      "sub_category": "Government officials and agencies involved in the ongoing process of public issues on weaknesses",
+      "sn_top_category": "රාජ්‍ය අංශය සම්බන්ධ පරිපාලනමය ගැටලු",
+      "sn_sub_category": "මහජන ගැටලු සම්බන්ධව රාජ්‍ය නිලධාරීන් හා ආයතන මැදිහත්ව ක්‍රියාත්මකවීමේ පවතින දුර්වලතා",
+      "tm_top_category": "பொதுத்துறை தொடர்பான நிர்வாக சிக்கல்கள்",
+      "tm_sub_category": "அரசு அதிகாரிகள் மற்றும் முகவர் பலவீனங்களில் பொது பிரச்சினைகள் நடைமுறையில் ஈடுபட்டு",
+      "created_date": "2020-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "common.category",
+    "pk": "58",
+    "fields": {
+      "code": "PUBLIC-7",
+      "top_category": "Administrative issues related to the public sector",
+      "sub_category": "Pension and gratuity",
+      "sn_top_category": "රාජ්‍ය අංශය සම්බන්ධ පරිපාලනමය ගැටලු",
+      "sn_sub_category": "විශ්‍රාම වැටුප් හා විශ්‍රාම පාරිතෝෂික සම්බන්ධ ගැටලු",
+      "tm_top_category": "பொதுத்துறை தொடர்பான நிர்வாக சிக்கல்கள்",
+      "tm_sub_category": "ஓய்வூதிய மற்றும் பணிக்கொடை சிக்கல்கள்",
+      "created_date": "2020-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "common.category",
+    "pk": "59",
+    "fields": {
+      "code": "PUBLIC-8",
+      "top_category": "Administrative issues related to the public sector",
+      "sub_category": "Widows and Orphans pension",
+      "sn_top_category": "රාජ්‍ය අංශය සම්බන්ධ පරිපාලනමය ගැටලු",
+      "sn_sub_category": "වැන්දඹු හා අනත්දරු විශ්‍රාම වැටුප් සම්බන්ධ ගැටලු",
+      "tm_top_category": "பொதுத்துறை தொடர்பான நிர்வாக சிக்கல்கள்",
+      "tm_sub_category": "விதவைகள், அநாதைகள் ஓய்வூதிய சிக்கல்கள்",
+      "created_date": "2020-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "common.category",
+    "pk": "60",
+    "fields": {
+      "code": "HEALTH-1",
+      "top_category": "Issues relating to health, nutrition, child and women's affairs",
+      "sub_category": "Drugs, medical equipment, sanitation and infrastructure demands",
+      "sn_top_category": "සෞඛ්‍ය,පෝෂණ, ළමා හා කාන්තා කටයුතු සම්බන්ධ ගැටලු",
+      "sn_sub_category": "රෝහල්වල ඖෂධ, වෛද්‍ය උපකරණ, සනීපාරක්ෂක සේවා සහ යටිතල පහසුකම් ඉල්ලීම්",
+      "tm_top_category": "உடல்நலம், ஊட்டச்சத்து, குழந்தை மற்றும் பெண்கள் விவகாரங்கள் தொடர்பான பிரச்சினைகள்",
+      "tm_sub_category": "மருந்துகள், மருத்துவ உபகரணங்கள், துப்புரவு மற்றும் உள்கட்டமைப்பு கோரிக்கைகளை",
+      "created_date": "2020-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "common.category",
+    "pk": "61",
+    "fields": {
+      "code": "HEALTH-2",
+      "top_category": "Issues relating to health, nutrition, child and women's affairs",
+      "sub_category": "Health matter-related nfairness, mistakes, bribery or misconduct ",
+      "sn_top_category": "සෞඛ්‍ය,පෝෂණ, ළමා හා කාන්තා කටයුතු සම්බන්ධ ගැටලු",
+      "sn_sub_category": "වෛද්‍ය ප්‍රතිකාර මගින් සිදුවන අතපසුවීම්, අසාධාරණ හා සෞඛ්‍ය කාර්ය මණ්ඩලය සම්බන්ධ අල්ලස් ගැනීම්, වංචනික ක්‍රියා, විෂමාචාර",
+      "tm_top_category": "உடல்நலம், ஊட்டச்சத்து, குழந்தை மற்றும் பெண்கள் விவகாரங்கள் தொடர்பான பிரச்சினைகள்",
+      "tm_sub_category": "மருத்துவ சிகிச்சை ஏற்படும் தவறுகள், நியாயமற்ற மற்றும் சுகாதார ஊழியர்கள் லஞ்சம், மோசடி, தவறான தொடர்பு",
+      "created_date": "2020-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "common.category",
+    "pk": "62",
+    "fields": {
+      "code": "HEALTH-3",
+      "top_category": "Issues relating to health, nutrition, child and women's affairs",
+      "sub_category": "Health staff recruitment, promotion, transfer, removal and re-issues of recruitment",
+      "sn_top_category": "සෞඛ්‍ය,පෝෂණ, ළමා හා කාන්තා කටයුතු සම්බන්ධ ගැටලු",
+      "sn_sub_category": "සෞඛ්‍ය කාර්ය මණ්ඩලයේ බඳවා ගැනීම්, උසස් කිරීම්, ස්ථාන මාරු කිරීම්, ඉවත් කිරීම් හා නැවත සේවයට බඳවා ගැනීම් සම්බන්ධ ගැටලු ",
+      "tm_top_category": "உடல்நலம், ஊட்டச்சத்து, குழந்தை மற்றும் பெண்கள் விவகாரங்கள் தொடர்பான பிரச்சினைகள்",
+      "tm_sub_category": "சுகாதாரம் ஊழியர்கள் ஆட்சேர்ப்பு, பதவி உயர்வு, இடமாற்றம், அகற்றுதல் மற்றும் ஆட்சேர்ப்பு மறு பிரச்சினைகள்",
+      "created_date": "2020-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "common.category",
+    "pk": "63",
+    "fields": {
+      "code": "HEALTH-4",
+      "top_category": "Issues relating to health, nutrition, child and women's affairs",
+      "sub_category": "Problems with local and Ayurvedic medicine",
+      "sn_top_category": "සෞඛ්‍ය,පෝෂණ, ළමා හා කාන්තා කටයුතු සම්බන්ධ ගැටලු",
+      "sn_sub_category": "දේශීය සහ ආයුර්වේද වෛද්‍ය ක්ෂේත්‍රය සම්බන්ධ ගැටලු",
+      "tm_top_category": "உடல்நலம், ஊட்டச்சத்து, குழந்தை மற்றும் பெண்கள் விவகாரங்கள் தொடர்பான பிரச்சினைகள்",
+      "tm_sub_category": "உள்ளூர் மற்றும் ஆயுர்வேத மருந்து சிக்கல்கள்",
+      "created_date": "2020-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "common.category",
+    "pk": "64",
+    "fields": {
+      "code": "HEALTH-5",
+      "top_category": "Issues relating to health, nutrition, child and women's affairs",
+      "sub_category": "Abuse of women and children, child labor, violence against women",
+      "sn_top_category": "සෞඛ්‍ය,පෝෂණ, ළමා හා කාන්තා කටයුතු සම්බන්ධ ගැටලු",
+      "sn_sub_category": "ළමයින් හා කාන්තාවන් අපයෝජනයට ලක් කිරීම, ළමා මෙහෙකාර සේවය, කාන්තා හිංසනය සම්බන්ධ ගැටලු ",
+      "tm_top_category": "உடல்நலம், ஊட்டச்சத்து, குழந்தை மற்றும் பெண்கள் விவகாரங்கள் தொடர்பான பிரச்சினைகள்",
+      "tm_sub_category": "குழந்தைகள் மற்றும் பெண்கள் வன்கொடுமை, சிறார் தொழில் பெண்களுக்கு எதிரான வன்முறை பிரச்சினை",
+      "created_date": "2020-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "common.category",
+    "pk": "65",
+    "fields": {
+      "code": "HEALTH-6",
+      "top_category": "Issues relating to health, nutrition, child and women's affairs",
+      "sub_category": "Child custody, maintenance and interim/foster care",
+      "sn_top_category": "සෞඛ්‍ය,පෝෂණ, ළමා හා කාන්තා කටයුතු සම්බන්ධ ගැටලු",
+      "sn_sub_category": "ළමුන්ගේ භාරකාරත්වය, පරිවාසභාරයට පත්කිරීම හා නඩත්තු සම්බන්ධ ගැටලු ",
+      "tm_top_category": "உடல்நலம், ஊட்டச்சத்து, குழந்தை மற்றும் பெண்கள் விவகாரங்கள் தொடர்பான பிரச்சினைகள்",
+      "tm_sub_category": "குழந்தைகள், பராமரிப்பு பிரச்சினைகளுக்கு மற்றும் அலங்காரம் parivāsabhārayaṭa காவலில்",
+      "created_date": "2020-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "common.category",
+    "pk": "66",
+    "fields": {
+      "code": "HEALTH-7",
+      "top_category": "Issues relating to health, nutrition, child and women's affairs",
+      "sub_category": "Early childhood development centers and children's homes",
+      "sn_top_category": "සෞඛ්‍ය,පෝෂණ, ළමා හා කාන්තා කටයුතු සම්බන්ධ ගැටලු",
+      "sn_sub_category": "මුල් ළමාවිය සංවර්ධන මධ්‍යස්ථාන හා ළමා නිවාස සම්බන්ධ ගැටලු",
+      "tm_top_category": "உடல்நலம், ஊட்டச்சத்து, குழந்தை மற்றும் பெண்கள் விவகாரங்கள் தொடர்பான பிரச்சினைகள்",
+      "tm_sub_category": "குழந்தை பருவ வளர்ச்சி மையங்கள் தொடர்பான சிக்கல்கள் மற்றும் சிறுவர் இல்லங்களில்",
+      "created_date": "2020-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "common.category",
+    "pk": "67",
+    "fields": {
+      "code": "INFRA-1",
+      "top_category": "Issues related to Transport, Infrastructure and Communication",
+      "sub_category": "Public transport (railways, SLTB etc. )",
+      "sn_top_category": "ප්‍රවාහන, යටිතල පහසුකම් හා සන්නිවේදන ක්ෂේත්‍රය සම්බන්ධ ගැටලු",
+      "sn_sub_category": "පොදු ප්‍රවාහන ක්ෂේත්‍රය (දුම්රිය සේවය, ශ්‍රීලංගම, මාර්ගස්ථ මගී ප්‍රවාහන)",
+      "tm_top_category": "போக்குவரத்து, உள்கட்டமைப்பு மற்றும் தொடர்பு தொடர்பான சிக்கல்கள்",
+      "tm_sub_category": "பொது போக்குவரத்துத் துறை (ரயில்வே, பரந்த இப்போது, சாலை போக்குவரத்து)",
+      "created_date": "2020-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "common.category",
+    "pk": "68",
+    "fields": {
+      "code": "INFRA-2",
+      "top_category": "Issues related to Transport, Infrastructure and Communication",
+      "sub_category": "Ports and Aviation",
+      "sn_top_category": "ප්‍රවාහන, යටිතල පහසුකම් හා සන්නිවේදන ක්ෂේත්‍රය සම්බන්ධ ගැටලු",
+      "sn_sub_category": "වරාය, නාවික හා ගුවන් සේවා",
+      "tm_top_category": "போக்குவரத்து, உள்கட்டமைப்பு மற்றும் தொடர்பு தொடர்பான சிக்கல்கள்",
+      "tm_sub_category": "துறைமுகங்கள் மற்றும் விமானப் போக்குவரத்து",
+      "created_date": "2020-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "common.category",
+    "pk": "69",
+    "fields": {
+      "code": "INFRA-3",
+      "top_category": "Issues related to Transport, Infrastructure and Communication",
+      "sub_category": "Water, electricity and telephone connections ",
+      "sn_top_category": "ප්‍රවාහන, යටිතල පහසුකම් හා සන්නිවේදන ක්ෂේත්‍රය සම්බන්ධ ගැටලු",
+      "sn_sub_category": "ජලය, විදුලිය හා දුරකථන සම්බන්ධ ගැටලු හෝ ඉල්ලීම්",
+      "tm_top_category": "போக்குவரத்து, உள்கட்டமைப்பு மற்றும் தொடர்பு தொடர்பான சிக்கல்கள்",
+      "tm_sub_category": "தண்ணீர், மின்சாரம் மற்றும் தொலைபேசி இணைப்பு பிரச்சினைகள் அல்லது கோரிக்கைகளை",
+      "created_date": "2020-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "common.category",
+    "pk": "70",
+    "fields": {
+      "code": "INFRA-4",
+      "top_category": "Issues related to Transport, Infrastructure and Communication",
+      "sub_category": "Road construction and repair work",
+      "sn_top_category": "ප්‍රවාහන, යටිතල පහසුකම් හා සන්නිවේදන ක්ෂේත්‍රය සම්බන්ධ ගැටලු",
+      "sn_sub_category": "මාර්ග ඉදිකිරීම් හා ප්‍රතිසංස්කරණ කටයුතු",
+      "tm_top_category": "போக்குவரத்து, உள்கட்டமைப்பு மற்றும் தொடர்பு தொடர்பான சிக்கல்கள்",
+      "tm_sub_category": "சாலை கட்டுமானம் மற்றும் பழுது வேலை",
+      "created_date": "2020-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "common.category",
+    "pk": "71",
+    "fields": {
+      "code": "INFRA-5",
+      "top_category": "Issues related to Transport, Infrastructure and Communication",
+      "sub_category": "Highways",
+      "sn_top_category": "ප්‍රවාහන, යටිතල පහසුකම් හා සන්නිවේදන ක්ෂේත්‍රය සම්බන්ධ ගැටලු",
+      "sn_sub_category": "අධිවේගී මාර්ග සම්බන්ධ ගැටලු",
+      "tm_top_category": "போக்குவரத்து, உள்கட்டமைப்பு மற்றும் தொடர்பு தொடர்பான சிக்கல்கள்",
+      "tm_sub_category": "நெடுஞ்சாலைகள் சிக்கல்கள்",
+      "created_date": "2020-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "common.category",
+    "pk": "72",
+    "fields": {
+      "code": "INFRA-6",
+      "top_category": "Issues related to Transport, Infrastructure and Communication",
+      "sub_category": "Television, radio and newspapers",
+      "sn_top_category": "ප්‍රවාහන, යටිතල පහසුකම් හා සන්නිවේදන ක්ෂේත්‍රය සම්බන්ධ ගැටලු",
+      "sn_sub_category": "රූපවාහිනී, ගුවන් විදුලි හා පුවත්පත් ආයතන",
+      "tm_top_category": "போக்குவரத்து, உள்கட்டமைப்பு மற்றும் தொடர்பு தொடர்பான சிக்கல்கள்",
+      "tm_sub_category": "தொலைக்காட்சி, வானொலி மற்றும் செய்தித்தாள்கள்",
+      "created_date": "2020-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "common.category",
+    "pk": "73",
+    "fields": {
+      "code": "INFRA-7",
+      "top_category": "Issues related to Transport, Infrastructure and Communication",
+      "sub_category": "Web sites, Internet activities and other means of communication",
+      "sn_top_category": "ප්‍රවාහන, යටිතල පහසුකම් හා සන්නිවේදන ක්ෂේත්‍රය සම්බන්ධ ගැටලු",
+      "sn_sub_category": "වෙබ් අඩවි, අන්තර්ජාල ක්‍රියාකාරකම් සහ අනෙකුත් සන්නිවේදන මාධ්‍යයන්",
+      "tm_top_category": "போக்குவரத்து, உள்கட்டமைப்பு மற்றும் தொடர்பு தொடர்பான சிக்கல்கள்",
+      "tm_sub_category": "இணையத்தளங்கள், இணைய செயல்பாடுகள் தகவல் மற்ற வழிமுறையாக",
+      "created_date": "2020-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "common.category",
+    "pk": "74",
+    "fields": {
+      "code": "RELIEF-1",
+      "top_category": "Requests for assistance and relief",
+      "sub_category": "Housing and housing assistance requests",
+      "sn_top_category": "ආධාර හා සහන ඉල්ලීම්",
+      "sn_sub_category": "නිවාස හා නිවාස ආධාර ඉල්ලීම්",
+      "tm_top_category": "உதவி மற்றும் நிவாரணத்திற்கான கோரிக்கைகள்",
+      "tm_sub_category": "வீட்டு வசதி மற்றும் வீட்டு கோரிக்கைகளை உதவி",
+      "created_date": "2020-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "common.category",
+    "pk": "75",
+    "fields": {
+      "code": "RELIEF-2",
+      "top_category": "Requests for assistance and relief",
+      "sub_category": "Floods, landslides, drought, cyclones and tsunamis and disaster relief requests",
+      "sn_top_category": "ආධාර හා සහන ඉල්ලීම්",
+      "sn_sub_category": "ජල ගැලීම්, නායයාම්, නියඟය, සුළිසුළං හා සුනාමි ආදී ආපදා සහන ඉල්ලීම්",
+      "tm_top_category": "உதவி மற்றும் நிவாரணத்திற்கான கோரிக்கைகள்",
+      "tm_sub_category": "வெள்ளம், நிலச்சரிவு, வறட்சி, புயல், மற்றும் சுனாமி மற்றும் பேரழிவு நிவாரண கோரிக்கைகளை",
+      "created_date": "2020-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "common.category",
+    "pk": "76",
+    "fields": {
+      "code": "RELIEF-3",
+      "top_category": "Requests for assistance and relief",
+      "sub_category": "Samurdhi and other grants",
+      "sn_top_category": "ආධාර හා සහන ඉල්ලීම්",
+      "sn_sub_category": "සමෘද්ධි සහ වෙනත් සහනාධාර හෝ ජීවනාධාර ඉල්ලීම්",
+      "tm_top_category": "உதவி மற்றும் நிவாரணத்திற்கான கோரிக்கைகள்",
+      "tm_sub_category": "சமுர்த்தி மானியங்கள் மற்றும் பிற கோரிக்கைகளை அல்லது அடிப்படை",
+      "created_date": "2020-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "common.category",
+    "pk": "77",
+    "fields": {
+      "code": "RELIEF-4",
+      "top_category": "Requests for assistance and relief",
+      "sub_category": "Medicine / Health",
+      "sn_top_category": "ආධාර හා සහන ඉල්ලීම්",
+      "sn_sub_category": "වෛද්‍යාධාර ඉල්ලීම්",
+      "tm_top_category": "உதவி மற்றும் நிவாரணத்திற்கான கோரிக்கைகள்",
+      "tm_sub_category": "மருத்துவ கோரிக்கைகளை",
+      "created_date": "2020-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "common.category",
+    "pk": "78",
+    "fields": {
+      "code": "RELIEF-5",
+      "top_category": "Requests for assistance and relief",
+      "sub_category": "Scholarship or scholarship requests",
+      "sn_top_category": "ආධාර හා සහන ඉල්ලීම්",
+      "sn_sub_category": "ශිෂ්‍යාධාර හෝ ශිෂ්‍යත්ව ඉල්ලීම්",
+      "tm_top_category": "உதவி மற்றும் நிவாரணத்திற்கான கோரிக்கைகள்",
+      "tm_sub_category": "உதவித்தொகை அல்லது உதவித்தொகை கோரிக்கைகளை",
+      "created_date": "2020-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "common.category",
+    "pk": "79",
+    "fields": {
+      "code": "RELIEF-6",
+      "top_category": "Requests for assistance and relief",
+      "sub_category": "Elders allowance, disability allowances and poverty-relief assistance",
+      "sn_top_category": "ආධාර හා සහන ඉල්ලීම්",
+      "sn_sub_category": "වැඩිහිටි දීමනා, ආබාධිත දීමනා, දිළිදු සහන ඉල්ලීම්",
+      "tm_top_category": "உதவி மற்றும் நிவாரணத்திற்கான கோரிக்கைகள்",
+      "tm_sub_category": "வயது வந்தோர் கொடுப்பனவு, இயலாமை கொடுப்பனவு, ஏழை நிவாரண கோரிக்கைகளை",
+      "created_date": "2020-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "common.category",
+    "pk": "80",
+    "fields": {
+      "code": "RELIEF-7",
+      "top_category": "Requests for assistance and relief",
+      "sub_category": "Self-employment assistance requests",
+      "sn_top_category": "ආධාර හා සහන ඉල්ලීම්",
+      "sn_sub_category": "ස්වයං රැකියා ආධාර ඉල්ලීම්",
+      "tm_top_category": "உதவி மற்றும் நிவாரணத்திற்கான கோரிக்கைகள்",
+      "tm_sub_category": "சுய வேலை கோரிக்கைகளை உதவி",
+      "created_date": "2020-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "common.category",
+    "pk": "81",
+    "fields": {
+      "code": "COMM-1",
+      "top_category": "Issues related to Industry and Commerce",
+      "sub_category": "Consumer goods and services (price, quality and deficiencies)",
+      "sn_top_category": "කර්මාන්ත හා වාණිජ ක්ෂේත්‍රය සම්බන්ධ ගැටලු",
+      "sn_sub_category": "පාරිභෝගික භාණ්ඩ හා සේවා සැපයීම් (මිල, ප්‍රමිතිය හා හිඟයන් සම්බන්ධව)",
+      "tm_top_category": "தொழில் மற்றும் வர்த்தகம் தொடர்பான சிக்கல்கள்",
+      "tm_sub_category": "நுகர்வோர் பொருட்கள் மற்றும் சேவைகள் (விலை, தரம் மற்றும் பற்றாக்குறைகள் மீது)",
+      "created_date": "2020-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "common.category",
+    "pk": "82",
+    "fields": {
+      "code": "COMM-2",
+      "top_category": "Issues related to Industry and Commerce",
+      "sub_category": "Government, state-owned factories and institutions",
+      "sn_top_category": "කර්මාන්ත හා වාණිජ ක්ෂේත්‍රය සම්බන්ධ ගැටලු",
+      "sn_sub_category": "රජයේ කර්මාන්තශාලා හා රාජ්‍ය ව්‍යවසායී ආයතන සම්බන්ධ ගැටලු",
+      "tm_top_category": "தொழில் மற்றும் வர்த்தகம் தொடர்பான சிக்கல்கள்",
+      "tm_sub_category": "அரசாங்கமும் அரசுக்கு சொந்தமான தொழிற்சாலைகள், நிறுவனங்கள் சிக்கல்கள்",
+      "created_date": "2020-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "common.category",
+    "pk": "83",
+    "fields": {
+      "code": "COMM-3",
+      "top_category": "Issues related to Industry and Commerce",
+      "sub_category": "Co-operative or rural banks",
+      "sn_top_category": "කර්මාන්ත හා වාණිජ ක්ෂේත්‍රය සම්බන්ධ ගැටලු",
+      "sn_sub_category": "සමුපකාර හා ග්‍රාමීය බැංකු සම්බන්ධ ගැටලු",
+      "tm_top_category": "தொழில் மற்றும் வர்த்தகம் தொடர்பான சிக்கல்கள்",
+      "tm_sub_category": "மற்றும் பிரச்சினைகள் கூட்டுறவு கிராமிய வங்கிகள் தொடர்பான",
+      "created_date": "2020-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "common.category",
+    "pk": "84",
+    "fields": {
+      "code": "COMM-4",
+      "top_category": "Issues related to Industry and Commerce",
+      "sub_category": "National/local industry development and promotion",
+      "sn_top_category": "කර්මාන්ත හා වාණිජ ක්ෂේත්‍රය සම්බන්ධ ගැටලු",
+      "sn_sub_category": "දේශීය කර්මාන්ත නඟා සිටුවීම් හා ප්‍රවර්ධනය සඳහා අවශ්‍ය සහාය පැතීම්",
+      "tm_top_category": "தொழில் மற்றும் வர்த்தகம் தொடர்பான சிக்கல்கள்",
+      "tm_sub_category": "அமைப்புகளை ஆதரவு தேடி, உள்ளூர் தொழில் விளம்பரப் படுத்துவதற்காக",
+      "created_date": "2020-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "common.category",
+    "pk": "85",
+    "fields": {
+      "code": "COMM-5",
+      "top_category": "Issues related to Industry and Commerce",
+      "sub_category": "Investment promotion zones",
+      "sn_top_category": "කර්මාන්ත හා වාණිජ ක්ෂේත්‍රය සම්බන්ධ ගැටලු",
+      "sn_sub_category": "ආයෝජන ප්‍රවර්ධන කලාප සම්බන්ධ ගැටලු ",
+      "tm_top_category": "தொழில் மற்றும் வர்த்தகம் தொடர்பான சிக்கல்கள்",
+      "tm_sub_category": "முதலீட்டு ஊக்குவிப்பு மண்டலங்களை சிக்கல்கள்",
+      "created_date": "2020-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "common.category",
+    "pk": "86",
+    "fields": {
+      "code": "COMM-6",
+      "top_category": "Issues related to Industry and Commerce",
+      "sub_category": "Tourism",
+      "sn_top_category": "කර්මාන්ත හා වාණිජ ක්ෂේත්‍රය සම්බන්ධ ගැටලු",
+      "sn_sub_category": "සංචාරක කර්මාන්තය ආශ්‍රිත ගැටලු ",
+      "tm_top_category": "தொழில் மற்றும் வர்த்தகம் தொடர்பான சிக்கல்கள்",
+      "tm_sub_category": "சுற்றுலா தொடர்பான பிரச்சினைகள்",
+      "created_date": "2020-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "common.category",
+    "pk": "87",
+    "fields": {
+      "code": "SUGGEST-1",
+      "top_category": "Comments and suggestions",
+      "sub_category": "Innovation",
+      "sn_top_category": "අදහස් හා යෝජනා ",
+      "sn_sub_category": "නව නිපැයුම් සම්බන්ධව සිදු කරන ඉල්ලීම්",
+      "tm_top_category": "கருத்துகள் மற்றும் பரிந்துரைகள்",
+      "tm_sub_category": "புதிய தயாரிப்புகள் அன்று கோரிக்கைகளை",
+      "created_date": "2020-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "common.category",
+    "pk": "88",
+    "fields": {
+      "code": "SUGGEST-2",
+      "top_category": "Comments and suggestions",
+      "sub_category": "Budget proposals",
+      "sn_top_category": "අදහස් හා යෝජනා ",
+      "sn_sub_category": "අය-වැය යෝජනා",
+      "tm_top_category": "கருத்துகள் மற்றும் பரிந்துரைகள்",
+      "tm_sub_category": "பட்ஜெட் திட்டங்கள்",
+      "created_date": "2020-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "common.category",
+    "pk": "89",
+    "fields": {
+      "code": "SUGGEST-3",
+      "top_category": "Comments and suggestions",
+      "sub_category": "Positive changes to take place in public policy and state mechanism",
+      "sn_top_category": "අදහස් හා යෝජනා ",
+      "sn_sub_category": "රාජ්‍ය ප්‍රතිපත්ති සහ රාජ්‍ය යාන්ත්‍රණය තුළ සිදුවිය යුතු සාධනීය වෙනස්කම්  ",
+      "tm_top_category": "கருத்துகள் மற்றும் பரிந்துரைகள்",
+      "tm_sub_category": "நேர்மறை பொதுக் கொள்கை மற்றும் மாநில பொறிமுறையை நடைபெறும் மாற்றுகிறது",
+      "created_date": "2020-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "common.category",
+    "pk": "90",
+    "fields": {
+      "code": "SUGGEST-4",
+      "top_category": "Comments and suggestions",
+      "sub_category": "Ideas and suggestions",
+      "sn_top_category": "අදහස් හා යෝජනා ",
+      "sn_sub_category": "වෙනත් අදහස් හා යෝජනා",
+      "tm_top_category": "கருத்துகள் மற்றும் பரிந்துரைகள்",
+      "tm_sub_category": "மற்ற கருத்துக்களையும், அறிவுரைகளையும்",
+      "created_date": "2020-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "common.category",
+    "pk": "91",
+    "fields": {
+      "code": "COVID19-1",
+      "top_category": "Problems with the Covid-19 epidemic",
+      "sub_category": "Violation of curfew",
+      "sn_top_category": "කොවිඩ්-19 වසංගතය සම්බන්ධ ගැටලු",
+      "sn_sub_category": "ඇඳිරිනීති කඩකිරීම් සම්බන්ධ ගැටලු",
+      "tm_top_category": "கோவிட் -19 தொற்றுநோயால் சிக்கல்கள்",
+      "tm_sub_category": "ஊரடங்கு சட்டங்களை மீறல்கள் சிக்கல்கள்",
+      "created_date": "2020-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "common.category",
+    "pk": "92",
+    "fields": {
+      "code": "COVID19-2",
+      "top_category": "Problems with the Covid-19 epidemic",
+      "sub_category": "Subsidies and allowances",
+      "sn_top_category": "කොවිඩ්-19 වසංගතය සම්බන්ධ ගැටලු",
+      "sn_sub_category": "සහනාධාර හා දීමනා නිසි පරිදි නොලැබීම්",
+      "tm_top_category": "கோவிட் -19 தொற்றுநோயால் சிக்கல்கள்",
+      "tm_sub_category": "மானியங்கள் மற்றும் படிகள் வழங்கப்படுகின்றன",
+      "created_date": "2020-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "common.category",
+    "pk": "93",
+    "fields": {
+      "code": "COVID19-3",
+      "top_category": "Problems with the Covid-19 epidemic",
+      "sub_category": "Food distribution",
+      "sn_top_category": "කොවිඩ්-19 වසංගතය සම්බන්ධ ගැටලු",
+      "sn_sub_category": "ආහාර බෙදාහැරීම් සම්බන්ධ ගැටලු",
+      "tm_top_category": "கோவிட் -19 தொற்றுநோயால் சிக்கல்கள்",
+      "tm_sub_category": "உணவு விநியோகம் சிக்கல்கள்",
+      "created_date": "2020-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "common.category",
+    "pk": "94",
+    "fields": {
+      "code": "COVID19-4",
+      "top_category": "Problems with the Covid-19 epidemic",
+      "sub_category": "Clergy",
+      "sn_top_category": "කොවිඩ්-19 වසංගතය සම්බන්ධ ගැටලු",
+      "sn_sub_category": "ආගමික සිද්ධාස්ථාන හා පූජ්‍ය පක්ෂය සම්බන්ධ ගැටලු",
+      "tm_top_category": "கோவிட் -19 தொற்றுநோயால் சிக்கல்கள்",
+      "tm_sub_category": "கொள்கைச் மற்றும் மத குருமார்கள் சிக்கல்கள்",
+      "created_date": "2020-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "common.category",
+    "pk": "95",
+    "fields": {
+      "code": "COVID19-5",
+      "top_category": "Problems with the Covid-19 epidemic",
+      "sub_category": "COVID-19 related problems",
+      "sn_top_category": "කොවිඩ්-19 වසංගතය සම්බන්ධ ගැටලු",
+      "sn_sub_category": "කොවිඩ්-19 සම්බන්ධ වෙනත් ගැටලු",
+      "tm_top_category": "கோவிட் -19 தொற்றுநோயால் சிக்கல்கள்",
+      "tm_sub_category": "-19 கோவில் தொடர்பான பிரச்சினைகள்",
+      "created_date": "2020-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "common.category",
+    "pk": "96",
+    "fields": {
+      "code": "OTHER-1",
+      "top_category": " Other",
+      "sub_category": "Congratulations to the President",
+      "sn_top_category": " වෙනත් ",
+      "sn_sub_category": "අතිගරු ජනාධිපතිතුමා වෙත සිදු කරන සුභාශිංසන",
+      "tm_top_category": " மற்றவை",
+      "tm_sub_category": "தலைவர் வாழ்த்துக்கள்",
+      "created_date": "2020-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "common.category",
+    "pk": "97",
+    "fields": {
+      "code": "OTHER-2",
+      "top_category": " Other",
+      "sub_category": "Requests to meet the President",
+      "sn_top_category": " වෙනත් ",
+      "sn_sub_category": "අතිගරු ජනාධිපතිතුමා හමුවීම සඳහා කරනු ලබන ඉල්ලීම් ",
+      "tm_top_category": " மற்றவை",
+      "tm_sub_category": "கோரிக்கைகள் ஜனாதிபதி சந்திக்க செய்யப்படுகின்றன",
+      "created_date": "2020-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "common.category",
+    "pk": "98",
+    "fields": {
+      "code": "OTHER-3",
+      "top_category": " Other",
+      "sub_category": "Political revenge",
+      "sn_top_category": " වෙනත් ",
+      "sn_sub_category": "දේශපාලන පළිගැනීම් ",
+      "tm_top_category": " மற்றவை",
+      "tm_sub_category": "அரசியல் பழிவாங்கும்",
+      "created_date": "2020-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "common.category",
+    "pk": "99",
+    "fields": {
+      "code": "OTHER-4",
+      "top_category": " Other",
+      "sub_category": "Other issues (uncategorized)",
+      "sn_top_category": " වෙනත් ",
+      "sn_sub_category": "ඉහත වර්ගීකරණයන්ට අයත් නොවන අනෙකුත් ඉල්ලීම් හා ගැටලු",
+      "tm_top_category": " மற்றவை",
+      "tm_sub_category": "தரவரிசையில் வெளியே இதர வேண்டுகோள்கள் மற்றும் பிரச்சினைகள்",
+      "created_date": "2020-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "common.category",
+    "pk": "100",
+    "fields": {
+      "code": "REJECT-1",
+      "top_category": " Rejected Requests",
+      "sub_category": "Answer letters",
+      "sn_top_category": " ප්‍රතික්ෂේප වන ඉල්ලීම් (Rejected)",
+      "sn_sub_category": "පිළිතුරු ලිපි",
+      "tm_top_category": " நிராகரிக்கப்பட்ட கோரிக்கைகள்",
+      "tm_sub_category": "பதில் கடிதங்கள்",
+      "created_date": "2020-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "common.category",
+    "pk": "101",
+    "fields": {
+      "code": "REJECT-2",
+      "top_category": " Rejected Requests",
+      "sub_category": "Copies of letters",
+      "sn_top_category": " ප්‍රතික්ෂේප වන ඉල්ලීම් (Rejected)",
+      "sn_sub_category": "පිටපත් ලිපි",
+      "tm_top_category": " நிராகரிக்கப்பட்ட கோரிக்கைகள்",
+      "tm_sub_category": "கடிதங்கள் நகல்கள்",
+      "created_date": "2020-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "common.category",
+    "pk": "102",
+    "fields": {
+      "code": "REJECT-3",
+      "top_category": " Rejected Requests",
+      "sub_category": "Anonymous petitions",
+      "sn_top_category": " ප්‍රතික්ෂේප වන ඉල්ලීම් (Rejected)",
+      "sn_sub_category": "නිර්නාමික පෙත්සම්",
+      "tm_top_category": " நிராகரிக்கப்பட்ட கோரிக்கைகள்",
+      "tm_sub_category": "அநாமதேய மனுக்களை",
+      "created_date": "2020-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "common.category",
+    "pk": "103",
+    "fields": {
+      "code": "REJECT-4",
+      "top_category": " Rejected Requests",
+      "sub_category": "Instruction to file with other documents/letters",
+      "sn_top_category": " ප්‍රතික්ෂේප වන ඉල්ලීම් (Rejected)",
+      "sn_sub_category": "උපදෙස් පරිදි ගොනු කරනු ලබන අනෙකුත් ලිපි",
+      "tm_top_category": " நிராகரிக்கப்பட்ட கோரிக்கைகள்",
+      "tm_sub_category": "மற்ற கடிதங்கள் மூலம் வழிமுறைகள் கோப்புகளை",
       "created_date": "2020-01-01T00:00:00Z"
     }
   }
