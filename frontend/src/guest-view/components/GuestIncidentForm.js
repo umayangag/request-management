@@ -122,7 +122,7 @@ const VerticalLinearStepper = (props) => {
 
   let webInfoChannelId = "";
   for (var channel of channels) {
-    if (channel.name === "Online") {
+    if (channel.name === "Web") {
       webInfoChannelId = channel.id;
       break;
     }

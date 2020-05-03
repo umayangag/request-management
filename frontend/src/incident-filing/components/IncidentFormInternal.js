@@ -743,7 +743,7 @@ function IncidentFormInternal(props) {
                         onClick={() => {
                           setFieldValue("infoChannel", c.id, true);
                         }}
-                        disabled={c.name == "Online" ? "disabled" : "" }
+                        disabled={c.name == "Web" ? "disabled" : "" }
                       >
                         {c.name}
                       </Button>))}
