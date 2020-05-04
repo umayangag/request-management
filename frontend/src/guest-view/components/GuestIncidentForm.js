@@ -6,7 +6,12 @@ import { Link, Redirect } from "react-router-dom";
 import { withRouter } from "react-router";
 import { useIntl } from "react-intl";
 import ReCAPTCHA from "react-google-recaptcha";
-
+import Radio from "@material-ui/core/Radio";
+import RadioGroup from "@material-ui/core/RadioGroup";
+import FormControl from "@material-ui/core/FormControl";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import FormHelperText from "@material-ui/core/FormHelperText";
+import FormLabel from "@material-ui/core/FormLabel";
 import { withStyles } from "@material-ui/core/styles";
 import Stepper from "@material-ui/core/Stepper";
 import Step from "@material-ui/core/Step";
@@ -87,6 +92,11 @@ const styles = (theme) => ({
   list: {
     marginLeft: -20,
   },
+  group: {
+    marginLeft:56,
+    marginBottom:-20,
+    marginTop:33
+  }
 });
 
 const VerticalLinearStepper = (props) => {
@@ -122,7 +132,7 @@ const VerticalLinearStepper = (props) => {
 
   let webInfoChannelId = "";
   for (var channel of channels) {
-    if (channel.name === "Online") {
+    if (channel.name === "Web") {
       webInfoChannelId = channel.id;
       break;
     }
@@ -181,19 +191,15 @@ const VerticalLinearStepper = (props) => {
         ? moment(incidentData.occured_date).format("HH:mm")
         : null,
   });
+  const { selectedLanguage } = useSelector((state) => (state.shared));
 
   // location section
-  const [incidentLocation, setIncidentLocation] = useState(
-    incidentId ? incidentData.location : ""
-  );
+
   const [incidentAddress, setIncidentAddress] = useState(
     incidentId ? incidentData.address : ""
   );
   const [incidentCity, setIncidentCity] = useState(
     incidentId ? incidentData.city : ""
-  );
-  const [recipientLocation, setRecipientLocation] = useState(
-    incidentId ? incidentData.recipientLocation : ""
   );
   const [recipientAddress, setRecipientAddress] = useState(
     incidentId ? incidentData.recipientAddress : ""
@@ -204,6 +210,15 @@ const VerticalLinearStepper = (props) => {
   const [showRecipient, setShowRecipient] = useState(
     incidentId ? incidentData.showRecipient : ""
   );
+  const [title, setTitle] = useState(
+    incidentId ? incidentData.title : ""
+  );
+  const [recipientTitle, setRecipientTitle] = useState(
+    incidentId ? incidentData.recipientTitle : ""
+  );
+  const [language, setLanguage] = useState(
+    incidentId ? incidentData.language : selectedLanguage==="si" ? "SINHALA" : selectedLanguage==="ta" ? "TAMIL" : "ENGLISH",
+  );
   const [incidentDistrict, setIncidentDistrict] = useState(
     incidentId ? incidentData.district : ""
   );
@@ -213,13 +228,17 @@ const VerticalLinearStepper = (props) => {
 
   const [incidentContact, setIncidentContact] = useState({
     name: incidentReporterData ? incidentReporterData.name : "",
+    nic: incidentReporterData ? incidentReporterData.nic : "",
     phone: incidentReporterData ? incidentReporterData.telephone : "",
     mobile: incidentReporterData ? incidentReporterData.mobile : "",
     email: incidentReporterData ? incidentReporterData.email : "",
-    reporterType: incidentReporterData ? incidentReporterData.reporterType : "",
-    recipientType: incidentReporterData ? incidentReporterData.recipientType : "",
+    // reporterType: incidentReporterData ? incidentReporterData.reporterType : "",
+    // recipientType: incidentReporterData ? incidentReporterData.recipientType : "",
     recipientName: incidentReporterData
       ? incidentReporterData.recipientName
+      : "",
+    recipientNic: incidentReporterData
+      ? incidentReporterData.recipientNic
       : "",
     recipientPhone: incidentReporterData
       ? incidentReporterData.recipientPhone
@@ -289,12 +308,15 @@ const VerticalLinearStepper = (props) => {
       incidentDatetimeErrorMsg: null,
       incidentContactErrorMsg: null,
       incidentNameErrorMsg: null,
+      incidentNicErrorMsg: null,
       incidentReporterTypeErrorMsg: null,
       incidentAddressErrorMsg: null,
       incidentDistrictErrorMsg: null,
       incidentCityErrorMsg: null,
       showRecipientErrorMsg: null,
+      showLanuageErrorMsg: null,
       recipientNameErrorMsg: null,
+      recipientNicErrorMsg: null,
       recipientAddressErrorMsg: null,
       recipientDistrictErrorMsg: null,
       recipientCityErrorMsg: null,
@@ -322,16 +344,26 @@ const VerticalLinearStepper = (props) => {
       };
       valid = false;
     }
-    if (!incidentContact.reporterType) {
+    if (!incidentContact.nic) {
       errorMsg = {
         ...errorMsg,
-        incidentReporterTypeErrorMsg: f({
-          id: "request.management.report.incidents.reporterType.error.message",
-          defaultMessage: "Individual/Organization is required",
+        incidentNicErrorMsg: f({
+          id: "request.management.report.incidents.nic.error.message",
+          defaultMessage: "NIC Number is required",
         }),
       };
       valid = false;
     }
+    // if (!incidentContact.reporterType) {
+    //   errorMsg = {
+    //     ...errorMsg,
+    //     incidentReporterTypeErrorMsg: f({
+    //       id: "request.management.report.incidents.reporterType.error.message",
+    //       defaultMessage: "Individual/Organization is required",
+    //     }),
+    //   };
+    //   valid = false;
+    // }
     if (!incidentAddress) {
       errorMsg = {
         ...errorMsg,
@@ -383,16 +415,27 @@ const VerticalLinearStepper = (props) => {
         };
         valid = false;
       }
-      if (!incidentContact.recipientType) {
+      if (!incidentContact.recipientNic) {
         errorMsg = {
           ...errorMsg,
-          incidentRecipientTypeErrorMsg: f({
-            id: "request.management.report.incidents.reporterType.error.message",
-            defaultMessage: "Individual/Organization is required",
+          recipientNicErrorMsg: f({
+            id: "request.management.report.incidents.nic.error.message",
+            defaultMessage: "NIC Number is required",
           }),
         };
         valid = false;
       }
+      
+      // if (!incidentContact.recipientType) {
+      //   errorMsg = {
+      //     ...errorMsg,
+      //     incidentRecipientTypeErrorMsg: f({
+      //       id: "request.management.report.incidents.reporterType.error.message",
+      //       defaultMessage: "Individual/Organization is required",
+      //     }),
+      //   };
+      //   valid = false;
+      // }
       if (!recipientAddress) {
         errorMsg = {
           ...errorMsg,
@@ -434,7 +477,27 @@ const VerticalLinearStepper = (props) => {
       };
       valid = false;
     }
-
+    if (!title) {
+      errorMsg = {
+        ...errorMsg,
+        titleErrorMsg: f({
+          id: "request.management.report.incidents.recipient.error.message",
+          defaultMessage: "This is required",
+        }),
+      };
+      valid = false;
+    }
+    if (!language) {
+      errorMsg = {
+        ...errorMsg,
+        languageErrorMsg: f({
+          id: "request.management.report.incidents.recipient.error.message",
+          defaultMessage: "This is required",
+        }),
+      };
+      valid = false;
+    }
+    
     setFormErrors({ ...errorMsg });
     return valid;
   };
@@ -658,22 +721,26 @@ const VerticalLinearStepper = (props) => {
                 title: "Guest user submit",
                 infoChannel: webInfoChannelId, //info channel is web by default.
                 recaptcha: incidentRecaptcha,
-                location: incidentLocation,
+                // location: incidentLocation,
                 address: incidentAddress,
+                language:language,
                 city: incidentCity,
                 category: incidentCatogory,
                 mainCategory: incidentMainCatogory,
                 district: incidentDistrict,
                 showRecipient: showRecipient,
-                recipientType: incidentContact.recipientType,
-                recipientLocation: recipientLocation,
+                title:title,
+                // recipientType: incidentContact.recipientType,
+                // recipientLocation: recipientLocation,
                 recipientAddress: recipientAddress,
                 recipientCity: recipientCity,
                 recipientDistrict: recipientDistrict,
                 recipientName: incidentContact.recipientName,
+                recipientNic: incidentContact.recipientNic,
                 recipientTelephone: incidentContact.recipientPhone,
                 recipientMobile: incidentContact.recipientMobile,
                 recipientEmail: incidentContact.recipientEmail,
+                recipientTitle:recipientTitle
               };
               const dateTime = getFormattedDateTime();
               if (dateTime) {
@@ -684,10 +751,11 @@ const VerticalLinearStepper = (props) => {
 
               let reporterData = {};
               reporterData.name = incidentContact.name;
+              reporterData.nic = incidentContact.nic;
               reporterData.telephone = incidentContact.phone;
               reporterData.mobile = incidentContact.mobile;
               reporterData.email = incidentContact.email;
-              reporterData.reporter_type = incidentContact.reporterType;
+              // reporterData.reporter_type = incidentContact.reporterType;
               reporterData.address = incidentAddress;
 
               dispatch(
@@ -708,22 +776,26 @@ const VerticalLinearStepper = (props) => {
                 title: "Guest user submit",
                 infoChannel: webInfoChannelId, //info channel is web by default.
                 recaptcha: incidentRecaptcha,
-                location: incidentLocation,
+                // location: incidentLocation,
                 address: incidentAddress,
+                language:language,
                 city: incidentCity,
                 category: incidentCatogory,
                 mainCategory: incidentMainCatogory,
                 district: incidentDistrict,
                 showRecipient: showRecipient,
-                recipientType: incidentContact.recipientType,
-                recipientLocation: recipientLocation,
+                title:title,
+                // recipientType: incidentContact.recipientType,
+                // recipientLocation: recipientLocation,
                 recipientAddress: recipientAddress,
                 recipientCity: recipientCity,
                 recipientDistrict: recipientDistrict,
                 recipientName: incidentContact.recipientName,
+                recipientNic: incidentContact.recipientNic,
                 recipientTelephone: incidentContact.recipientPhone,
                 recipientMobile: incidentContact.recipientMobile,
                 recipientEmail: incidentContact.recipientEmail,
+                recipientTitle:recipientTitle
               };
               const dateTime = getFormattedDateTime();
               if (dateTime) {
@@ -734,10 +806,11 @@ const VerticalLinearStepper = (props) => {
 
               let reporterData = {};
               reporterData.name = incidentContact.name;
+              reporterData.nic = incidentContact.nic;
               reporterData.telephone = incidentContact.phone;
               reporterData.mobile = incidentContact.mobile;
               reporterData.email = incidentContact.email;
-              reporterData.reporter_type = incidentContact.reporterType;
+              // reporterData.reporter_type = incidentContact.reporterType;
               reporterData.address = incidentAddress;
 
               dispatch(
@@ -762,16 +835,19 @@ const VerticalLinearStepper = (props) => {
               let incidentUpdate = incidentData;
               incidentUpdate["election"] = incidentElection;
               incidentUpdate["description"] = incidentDescription;
-              incidentUpdate["location"] = incidentLocation;
+              // incidentUpdate["location"] = incidentLocation;
               incidentUpdate["address"] = incidentAddress;
+              incidentUpdate["langage"] = language;
+              incidentUpdate["title"] = title;
               incidentUpdate["city"] = incidentCity;
               incidentData["category"] = incidentCatogory;
               incidentData["mainCategory"] = incidentMainCatogory;
               incidentData["district"] = incidentDistrict;
-              incidentUpdate["recipientLocation"] = recipientLocation;
+              // incidentUpdate["recipientLocation"] = recipientLocation;
               incidentUpdate["recipientAddress"] = recipientAddress;
               incidentUpdate["recipientCity"] = recipientCity;
               incidentData["recipientDistrict"] = recipientDistrict;
+              incidentUpdate["recipientTitle"] = recipientTitle;
 
               const dateTime = getFormattedDateTime();
               if (dateTime) {
@@ -789,16 +865,19 @@ const VerticalLinearStepper = (props) => {
               let incidentUpdate = incidentData;
               incidentUpdate["election"] = incidentElection;
               incidentUpdate["description"] = incidentDescription;
-              incidentUpdate["location"] = incidentLocation;
+              // incidentUpdate["location"] = incidentLocation;
               incidentUpdate["address"] = incidentAddress;
+              incidentUpdate["langage"] = language;
+              incidentUpdate["title"] = title;
               incidentUpdate["city"] = incidentCity;
               incidentData["category"] = incidentCatogory;
               incidentData["mainCategory"] = incidentMainCatogory;
               incidentData["district"] = incidentDistrict;
-              incidentUpdate["recipientLocation"] = recipientLocation;
+              // incidentUpdate["recipientLocation"] = recipientLocation;
               incidentUpdate["recipientAddress"] = recipientAddress;
               incidentUpdate["recipientCity"] = recipientCity;
               incidentData["recipientDistrict"] = recipientDistrict;
+              incidentUpdate["recipientTitle"] = recipientTitle;
 
               const dateTime = getFormattedDateTime();
               if (dateTime) {
@@ -822,8 +901,6 @@ const VerticalLinearStepper = (props) => {
       content: (
         <>
           <ContactSection
-            location={incidentLocation}
-            handledLocationChange={setIncidentLocation}
             address={incidentAddress}
             handleAddressChange={setIncidentAddress}
             city={incidentCity}
@@ -833,14 +910,16 @@ const VerticalLinearStepper = (props) => {
             recipientAddress={recipientAddress}
             handleDistrictChange={setIncidentDistrict}
             handleCityChange={setIncidentCity}
-            handleRecipientLocationChange={setRecipientLocation}
             handleRecipientDistrictChange={setRecipientDistrict}
             handleRecipientCityChange={setRecipientCity}
             handleRecipientAddressChange={setRecipientAddress}
             handleShowRecipientChange={setShowRecipient}
+            handleTitleChange={setTitle}
+            handleRecipientTitleChange={setRecipientTitle}
             districts={districts}
-            recipientLocation={recipientLocation}
             showRecipient={showRecipient}
+            title={title}
+            recipientTitle={recipientTitle}
             contactDetials={incidentContact}
             handleContactDetailsChange={setIncidentContact}
             formErrors={formErrors}
@@ -861,10 +940,11 @@ const VerticalLinearStepper = (props) => {
         } else {
           if (validContactInputs()) {
             incidentReporterData.name = incidentContact.name;
+            incidentReporterData.nic = incidentContact.nic;
             incidentReporterData.telephone = incidentContact.phone;
             incidentReporterData.mobile = incidentContact.mobile;
             incidentReporterData.email = incidentContact.email;
-            incidentReporterData.reporter_type = incidentContact.reporterType;
+            // incidentReporterData.reporter_type = incidentContact.reporterType;
             incidentReporterData.address = incidentContact.incidentAddress;
 
             dispatch(
@@ -1030,6 +1110,45 @@ const VerticalLinearStepper = (props) => {
             "Select your language of preference and fill in the form below.",
         })}
       </Typography>
+      <Grid item xs={12}>
+                        <FormControl className={classes.group} error={formErrors.languageErrorMsg ? true : false} component="fieldset">
+                        <FormLabel component="legend">{f({ id: "request.management.incident.create.location.language", defaultMessage: "Select Language*" })}</FormLabel>
+                            <RadioGroup
+                                aria-label="Gender"
+                                name="language"
+                                id="language"
+                                // ref= {this.props.securityDepositeRpp}
+                                // className={classes.group}
+                                value={language}
+                                onChange={(e) => { setLanguage(e.target.value);formErrors.languageErrorMsg = null;dispatch(changeLanguage(e.target.value=="SINHALA" ? "si" : e.target.value=="TAMIL" ? "ta" : "en")); }}
+                                // onClick={(e) => { }}
+                                row
+                            >
+                                <FormControlLabel
+                                    control={
+                                        <Radio />
+                                    }
+                                    value="SINHALA"
+                                    label={f({ id: "request.management.incident.create.location.language.sinhala", defaultMessage: "Sinhala" })}
+                                />
+                                <FormControlLabel
+                                    control={
+                                        <Radio />
+                                    }
+                                    label={f({ id: "request.management.incident.create.location.language.tamil", defaultMessage: "Tamil" })}
+                                    value="TAMIL"
+                                />
+                                <FormControlLabel
+                                    control={
+                                        <Radio />
+                                    }
+                                    label={f({ id: "request.management.incident.create.location.language.english", defaultMessage: "English" })}
+                                    value="ENGLISH"
+                                />
+                            </RadioGroup>
+                            <FormHelperText>{formErrors.languageErrorMsg ? formErrors.languageErrorMsg : null}</FormHelperText>
+                        </FormControl>
+                    </Grid>
       <Stepper activeStep={activeStep} orientation="vertical">
         {steps.map((label, index) => {
           const props = {};

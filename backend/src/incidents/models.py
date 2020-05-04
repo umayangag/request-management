@@ -96,13 +96,6 @@ class Reporter(models.Model):
     name = models.CharField(max_length=200, null=True, blank=True)
     sn_name = models.CharField(max_length=200, null=True, blank=True)
     tm_name = models.CharField(max_length=200, null=True, blank=True)
-    reporter_type = models.CharField(
-        max_length=50,
-        choices=[(tag.name, tag.value) for tag in ContactType],
-        default=ContactType.INDIVIDUAL,
-        blank=True,
-        null=True,
-    )
     email = models.CharField(max_length=200, null=True, blank=True)
     telephone = models.CharField(max_length=200, null=True, blank=True)
     mobile = models.CharField(max_length=200, null=True, blank=True)
@@ -131,13 +124,6 @@ class Recipient(models.Model):
     name = models.CharField(max_length=200, null=True, blank=True)
     sn_name = models.CharField(max_length=200, null=True, blank=True)
     tm_name = models.CharField(max_length=200, null=True, blank=True)
-    recipient_type = models.CharField(
-        max_length=50,
-        choices=[(tag.name, tag.value) for tag in ContactType],
-        default=ContactType.INDIVIDUAL,
-        blank=True,
-        null=True,
-    )
     email = models.CharField(max_length=200, null=True, blank=True)
     telephone = models.CharField(max_length=200, null=True, blank=True)
     mobile = models.CharField(max_length=200, null=True, blank=True)

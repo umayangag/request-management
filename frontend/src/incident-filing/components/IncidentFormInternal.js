@@ -25,6 +25,7 @@ import {
   // fetchProvinces,
   // fetchWards,
   resetActiveIncident,
+  changeLanguage
 } from "../../shared/state/sharedActions";
 
 import Button from "@material-ui/core/Button";
@@ -79,8 +80,22 @@ const styles = (theme) => ({
     color: theme.palette.text.secondary,
     marginBottom: 20,
   },
+  paper2: {
+    padding: theme.spacing.unit * 2,
+    background: "#ebf5fa",
+    marginBottom: 10,
+  },
   textField: {
     width: "100%",
+  },
+  textField2: {
+    width: "100%",
+    marginBottom: "-23px",
+    marginTop: "26px",
+  },
+  textField3: {
+    width: "100%",
+    marginTop: "8px"
   },
   formControl: {
     width: "100%",
@@ -141,12 +156,18 @@ const styles = (theme) => ({
   cardContent: {
     padding: "10px !important",
   },
+  title: {
+    marginBottom: "-23px",
+    marginTop: "20px",
+  },
 });
 
 function IncidentFormInternal(props) {
   const dispatch = useDispatch();
   const [similarIncidents, setSimilarIncidents] = useState([]);
   const [selectedInstitution, setSelectedInstitution] = useState("");
+  const { selectedLanguage } = useSelector((state) => (state.shared));
+
   const {
     incident,
     reporter,
@@ -188,11 +209,12 @@ function IncidentFormInternal(props) {
     institution: "",
 
     // location
-    location: "",
+    // location: "",
     address: "",
     city: "",
     province: "",
     district: "",
+    language: selectedLanguage==="si" ? "SINHALA" : selectedLanguage==="ta" ? "TAMIL" : "ENGLISH",
     divisionalSecretariat: "",
     gramaNiladhari: "",
     pollingDivision: "",
@@ -202,7 +224,9 @@ function IncidentFormInternal(props) {
 
     // reporter
     reporterName: "",
-    reporterType: "",
+    reporterNic: "",
+    reporterTitle: "",
+    // reporterType: "",
     reporterAddress: "",
     reporterMobile: "",
     reporterTelephone: "",
@@ -213,7 +237,9 @@ function IncidentFormInternal(props) {
 
     // recipient
     recipientName: "",
-    recipientType: "",
+    recipientNic: "",
+    recipientTitle: "",
+    // recipientType: "",
     recipientAddress: "",
     recipientId: "",
     recipientMobile: "",
@@ -222,7 +248,7 @@ function IncidentFormInternal(props) {
     recipientCity: "",
     recipientDistrict: "",
     recipientGramaNiladhari: "",
-    recipientLocation: "",
+    // recipientLocation: "",
 
 
     files: [],
@@ -377,7 +403,8 @@ function IncidentFormInternal(props) {
     if (reporter) {
       Object.assign(initData, {
         reporterName: reporter.name,
-        reporterType: reporter.reporter_type,
+        reporterNic: reporter.nic,
+        reporterTitle: reporter.reporterTitle,
         reporterEmail: reporter.email,
         reporterMobile: reporter.mobile,
         reporterTelephone: reporter.telephone,
@@ -390,7 +417,8 @@ function IncidentFormInternal(props) {
     if (recipient) {
         Object.assign(initData, {
           recipientName: recipient.name,
-          recipientType: recipient.recipientType,
+          recipientNic: recipient.recipientNic,
+          recipientTitle: recipient.recipientTitle,
           recipientEmail: recipient.email,
           recipientMobile: recipient.mobile,
           recipientTelephone: recipient.telephone,
@@ -398,7 +426,7 @@ function IncidentFormInternal(props) {
           recipientCity: recipient.city,
           recipientDistrict: recipient.district,
           recipientGramaNiladhari: recipient.gnDivision,
-          recipientLocation: recipient.location,
+          // recipientLocation: recipient.location,
           showRecipient: "YES",
         });
       }else{
@@ -533,11 +561,13 @@ function IncidentFormInternal(props) {
         : IncidentSchema
     ),
     incidentType: Yup.mixed().required("Required"),
-    infoChannel: Yup.mixed().required("Required"),
+    infoChannel: Yup.mixed().required(f({ id: "request.management.incident.error.channel", defaultMessage: "Mode of receipt is Required" })),
+    language: Yup.string().required(f({ id: "request.management.incident.error.language", defaultMessage: "Language is Required" })),
     reporterName: Yup.string().required(f({ id: "request.management.incident.error.name", defaultMessage: "Name is Required" })),
-
+    reporterNic: Yup.string().required(f({ id: "request.management.report.incidents.nic.error.message", defaultMessage: "NIC Number is Required" })),
+    reporterTitle: Yup.string().required(f({ id: "request.management.incident.error.title", defaultMessage: "Title is Required" })),
     reporterAddress: Yup.string().required(f({ id: "request.management.incident.error.address", defaultMessage: "Address is Required" })),
-    reporterType: Yup.string().required(f({ id: "request.management.incident.error.type", defaultMessage: "Reporter Type is Required" })),
+    // reporterType: Yup.string().required(f({ id: "request.management.incident.error.type", defaultMessage: "Reporter Type is Required" })),
     city: Yup.string().required(f({ id: "request.management.incident.error.city", defaultMessage: "City is Required" })),
     // address: Yup.string().required("Required"),
     // occurrence: Yup.mixed().when('incidentType', (incidentType, IncidentSchema) => (incidentType == 'COMPLAINT' ? IncidentSchema.required("Required") : IncidentSchema)),
@@ -578,11 +608,21 @@ function IncidentFormInternal(props) {
         ? IncidentSchema.required(f({ id: "request.management.incident.error.recipient", defaultMessage: "Recipient is Required" }))
         : IncidentSchema
     ),
-    recipientType: Yup.mixed().when("showRecipient", (showRecipient, IncidentSchema) =>
+    recipientNic: Yup.mixed().when("showRecipient", (showRecipient, IncidentSchema) =>
     showRecipient == "YES"
-        ? IncidentSchema.required(f({ id: "request.management.incident.error.type", defaultMessage: "Recipient Type is Required" }))
+        ? IncidentSchema.required(f({ id: "request.management.report.incidents.nic.error.message", defaultMessage: "NIC Number is Required" }))
         : IncidentSchema
     ),
+    recipientTitle: Yup.mixed().when("showRecipient", (showRecipient, IncidentSchema) =>
+    showRecipient == "YES"
+        ? IncidentSchema.required(f({ id: "request.management.incident.error.title", defaultMessage: "Title is Required" }))
+        : IncidentSchema
+    ),
+    // recipientType: Yup.mixed().when("showRecipient", (showRecipient, IncidentSchema) =>
+    // showRecipient == "YES"
+    //     ? IncidentSchema.required(f({ id: "request.management.incident.error.type", defaultMessage: "Recipient Type is Required" }))
+    //     : IncidentSchema
+    // ),
     recipientAddress: Yup.mixed().when("showRecipient", (showRecipient, IncidentSchema) =>
     showRecipient == "YES"
         ? IncidentSchema.required(f({ id: "request.management.incident.error.address", defaultMessage: "Address is Required" }))
@@ -629,12 +669,7 @@ function IncidentFormInternal(props) {
         enableReinitialize={reinit}
         initialValues={getInitialValues()}
         onSubmit={(values, actions) => {
-          if (values.incidentType === "INQUIRY" && selectedInstitution) {
-            values.institution = selectedInstitution;
-            confirmDateAndSubmit(values, actions);
-          } else if (values.incidentType === "COMPLAINT") {
-            confirmDateAndSubmit(values, actions);
-          }
+          handleSubmit(values, actions);
         }}
         validationSchema={IncidentSchema}
         // validate={customValidations}
@@ -671,12 +706,63 @@ function IncidentFormInternal(props) {
               {/* <div style={{ display: "none" }}>{incident?incident.id:null}</div> */}
               {/* basic incident detail information */}
               <Paper className={classes.paper}>
-              <Typography style={{ width: '100%' }} align="left" variant="" marginTop="20">
+              <div className={classes.paper2}>
+              <ul className={props.classes.list}>
+              <li><Typography style={{ width: '100%' }} align="left" variant="subtitle2" marginTop="20">
+                {f({ id: "request.management.report.incidents.helper.text", defaultMessage: "*fields are mandatory" })}
+            </Typography></li>
+            <li><Typography style={{ width: '100%' }} align="left" variant="subtitle2" marginTop="20">
+                {f({ id: "request.management.report.incidents.helper.text2", defaultMessage: "Select your language of preference and fill in the form below." })}
+            </Typography></li>
+                    </ul>
+              {/* <Typography style={{ width: '100%' }} align="left" variant="" marginTop="20">
                 {f({ id: "request.management.report.incidents.helper.text", defaultMessage: "*fields are mandatory" })}
             </Typography>
             <Typography style={{ width: '100%' }} align="left" variant="" marginTop="20">
                 {f({ id: "request.management.report.incidents.helper.text2", defaultMessage: "Select your language of preference and fill in the form below." })}
-            </Typography><br/>
+            </Typography> */}
+            </div>
+            <br/>
+            <Grid item xs={12}>
+                        <FormControl className={classes.group} error={touched.language && errors.language} component="fieldset">
+                        <FormLabel component="legend">{f({ id: "request.management.incident.create.location.language", defaultMessage: "Select Language*" })}</FormLabel>
+                            <RadioGroup
+                                aria-label="Gender"
+                                name="language"
+                                id="language"
+                                // ref= {this.props.securityDepositeRpp}
+                                // className={classes.group}
+                                value={values.language}
+                                onChange={handleChange}
+                                // onChange={(e) => { setLanguage(e.target.value);formErrors.languageErrorMsg = null;dispatch(changeLanguage(e.target.value=="SINHALA" ? "si" : e.target.value=="TAMIL" ? "ta" : "en")); }}
+                                onClick={(e) => {dispatch(changeLanguage(e.target.value=="SINHALA" ? "si" : e.target.value=="TAMIL" ? "ta" : "en"))}}
+                                row
+                            >
+                                <FormControlLabel
+                                    control={
+                                        <Radio />
+                                    }
+                                    value="SINHALA"
+                                    label={f({ id: "request.management.incident.create.location.language.sinhala", defaultMessage: "Sinhala" })}
+                                />
+                                <FormControlLabel
+                                    control={
+                                        <Radio />
+                                    }
+                                    label={f({ id: "request.management.incident.create.location.language.tamil", defaultMessage: "Tamil" })}
+                                    value="TAMIL"
+                                />
+                                <FormControlLabel
+                                    control={
+                                        <Radio />
+                                    }
+                                    label={f({ id: "request.management.incident.create.location.language.english", defaultMessage: "English" })}
+                                    value="ENGLISH"
+                                />
+                            </RadioGroup>
+                            <FormHelperText>{touched.language && errors.language ? errors.language : ""}</FormHelperText>
+                        </FormControl>
+                    </Grid>
                 <Typography variant="h5" gutterBottom>
                   {f({ id: "request.management.incident.create.basic_information" })}
                 </Typography>
@@ -743,14 +829,14 @@ function IncidentFormInternal(props) {
                         onClick={() => {
                           setFieldValue("infoChannel", c.id, true);
                         }}
-                        disabled={c.name == "Online" ? "disabled" : "" }
+                        disabled={c.name == "Web" ? "disabled" : "" }
                       >
                         {c.name}
                       </Button>))}
 
                     <FormHelperText>
                       {errors.infoChannel && touched.infoChannel ? (
-                        <div style={{ color: "red" }}>Required</div>
+                        <div style={{ color: "red" }}>{f({ id: "request.management.incident.error.channel", defaultMessage: "Mode of receipt is Required" })}</div>
                       ) : (
                           ""
                         )}
@@ -1279,12 +1365,57 @@ function IncidentFormInternal(props) {
                 {f({ id: "request.management.incident.create.contact_information", defaultMessage: "Contact Information" })}
                 </Typography>
                 <Grid container spacing={24}>
-                  <Grid item xs={12} sm={6}>
+                <Grid item xs={12} sm={4}>
+                        <FormControl className={classes.title} error={touched.reporterTitle ? errors.reporterTitle : false} component="fieldset">
+                            <FormLabel component="legend">{f({ id: "request.management.incident.create.location.title", defaultMessage: "Title*" })}</FormLabel>
+                            <RadioGroup
+                                aria-label="Gender"
+                                name="reporterTitle"
+                                id="reporterTitle"
+                                // ref= {this.props.securityDepositeRpp}
+                                value={values.reporterTitle}
+                                onChange={handleChange}
+                                // onClick={this.showAmountRpp.bind(this)}
+                                row
+                            >
+                                <FormControlLabel
+                                    control={
+                                        <Radio />
+                                    }
+                                    value="Rev"
+                                    label={f({ id: "request.management.incident.create.location.title.rev", defaultMessage: "Rev." })}
+                                />
+                                <FormControlLabel
+                                    control={
+                                        <Radio />
+                                    }
+                                    label={f({ id: "request.management.incident.create.location.title.mr", defaultMessage: "Mr." })}
+                                    value="Mr"
+                                />
+                                <FormControlLabel
+                                    control={
+                                        <Radio />
+                                    }
+                                    value="Mrs"
+                                    label={f({ id: "request.management.incident.create.location.title.mrs", defaultMessage: "Mrs." })}
+                                />
+                                <FormControlLabel
+                                    control={
+                                        <Radio />
+                                    }
+                                    label={f({ id: "request.management.incident.create.location.title.ms", defaultMessage: "Ms." })}
+                                    value="Ms"
+                                />
+                            </RadioGroup>
+                            <FormHelperText>{touched.reporterTitle ? errors.reporterTitle : null}</FormHelperText>
+                        </FormControl>
+                    </Grid>
+                  <Grid item xs={12} sm={8}>
                     <TextField
                       id="reporterName"
                       name="reporterName"
                       label={f({ id: "request.management.incident.create.reporter.name", defaultMessage: "reporter Name*" })}
-                      className={classes.textField}
+                      className={classes.textField2}
                       value={values.reporterName}
                       onChange={handleChange}
                       error={touched.reporterName && errors.reporterName}
@@ -1293,7 +1424,21 @@ function IncidentFormInternal(props) {
                       }
                     />
                   </Grid>
-                  <Grid item xs={12} sm={3}>
+                  <Grid item xs={12} sm={4}>
+                    <TextField
+                      id="reporterNic"
+                      name="reporterNic"
+                      label={f({ id: "request.management.report.incidents.contact.nic", defaultMessage: "NIC Nubmer*" })}
+                      className={classes.textField3}
+                      value={values.reporterNic}
+                      onChange={handleChange}
+                      error={touched.reporterNic && errors.reporterNic}
+                      helperText={
+                        touched.reporterNic ? errors.reporterNic : null
+                      }
+                    />
+                  </Grid>
+                  {/* <Grid item xs={12} sm={3}>
                     <FormControl  error={touched.reporterType && errors.reporterType} className={classes.formControl}>
                       <InputLabel htmlFor="reporterType">
                       {f({ id: "request.management.incident.create.reporter.type", defaultMessage: "Individual/Organization*" })}
@@ -1319,7 +1464,7 @@ function IncidentFormInternal(props) {
                               : ""}
                           </FormHelperText>
                     </FormControl>
-                  </Grid>
+                  </Grid> */}
                   {/* {values.incidentType === "COMPLAINT" && (
                                         <Grid item xs={12} sm={3}>
                                             <FormControl className={classes.formControl}>
@@ -1346,7 +1491,7 @@ function IncidentFormInternal(props) {
                                             </FormControl>
                                         </Grid>
                                     )} */}
-                  <Grid item xs={12}>
+                  <Grid item xs={12} sm={8}>
                     <TextField
                       id="reporterAddress"
                       name="reporterAddress"
@@ -1362,7 +1507,7 @@ function IncidentFormInternal(props) {
                       }
                     />
                   </Grid>
-                  <Grid item xs={12}>
+                  {/* <Grid item xs={12}>
                         <TextField
                           id="location"
                           label={f({ id: "request.management.incident.create.location.description", defaultMessage: "Description / Landmarks"  })}
@@ -1371,7 +1516,7 @@ function IncidentFormInternal(props) {
                           onChange={handleChange}
                           multiline
                         />
-                      </Grid>
+                      </Grid> */}
                   <Grid item xs={12} md={4} sm={6}>
                     <TelephoneInput
                       className={classes.textField}
@@ -1559,16 +1704,64 @@ function IncidentFormInternal(props) {
                         <Typography variant="h5" gutterBottom>
                         {f({ id: "request.management.incident.create.recipient_information", defaultMessage: "Recipient Information" })}
                         </Typography>
+                        <div className={classes.paper2}>
                         <ul className={props.classes.list}>
-                        <li>{f({ id: "request.management.report.incidents.section.location.info", defaultMessage: "If the location where help is required differs from your address, please fill in this section w/ the location details." })}</li>
-                    </ul>
+                        <li><Typography style={{ width: '100%' }} align="left" variant="subtitle2" marginTop="20">
+                            {f({ id: "request.management.report.incidents.section.location.info", defaultMessage: "If the location where help is required differs from your address, please fill in this section w/ the location details." })}
+                        </Typography></li>
+                    </ul></div>
                         <Grid container spacing={24}>
-                        <Grid item xs={12} sm={6}>
+                        <Grid item xs={12} sm={4}>
+                        <FormControl className={classes.title} error={touched.recipientTitle ? errors.recipientTitle : false} component="fieldset">
+                            <FormLabel component="legend">{f({ id: "request.management.incident.create.location.title", defaultMessage: "Title*" })}</FormLabel>
+                            <RadioGroup
+                                aria-label="Gender"
+                                name="recipientTitle"
+                                id="recipientTitle"
+                                // ref= {this.props.securityDepositeRpp}
+                                value={values.recipientTitle}
+                                onChange={handleChange}
+                                // onClick={this.showAmountRpp.bind(this)}
+                                row
+                            >
+                                <FormControlLabel
+                                    control={
+                                        <Radio />
+                                    }
+                                    value="Rev"
+                                    label={f({ id: "request.management.incident.create.location.title.rev", defaultMessage: "Rev." })}
+                                />
+                                <FormControlLabel
+                                    control={
+                                        <Radio />
+                                    }
+                                    label={f({ id: "request.management.incident.create.location.title.mr", defaultMessage: "Mr." })}
+                                    value="Mr"
+                                />
+                                <FormControlLabel
+                                    control={
+                                        <Radio />
+                                    }
+                                    value="Mrs"
+                                    label={f({ id: "request.management.incident.create.location.title.mrs", defaultMessage: "Mrs." })}
+                                />
+                                <FormControlLabel
+                                    control={
+                                        <Radio />
+                                    }
+                                    label={f({ id: "request.management.incident.create.location.title.ms", defaultMessage: "Ms." })}
+                                    value="Ms"
+                                />
+                            </RadioGroup>
+                            <FormHelperText>{touched.recipientTitle ? errors.recipientTitle : null}</FormHelperText>
+                        </FormControl>
+                    </Grid>
+                        <Grid item xs={12} sm={8}>
                           <TextField
                             id="recipientName"
                             name="recipientName"
                             label={f({ id: "request.management.incident.create.recipient.name", defaultMessage: "Recipient Name*" })}
-                            className={classes.textField}
+                            className={classes.textField2}
                             value={values.recipientName}
                             onChange={handleChange}
                             error={touched.recipientName && errors.recipientName}
@@ -1577,7 +1770,21 @@ function IncidentFormInternal(props) {
                             }
                           />
                         </Grid>
-                        <Grid item xs={12} sm={3}>
+                        <Grid item xs={12} sm={4}>
+                          <TextField
+                            id="recipientNic"
+                            name="recipientNic"
+                            label={f({ id: "request.management.report.incidents.contact.nic", defaultMessage: "NIC Nubmer*" })}
+                            className={classes.textField3}
+                            value={values.recipientNic}
+                            onChange={handleChange}
+                            error={touched.recipientNic && errors.recipientNic}
+                            helperText={
+                              touched.recipientNic ? errors.recipientNic : null
+                            }
+                          />
+                        </Grid>
+                        {/* <Grid item xs={12} sm={3}>
                           <FormControl  error={touched.recipientType && errors.recipientType} className={classes.formControl}>
                             <InputLabel htmlFor="reporterType">
                             {f({ id: "request.management.incident.create.reporter.type", defaultMessage: "Individual/Organization*" })}
@@ -1603,7 +1810,7 @@ function IncidentFormInternal(props) {
                                     : ""}
                                 </FormHelperText>
                           </FormControl>
-                        </Grid>
+                        </Grid> */}
                         {/* {values.incidentType === "COMPLAINT" && (
                                               <Grid item xs={12} sm={3}>
                                                   <FormControl className={classes.formControl}>
@@ -1630,7 +1837,7 @@ function IncidentFormInternal(props) {
                                                   </FormControl>
                                               </Grid>
                                           )} */}
-                        <Grid item xs={12}>
+                        <Grid item xs={12} sm={8}>
                           <TextField
                             id="recipientAddress"
                             name="recipientAddress"
@@ -1646,7 +1853,7 @@ function IncidentFormInternal(props) {
                             }
                           />
                         </Grid>
-                        <Grid item xs={12}>
+                        {/* <Grid item xs={12}>
                         <TextField
                           id="recipientLocation"
                           label={f({ id: "request.management.incident.create.location.description" })}
@@ -1655,7 +1862,7 @@ function IncidentFormInternal(props) {
                           onChange={handleChange}
                           multiline
                         />
-                      </Grid>
+                      </Grid> */}
                         <Grid item xs={12} md={4} sm={6}>
                           <TelephoneInput
                             className={classes.textField}

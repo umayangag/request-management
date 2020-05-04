@@ -728,6 +728,10 @@ def incident_escalate_external_action(user: User, incident: Incident, entity: ob
 
     if is_internal_user:
         escalated_user = get_user_by_id(entity["name"])
+
+        # adding the current assignee as a linked user
+        incident.linked_individuals.add(user)
+
         incident.linked_individuals.add(escalated_user)
         incident.assignee = escalated_user
         incident.save()
@@ -793,7 +797,7 @@ def incident_complete_external_action(user: User, incident: Incident, comment: s
 
 def incident_request_information(user: User, incident: Incident, comment: str):
     if incident.current_status == StatusType.INFORMATION_REQESTED.name:
-        raise WorkflowException("Incident already has a pending advice request")
+        raise WorkflowException("Issue already has a pending advice request")
 
     # request workflow
     workflow = RequestInformationWorkflow(
@@ -859,7 +863,7 @@ def incident_provide_information(user: User, incident: Incident, comment: str, s
     status.save()
 
     # check this
-    incident.linked_individuals.remove(user.id)
+    # incident.linked_individuals.remove(user.id)
 
     event_services.update_linked_workflow_event(user, incident, workflow, start_event)
 

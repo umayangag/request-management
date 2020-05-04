@@ -38,12 +38,10 @@ class ReporterSerializer(serializers.ModelSerializer):
 
     gnDivision = serializers.CharField(
         source="gn_division", required=False, allow_null=True, allow_blank=True)
-    reporterType = serializers.ChoiceField(
-        source="reporter_type", required=False, allow_blank=True, choices=[(tag.name, tag.value) for tag in ContactType])
 
     class Meta:
         model = Reporter
-        exclude = ["gn_division", "reporter_type", "created_date", "updated_date"]
+        exclude = ["gn_division", "created_date", "updated_date"]
 
 class RecipientSerializer(serializers.ModelSerializer):
 
@@ -52,12 +50,10 @@ class RecipientSerializer(serializers.ModelSerializer):
 
     gnDivision = serializers.CharField(
         source="gn_division", required=False, allow_null=True, allow_blank=True)
-    recipientType = serializers.ChoiceField(
-        source="recipient_type", required=False, allow_blank=True, choices=[(tag.name, tag.value) for tag in ContactType])
 
     class Meta:
         model = Recipient
-        exclude = ["gn_division", "recipient_type", "created_date", "updated_date"]
+        exclude = ["gn_division", "created_date", "updated_date"]
 
 
 class IncidentSerializer(serializers.ModelSerializer):

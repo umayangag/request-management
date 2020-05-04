@@ -201,8 +201,9 @@ class IncidentList(APIView, IncidentResultsSetPagination):
         if request.data["showRecipient"] == "YES":
             # collect recipient information
             recipient_data = {}
+            recipient_data["title"] = incident_data["recipientTitle"]
+            recipient_data["nic"] = incident_data["recipientNic"]
             recipient_data["name"] = incident_data["recipientName"]
-            recipient_data["recipientType"] = incident_data["recipientType"]
             recipient_data["address"] = incident_data["recipientAddress"]
             recipient_data["mobile"] = incident_data["recipientMobile"]
             recipient_data["telephone"] = incident_data["recipientTelephone"]
@@ -210,7 +211,7 @@ class IncidentList(APIView, IncidentResultsSetPagination):
             recipient_data["city"] = incident_data["recipientCity"]
             recipient_data["district"] = incident_data["recipientDistrict"]
             recipient_data["gnDivision"] = incident_data["recipientGramaNiladhari"]
-            recipient_data["location"] = incident_data["recipientLocation"]
+            # recipient_data["location"] = incident_data["recipientLocation"]
             # create recipient
             recipient_serializer = RecipientSerializer(data=recipient_data)
             if recipient_serializer.is_valid():
@@ -561,8 +562,9 @@ class IncidentPublicUserView(APIView):
         if request.data["showRecipient"] == "YES":
             # collect recipient information
             recipient_data = {}
+            recipient_data["title"] = incident_data["recipientTitle"]
+            recipient_data["nic"] = incident_data["recipientNic"]
             recipient_data["name"] = incident_data["recipientName"]
-            recipient_data["recipientType"] = incident_data["recipientType"]
             recipient_data["address"] = incident_data["recipientAddress"]
             recipient_data["mobile"] = incident_data["recipientMobile"]
             recipient_data["telephone"] = incident_data["recipientTelephone"]
@@ -570,7 +572,7 @@ class IncidentPublicUserView(APIView):
             recipient_data["city"] = incident_data["recipientCity"]
             recipient_data["district"] = incident_data["recipientDistrict"]
             # recipient_data["gnDivision"] = incident_data["recipientGramaNiladhari"]
-            recipient_data["location"] = incident_data["recipientLocation"]
+            # recipient_data["location"] = incident_data["recipientLocation"]
             # create recipient
             recipient_serializer = RecipientSerializer(data=recipient_data)
             if recipient_serializer.is_valid():
