@@ -29,7 +29,8 @@ export function createInternalIncident(incidentData, fileData) {
             const reporterId = incident.reporter;
             const reporterUpdate = {
                 "name": incidentData["reporterName"],
-                // "reporter_type": incidentData["reporterType"],
+                "nic": incidentData["reporterNic"],
+                "title": incidentData["reporterTitle"],
                 "email": incidentData["reporterEmail"],
                 "mobile": incidentData["reporterMobile"],
                 "telephone": incidentData["reporterTelephone"],
@@ -71,7 +72,8 @@ export function updateInternalIncident(incidentId, incidentData) {
             const reporterId = incident.reporter;
             const reporterUpdate = {
                 "name": incidentData["reporterName"],
-                // "reporter_type": incidentData["reporterType"],
+                "nic": incidentData["reporterNic"],
+                "title": incidentData["reporterTitle"],
                 "email": incidentData["reporterEmail"],
                 "telephone": incidentData["reporterMobile"],
                 "telephone": incidentData["reporterMobile"],
