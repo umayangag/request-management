@@ -1022,7 +1022,7 @@ def get_fitlered_incidents_report(incidents: Incident, output_format: str):
         cursor.execute(sql)
         incidents = cursor.fetchall()
         dataframe = pd.DataFrame(list(incidents))
-    dataframe.columns = ["Ref ID", "Title", "Description", "Status", "Severity", "Response Time", "Category"]
+    dataframe.columns = ["Ref ID", "Mode of receipt", "Description", "Status", "Severity", "Response Time", "Category"]
 
     if output_format == "csv":
         response = HttpResponse(content_type='text/csv')
