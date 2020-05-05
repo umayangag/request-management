@@ -517,11 +517,6 @@ def incident_close(user: User, incident: Incident, details: str):
         raise WorkflowException(
             "All pending actions needs to be resolved first")
 
-    # if outcomes == 0:
-    #     raise WorkflowException(
-    #         "Incident need at least 1 resolution outcome before closing")
-
-
     comment_data = {
         "comment": details["remark"],
         "is_outcome": True
@@ -553,6 +548,20 @@ def incident_close(user: User, incident: Incident, details: str):
         comment=details["remark"]
     )
     workflow.save()
+
+    # sending notifications
+    # get the default Org/Division -> PS
+    default_division = Division.objects.get(is_default_division=True)
+
+    # check if the user from PS
+    # if user.profile.organization != default_division.organization:
+    # if issue closing user is not from PS, send notification
+    # find PS user from linked users
+    for linked_user in incident.linked_individuals.all():
+        if linked_user.profile.organization == default_division.organization:
+            # send notification
+            add_notification(NotificationType.INCIDENT_CLOSED, 
+                                    user, linked_user, incident)
 
     # request closed email
     if (incident.reporter.email):
