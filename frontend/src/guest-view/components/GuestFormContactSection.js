@@ -133,8 +133,6 @@ const IncidentContact = (props) => {
               id: "request.management.report.incidents.contact.name",
               defaultMessage: "Name",
             })}
-            autoFocus
-            multiline
             fullWidth
             rowsMax="4"
             value={contactDetials.name}
@@ -160,8 +158,6 @@ const IncidentContact = (props) => {
               id: "request.management.report.incidents.contact.nic",
               defaultMessage: "NIC",
             })}
-            autoFocus
-            multiline
             fullWidth
             rowsMax="4"
             value={contactDetials.nic}
@@ -187,7 +183,6 @@ const IncidentContact = (props) => {
               id: "request.management.report.incidents.contact.mobile",
               defaultMessage: "Mobile",
             })}
-            multiline
             fullWidth
             rowsMax="4"
             value={contactDetials.mobile}
@@ -215,7 +210,6 @@ const IncidentContact = (props) => {
               id: "request.management.report.incidents.contact.telephone",
               defaultMessage: "Landline",
             })}
-            multiline
             fullWidth
             rowsMax="4"
             value={contactDetials.phone}
@@ -240,7 +234,6 @@ const IncidentContact = (props) => {
               id: "request.management.report.incidents.contact.email",
               defaultMessage: "Email",
             })}
-            multiline
             fullWidth
             rowsMax="4"
             value={contactDetials.email}
@@ -416,8 +409,6 @@ const IncidentContact = (props) => {
               id: "request.management.incident.create.recipient.name",
               defaultMessage: "Name",
             })}
-            autoFocus
-            multiline
             fullWidth
             rowsMax="4"
             value={contactDetials.recipientName}
@@ -443,8 +434,6 @@ const IncidentContact = (props) => {
               id: "request.management.report.incidents.contact.nic",
               defaultMessage: "NIC",
             })}
-            autoFocus
-            multiline
             fullWidth
             rowsMax="4"
             value={contactDetials.recipientNic}
@@ -470,7 +459,6 @@ const IncidentContact = (props) => {
               id: "request.management.report.incidents.contact.mobile",
               defaultMessage: "Mobile",
             })}
-            multiline
             fullWidth
             rowsMax="4"
             value={contactDetials.recipientMobile}
@@ -498,7 +486,6 @@ const IncidentContact = (props) => {
               id: "request.management.report.incidents.contact.telephone",
               defaultMessage: "Landline",
             })}
-            multiline
             fullWidth
             rowsMax="4"
             value={contactDetials.recipientPhone}
@@ -523,7 +510,6 @@ const IncidentContact = (props) => {
               id: "request.management.report.incidents.contact.email",
               defaultMessage: "Email",
             })}
-            multiline
             fullWidth
             rowsMax="4"
             value={contactDetials.recipientEmail}
