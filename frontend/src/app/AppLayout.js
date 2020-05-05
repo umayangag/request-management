@@ -258,9 +258,9 @@ class DomainContainer extends React.Component {
         } else {
             switch (notification.notification_type) {
                 case 'INCIDENT_ASSIGNED':
-                    return 'Incident Assigned'
+                    return 'Issue Assigned'
                 case 'INCIDENT_CLOSED':
-                        return 'Incident Closed'
+                        return 'Issue Closed'
                 default:
                     return 'notification'
             }
