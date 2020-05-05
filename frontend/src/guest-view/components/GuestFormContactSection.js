@@ -404,6 +404,7 @@ const IncidentContact = (props) => {
                     </Grid>
       <Grid item xs={10} sm={6} lg={8}>
           <TextField
+            autoFocus
             id="contactName"
             label={f({
               id: "request.management.incident.create.recipient.name",
