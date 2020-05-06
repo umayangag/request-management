@@ -1037,7 +1037,7 @@ def get_fitlered_incidents_report(incidents: Incident, output_format: str):
     for incident in incidents:
         mode_of_receipt=Channel.objects.get(pk=incident.infoChannel)
         category=Category.objects.get(pk=incident.category)
-        incidentList.append([incident.refId,incident.reporter.name, incident.city, incident.created_date, mode_of_receipt.name,incident.current_status, incident.current_severity,incident.response_time,category.sub_category])
+        incidentList.append([incident.refId,incident.reporter.name, incident.city, incident.created_date.strftime('%Y-%m-%d'), mode_of_receipt.name,incident.current_status, incident.current_severity,incident.response_time,category.sub_category])
     dataframe = pd.DataFrame(incidentList)
     dataframe.columns = ["Ref ID", "Reporter Name", "City", "Submitted Date", "Mode of receipt", "Status", "Priority", "Response Time", "Category"]
 
