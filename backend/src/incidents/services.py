@@ -22,8 +22,10 @@ from .models import (
     InvalidateWorkflow,
     ReopenWorkflow,
     CannedResponse,
-    SendCannedResponseWorkflow
+    SendCannedResponseWorkflow,
+    Category
 )
+from ..common.models import (Channel)
 from django.contrib.auth.models import User, Group, Permission
 from django.contrib.contenttypes.models import ContentType
 
@@ -1031,10 +1033,12 @@ def get_fitlered_incidents_report(incidents: Incident, output_format: str):
                 ) g
                 ON g.id = i.reporter_id
         """
-    with connection.cursor() as cursor:
-        cursor.execute(sql)
-        incidents = cursor.fetchall()
-        dataframe = pd.DataFrame(list(incidents))
+    incidentList=[]
+    for incident in incidents:
+        mode_of_receipt=Channel.objects.get(pk=incident.infoChannel)
+        category=Category.objects.get(pk=incident.category)
+        incidentList.append([incident.refId,incident.reporter.name, incident.city, incident.created_date, mode_of_receipt.name,incident.current_status, incident.current_severity,incident.response_time,category.sub_category])
+    dataframe = pd.DataFrame(incidentList)
     dataframe.columns = ["Ref ID", "Reporter Name", "City", "Submitted Date", "Mode of receipt", "Status", "Priority", "Response Time", "Category"]
 
     if output_format == "csv":
