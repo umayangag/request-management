@@ -9,6 +9,7 @@ import {
   withStyles,
   TableFooter,
   TablePagination,
+  Chip,
 } from "@material-ui/core";
 import { withRouter } from "react-router";
 import { useIntl } from "react-intl";
@@ -102,6 +103,9 @@ function IncidentList({
   const categories = useSelector((state) => state.shared.categories);
   const { formatMessage: f } = useIntl();
 
+    const priorityColors = {HIGH:"red", MEDIUM: "orange", LOW: "#FABA00"};
+    const statusColors = {NEW:"#0090FA", VERIFIED: "green", CLOSED: "gray"};
+
   return (
     <Table className={classes.table}>
       <colgroup>
@@ -151,10 +155,10 @@ function IncidentList({
               </p>
             </CustomTableCell>
             <CustomTableCell align="center">
-              <p>{row.currentStatus}</p>
+                <Chip label={row.currentStatus} variant="outlined" size="small" style={{color:statusColors[row.currentStatus]}}/>
             </CustomTableCell>
             <CustomTableCell align="center">
-              <p>{row.severity}</p>
+              <Chip label={row.severity} variant="outlined" size="small" style={{color:priorityColors[row.severity]}}/>
             </CustomTableCell>
             <CustomTableCell align="center">
               <p>{row.response_time} h</p>
