@@ -156,7 +156,7 @@ const IncidentContact = (props) => {
             id="nic"
             label={f({
               id: "request.management.report.incidents.contact.nic",
-              defaultMessage: "NIC",
+              defaultMessage: "NIC/SLIN Number",
             })}
             fullWidth
             rowsMax="4"

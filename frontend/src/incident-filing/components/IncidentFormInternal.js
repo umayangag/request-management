@@ -1427,7 +1427,7 @@ function IncidentFormInternal(props) {
                     <TextField
                       id="reporterNic"
                       name="reporterNic"
-                      label={f({ id: "request.management.report.incidents.contact.nic", defaultMessage: "NIC Nubmer*" })}
+                      label={f({ id: "request.management.report.incidents.contact.nic", defaultMessage: "NIC/SLIN Nubmer*" })}
                       className={classes.textField3}
                       value={values.reporterNic}
                       onChange={handleChange}
@@ -1773,7 +1773,7 @@ function IncidentFormInternal(props) {
                           <TextField
                             id="recipientNic"
                             name="recipientNic"
-                            label={f({ id: "request.management.report.incidents.contact.nic", defaultMessage: "NIC Nubmer*" })}
+                            label={f({ id: "request.management.report.incidents.contact.nic", defaultMessage: "NIC/SLIN Nubmer*" })}
                             className={classes.textField3}
                             value={values.recipientNic}
                             onChange={handleChange}
