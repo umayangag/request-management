@@ -160,6 +160,7 @@
   "request.management.incident.error.recipient": "ලබන්නාගේ නම අවශ්‍යය වේ",
   "request.management.incident.error.mobile": "ජංගම දුරකථනය අවශ්‍යය වේ",
   "request.management.incident.error.invalidMobile": "මෙය වලංගු දුරකථන අංකයක් නොවේ",
+  "request.management.incident.error.invaliEmail": "මෙය වලංගු විද්‍යුත් ලිපිනයක් ( ඊ-මේල් ) නොවේ",
 
   "request.management.incident.error.incidenttype": "සිදුවීම් වර්ගය අවශ්‍යය වේ",
 

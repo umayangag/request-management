@@ -329,7 +329,9 @@ const VerticalLinearStepper = (props) => {
       recipientDistrictErrorMsg: null,
       recipientCityErrorMsg: null,
       recipientContactErrorMsg: null,
-      recipientLandlineErrorMsg: null
+      recipientLandlineErrorMsg: null,
+      incidentEmailErrorMsg: null,
+      recipientEmailErrorMsg: null
     });
     let errorMsg = { ...formErrors };
     let valid = true;
@@ -363,6 +365,19 @@ const VerticalLinearStepper = (props) => {
           incidentLandlineErrorMsg: f({
             id: "request.management.incident.error.invalidMobile",
             defaultMessage: "mobile Number is required",
+          }),
+        };
+        valid = false;
+      }
+    }
+
+    if (incidentContact.email) {
+      if(!(incidentContact.email.match("^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$"))){
+        errorMsg = {
+          ...errorMsg,
+          incidentEmailErrorMsg: f({
+            id: "request.management.incident.error.invaliEmail",
+            defaultMessage: "Email is invalid",
           }),
         };
         valid = false;
@@ -461,6 +476,19 @@ const VerticalLinearStepper = (props) => {
         };
         valid = false;
       }
+      }
+
+      if (incidentContact.recipientEmail) {
+        if(!(incidentContact.recipientEmail.match("^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$"))){
+          errorMsg = {
+            ...errorMsg,
+            recipientEmailErrorMsg: f({
+              id: "request.management.incident.error.invaliEmail",
+              defaultMessage: "Email is invalid",
+            }),
+          };
+          valid = false;
+        }
       }
 
       if (incidentContact.recipientPhone) {

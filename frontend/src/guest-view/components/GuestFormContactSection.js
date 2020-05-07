@@ -244,9 +244,12 @@ const IncidentContact = (props) => {
                 ...contactDetials,
                 email: e.target.value,
               });
+              formErrors.incidentEmailErrorMsg = null;
             }}
             className={classes.textField}
             margin="normal"
+            helperText={formErrors.incidentEmailErrorMsg || ""}
+            error={formErrors.incidentEmailErrorMsg ? true : false}
           />
         </Grid>
         <Grid item xs={2} sm={6} lg={4}  />
@@ -522,9 +525,12 @@ const IncidentContact = (props) => {
                 ...contactDetials,
                 recipientEmail: e.target.value,
               });
+              formErrors.recipientEmailErrorMsg = null;
             }}
             className={classes.textField}
             margin="normal"
+            helperText={formErrors.recipientEmailErrorMsg || ""}
+            error={formErrors.recipientEmailErrorMsg ? true : false}
           />
         </Grid>
         <Grid item xs={2} sm={6} lg={4} />
