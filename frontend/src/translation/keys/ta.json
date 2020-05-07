@@ -160,6 +160,7 @@
   "request.management.incident.error.recipient": "பெறுநரின் பெயர் தேவை",
   "request.management.incident.error.mobile": "கைபேசி தேவை",
   "request.management.incident.error.invalidMobile": "இது சரியான தொலைபேசி எண் அல்ல",
+  "request.management.incident.error.invaliEmail": "இது சரியான மின்னஞ்சல் அல்ல",
 
   "request.management.incident.error.incidenttype": "சம்பவ வகை தேவை",
 
