@@ -22,8 +22,10 @@ from .models import (
     InvalidateWorkflow,
     ReopenWorkflow,
     CannedResponse,
-    SendCannedResponseWorkflow
+    SendCannedResponseWorkflow,
+    Category
 )
+from ..common.models import (Channel)
 from django.contrib.auth.models import User, Group, Permission
 from django.contrib.contenttypes.models import ContentType
 
@@ -83,7 +85,7 @@ def get_incident_status_guest(refId):
         status["reply"] = "Your request has been received. Please check again later for status updates."
     elif incident.current_status == StatusType.VERIFIED.name:
         status["reply"] = "Your request has been acknowledged."
-    elif incident.current_status == StatusType.INFORMATION_REQESTED.name or has_pending_information_request(incident):
+    elif incident.current_status == StatusType.INFORMATION_REQUESTED.name or has_pending_information_request(incident):
         status = get_public_status_on_information_request(incident)
     elif incident.current_status == StatusType.ACTION_PENDING.name or incident.current_status == StatusType.ACTION_TAKEN.name \
         or incident.current_status == StatusType.INFORMATION_PROVIDED.name:
@@ -591,7 +593,7 @@ def incident_escalate(user: User, incident: Incident, escalate_dir: str = "UP", 
         incident.current_status == StatusType.NEW.name
         or incident.current_status == StatusType.REOPENED.name
         or incident.current_status == StatusType.ACTION_PENDING.name
-        or incident.current_status == StatusType.INFORMATION_REQESTED.name
+        or incident.current_status == StatusType.INFORMATION_REQUESTED.name
     ) :
         raise WorkflowException("Incident cannot be escalated at this Status")
 
@@ -668,7 +670,7 @@ def incident_close(user: User, incident: Incident, details: str):
     # outcomes = IncidentComment.objects.filter(
     #     incident=incident, is_outcome=True).count()
 
-    if incident.current_status == StatusType.INFORMATION_REQESTED.name:
+    if incident.current_status == StatusType.INFORMATION_REQUESTED.name:
         raise WorkflowException(
             "All pending advices must be resolved first")
 
@@ -815,7 +817,7 @@ def incident_complete_external_action(user: User, incident: Incident, comment: s
 
 
 def incident_request_information(user: User, incident: Incident, comment: str):
-    if incident.current_status == StatusType.INFORMATION_REQESTED.name:
+    if incident.current_status == StatusType.INFORMATION_REQUESTED.name:
         raise WorkflowException("Issue already has a pending advice request")
 
     # request workflow
@@ -828,7 +830,7 @@ def incident_request_information(user: User, incident: Incident, comment: str):
     workflow.save()
 
     status = IncidentStatus(
-        current_status=StatusType.INFORMATION_REQESTED,
+        current_status=StatusType.INFORMATION_REQUESTED,
         previous_status=incident.current_status,
         incident=incident,
         approved=True
@@ -855,7 +857,7 @@ def incident_provide_information(user: User, incident: Incident, comment: str, s
     # if not Incident.objects.filter(linked_individuals__id=user.id).exists():
     #     raise WorkflowException("User not linked to the given incident")
 
-    # if incident.current_status != StatusType.INFORMATION_REQESTED.name:
+    # if incident.current_status != StatusType.INFORMATION_REQUESTED.name:
     #     raise WorkflowException("Incident does not have pending advice requests")
 
     initiated_workflow = start_event.refered_model
@@ -989,7 +991,7 @@ def get_incidents_to_escalate():
                 b.`current_status` <> 'CLOSED' AND
                 b.`current_status` <> 'ACTION_PENDING' AND
                 b.`current_status` <> 'NEW' AND
-                b.`current_status` <> 'INFORMATION_REQESTED'
+                b.`current_status` <> 'INFORMATION_REQUESTED'
     """
 
     with connection.cursor() as cursor:
@@ -1015,7 +1017,7 @@ def attach_media(user:User, incident:Incident, uploaded_file:File):
 def get_fitlered_incidents_report(incidents: Incident, output_format: str):
 
     sql = """
-            SELECT i.refId, f.name as channel, i.description, i.current_status, i.current_severity, i.response_time, d.sub_category as category
+            SELECT i.refId,g.name,i.city,DATE_FORMAT(i.created_date,'%Y-%m-%d') as submitted_date, f.name as channel, i.current_status, i.current_severity, i.response_time, d.sub_category as category
                 FROM incidents_incident i
                 LEFT JOIN (
                   SELECT c.id, c.sub_category
@@ -1026,12 +1028,18 @@ def get_fitlered_incidents_report(incidents: Incident, output_format: str):
                     SELECT e.id, e.name FROM common_channel e
                 ) f
                 ON f.id = i.infoChannel
+                LEFT JOIN (
+                    SELECT r.id, r.name FROM incidents_reporter r
+                ) g
+                ON g.id = i.reporter_id
         """
-    with connection.cursor() as cursor:
-        cursor.execute(sql)
-        incidents = cursor.fetchall()
-        dataframe = pd.DataFrame(list(incidents))
-    dataframe.columns = ["Ref ID", "Mode of receipt", "Description", "Status", "Priority", "Response Time", "Category"]
+    incidentList=[]
+    for incident in incidents:
+        mode_of_receipt=Channel.objects.get(pk=incident.infoChannel)
+        category=Category.objects.get(pk=incident.category)
+        incidentList.append([incident.refId,incident.reporter.name, incident.city, incident.created_date.strftime('%Y-%m-%d'), mode_of_receipt.name,incident.current_status, incident.current_severity,incident.response_time,category.sub_category])
+    dataframe = pd.DataFrame(incidentList)
+    dataframe.columns = ["Ref ID", "Reporter Name", "City", "Submitted Date", "Mode of receipt", "Status", "Priority", "Response Time", "Category"]
 
     if output_format == "csv":
         response = HttpResponse(content_type='text/csv')
