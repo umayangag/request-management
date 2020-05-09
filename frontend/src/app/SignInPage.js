@@ -106,7 +106,7 @@ class SignInPage extends Component {
                         </FormControl>
                         <FormControlLabel
                             control={<Checkbox checked={rememberMe} value="remember" color="primary" onChange={toggleRememberMe} />}
-                            label="Remember me2"
+                            label="Remember me"
                         />
                         <ReCAPTCHA
                             ref={recaptchaRef}
