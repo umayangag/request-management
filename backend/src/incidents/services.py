@@ -583,6 +583,22 @@ def get_incidents_before_date(date: str) -> Incident:
     except Exception as e:
         return None
 
+def get_incident_list_by_organization_id(org_id):
+    """ get all incident assigned or linked to given orgnization id. """
+
+    # get user list of the organization
+    profiles = Profile.objects.filter(organization=org_id)
+
+    all_incidents = []
+    # all external organizations will all ways be listed on linked-individuals
+    for profile in profiles:
+        incidents = Incident.objects.filter(linked_individuals__id=profile.user_id)
+        for incident in incidents:
+            if incident not in all_incidents:
+                all_incidents.append(incident)
+
+    return all_incidents
+
 
 def incident_escalate(user: User, incident: Incident, escalate_dir: str = "UP", comment=None, response_time=None):
     if incident.assignee != user:
@@ -731,7 +747,7 @@ To check status:
     for linked_user in incident.linked_individuals.all():
         if linked_user.profile.organization == default_division.organization:
             # send notification
-            add_notification(NotificationType.INCIDENT_CLOSED, 
+            add_notification(NotificationType.INCIDENT_CLOSED,
                                     user, linked_user, incident)
 
     event_services.update_workflow_event(user, incident, workflow)

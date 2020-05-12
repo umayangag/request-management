@@ -59,7 +59,8 @@ from .services import (
     send_incident_created_mail_sms,
     get_incident_status_guest,
     send_canned_response,
-    get_incident_status_guest
+    get_incident_status_guest,
+    get_incident_list_by_organization_id
 )
 
 from ..events import services as event_service
@@ -126,6 +127,26 @@ class IncidentList(APIView, IncidentResultsSetPagination):
         param_title = self.request.query_params.get('title', None)
         if param_title is not None:
             incidents = incidents.filter(title__contains=param_title)
+
+        # filter by language
+        param_language = self.request.query_params.get('language', None)
+        if param_language is not None:
+            incidents = incidents.filter(language=param_language)
+
+        # filter by channel
+        param_info_channel = self.request.query_params.get('channel', None)
+        if param_info_channel is not None:
+            incidents = incidents.filter(info_channel=param_info_channel)
+
+        # filter by city
+        param_city = self.request.query_params.get('city', None)
+        if param_city is not None:
+            incidents = incidents.filter(city__contains=param_city)
+
+        # filter by organization
+        param_organization = self.request.query_params.get('organization', None)
+        if param_organization is not None:
+            incidents = get_incident_list_by_organization_id(param_organization)
 
         param_incident_type = self.request.query_params.get('incident_type', None)
         if param_incident_type is not None:
