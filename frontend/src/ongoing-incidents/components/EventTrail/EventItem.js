@@ -299,7 +299,7 @@ const EventItemView = ({ event, classes }) => {
 
                 {
                     hasPendingAction(event) && (
-                        <div className={classes.eventItemActions}>
+                        <div name={event.id} className={classes.eventItemActions}>
                             <Button
                                 color="primary"
                                 className={classes.button}

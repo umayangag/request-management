@@ -95,7 +95,7 @@ const getLastActionTime = (events) => {
 };
 
 const EventActions = (props) => {
-  const { classes, users, divisions } = props;
+  const { classes, users, divisions,events } = props;
 
   var hourlyResponseTimes = [];
   for (var i = 1; i < 24; i++) {
@@ -142,7 +142,7 @@ const EventActions = (props) => {
           button
           onClick={() => {
             if (activeIncident.linked_individuals.length > 0) {
-              dispatch(showModal("LINKED_INDIVIDUAL_MODAL", { activeIncident }));
+              dispatch(showModal("LINKED_INDIVIDUAL_MODAL", { activeIncident,events }));
             }
           }}
         >
