@@ -53,7 +53,7 @@ const Home = ({classes, ...props}) =>{
 
             {!userCan(user, null, USER_ACTIONS.CAN_REVIEW_ALL_INCIDENTS) && (
                 <>
-                <Grid maxWidth={false} xs={12} item style={{paddingTop:"10px",overflow: "auto"}}>
+                <Grid xs={12} item style={{paddingTop:"10px",overflow: "auto"}}>
                     <Card style={{overflow: "auto"}}  xs={6}>
                         <CardHeader
                             title={f({id: "request.management.home.incidents_assigned"})}
