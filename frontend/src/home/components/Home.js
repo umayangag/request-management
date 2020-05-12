@@ -24,7 +24,7 @@ const Home = ({classes, ...props}) =>{
             {userCan(user, null, USER_ACTIONS.CAN_REVIEW_ALL_INCIDENTS) && (
                 <>
                 <Grid xs={12} item>
-                    <Card xs={6}>
+                    <Card style={{overflow: "auto"}} xs={6}>
                         <CardHeader
                             title={f({id: "request.management.home.incidents_assigned"})}
                         />
@@ -54,7 +54,7 @@ const Home = ({classes, ...props}) =>{
             {!userCan(user, null, USER_ACTIONS.CAN_REVIEW_ALL_INCIDENTS) && (
                 <>
                 <Grid xs={12} item style={{paddingTop:"10px"}}>
-                    <Card xs={6}>
+                    <Card style={{overflow: "auto"}}  xs={6}>
                         <CardHeader
                             title={f({id: "request.management.home.incidents_assigned"})}
                         />
