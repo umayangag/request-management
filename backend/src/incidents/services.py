@@ -911,7 +911,12 @@ def incident_verify(user: User, incident: Incident, comment: str, proof: bool):
         raise WorkflowException("Can only verify unverified incidents")
 
     if incident.assignee != user:
-        raise WorkflowException("Only assignee can verify the incident")
+        # need to check if the user got permission: 'CAN_ACTION_OVER_CURRENT_ASSIGNEE'
+        profile = Profile.objects.get(user_id=user.id)
+        required_permission = Permission.objects.get(codename=CAN_ACTION_OVER_CURRENT_ASSIGNEE)
+
+        if not user_level_has_permission(profile.level, required_permission):
+            raise WorkflowException("Only assignee can verify the incident")
 
     # create workflow action
     workflow = VerifyWorkflow(
