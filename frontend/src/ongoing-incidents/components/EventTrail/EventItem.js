@@ -271,6 +271,7 @@ function getDateDiff(event){
 const EventItemView = ({ event, classes }) => {
     const dispatch = useDispatch();
     const userData = useSelector((state)=>(state.user));
+    const colorList=["#FF9AA2","#FFB7B2","#FFDAC1","#E2F0CB","#B5EAD7","#C7CEEA"];
 
     let initiator = "Public User";
     if(event.initiator && event.initiator.userName !== "guest"){
@@ -278,10 +279,14 @@ const EventItemView = ({ event, classes }) => {
     }
 
     let initiatorData = userData.users.byIds[event.initiator.uid];
+    let color=colorList[(initiatorData.entity.name.length%6)];
+    if (getActionText(event)===` created this record`){
+        color=colorList[4]
+    }
 
     return (
-    <li className={event.action==='OUTCOME_ADDED'? classes.eventItemOutcome : classes.eventItem}>
-        <div className={classes.eventItemDetails}>
+    <li className={event.action==='OUTCOME_ADDED'? classes.eventItemOutcome : classes.eventItem} style={{border:"solid 1px "+color}}>
+        <div className={classes.eventItemDetails} style={{backgroundColor:color}}>
             <Chip label={!!(initiatorData) ? initiatorData.entity.name : ""} className={classes.chip} variant="outlined" />
             <div className={classes.eventItemUserDetails}>
                 <div className={classes.truncate}>
