@@ -270,6 +270,8 @@ class Incident(models.Model):
             (CAN_INVALIDATE_INCIDENT, "Can invalidate incident"),
             (CAN_REOPEN_INCIDENT, "Can reopen incident"),
 
+            (CAN_ACTION_OVER_CURRENT_ASSIGNEE, "Can action over current assignee"),
+
             (CAN_VIEW_REPORTS, "Can view inciddent reports"),
         )
 
