@@ -104,7 +104,9 @@ def get_category_dict(incidents):
             top_categories.append(category.top_category)
 
             sub_cat = {}
-            sub_cat["name"] = category.sn_sub_category
+            sub_cat["nameEnglish"] = category.sub_category
+            sub_cat["nameSinhala"] = category.sn_sub_category
+            sub_cat["nameTamil"] = category.tm_sub_category
             if str(category.id) in category_count:
                 sub_cat["count"] = category_count[str(category.id)]
             else:
@@ -138,13 +140,13 @@ def get_organization_dict(incidents, actionType = "OPENED"):
     for org_id, count in org_count.items():
         orgData = {}
         org = Organization.objects.get(id=org_id)
+        orgData["organizationNameEnglish"] = org.displayName
         orgData["organizationNameSinhala"] = org.displayName_sn
         orgData["organizationNameTamil"] = org.displayName_tm
         orgData["count"] = count
 
         organizations.append(orgData)
 
-    print(organizations)
     return organizations
 
 def get_daily_category_data(language="sinhala"):
