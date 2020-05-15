@@ -140,13 +140,13 @@ def get_organization_dict(incidents, actionType = "OPENED"):
     for org_id, count in org_count.items():
         orgData = {}
         org = Organization.objects.get(id=org_id)
+        orgData["organizationNameEnglish"] = org.displayName
         orgData["organizationNameSinhala"] = org.displayName_sn
         orgData["organizationNameTamil"] = org.displayName_tm
         orgData["count"] = count
 
         organizations.append(orgData)
 
-    print(organizations)
     return organizations
 
 def get_daily_category_data(language="sinhala"):
