@@ -104,7 +104,9 @@ def get_category_dict(incidents):
             top_categories.append(category.top_category)
 
             sub_cat = {}
-            sub_cat["name"] = category.sn_sub_category
+            sub_cat["nameEnglish"] = category.sub_category
+            sub_cat["nameSinhala"] = category.sn_sub_category
+            sub_cat["nameTamil"] = category.tm_sub_category
             if str(category.id) in category_count:
                 sub_cat["count"] = category_count[str(category.id)]
             else:
