@@ -113,7 +113,7 @@ ASGI_APPLICATION = "src.routing.application"
 
 DATABASES = {
     'default': {
-        'ENGINE': 'mysql.connector.django',
+        'ENGINE': 'django.db.backends.mysql',
         'NAME': env_var('DATABASE_NAME', 'incidents'),
         'USER': env_var('DATABASE_USER', 'root'),
         'PASSWORD': env_var('DATABASE_PWD', 'root'),
