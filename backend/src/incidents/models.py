@@ -325,6 +325,7 @@ class IncidentPoliceReport(models.Model):
         ordering = ("created_date",)
 
 class IncidentWorkflow(models.Model):
+    id = models.BigAutoField(primary_key=True)
     incident = models.ForeignKey(Incident,
                     on_delete=models.DO_NOTHING,
                     related_name="%(app_label)s_%(class)s_related",
