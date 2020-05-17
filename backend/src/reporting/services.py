@@ -10,7 +10,6 @@ from django.utils.dateparse import parse_datetime
 from ..custom_auth.models import Profile, Organization
 from ..common.models import Category, Channel, District
 from ..incidents.models import Incident, IncidentType, CloseWorkflow, StatusType
-from django.contrib.auth.models import User
 from ..incidents.services import get_incident_by_id
 from .functions import get_detailed_report, get_general_report, encode_column_names, get_subcategory_report, \
     incident_type_query, incident_list_query, date_list_query, encode_value, get_subcategory_categorized_report
@@ -18,6 +17,9 @@ from ..common.data.Institutions import institutions
 # from django.conf import settings
 from django.db.models import Count
 import collections, functools, operator
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
 
 def get_total_opened_incident_count():
     count = Incident.objects.exclude(current_status=StatusType.CLOSED.name).exclude(current_status=StatusType.INVALIDATED.name).count()

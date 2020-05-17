@@ -26,7 +26,7 @@ from .models import (
     Category
 )
 from ..common.models import (Channel)
-from django.contrib.auth.models import User, Group, Permission
+from django.contrib.auth.models import Group, Permission
 from django.contrib.contenttypes.models import ContentType
 
 from ..events import services as event_services
@@ -56,6 +56,9 @@ from zeep import Client
 from zeep.wsse.username import UsernameToken
 import requests
 from django.conf import settings
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
 
 def generate_refId(user):
     """ Function to generate refId for requests on creation """
@@ -353,7 +356,7 @@ def get_user_from_level(user_level: UserLevel, division: Division) -> User:
     """
 
     sql = """
-            SELECT usr.id, COUNT(incident.id) as incident_count FROM `auth_user` as usr
+            SELECT usr.id, COUNT(incident.id) as incident_count FROM `custom_auth_user` as usr
             LEFT JOIN incidents_incident as incident on incident.assignee_id = usr.id
             INNER JOIN custom_auth_profile as prf on prf.user_id = usr.id
             INNER JOIN custom_auth_userlevel as ulvl on prf.level_id = ulvl.id

@@ -1,6 +1,5 @@
 from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
-from django.contrib.auth.models import User
 from django_filters import rest_framework as filters
 from django.db.models.signals import post_save
 from django.dispatch import receiver
@@ -9,6 +8,9 @@ import enum
 from datetime import datetime
 from .permissions import *
 from ..common.models import Category
+from django.conf import settings
+
+User = settings.AUTH_USER_MODEL
 
 class LanguageType(enum.Enum):
     SINHALA = "Sinhala"
