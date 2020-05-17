@@ -114,7 +114,7 @@ ASGI_APPLICATION = "src.routing.application"
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': env_var('DATABASE_NAME', 'incidents'),
+        'NAME': env_var('DATABASE_NAME', 'request'),
         'USER': env_var('DATABASE_USER', 'root'),
         'PASSWORD': env_var('DATABASE_PWD', 'root'),
         'HOST': env_var('DATABASE_HOST', 'localhost'),   # Or an IP Address that your DB is hosted on
@@ -160,12 +160,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
-)
-
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-
 
 REST_FRAMEWORK = {
     'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema',
@@ -198,10 +192,6 @@ SECURE_CONTENT_TYPE_NOSNIFF = True
 CORS_ORIGIN_ALLOW_ALL = True
 X_FRAME_OPTIONS = "ALLOW ALL"
 
-# file uload parameters
-MEDIA_URL = '/app/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
 # set seeder folder for loaddata
 FIXTURE_DIRS = [
     "./seeddata/"
@@ -210,10 +200,7 @@ FIXTURE_DIRS = [
 # PDF endpoint for report generation
 PDF_SERVICE_ENDPOINT = env_var('PDF_SERVICE_ENDPOINT')
 
-# election constant - not in use
-# ELECTION = env_var('ELECTION')
-
-#Email parameters
+# Email parameters
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = env_var('EMAIL_HOST')
 EMAIL_PORT = env_var('EMAIL_PORT')
@@ -227,4 +214,5 @@ SMS_GATEWAY_USER=env_var('SMS_GATEWAY_USER')
 SMS_GATEWAY_PASSWORD=env_var('SMS_GATEWAY_PASSWORD')
 SMS_GATEWAY_BASE_URL=env_var('SMS_GATEWAY_BASE_URL')
 
+# set frontend APP_BASE_URL for notifications sent via sms and email
 APP_BASE_URL=env_var('APP_BASE_URL', 'http://localhost:3000')

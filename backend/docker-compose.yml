@@ -9,7 +9,7 @@ services:
     environment:
       MYSQL_ROOT_USER: root
       MYSQL_ROOT_PASSWORD: toor
-      MYSQL_DATABASE: lsf
+      MYSQL_DATABASE: request
     expose:
       - '3306'
     ports:
@@ -31,8 +31,7 @@ services:
       - DATABASE_PORT=3306
       - DATABASE_USER=root
       - DATABASE_PWD=toor
-      - DATABASE_NAME=lsf
-      - ELECTION=${ELECTION}
+      - DATABASE_NAME=request
     volumes:
       - './src:/app/src'
       - './seeddata:/app/seeddata'
