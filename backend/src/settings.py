@@ -69,6 +69,8 @@ INSTALLED_APPS = [
     'channels',
 ]
 
+AUTH_USER_MODEL = 'custom_auth.User'
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',

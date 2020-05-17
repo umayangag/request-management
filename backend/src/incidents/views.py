@@ -13,7 +13,7 @@ from django.db.models import Q
 
 from .models import Incident, StatusType, SeverityType, ReopenWorkflow as Reopened, \
     CannedResponse, IncidentType, Reporter
-from django.contrib.auth.models import User, Group, Permission
+from django.contrib.auth.models import Group, Permission
 from .serializers import (
     IncidentSerializer,
     ReporterSerializer,
@@ -74,6 +74,9 @@ from ..custom_auth.models import UserLevel
 from ..custom_auth.services import user_can
 from .permissions import *
 from django.conf import settings
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
 
 class IncidentResultsSetPagination(PageNumberPagination):
     page_size = 15
