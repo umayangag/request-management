@@ -1145,8 +1145,12 @@ const VerticalLinearStepper = (props) => {
   }
 
   const isLoading = isLoadingIncident || isLoadingMetaData;
+  const queryString = require('query-string');
+
+  const queryParams = queryString.parse(props.location.search);
   return (
     <div className={classes.root}>
+        hello: {queryParams.organization}
       <Grid container spacing={24}>
         <Grid item xs={12} sm={6}>
           <Grid item xs={12} sm={6}>
