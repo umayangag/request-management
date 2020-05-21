@@ -108,6 +108,10 @@ urlpatterns = [
         "entities/",
         user_views.OrganizationList.as_view(),
     ),
+    path(
+        "oraganizations/<int:organization_id>",
+        user_views.OrganizationDetail.as_view(),
+    ),
     path("incidents/<uuid:incident_id>/workflow/<str:workflow>",
          incident_views.IncidentWorkflowView.as_view()
     ),
