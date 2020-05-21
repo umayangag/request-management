@@ -109,7 +109,7 @@ urlpatterns = [
         user_views.OrganizationList.as_view(),
     ),
     path(
-        "oraganizations/<int:organization_id>",
+        "organizations/<int:organization_id>",
         user_views.OrganizationDetail.as_view(),
     ),
     path("incidents/<uuid:incident_id>/workflow/<str:workflow>",
