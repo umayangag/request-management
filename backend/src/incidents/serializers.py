@@ -58,9 +58,10 @@ class RecipientSerializer(serializers.ModelSerializer):
 
 class IncidentSerializer(serializers.ModelSerializer):
 
-    currentStatus = serializers.ReadOnlyField(source="current_status")
     createdDate = serializers.ReadOnlyField(source="created_date")
     updatedDate = serializers.ReadOnlyField(source="updated_date")
+    dueDate = serializers.ReadOnlyField(source="due_date")
+    currentStatus = serializers.ReadOnlyField(source="current_status")
     currentDecision = serializers.ReadOnlyField(source="current_decision")
 
     assignee = UserSerializer(read_only=True)
@@ -79,7 +80,7 @@ class IncidentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Incident
         exclude = ["created_date", "updated_date", "ds_division", "grama_niladhari",
-                   "current_severity", "complainer_consent"]
+                   "current_severity", "complainer_consent", "due_date"]
         read_only_fields = ['recaptcha']
 
     def get_extra_kwargs(self):
