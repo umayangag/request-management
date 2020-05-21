@@ -535,7 +535,7 @@ const VerticalLinearStepper = (props) => {
         valid = false;
       }
       }
-      
+
       // if (!incidentContact.recipientType) {
       //   errorMsg = {
       //     ...errorMsg,
@@ -607,7 +607,7 @@ const VerticalLinearStepper = (props) => {
       };
       valid = false;
     }
-    
+
     setFormErrors({ ...errorMsg });
     return valid;
   };
@@ -906,7 +906,8 @@ const VerticalLinearStepper = (props) => {
                 recipientTelephone: incidentContact.recipientPhone,
                 recipientMobile: incidentContact.recipientMobile,
                 recipientEmail: incidentContact.recipientEmail,
-                recipientTitle:recipientTitle
+                recipientTitle:recipientTitle,
+                organizationId:queryParams.organization
               };
               const dateTime = getFormattedDateTime();
               if (dateTime) {
@@ -1150,7 +1151,6 @@ const VerticalLinearStepper = (props) => {
   const queryParams = queryString.parse(props.location.search);
   return (
     <div className={classes.root}>
-        hello: {queryParams.organization}
       <Grid container spacing={24}>
         <Grid item xs={12} sm={6}>
           <Grid item xs={12} sm={6}>
