@@ -48,6 +48,8 @@ import {
   requestIncidentCatogories,
 } from "../../shared/state/sharedActions";
 
+import {loadOrganization} from "../state/guestViewActions";
+
 import {
   createGuestIncident,
   updateGuestIncident,
@@ -106,12 +108,16 @@ const styles = (theme) => ({
   },
 });
 
+const queryString = require('query-string');
+
 const VerticalLinearStepper = (props) => {
+    const queryParams = queryString.parse(props.location.search);
   useEffect(() => {
     dispatch(fetchElections());
     dispatch(fetchCategories());
     dispatch(fetchChannels());
     dispatch(fetchDistricts());
+    dispatch(loadOrganization(queryParams.organization))
   }, []);
 
   const { formatMessage: f } = useIntl();
@@ -1146,9 +1152,7 @@ const VerticalLinearStepper = (props) => {
   }
 
   const isLoading = isLoadingIncident || isLoadingMetaData;
-  const queryString = require('query-string');
 
-  const queryParams = queryString.parse(props.location.search);
   return (
     <div className={classes.root}>
       <Grid container spacing={24}>

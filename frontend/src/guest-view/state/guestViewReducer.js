@@ -35,6 +35,7 @@ import {
 const initialState = {
     isLoading: false,
     activeStep: 0,
+    organization:{},
 }
 
 const incidentReducer = createReducer(initialState, {
