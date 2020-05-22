@@ -19,6 +19,7 @@ import InvalidateModal from './InvalidateModal';
 import ReopenModal from './ReopenModal';
 import SendCannedResponseModal from './CannedResponseModal'
 import LinkedIndividualsModal from './LinkedIndividualModal'
+import DueDateTimeEditModal from './DueDateTimeEditModal'
 
 const MODAL_COMPONENTS = {
     'RESPONSE_TIME_EDIT': ResponseTimeEditModal,
@@ -33,7 +34,8 @@ const MODAL_COMPONENTS = {
     'INVALIDATE_MODAL': InvalidateModal,
     'REOPEN_MODAL': ReopenModal,
     'CANNED_RESPONSE': SendCannedResponseModal,
-    'LINKED_INDIVIDUAL_MODAL':LinkedIndividualsModal
+    'LINKED_INDIVIDUAL_MODAL': LinkedIndividualsModal,
+    'DUE_DATE_TIME_EDIT_MODAL': DueDateTimeEditModal,
     /* other modals */
 }
 

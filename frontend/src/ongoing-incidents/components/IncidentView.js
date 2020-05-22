@@ -158,6 +158,9 @@ function NavTabs({ classes, match }) {
                 case 'RESPONSE_TIME_EDIT':
                     dispatch(showModal('RESPONSE_TIME_EDIT', { activeIncident }))
                     break
+                case 'DUE_DATE_TIME_EDIT_MODAL':
+                    dispatch(showModal('DUE_DATE_TIME_EDIT_MODAL', { activeIncident }))
+                    break
 
                 default:
                     break;
