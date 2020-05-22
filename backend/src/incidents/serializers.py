@@ -60,12 +60,13 @@ class IncidentSerializer(serializers.ModelSerializer):
 
     createdDate = serializers.ReadOnlyField(source="created_date")
     updatedDate = serializers.ReadOnlyField(source="updated_date")
-    dueDate = serializers.ReadOnlyField(source="due_date")
     currentStatus = serializers.ReadOnlyField(source="current_status")
     currentDecision = serializers.ReadOnlyField(source="current_decision")
 
     assignee = UserSerializer(read_only=True)
 
+    dueDate = serializers.CharField(
+        source="due_date", required=False, allow_null=True, allow_blank=True)
     severity = serializers.CharField(source="current_severity", required=False, allow_null=True, allow_blank=True)
     divisionalSecretariat = serializers.CharField(
         source="ds_division", required=False, allow_null=True, allow_blank=True)
