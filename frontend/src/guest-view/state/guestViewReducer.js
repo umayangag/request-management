@@ -28,6 +28,7 @@ import {
 } from '../../incident/state/incidentActions'
 
 import {
+    loadOrganizationSuccess,
     moveStepper,
 } from './guestViewActions'
 
@@ -39,7 +40,9 @@ const initialState = {
 }
 
 const incidentReducer = createReducer(initialState, {
-
+    [loadOrganizationSuccess] : (state, action) => {
+        state.organization = action.payload.organization.data;
+    },
     [createGuestIncidentRequest] : (state, action) => {
         state.isLoading = true;
     },

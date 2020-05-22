@@ -1152,13 +1152,14 @@ const VerticalLinearStepper = (props) => {
   }
 
   const isLoading = isLoadingIncident || isLoadingMetaData;
+  const organization = useSelector((state) => state.guestView.organization);
 
   return (
     <div className={classes.root}>
       <Grid container spacing={24}>
         <Grid item xs={12} sm={6}>
           <Grid item xs={12} sm={6}>
-            <Logo />
+            <Logo image={organization? organization.logo:null} />
           </Grid>
         </Grid>
 
