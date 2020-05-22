@@ -35,6 +35,7 @@ class OrganizationList(APIView):
         return Response(serializer.data)
 
 class OrganizationDetail(APIView):
+    permission_classes = []
     serializer_class = OrganizationSerializer
 
     def get(self, request, organization_id, format=None):
