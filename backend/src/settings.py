@@ -37,8 +37,7 @@ DEBUG = env_var('django_debug', True)
 
 
 ALLOWED_HOSTS = [
-    "127.0.0.1",
-    "localhost"
+    env_var('API_BASE_HOST', 'localhost'),
 ]
 
 
@@ -191,8 +190,12 @@ JWT_AUTH = {
 # Application security
 SECURE_BROWSER_XSS_FILTER = True
 SECURE_CONTENT_TYPE_NOSNIFF = True
-CORS_ORIGIN_ALLOW_ALL = True
-X_FRAME_OPTIONS = "ALLOW ALL"
+X_FRAME_OPTIONS = "SAMEORIGIN"
+
+CORS_ORIGIN_ALLOW_ALL = False
+CORS_ORIGIN_WHITELIST = [
+    env_var('APP_BASE_URL', 'http://localhost:3000'),
+]
 
 # set seeder folder for loaddata
 FIXTURE_DIRS = [
