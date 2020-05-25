@@ -668,7 +668,7 @@ export function fetchSignIn(userName, password) {
         dispatch(requestSignIn());
         try{
             let signInData = null;
-            signInData = localStorage.read('ECIncidentManagementUser');
+            signInData = localStorage.read('RequestManagementUser');
             let token = null;
 
             if(!signInData){
@@ -676,7 +676,7 @@ export function fetchSignIn(userName, password) {
 
                 if(signInData.data.token != ""){
                     if(getState().shared.signedInUser.rememberMe){
-                        localStorage.write('ECIncidentManagementUser', signInData.data);
+                        localStorage.write('RequestManagementUser', signInData.data);
                         token = signInData.data.token;
                     }
                 }else{
@@ -720,7 +720,7 @@ export function signOutError(error) {
 export function initiateSignOut() {
     return async function (dispatch, getState) {
         try{
-            localStorage.remove('ECIncidentManagementUser');
+            localStorage.remove('RequestManagementUser');
             axios.defaults.headers.common['Authorization'] = null;
             dispatch(signOut())
         }catch(error){

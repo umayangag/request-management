@@ -26,7 +26,7 @@ handler.interceptors.response.use(function (response) {
 });
 
 const signOut = () => {
-  localStorage.remove('ECIncidentManagementUser');
+  localStorage.remove('RequestManagementUser');
   axios.defaults.headers.common['Authorization'] = null;
   window.location.href = "/signin";
 }

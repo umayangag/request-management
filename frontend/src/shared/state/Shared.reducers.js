@@ -184,7 +184,7 @@ const initialState = {
 
 export default function sharedReducer(state, action) {
     if (typeof state === 'undefined') {
-        let userData = localStorage.read("ECIncidentManagementUser");
+        let userData = localStorage.read("RequestManagementUser");
         if (userData && userData.authenticated) {
             initialState.signedInUser.data = userData.user;
             initialState.signedInUser.isSignedIn = true;

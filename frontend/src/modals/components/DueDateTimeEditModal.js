@@ -16,7 +16,6 @@ const DueDateTimeEditModal = (props) => {
   const dispatch = useDispatch();
   const { activeIncident } = props;
   const dateValue = moment(activeIncident.dueDate).format().substr(0, 16)
-  debugger
   const [dueDate, setDueDate] = useState(dateValue);
 
   return (
