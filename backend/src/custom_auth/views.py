@@ -1,8 +1,12 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 
-from django.contrib.auth.models import User, Group
-from .serializers import UserSerializer, GroupSerializer
+from django.contrib.auth.models import Group
+from .models import Organization
+from .serializers import UserSerializer, GroupSerializer, OrganizationSerializer
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
 
 class UserList(APIView):
     serializer_class = UserSerializer
@@ -28,4 +32,15 @@ class OrganizationList(APIView):
     def get(self, request, format=None):
         organizations = Group.objects.filter(organization=None)
         serializer = GroupSerializer(organizations, many=True)
+        return Response(serializer.data)
+
+class OrganizationDetail(APIView):
+    permission_classes = []
+    serializer_class = OrganizationSerializer
+
+    def get(self, request, organization_id, format=None):
+        """ return organization detail by organization id. """
+
+        organization = Organization.objects.get(id=organization_id)
+        serializer = OrganizationSerializer(organization)
         return Response(serializer.data)
