@@ -26,6 +26,7 @@ import Badge from "@material-ui/core/Badge";
 
 
 import {
+  fetchSignInRefreshToken,
   initiateSignOut,
   fetchChannels,
   fetchElections,
@@ -41,8 +42,8 @@ import {
   fetchPoliceDivisions,
   fetchWards,
   getCannedResponses,
+  changeLanguage
 } from "../shared/state/sharedActions";
-import { changeLanguage } from "../shared/state/sharedActions";
 import { loadUsers } from "../user/state/userActions";
 import { showModal, hideModal } from "../modals/state/modal.actions";
 
@@ -153,18 +154,51 @@ class DomainContainer extends React.Component {
       anchorNotification: null,
       notifications: [],
       unreadNotificationCount: 0,
-  
-      timeout: 1000 * 5 * 1,
-      showModal_Dummy: false,
-      userLoggedIn: false,
+
+      timeout: 1000 * 60 * 15,
       isTimedOut: false,
     };
-  
+
     this.idleTimer = null
     this.onAction = this._onAction.bind(this)
     this.onActive = this._onActive.bind(this)
     this.onIdle = this._onIdle.bind(this)
   }
+
+
+  /**
+   * user idle actions
+   */
+
+  _onAction(e) {
+    // console.log("user did something", e);
+    this.setState({ isTimedOut: false });
+  }
+
+  _onActive(e) {
+    // console.log("user is active", e);
+    this.setState({ isTimedOut: false });
+  }
+
+  _onIdle(e) {
+    // console.log("user is idle", e);
+    const isTimedOut = this.state.isTimedOut;
+    if (isTimedOut) {
+      this.props.hideIdleTimeOutModal();
+      this.handleSignOut();
+    } else {
+      this.props.showIdleTimeOutModal()
+      this.idleTimer.reset();
+      this.setState({ isTimedOut: true });
+    }
+  }
+
+  refreshTokenScheduler = (signInData) => {
+    if(!this.state.isTimedOut && signInData){
+      this.props.refreshToken()
+    }
+  }
+
 
   componentDidMount() {
     this.props.getChannels();
@@ -185,6 +219,9 @@ class DomainContainer extends React.Component {
     const signInData = localStorage.read("RequestManagementUser");
     signInData && this.setState({ authToken: signInData.token });
     this.loadNotifications();
+
+    // following is only neccessary when you have to periodically get new tokens
+    this.interval = setInterval(() => this.refreshTokenScheduler(signInData), 1000 * 60 * 15);
   }
 
   loadNotifications = async () => {
@@ -295,33 +332,6 @@ class DomainContainer extends React.Component {
       }
     }
     window.location = `/app/review/${notification.incident}`;
-  }
-
-  /**
-   * user idle actions
-   */
-
-  _onAction(e) {
-    // console.log("user did something", e);
-    this.setState({ isTimedOut: false });
-  }
-
-  _onActive(e) {
-    // console.log("user is active", e);
-    this.setState({ isTimedOut: false });
-  }
-
-  _onIdle(e) {
-    console.log("user is idle", e);
-    const isTimedOut = this.state.isTimedOut;
-    if (isTimedOut) {
-      this.props.hideIdleTimeOutModal();
-      this.props.history.push("/");
-    } else {
-      this.props.showIdleTimeOutModal()
-      this.idleTimer.reset();
-      this.setState({ isTimedOut: true });
-    }
   }
 
   render() {
@@ -624,6 +634,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     hideIdleTimeOutModal: () => {
       dispatch(hideModal())
+    },
+    refreshToken: () => {
+      dispatch(fetchSignInRefreshToken())
     }
   };
 };

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Button from "@material-ui/core/Button";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
@@ -7,6 +7,8 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 
 import { useDispatch } from "react-redux";
 import { hideModal } from "../state/modal.actions";
+import { fetchSignInRefreshToken, initiateSignOut } from "../../shared/state/sharedActions"
+
 
 const IdleTimeOutModal = (props) => {
   const dispatch = useDispatch();
@@ -22,15 +24,16 @@ const IdleTimeOutModal = (props) => {
       <DialogActions>
         <Button
           onClick={() => {
+            dispatch(initiateSignOut())
             dispatch(hideModal());
           }}
           color="secondary"
         >
-          Close
+          Sign Out
         </Button>
         <Button
           onClick={() => {
-            // dispatch();
+            dispatch(fetchSignInRefreshToken());
             dispatch(hideModal());
           }}
           color="primary"
