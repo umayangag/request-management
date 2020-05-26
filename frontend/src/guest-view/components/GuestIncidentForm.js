@@ -194,6 +194,7 @@ const VerticalLinearStepper = (props) => {
   }
 
   const [incidentFiles, setIncidentFiles] = useState(null);
+  const [fileError, setFileError] = useState(false);
   const [incidentDateTime, setIncidentDateTime] = useState({
     date:
       incidentId && incidentData.occured_date
@@ -809,7 +810,7 @@ const VerticalLinearStepper = (props) => {
       }),
       content: (
         <>
-          <FileUploader files={incidentFiles} setFiles={setIncidentFiles} />
+          <FileUploader files={incidentFiles} setFiles={setIncidentFiles} setFileError={setFileError} />
           <ReCAPTCHA
             ref={recaptchaRef}
             sitekey={process.env.REACT_APP_RECAPTCHA_SITEKEY}
@@ -1327,7 +1328,7 @@ const VerticalLinearStepper = (props) => {
                       onClick={handleNext}
                       className={classes.button}
                       disabled={
-                        index == 3 ? isLoading || !incidentRecaptcha : isLoading
+                        index == 3 ? isLoading || !incidentRecaptcha || fileError : isLoading 
                       }
                     >
                       {activeStep === steps.length - 1
