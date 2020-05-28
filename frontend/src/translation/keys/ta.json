@@ -30,6 +30,7 @@
   "request.management.report.incidents.time": "நேரம்",
   "request.management.report.incidents.datetime.error.message": "திகதி மற்றும் நேரம் தேவைப்படுகின்றன",
   "request.management.report.incidents.recaptcha.error.message": "இந்த சரிபார்ப்பு தேவை",
+  "request.management.report.incidents.recaptcha.note" : "படிவத்தை சமர்ப்பிக்க கீழே \"I'm not a robot\" பெட்டியைக் குறிக்க வேண்டும்.",
   "request.management.report.incidents.name.error.message": "பெயர் தேவை",
   "request.management.report.incidents.nic.error.message": "தேசிய அடையாள அட்டை எண் தேவை",
   "request.management.report.incidents.invalidNic.error.message": "இது சரியான தேசிய அடையாள அட்டை எண் அல்ல",
@@ -99,6 +100,7 @@
   "request.management.home.incidents.list.subcategory": "துணைப்பிரிவு",
   "request.management.home.incidents.list.last_actioned_at": "Last Actioned At",
   "request.management.home.incidents.list.created_date": "உருவாக்கிய தேதி",
+  "request.management.home.incidents.list.due_date": "உரிய தேதி",
 
   "request.management.incident.create.basic_information": "அடிப்படை தகவல்",
   "request.management.incident.create.type": "Type",
