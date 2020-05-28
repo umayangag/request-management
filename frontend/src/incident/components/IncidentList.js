@@ -20,6 +20,7 @@ const CustomTableCell = withRouter(
       // padding: "3px 8px",
       fontSize: "14px",
       textAlign: 'center',
+        border:"1px solid rgb(224, 224, 224)",
       "& p.description": {
         overflow: "hidden",
         textOverflow: "ellipsis",
@@ -32,6 +33,7 @@ const CustomTableCell = withRouter(
     },
       head:{
           fontSize: "16px",
+          border:"1px solid rgb(224, 224, 224)"
       }
   }))(TableCell)
 );
