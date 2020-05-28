@@ -349,26 +349,17 @@ const VerticalLinearStepper = (props) => {
     let errorMsg = { ...formErrors };
     let valid = true;
 
-    if (!incidentContact.mobile) {
+    if (incidentContact.mobile) {
+      if(!(incidentContact.mobile.match("^[0-9]{10}$"))){
       errorMsg = {
         ...errorMsg,
         incidentContactErrorMsg: f({
-          id: "request.management.report.incidents.phone.error.message",
-          defaultMessage: "Contact number is required",
+          id: "request.management.incident.error.invalidMobile",
+          defaultMessage: "mobile Number is required",
         }),
       };
       valid = false;
-    } else {
-      if (!incidentContact.mobile.match("^[0-9]{10}$")) {
-        errorMsg = {
-          ...errorMsg,
-          incidentContactErrorMsg: f({
-            id: "request.management.incident.error.invalidMobile",
-            defaultMessage: "mobile Number is required",
-          }),
-        };
-        valid = false;
-      }
+    }
     }
 
     if (incidentContact.phone) {
@@ -411,26 +402,17 @@ const VerticalLinearStepper = (props) => {
       };
       valid = false;
     }
-    if (!incidentContact.nic) {
+    if (incidentContact.nic) {
+      if(!(incidentContact.nic.match("^([0-9]{9}[x|X|v|V]|[0-9]{12})$"))){
       errorMsg = {
         ...errorMsg,
         incidentNicErrorMsg: f({
-          id: "request.management.report.incidents.nic.error.message",
+          id: "request.management.report.incidents.invalidNic.error.message",
           defaultMessage: "NIC Number is required",
         }),
       };
       valid = false;
-    } else {
-      if (!incidentContact.nic.match("^([0-9]{9}[x|X|v|V]|[0-9]{12})$")) {
-        errorMsg = {
-          ...errorMsg,
-          incidentNicErrorMsg: f({
-            id: "request.management.report.incidents.invalidNic.error.message",
-            defaultMessage: "NIC Number is required",
-          }),
-        };
-        valid = false;
-      }
+    }
     }
     // if (!incidentContact.reporterType) {
     //   errorMsg = {
@@ -473,26 +455,17 @@ const VerticalLinearStepper = (props) => {
       valid = false;
     }
     if (showRecipient === "YES") {
-      if (!incidentContact.recipientMobile) {
+      if (incidentContact.recipientMobile) {
+        if(!(incidentContact.recipientMobile.match("^[0-9]{10}$"))){
         errorMsg = {
           ...errorMsg,
           recipientContactErrorMsg: f({
-            id: "request.management.report.incidents.phone.error.message",
-            defaultMessage: "Contact number is required",
+            id: "request.management.incident.error.invalidMobile",
+            defaultMessage: "mobile Number is required",
           }),
         };
         valid = false;
-      } else {
-        if (!incidentContact.recipientMobile.match("^[0-9]{10}$")) {
-          errorMsg = {
-            ...errorMsg,
-            recipientContactErrorMsg: f({
-              id: "request.management.incident.error.invalidMobile",
-              defaultMessage: "mobile Number is required",
-            }),
-          };
-          valid = false;
-        }
+      }
       }
 
       if (incidentContact.recipientEmail) {
@@ -535,29 +508,17 @@ const VerticalLinearStepper = (props) => {
         };
         valid = false;
       }
-      if (!incidentContact.recipientNic) {
+      if (incidentContact.recipientNic) {
+        if(!(incidentContact.recipientNic.match("^([0-9]{9}[x|X|v|V]|[0-9]{12})$"))){
         errorMsg = {
           ...errorMsg,
           recipientNicErrorMsg: f({
-            id: "request.management.report.incidents.nic.error.message",
+            id: "request.management.report.incidents.invalidNic.error.message",
             defaultMessage: "NIC Number is required",
           }),
         };
         valid = false;
-      } else {
-        if (
-          !incidentContact.recipientNic.match("^([0-9]{9}[x|X|v|V]|[0-9]{12})$")
-        ) {
-          errorMsg = {
-            ...errorMsg,
-            recipientNicErrorMsg: f({
-              id:
-                "request.management.report.incidents.invalidNic.error.message",
-              defaultMessage: "NIC Number is required",
-            }),
-          };
-          valid = false;
-        }
+      }
       }
 
       // if (!incidentContact.recipientType) {
@@ -621,16 +582,16 @@ const VerticalLinearStepper = (props) => {
       };
       valid = false;
     }
-    if (!language) {
-      errorMsg = {
-        ...errorMsg,
-        languageErrorMsg: f({
-          id: "request.management.report.incidents.recipient.error.message",
-          defaultMessage: "This is required",
-        }),
-      };
-      valid = false;
-    }
+    // if (!language) {
+    //   errorMsg = {
+    //     ...errorMsg,
+    //     languageErrorMsg: f({
+    //       id: "request.management.report.incidents.recipient.error.message",
+    //       defaultMessage: "This is required",
+    //     }),
+    //   };
+    //   valid = false;
+    // }
 
     setFormErrors({ ...errorMsg });
     return valid;
@@ -1195,24 +1156,27 @@ const VerticalLinearStepper = (props) => {
           <div style={{ textAlign: "right" }}>
             <Button
               variant="outlined"
+              style={{width:'88px'}}
               color="primary"
               onClick={() => dispatch(changeLanguage("si"))}
               className={classes.button}
             >
               {" "}
-              Sinhala{" "}
+              සිංහල{" "}
             </Button>
             <Button
               variant="outlined"
+              style={{width:'88px'}}
               color="primary"
               onClick={() => dispatch(changeLanguage("ta"))}
               className={classes.button}
             >
               {" "}
-              Tamil{" "}
+              தமிழ்{" "}
             </Button>
             <Button
               variant="outlined"
+              style={{width:'88px'}}
               color="primary"
               onClick={() => dispatch(changeLanguage("en"))}
               className={classes.button}
@@ -1237,118 +1201,54 @@ const VerticalLinearStepper = (props) => {
         })}
       </Typography>
       <div className={classes.paper2}>
-        <ul className={props.classes.list}>
-          <li>
-            <Typography
-              style={{ width: "100%" }}
-              align="left"
-              variant="subtitle1"
-              marginTop="20"
-            >
-              {f({
-                id: "request.management.report.incidents.helper.text",
-                defaultMessage: "Fields denoted with an * are mandatory.",
-              })}
-            </Typography>
-          </li>
-          <li>
-            <Typography
-              style={{ width: "100%" }}
-              align="left"
-              variant="subtitle1"
-              marginTop="20"
-            >
-              {f({
-                id: "request.management.report.incidents.helper.text5",
-                defaultMessage:
-                  "Please select your language of preference and then fill in the form below.",
-              })}
-            </Typography>
-          </li>
-          <li>
-            <Typography
-              style={{ width: "100%" }}
-              align="left"
-              variant="subtitle1"
-              marginTop="20"
-            >
-              {f({
-                id: "request.management.report.incidents.helper.text6",
-                defaultMessage:
-                  'Request on behalf of someone - If a request is made on behalf of someone, click "Yes" and fill in the Recipient Information. If not, click "No"',
-              })}
-            </Typography>
-          </li>
-        </ul>
-      </div>
-      <Grid item xs={12}>
-        <FormControl
-          className={classes.group}
-          error={formErrors.languageErrorMsg ? true : false}
-          component="fieldset"
-        >
-          <FormLabel component="legend">
-            {f({
-              id: "request.management.incident.create.location.language",
-              defaultMessage: "Select Language*",
-            })}
-          </FormLabel>
-          <RadioGroup
-            aria-label="Gender"
-            name="language"
-            id="language"
-            // ref= {this.props.securityDepositeRpp}
-            // className={classes.group}
-            value={language}
-            onChange={(e) => {
-              setLanguage(e.target.value);
-              formErrors.languageErrorMsg = null;
-              dispatch(
-                changeLanguage(
-                  e.target.value == "SINHALA"
-                    ? "si"
-                    : e.target.value == "TAMIL"
-                    ? "ta"
-                    : "en"
-                )
-              );
-            }}
-            // onClick={(e) => { }}
-            row
-          >
-            <FormControlLabel
-              control={<Radio />}
-              value="SINHALA"
-              label={f({
-                id:
-                  "request.management.incident.create.location.language.sinhala",
-                defaultMessage: "Sinhala",
-              })}
-            />
-            <FormControlLabel
-              control={<Radio />}
-              label={f({
-                id:
-                  "request.management.incident.create.location.language.tamil",
-                defaultMessage: "Tamil",
-              })}
-              value="TAMIL"
-            />
-            <FormControlLabel
-              control={<Radio />}
-              label={f({
-                id:
-                  "request.management.incident.create.location.language.english",
-                defaultMessage: "English",
-              })}
-              value="ENGLISH"
-            />
-          </RadioGroup>
-          <FormHelperText>
-            {formErrors.languageErrorMsg ? formErrors.languageErrorMsg : null}
-          </FormHelperText>
-        </FormControl>
-      </Grid>
+              <ul className={props.classes.list}>
+              <li><Typography style={{ width: '100%' }} align="left" variant="subtitle1" marginTop="20">
+                {f({ id: "request.management.report.incidents.helper.text", defaultMessage: "Fields denoted with an * are mandatory." })}
+            </Typography></li>
+            <li><Typography style={{ width: '100%' }} align="left" variant="subtitle1" marginTop="20">
+                {f({ id: "request.management.report.incidents.helper.text5", defaultMessage: "Please select your language of preference and then fill in the form below." })}
+            </Typography></li>
+            <li><Typography style={{ width: '100%' }} align="left" variant="subtitle1" marginTop="20">
+                {f({ id: "request.management.report.incidents.helper.text6", defaultMessage: 'Request on behalf of someone - If a request is made on behalf of someone, click "Yes" and fill in the Recipient Information. If not, click "No"' })}
+            </Typography></li>
+                    </ul>
+            </div>
+      {/* <Grid item xs={12}>
+                        <FormControl className={classes.group} error={formErrors.languageErrorMsg ? true : false} component="fieldset">
+                        <FormLabel component="legend">{f({ id: "request.management.incident.create.location.language", defaultMessage: "Select Language*" })}</FormLabel>
+                            <RadioGroup
+                                aria-label="Gender"
+                                name="language"
+                                id="language"
+                                value={language}
+                                onChange={(e) => { setLanguage(e.target.value);formErrors.languageErrorMsg = null;dispatch(changeLanguage(e.target.value=="SINHALA" ? "si" : e.target.value=="TAMIL" ? "ta" : "en")); }}
+                                row
+                            >
+                                <FormControlLabel
+                                    control={
+                                        <Radio />
+                                    }
+                                    value="SINHALA"
+                                    label={f({ id: "request.management.incident.create.location.language.sinhala", defaultMessage: "Sinhala" })}
+                                />
+                                <FormControlLabel
+                                    control={
+                                        <Radio />
+                                    }
+                                    label={f({ id: "request.management.incident.create.location.language.tamil", defaultMessage: "Tamil" })}
+                                    value="TAMIL"
+                                />
+                                <FormControlLabel
+                                    control={
+                                        <Radio />
+                                    }
+                                    label={f({ id: "request.management.incident.create.location.language.english", defaultMessage: "English" })}
+                                    value="ENGLISH"
+                                />
+                            </RadioGroup>
+                            <FormHelperText>{formErrors.languageErrorMsg ? formErrors.languageErrorMsg : null}</FormHelperText>
+                        </FormControl>
+                    </Grid> */}
       <Stepper activeStep={activeStep} orientation="vertical">
         {steps.map((label, index) => {
           const props = {};
