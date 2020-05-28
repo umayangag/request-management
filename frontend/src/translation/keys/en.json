@@ -108,6 +108,7 @@
   "request.management.home.incidents.list.subcategory": "Subcategory",
   "request.management.home.incidents.list.last_actioned_at": "Last Actioned At",
   "request.management.home.incidents.list.created_date": "Created Date",
+  "request.management.home.incidents.list.due_date": "Due Date",
 
   "request.management.incident.create.basic_information": "Basic Information",
   "request.management.incident.create.type": "Type",
