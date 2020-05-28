@@ -1,18 +1,19 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
-  Table,
-  TableHead,
-  TableRow,
-  TableCell,
-  TableBody,
-  withStyles,
-  TableFooter,
-  TablePagination,
+    Table,
+    TableHead,
+    TableRow,
+    TableCell,
+    TableBody,
+    withStyles,
+    TableFooter,
+    TablePagination, Grid,
 } from "@material-ui/core";
 import { withRouter } from "react-router";
 import { useIntl } from "react-intl";
 import moment from "moment";
+import Chip from "@material-ui/core/Chip/Chip";
 
 const CustomTableCell = withRouter(
   withStyles((theme) => ({
@@ -214,6 +215,9 @@ function IncidentList({
             }}
             onChangePage={handlePageChange}
           />
+            <CustomTableCell align="center">
+                <Chip label={"Verified"} className={classes.chip} style={{backgroundColor:"rgba(0, 255, 0, 0.2)"}} />
+            </CustomTableCell>
         </TableRow>
         {/* )} */}
       </TableFooter>
