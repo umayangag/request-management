@@ -149,6 +149,7 @@ function HomePage(props) {
           <div style={{ textAlign: "right" }}>
             <Button
               variant="outlined"
+              style={{width:'88px'}}
               color="primary"
               onClick={() => dispatch(changeLanguage("si"))}
               className={classes.button}
@@ -158,6 +159,7 @@ function HomePage(props) {
             </Button>
             <Button
               variant="outlined"
+              style={{width:'88px'}}
               color="primary"
               onClick={() => dispatch(changeLanguage("ta"))}
               className={classes.button}
@@ -167,6 +169,7 @@ function HomePage(props) {
             </Button>
             <Button
               variant="outlined"
+              style={{width:'88px'}}
               color="primary"
               onClick={() => dispatch(changeLanguage("en"))}
               className={classes.button}

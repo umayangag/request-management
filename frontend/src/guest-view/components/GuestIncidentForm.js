@@ -343,16 +343,7 @@ const VerticalLinearStepper = (props) => {
     let errorMsg = { ...formErrors };
     let valid = true;
 
-    if (!incidentContact.mobile) {
-      errorMsg = {
-        ...errorMsg,
-        incidentContactErrorMsg: f({
-          id: "request.management.report.incidents.phone.error.message",
-          defaultMessage: "Contact number is required",
-        }),
-      };
-      valid = false;
-    }else{
+    if (incidentContact.mobile) {
       if(!(incidentContact.mobile.match("^[0-9]{10}$"))){
       errorMsg = {
         ...errorMsg,
@@ -401,16 +392,7 @@ const VerticalLinearStepper = (props) => {
       };
       valid = false;
     }
-    if (!incidentContact.nic) {
-      errorMsg = {
-        ...errorMsg,
-        incidentNicErrorMsg: f({
-          id: "request.management.report.incidents.nic.error.message",
-          defaultMessage: "NIC Number is required",
-        }),
-      };
-      valid = false;
-    }else{
+    if (incidentContact.nic) {
       if(!(incidentContact.nic.match("^([0-9]{9}[x|X|v|V]|[0-9]{12})$"))){
       errorMsg = {
         ...errorMsg,
@@ -463,16 +445,7 @@ const VerticalLinearStepper = (props) => {
       valid = false;
     }
     if (showRecipient === "YES") {
-      if (!incidentContact.recipientMobile) {
-        errorMsg = {
-          ...errorMsg,
-          recipientContactErrorMsg: f({
-            id: "request.management.report.incidents.phone.error.message",
-            defaultMessage: "Contact number is required",
-          }),
-        };
-        valid = false;
-      }else{
+      if (incidentContact.recipientMobile) {
         if(!(incidentContact.recipientMobile.match("^[0-9]{10}$"))){
         errorMsg = {
           ...errorMsg,
@@ -521,16 +494,7 @@ const VerticalLinearStepper = (props) => {
         };
         valid = false;
       }
-      if (!incidentContact.recipientNic) {
-        errorMsg = {
-          ...errorMsg,
-          recipientNicErrorMsg: f({
-            id: "request.management.report.incidents.nic.error.message",
-            defaultMessage: "NIC Number is required",
-          }),
-        };
-        valid = false;
-      }else{
+      if (incidentContact.recipientNic) {
         if(!(incidentContact.recipientNic.match("^([0-9]{9}[x|X|v|V]|[0-9]{12})$"))){
         errorMsg = {
           ...errorMsg,
@@ -604,16 +568,16 @@ const VerticalLinearStepper = (props) => {
       };
       valid = false;
     }
-    if (!language) {
-      errorMsg = {
-        ...errorMsg,
-        languageErrorMsg: f({
-          id: "request.management.report.incidents.recipient.error.message",
-          defaultMessage: "This is required",
-        }),
-      };
-      valid = false;
-    }
+    // if (!language) {
+    //   errorMsg = {
+    //     ...errorMsg,
+    //     languageErrorMsg: f({
+    //       id: "request.management.report.incidents.recipient.error.message",
+    //       defaultMessage: "This is required",
+    //     }),
+    //   };
+    //   valid = false;
+    // }
 
     setFormErrors({ ...errorMsg });
     return valid;
@@ -1168,24 +1132,27 @@ const VerticalLinearStepper = (props) => {
           <div style={{ textAlign: "right" }}>
             <Button
               variant="outlined"
+              style={{width:'88px'}}
               color="primary"
               onClick={() => dispatch(changeLanguage("si"))}
               className={classes.button}
             >
               {" "}
-              Sinhala{" "}
+              සිංහල{" "}
             </Button>
             <Button
               variant="outlined"
+              style={{width:'88px'}}
               color="primary"
               onClick={() => dispatch(changeLanguage("ta"))}
               className={classes.button}
             >
               {" "}
-              Tamil{" "}
+              தமிழ்{" "}
             </Button>
             <Button
               variant="outlined"
+              style={{width:'88px'}}
               color="primary"
               onClick={() => dispatch(changeLanguage("en"))}
               className={classes.button}
@@ -1222,18 +1189,15 @@ const VerticalLinearStepper = (props) => {
             </Typography></li>
                     </ul>
             </div>
-      <Grid item xs={12}>
+      {/* <Grid item xs={12}>
                         <FormControl className={classes.group} error={formErrors.languageErrorMsg ? true : false} component="fieldset">
                         <FormLabel component="legend">{f({ id: "request.management.incident.create.location.language", defaultMessage: "Select Language*" })}</FormLabel>
                             <RadioGroup
                                 aria-label="Gender"
                                 name="language"
                                 id="language"
-                                // ref= {this.props.securityDepositeRpp}
-                                // className={classes.group}
                                 value={language}
                                 onChange={(e) => { setLanguage(e.target.value);formErrors.languageErrorMsg = null;dispatch(changeLanguage(e.target.value=="SINHALA" ? "si" : e.target.value=="TAMIL" ? "ta" : "en")); }}
-                                // onClick={(e) => { }}
                                 row
                             >
                                 <FormControlLabel
@@ -1260,7 +1224,7 @@ const VerticalLinearStepper = (props) => {
                             </RadioGroup>
                             <FormHelperText>{formErrors.languageErrorMsg ? formErrors.languageErrorMsg : null}</FormHelperText>
                         </FormControl>
-                    </Grid>
+                    </Grid> */}
       <Stepper activeStep={activeStep} orientation="vertical">
         {steps.map((label, index) => {
           const props = {};
