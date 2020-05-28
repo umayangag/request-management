@@ -30,6 +30,7 @@
   "request.management.report.incidents.time": "වේලාව",
   "request.management.report.incidents.datetime.error.message": "දිනය සහ වේලාව අවශ්‍ය වේ",
   "request.management.report.incidents.recaptcha.error.message": "මෙම සත්‍යාපනය අවශ්‍ය වේ",
+  "request.management.report.incidents.recaptcha.note" : "පෝරමය ඉදිරිපත් කිරීම සඳහා ඔබට පහත \"I'm not a robot\" කොටුව සලකුණු කළ යුතුය.",
   "request.management.report.incidents.name.error.message": "නම අවශ්‍ය වේ",
   "request.management.report.incidents.nic.error.message": "ජාතික හැඳුනුම්පත් අංකය අවශ්‍ය වේ",
   "request.management.report.incidents.invalidNic.error.message": "මෙය වලංගු ජාතික හැඳුනුම්පත් අංකයක් නොවේ",

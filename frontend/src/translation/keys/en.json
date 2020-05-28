@@ -30,6 +30,7 @@
   "request.management.report.incidents.time": "Time",
   "request.management.report.incidents.datetime.error.message": "Date and time are required",
   "request.management.report.incidents.recaptcha.error.message": "This verification is required",
+  "request.management.report.incidents.recaptcha.note" : "You need to tick the box \"I'm not a robot\" below, to submit the form.",
   "request.management.report.incidents.name.error.message": "Name is required",
   "request.management.report.incidents.nic.error.message": "NIC/SLIN Number is required",
   "request.management.report.incidents.invalidNic.error.message": "This is not a valid NIC or SLIN number",
