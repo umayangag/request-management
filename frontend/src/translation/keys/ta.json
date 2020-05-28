@@ -99,6 +99,7 @@
   "request.management.home.incidents.list.subcategory": "துணைப்பிரிவு",
   "request.management.home.incidents.list.last_actioned_at": "Last Actioned At",
   "request.management.home.incidents.list.created_date": "உருவாக்கிய தேதி",
+  "request.management.home.incidents.list.due_date": "உரிய தேதி",
 
   "request.management.incident.create.basic_information": "அடிப்படை தகவல்",
   "request.management.incident.create.type": "Type",

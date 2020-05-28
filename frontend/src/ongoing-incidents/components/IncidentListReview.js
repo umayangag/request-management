@@ -134,7 +134,7 @@ function IncidentList({
           <CustomTableCell align="center">{f({id: "request.management.home.incidents.list.category"})}</CustomTableCell>
           <CustomTableCell align="center">{f({id: "request.management.home.incidents.list.status"})}</CustomTableCell>
           <CustomTableCell align="center">{f({id: "request.management.home.incidents.list.severity"})}</CustomTableCell>
-          <CustomTableCell align="center">{f({id: "request.management.home.incidents.list.response_time"})}</CustomTableCell>
+          <CustomTableCell align="center">{f({id: "request.management.home.incidents.list.due_date"})}</CustomTableCell>
           {/* <CustomTableCell align="center">{f({id: "request.management.home.incidents.list.description"})}</CustomTableCell> */}
           {/* <CustomTableCell align="center">Final Resolution</CustomTableCell> */}
         </TableRow>
@@ -187,7 +187,7 @@ function IncidentList({
                 <p>{row.severity}</p>
             </CustomTableCell>
             <CustomTableCell align="center">
-              <p>{row.response_time} h</p>
+                <p>{moment(row.dueDate, "YYYY-MM-DD").fromNow()}</p>
             </CustomTableCell>
               {/* <CustomTableCell>
                 <p>
