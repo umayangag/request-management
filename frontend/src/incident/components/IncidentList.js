@@ -30,6 +30,9 @@ const CustomTableCell = withRouter(
         "-webkit-box-orient": "vertical",
       },
     },
+      head:{
+          fontSize: "16px",
+      }
   }))(TableCell)
 );
 
