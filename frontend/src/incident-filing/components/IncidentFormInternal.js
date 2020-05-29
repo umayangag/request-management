@@ -334,6 +334,9 @@ function IncidentFormInternal(props) {
   }, []);
 
   const { formatMessage: f } = useIntl();
+  const categoryLable = f({id: "request.management.incident.review.category_lable", defaultMessage: "Search category by name"});
+  const districtLable = f({id: "request.management.incident.review.district_lable", defaultMessage: "Search district by name"});
+  const gnLable = f({id: "request.management.incident.review.gn_lable", defaultMessage: "Search gn by name"});
 
   const getSimilarInquiries = async (title) => {
     if (title.length > 2) {
@@ -983,7 +986,8 @@ function IncidentFormInternal(props) {
                           value={values.category} 
                           handleChange={(event) => handleChange(event)}
                           error={(errors.category) == 'Category is Required' ? true : false}
-                          categories={complaintCategories} />
+                          categories={complaintCategories}
+                          categoryLable={categoryLable} />
                       
                       {/* <Select
                         value={values.category}
@@ -1613,7 +1617,7 @@ function IncidentFormInternal(props) {
                           error={touched.district && errors.district}
                           className={classes.formControl2}
                         >
-                          <CustomAutocompleteDistrict suggestions={suggestionDistricts} value={values.district} handleChange={handleChange} districts={districts} />
+                          <CustomAutocompleteDistrict districtLable={districtLable} suggestions={suggestionDistricts} value={values.district} handleChange={handleChange} districts={districts} />
                           {/* <InputLabel htmlFor="district">{f({ id: "request.management.incident.create.location.district", defaultMessage: "District" })}*</InputLabel>
                           <Select
                             value={values.district}
@@ -1648,6 +1652,7 @@ function IncidentFormInternal(props) {
                       <Grid item xs={12} md={4} sm={6}>
                         <FormControl className={classes.formControl2}>
                         <CustomAutocompleteGn
+                              gnLable={gnLable}
                               dataObj={getGramaNilidariDivisions(values.district)}
                               value={values.gramaNiladhari} 
                               handleChange={handleChange} 
@@ -1966,7 +1971,7 @@ function IncidentFormInternal(props) {
                                 error={touched.recipientDistrict && errors.recipientDistrict}
                                 className={classes.formControl2}
                               >
-                              <CustomAutocompleteRecipientDistrict suggestions={suggestionDistricts} value={values.recipientDistrict} handleChange={handleChange} districts={districts} />
+                              <CustomAutocompleteRecipientDistrict districtLable={districtLable} suggestions={suggestionDistricts} value={values.recipientDistrict} handleChange={handleChange} districts={districts} />
                                 {/* <InputLabel htmlFor="recipientDistrict">{f({ id: "request.management.incident.create.location.district" })}*</InputLabel>
                                 <Select
                                   value={values.recipientDistrict}
@@ -2001,6 +2006,7 @@ function IncidentFormInternal(props) {
                             <Grid item xs={12} sm={4}>
                               <FormControl className={classes.formControl2}>
                               <CustomAutocompleteRecipientGn
+                              gnLable={gnLable}
                               dataObj={getGramaNilidariDivisions(values.recipientDistrict)}
                               value={values.recipientGramaNiladhari} 
                               handleChange={handleChange} 
