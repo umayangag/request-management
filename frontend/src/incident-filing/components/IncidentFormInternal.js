@@ -4,6 +4,8 @@ import * as incidentUtils from "../../incident/incidentUtils";
 import { Card, CardContent } from "@material-ui/core";
 import React, { Component, useEffect, useState } from "react";
 import { connect, useDispatch, useSelector } from "react-redux";
+import { withRouter } from "react-router";
+import { withStyles } from "@material-ui/core/styles";
 import {
   createInternalIncident,
   loadIncident,
@@ -69,8 +71,6 @@ import orange from "@material-ui/core/colors/orange";
 import red from "@material-ui/core/colors/red";
 import { showNotification } from "../../notifications/state/notifications.actions";
 import { useLoadingStatus } from "../../loading-spinners/loadingHook";
-import { withRouter } from "react-router";
-import { withStyles } from "@material-ui/core/styles";
 import yellow from "@material-ui/core/colors/yellow";
 // import TitleAutoComplete from "./TitleAutoComplete";
 import { useIntl } from "react-intl";
@@ -2332,7 +2332,7 @@ function IncidentFormInternal(props) {
               {/* action panel */}
               <Grid container spacing={24}>
                 <Grid item xs={12} style={{ textAlign: "center" }}>
-                  <Button variant="contained" className={classes.button}>
+                  <Button variant="contained" className={classes.button} onClick={props.history.goBack}>
                     {" "}
                     Cancel
                   </Button>
