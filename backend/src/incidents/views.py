@@ -139,7 +139,7 @@ class IncidentList(APIView, IncidentResultsSetPagination):
         # filter by channel
         param_info_channel = self.request.query_params.get('channel', None)
         if param_info_channel is not None:
-            incidents = incidents.filter(info_channel=param_info_channel)
+            incidents = incidents.filter(infoChannel=param_info_channel)
 
         # filter by city
         param_city = self.request.query_params.get('city', None)
