@@ -70,6 +70,8 @@ from ..renderer import CustomJSONRenderer
 from rest_framework.renderers import JSONRenderer
 
 import json
+from datetime import datetime, timedelta
+
 from ..custom_auth.models import UserLevel
 from ..custom_auth.services import user_can
 from .permissions import *
@@ -253,6 +255,7 @@ class IncidentList(APIView, IncidentResultsSetPagination):
                 incident_data["recipient"] = recipient.id
 
         incident_data["refId"] = generate_refId(request.user)
+        incident_data["dueDate"] = (datetime.now()+timedelta(days=1)).strftime("%Y-%m-%dT%H:%M:%S")
         serializer = IncidentSerializer(data=incident_data)
 
         if serializer.is_valid() == False:

@@ -149,7 +149,6 @@ function SearchForm(props) {
   const {channels} = useSelector((state) => state.shared);
   const { selectedLanguage } = useSelector((state) => (state.shared));
   const { formatMessage: f } = useIntl();
-debugger;
   const categoryLable = f({id: "request.management.incident.review.category_lable", defaultMessage: "Search category by name"});
   const orgLable = f({id: "request.management.incident.review.org_lable", defaultMessage: "Search organization by name"});
   const districtLable = f({id: "request.management.incident.review.district_lable", defaultMessage: "Search district by name"});
@@ -180,7 +179,6 @@ const allTamil = {
       selectedLanguage=="en" ? 
       suggestionOrganizations = organizations.allIds.map((c, k) => {
         let currOrg = organizations.byIds[c];
-        debugger;
         return (
           currOrg.name !== "NONE" && (
             {label: currOrg.name, value: currOrg.code }
