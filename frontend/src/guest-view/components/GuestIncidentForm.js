@@ -130,6 +130,7 @@ const VerticalLinearStepper = (props) => {
   const { elections, categories, channels, districts } = useSelector(
     (state) => state.shared
   );
+    const organization = useSelector((state) => state.guestView.organization);
 
   function removeDuplicates(originalArray, prop) {
     var newArray = [];
@@ -1143,8 +1144,6 @@ const VerticalLinearStepper = (props) => {
   }
 
   const isLoading = isLoadingIncident || isLoadingMetaData;
-  // const organization = useSelector((state) => state.guestView.organization);
-    const organization={logo:null};
 
   return (
     <div className={classes.root}>
